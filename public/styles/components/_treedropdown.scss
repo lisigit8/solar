@@ -1,0 +1,38 @@
+#dropdowntree {
+  font-size: 11px;
+  position: absolute;
+  top: 10px;
+  right: 7%;
+}
+
+#dropdowntree .list-group {
+  margin-bottom: -3px;
+  border-radius: 0px !important;
+  font-size: 11px;
+}
+
+.btn-default {
+  background-image: none !important;
+}
+
+.padding {
+  padding: 2px !important;
+  width: 20px;
+  // border-top-right-radius: 4px !important;
+  //  border-bottom-right-radius: 4px !important;
+}
+
+.padding2 {
+  width: 140px;
+  padding: 2px !important;
+}
+
+#dropdowntree .treeview span.icon {
+  float: right;
+  color: grey;
+}
+
+#dropdowntree .list-group-item {
+  border: 0px !important;
+  padding: 7px 9px;
+}

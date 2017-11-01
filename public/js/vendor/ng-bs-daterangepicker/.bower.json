@@ -1,0 +1,15 @@
+{
+  "name": "ng-bs-daterangepicker",
+  "homepage": "https://github.com/luisfarzati/ng-bs-daterangepicker",
+  "version": "0.0.5",
+  "_release": "0.0.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.0.5",
+    "commit": "0e2fedfe1b196f7f81b697590ebc77c3818d427a"
+  },
+  "_source": "git://github.com/luisfarzati/ng-bs-daterangepicker.git",
+  "_target": "~0.0.5",
+  "_originalSource": "ng-bs-daterangepicker",
+  "_direct": true
+}

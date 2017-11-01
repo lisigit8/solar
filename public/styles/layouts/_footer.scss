@@ -1,0 +1,22 @@
+$footer-backcolor:rgb(21, 99, 148);
+$footer-text:#dbe9f2;
+$footer-font:10px;
+$footerheight:17px;
+
+.footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+    height: $footerheight;
+    background: $footer-backcolor;
+    color:$footer-text;
+    font-size:$footer-font;
+    z-index: 101;
+    padding-left:10px;
+    opacity:0.8;
+}
+
+.footertextright{
+    float:right;
+    padding-right: 10px;
+}

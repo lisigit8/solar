@@ -1,0 +1,145 @@
+/*u-mfmstation*/
+
+.bartext {
+  font-size: 14px;
+  font-family: roboto-bold;
+  padding: 4px;
+}
+.sidetextdiv{
+  margin-top:2.5vh;
+  text-align:center
+}
+#status {
+  font-weight: bold;
+}
+
+#status hr {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+#status .techalarm-right-icon {
+  width: 17px;
+  height: 17px;
+}
+
+#legends .c3-legend-background{
+  stroke:none;
+}
+
+#powerfactor {
+ @extend #legends;
+}
+
+#freq  {
+  @extend #legends;
+}
+
+#singlepanel2  {
+  @extend #legends;
+}
+
+/*u-mfmFreqchart*/
+
+.arrows{
+  position: absolute;cursor: pointer;top:50%;
+}
+
+.leftarrow{
+ @extend .arrows;
+  right:0%;
+}
+.rightarrow{
+  @extend .arrows;
+  left:0%;
+}
+
+#mydate{
+  right: 84px;
+  width: 102px!important;
+}
+
+/*u-mfmStatustable*/
+.tophead {
+  border-top: 1px solid #156394;
+  border-bottom-color: #156394 !important;
+  background: #e4e9ed;
+  color: #156294;
+}
+
+/*u-mfmtable*/
+.mfmtable{
+  margin-left: 10px;
+  table-layout: fixed;
+}
+.mfmtable thead {
+  width: 96%;
+}
+.mfmtable tbody {
+  height: 17vh;
+  overflow: auto;
+  width: 97%;
+}
+@media screen and (min-height:750px) and(max-height:850px){
+  .mfmtable tbody {
+    height: 19vh;
+    overflow: auto;
+    width: 97%;
+  }
+}
+@media screen and (min-height:851px) and(max-height:900px){
+  .mfmtable tbody {
+    height: 20vh;
+    overflow: auto;
+    width: 97%;
+  }
+}
+@media screen and (min-height:901px) and(max-height:950px){
+  .mfmtable tbody {
+    height: 21vh;
+    overflow: auto;
+    width: 97%;
+  }
+}
+@media screen and (min-height:951px) and(max-height:1000px){
+  .mfmtable tbody {
+    height: 22vh;
+    overflow: auto;
+    width: 97%;
+  }
+}
+@media screen and (min-height:1000px){
+  .mfmtable tbody {
+    height: 23vh;
+    overflow: auto;
+    width: 97%;
+  }
+}
+.mfmtable thead, .mfmtable tbody, .mfmtable tr, .mfmtable td, .mfmtable th {
+  display: block;
+}
+.mfmtable tbody td, .mfmtable thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+.mfmtable thead > tr> th {
+  background-color: #ececec;
+}
+.mfmtable > thead > tr > th,.mfmtable > tbody > tr > td {
+  padding: 8px;
+  line-height: 0.428571;
+}
+#mfmtable::-webkit-scrollbar {
+  width: 6px;
+  box-shadow: none;
+}
+#mfmtable::-webkit-scrollbar-thumb {
+  box-shadow: none;
+  background-color: #d7d7d7;
+}
+#mfmtable::-webkit-scrollbar-track {
+  box-shadow: none;
+}
+#mfmgenexpo .c3-axis-x path , #mfmenergyimpo .c3-axis-x path{
+  display: none;
+
+}

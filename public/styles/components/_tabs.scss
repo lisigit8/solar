@@ -1,0 +1,320 @@
+@import "./../helpers/variables";
+@import "./../helpers/mixins";
+.cpills {
+  margin-bottom:0px;
+  margin-top: -6px;
+  margin-left: 0px;
+  li {
+    text-align: center;
+    border-right: 1px solid #bdbdbd;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    span {
+      color: #8B8B8B !important;
+      cursor: pointer;
+      font-size:10px;
+      @include Roboto-Regular;
+    }
+
+  }
+
+  li.clicked {
+    //border-bottom: 1px solid #0c9cfa;
+
+    span {
+      color: #0c9cfa !important;
+      @include Roboto-Medium;
+         border-bottom: 1px solid #0c9cfa;
+    }
+  }
+
+  li:last-child{
+    border-right:none;
+  }
+}
+
+
+
+@media all and (max-width:1024px){
+
+    .cpills li {
+    padding-left:3px;
+        padding-right:2px;
+
+    }
+    .cpills li span{
+    font-size:8px;
+    }
+
+
+
+
+}
+
+
+/*
+@media all and (min-width:1023px) and(max-width:1200px){
+#pillsAlarms{
+
+    .cpills {
+  margin-bottom:4px;
+  margin-top: -6px;
+  margin-left: 0px;
+  li {
+    text-align: center;
+    border-right: 1px solid #bdbdbd;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    span {
+      color: #8B8B8B !important;
+      cursor: pointer;
+      font-size:13px;
+      @include Roboto-Regular;
+        padding-left: 3vw;
+    padding-right: 3vw;
+    }
+
+  }
+
+  li.clicked {
+    //border-bottom: 1px solid #0c9cfa;
+
+    span {
+      color: red !important;
+      @include Roboto-Bold;
+            border-bottom: 3px solid;
+        font-size:13px;
+        padding-left: 3vw;
+    padding-right: 3vw;
+    }
+  }
+}
+
+
+}
+}
+*/
+
+
+#pillsAlarms{
+
+        .cpills {
+  margin-bottom:4px;
+  margin-top: -6px;
+  margin-left: 0px;
+  li {
+    text-align: center;
+    border-right: 1px solid #bdbdbd;
+    padding-left: 7px;
+    padding-right: 7px;
+
+    span {
+      color: #8B8B8B !important;
+      cursor: pointer;
+      font-size:13px;
+      @include Roboto-Regular;
+        padding-left: 0vw;
+    padding-right: 0vw;
+    }
+
+  }
+
+  li.clicked {
+    //border-bottom: 1px solid #0c9cfa;
+
+    span {
+      color: red !important;
+      @include Roboto-Bold;
+            border-bottom: 3px solid;
+        font-size:13px;
+        padding-left: 0vw;
+    padding-right: 0vw;
+    }
+  }
+}
+
+
+}
+
+
+/*    @media all and (min-width:1281px) and(max-width:1366px){
+#pillsAlarms{
+
+    .cpills {
+  margin-bottom:4px;
+  margin-top: -6px;
+  margin-left: 0px;
+  li {
+    text-align: center;
+    border-right: 1px solid #bdbdbd;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    span {
+      color: #8B8B8B !important;
+      cursor: pointer;
+      font-size:13px;
+      @include Roboto-Regular;
+        padding-left: 4vw;
+    padding-right: 4vw;
+    }
+
+  }
+
+  li.clicked {
+    //border-bottom: 1px solid #0c9cfa;
+
+    span {
+      color: red !important;
+      @include Roboto-Bold;
+            border-bottom: 3px solid;
+        font-size:13px;
+        padding-left: 5vw;
+    padding-right: 5vw;
+    }
+  }
+}
+
+
+}
+}*/
+
+/*   @media all and (min-width:1367px){
+#pillsAlarms{
+
+    .cpills {
+  margin-bottom:4px;
+  margin-top: -6px;
+  margin-left: 0px;
+  li {
+    text-align: center;
+    border-right: 1px solid #bdbdbd;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    span {
+      color: #8B8B8B !important;
+      cursor: pointer;
+      font-size:13px;
+      @include Roboto-Regular;
+        padding-left: 5vw;
+    padding-right: 5vw;
+    }
+
+  }
+
+  li.clicked {
+    //border-bottom: 1px solid #0c9cfa;
+
+    span {
+      color: red !important;
+      @include Roboto-Bold;
+            border-bottom: 3px solid;
+        font-size:13px;
+        padding-left: 5vw;
+    padding-right: 5vw;
+    }
+  }
+}
+
+
+}
+}*/
+
+
+
+#critpillsAlarms{
+
+    .cpills {
+  margin-bottom:4px;
+  margin-top: -6px;
+  margin-left: 0px;
+  li {
+    text-align: center;
+    border-right: 1px solid #bdbdbd;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    span {
+      color: #8B8B8B !important;
+      cursor: pointer;
+      font-size:13px;
+      @include Roboto-Regular;
+        padding-left: 0vw;
+    padding-right: 0vw;
+    }
+
+  }
+
+  li.clicked {
+    //border-bottom: 1px solid #0c9cfa;
+
+    span {
+      color: red !important;
+      @include Roboto-Bold;
+            border-bottom: 3px solid;
+        font-size:13px;
+        padding-left: 0vw;
+    padding-right: 0vw;
+    }
+  }
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+//single
+@media all and (min-width:1201px) and(max-width:1280px){
+#singleCritical{
+
+    .cpills {
+  margin-bottom:4px;
+  margin-top: -6px;
+  margin-left: 0px;
+  li {
+    text-align: center;
+    border-right: 1px solid #bdbdbd;
+    padding-left: 7px;
+    padding-right: 7px;
+
+    span {
+      color: #8B8B8B !important;
+      cursor: pointer;
+      font-size:13px;
+      @include Roboto-Regular;
+        padding-left: 0vw;
+    padding-right: 0vw;
+    }
+
+  }
+
+  li.clicked {
+    //border-bottom: 1px solid #0c9cfa;
+
+    span {
+      color: red !important;
+      @include Roboto-Bold;
+            border-bottom: 3px solid;
+        font-size:13px;
+        padding-left: 0vw;
+    padding-right: 0vw;
+    }
+  }
+}
+}
+}
+
+
+

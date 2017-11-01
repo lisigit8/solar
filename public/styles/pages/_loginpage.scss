@@ -1,0 +1,262 @@
+.login-container {
+  float: left;
+  width: 100%;
+  min-height: 100%;
+}
+
+.login-container .login-box {
+  width: 400px;
+  margin: 0px auto;
+  padding-top: 200px;
+}
+
+.login-container .login-box .login-logo {
+  background:url('../styles/assets/images/solar-logos/SolarPulse Logo.svg') center center no-repeat #FDFDFD;
+  background-size: 60%;
+  width: 100%;
+  height: 60px;
+  float: left;
+  -webkit-border-top-left-radius:5px;
+  -webkit-border-top-right-radius:5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.login-container .login-box .login-body {
+  width: 100%;
+  float: left;
+  background: #F5F3F6;
+  padding: 20px 40px;
+  -webkit-border-bottom-left-radius:5px;
+  -webkit-border-bottom-right-radius:5px;
+  -moz-border-radius-bottomleft: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  opacity: 0.95;
+
+}
+
+.login-container .login-box .login-body .login-title {
+  color: #FFF;
+  font-size: 19px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.login-container .login-box .login-body .form-control {
+  border: 1px solid #CCCCCC;
+  background: #FCFBFF;
+  padding: 10px 15px;
+  color: #434343;
+  line-height: 20px;
+  height: auto;
+}
+
+.login-container .login-box .login-body .btn-link {
+  color: #FFF;
+  border: 0px;
+}
+
+.login-container .login-box .login-body .login-or {
+  width: 40px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 25px auto;
+  text-align: center;
+  line-height: 25px;
+  color: #FFF;
+}
+
+.login-container .login-box .login-body .login-or:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  top: -10px;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 10px solid rgba(0, 0, 0, 0.2);
+}
+
+.login-container .login-box .login-body .login-or:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 0;
+  bottom: -10px;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 10px solid rgba(0, 0, 0, 0.2);
+}
+
+.login-container .login-box .login-body .login-subtitle {
+  line-height: 20px;
+  padding: 5px 0px;
+  font-size: 12px;
+  color: #FFF;
+}
+
+.login-container .login-box .login-body .login-subtitle a {
+  color: #3fbae4;
+}
+
+.login-container .login-box .login-footer {
+  width: 100%;
+  float: left;
+  padding: 10px;
+  color: #FFF;
+}
+
+.login-container .login-box .login-footer a {
+  color: #FFF;
+}
+
+.login-container.lightmode {
+  background: url("../img/backgrounds/wall_1.jpg") left top no-repeat;
+}
+
+.login-container.lightmode .login-box .login-body {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.login-container.lightmode .login-box .login-body .form-control {
+  background: rgba(255, 255, 255, 0.4);
+  color: #333;
+}
+
+.login-container.lightmode .login-box .login-subtitle a {
+  color: #33414e;
+}
+
+.login-container.login-v2 {
+  background: url("../img/bg.png") left top repeat #f5f5f5;
+}
+
+.login-container.login-v2 .login-box .login-logo {
+  background: url("../img/logo-grey.png") top center no-repeat;
+}
+
+.login-container.login-v2 .login-box .login-body .login-title {
+  color: #33414e;
+}
+
+.login-container.login-v2 .login-box .login-body .form-control {
+  background: #FFF;
+  color: #33414e;
+  border: 1px solid #D5D5D5;
+  border-left: 0px;
+}
+
+.login-container.login-v2 .login-box .login-body .input-group-addon {
+  background: #FFF;
+  color: #33414e;
+  line-height: 40px;
+  font-size: 21px;
+  border-color: #D5D5D5;
+}
+
+.login-container.login-v2 .login-box .login-body a {
+  color: #33414e;
+}
+
+.login-container.login-v2 .login-box .login-footer {
+  color: #656d78;
+}
+
+.login-container.login-v2 .login-box .login-footer a {
+  color: #434a54;
+}
+
+.login-container.login-inside {
+  background: transparent;
+}
+
+.login-container.login-inside .login-box {
+  width: 100%;
+  padding-top: 0px;
+}
+
+.login-container.login-inside .login-box .login-body {
+  padding: 0px;
+}
+.input-group-addon{
+  background-color: #FDFDFD;
+}
+.loginbtn{
+  background-color: #0190FF;
+  background-image: none;
+  border:0;
+  padding:12px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 2px;
+}
+.loginbtn:hover{
+  background-color: #01ADEE;
+  background-image: none;
+  border:0;
+  padding:12px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 2px;
+}
+.solar-login-background{
+  background: url('../styles/assets/images/SolarPulse_Landing-Page-BG.jpg') center center no-repeat;
+  //background: url('../styles/assets/images/bg-solar1.jpg') center center no-repeat;
+  background-size:cover;
+  min-height: 100%
+}
+
+/* .remember checkbox */
+.remember-checkbox {
+  width: 20px;
+  position: relative;
+  margin: 20px auto;
+  display: inline-block;
+  label {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #018EFE;
+    border-radius: 4px;
+    &:after {
+      content: '';
+      width: 12px;
+      height: 5px;
+      position: absolute;
+      top: 7px;
+      left: 4px;
+      border: 3px solid #fcfff4;
+      border-top: none;
+      border-right: none;
+      background: transparent;
+      opacity: 0;
+      transform: rotate(-45deg);
+    }
+    &:hover::after {
+      opacity: 0.3;
+    }
+  }
+  input[type=checkbox] {
+    visibility: hidden;
+    &:checked + label:after {
+      opacity: 1;
+    }
+  }
+}
+.remember-label{
+  color:grey;
+  position: relative;
+  bottom: 2px;
+  left: 5px;
+}
+

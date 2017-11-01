@@ -1,0 +1,176 @@
+
+#oilwindTemperature .c3-legend-background {
+  stroke: none;
+}
+
+#dcAc .c3-legend-background {
+  stroke: none;
+}
+#invtemperature .c3-legend-background {
+  stroke: none;
+}
+
+.trafoalarm-healthy-icon{
+  background: url('/styles/assets/images/Trafo_Alarms_Trafo_Alarm_Healthy.png')no-repeat;
+  width: 17px;height: 17px;display: inline-block;background-size: contain;margin:0;float:left;
+}
+
+
+.trafoalarm-alert-icon{
+  background: url('/styles/assets/images/Trafo_Alarms_Trafo_Alarm_Alert.png')no-repeat;
+  width: 17px;height: 17px;display: inline-block;background-size: contain;margin:0;float:left;
+}
+
+#status {
+  font-weight: bold;
+}
+#status hr{
+
+  margin-top: 12px;
+  margin-bottom: 0px;
+  border: 0;
+  border-top: 1px solid #eee;
+
+}
+#status .techalarm-right-icon {
+  width: 17px;
+  height: 17px;
+}
+
+#trafAmbTemp .c3-legend-background {
+  stroke: none;
+}
+.radioIcon{
+  margin-left: 24px;
+}
+
+.radioLabel{
+  margin-left: -19px;
+  margin-right: -16px;
+  margin-bottom: 3px;
+}
+
+/*trafoTable*//*
+.trafoTable1 th,.trafoTable2 th{
+  margin-left: 15px;
+  background: #ECECEC;
+}
+.trafoTable1 td,.trafoTable2 td{
+  text-align: center;
+}
+.trafoTable1 th,.trafoTable2 th,.trafoTable1 tr,.trafoTable2 tr {
+  font-size: 10px;
+}
+
+
+.trafotable{
+  margin-left: 10px;
+  table-layout: fixed;
+}
+.trafotable thead {
+  width: 96%;
+}
+.trafotable tbody {
+  height: 17vh;
+  overflow: auto;
+  width: 97%;
+}
+@media screen and (min-height:750px) and (max-height:850px){
+  .trafotable tbody {
+    height: 19vh;
+    overflow: auto;
+    width: 98%;
+  }
+}
+@media screen and (min-height:851px) and (max-height:900px){
+  .trafotable tbody {
+    height: 20vh;
+    overflow: auto;
+    width: 98%;
+  }
+}
+@media screen and (min-height:901px) and (max-height:950px){
+  .trafotable tbody {
+    height: 21vh;
+    overflow: auto;
+    width: 98%;
+  }
+}
+@media screen and (min-height:951px) and (max-height:1000px){
+  .trafotable tbody {
+    height: 22vh;
+    overflow: auto;
+    width: 98%;
+  }
+}
+@media screen and (min-height:1000px){
+  .trafotable tbody {
+    height: 23vh;
+    overflow: auto;
+    width: 98%;
+  }
+}
+.trafotable thead, .trafotable tbody, .trafotable tr, .trafotable td, .trafotable th {
+  display: block;
+}
+.trafotable tbody td, .trafotable thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
+}
+.trafotable thead > tr> th {
+  background-color: #ececec;
+}
+.trafotable > thead > tr > th,.trafotable > tbody > tr > td {
+  padding: 8px;
+  line-height: 0.428571;
+}
+#trafotable::-webkit-scrollbar {
+  width: 6px;
+  box-shadow: none;
+}
+#trafotable::-webkit-scrollbar-thumb {
+  box-shadow: none;
+  background-color: #d7d7d7;
+}
+#trafotable::-webkit-scrollbar-track {
+  box-shadow: none;
+}*/
+
+
+/*--------Trafo Table 1------------*/
+.trafoTable1{
+  width:95%;
+}
+
+.trafoTable1 tbody{
+  height: 17vh;
+  overflow: auto;
+  width: 97%;
+}
+
+.trafoTable1 thead, .trafoTable1 tbody, .trafoTable1 tr, .trafoTable1 td, .trafoTable1 th {
+  display: block;
+}
+
+/*--------Trafo Table 2------------*/
+.trafoTable2{
+  width:95%;
+}
+
+.trafoTable2 tbody{
+  height: 17vh;
+  overflow: auto;
+  width: 97%;
+}
+
+.trafoTable2 thead, .trafoTable2 tbody, .trafoTable2 tr, .trafoTable2 td, .trafoTable2 th {
+  display: block;
+}
+
+.trafoTable1 th,.trafoTable2 th{
+  padding: 2px;
+}
+
+#trafogen .c3-axis-x path,#trafoTrafoloss .c3-axis-x path, #trafoAvail .c3-axis-x path{
+  display: none;
+}

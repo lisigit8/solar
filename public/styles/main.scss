@@ -1,0 +1,41 @@
+//@author : Pratik Sah
+//Main SCSS goes here , this file will gather all scss junks from different directory and compile it into css
+@import 'base/base_styles';
+@import 'layouts/header';
+@import 'layouts/footer.scss';
+@import 'components/charts';
+@import "components/_tabs";
+@import 'components/tooltip';
+@import "components/flip";
+@import 'components/top-widgets';
+@import 'components/panel';
+@import "components/radio_check";
+@import "components/filter-panel";
+@import "components/loaders";
+@import "components/navigation-bar";
+@import "components/treedropdown";
+@import "components/d3map";
+@import "components/toggle";
+@import 'pages/executive_dash';
+@import "pages/technical_dash";
+@import "pages/loginpage";
+@import "pages/alarms";
+@import "pages/reports";
+@import "pages/newexec";
+@import "pages/tracker";
+@import "pages/global";
+@import "layouts/loader";
+@import "pages/soiling";
+@import "pages/inverter";
+@import "pages/single_inverter";
+@import "pages/weather";
+@import "pages/mfm";
+@import "pages/users";
+@import "pages/cb";
+@import "pages/sld";
+@import "pages/forecasting";
+@import "pages/trafo";
+@import "pages/trendspage";
+@import "pages/device_control";
+
+

@@ -1,0 +1,309 @@
+@import "./../helpers/imagepaths";
+@import "./../helpers/mixins";
+@import "./../helpers/variables";
+.header-top {
+    position: fixed;
+    width: 100%;
+    height: 25px;
+    background-color: #156394;
+}
+
+.header-bottom {
+    padding-top: 24px;
+    height: 49px;
+    width: 100%;
+    background: #DBE0E4;
+}
+
+.header-top-left {
+    float: left;
+    padding-left: 16px;
+    padding-top: 3px;
+}
+
+.header-top-right {
+    float: right;
+    margin-right: -30px;
+}
+
+.solar-logo {
+    background: $image-headlogo;
+    height: 52px;
+    width: 135px;
+    background-size: 135px;
+    display: block;
+    float: left;
+    margin-top: -17px;
+    margin-left: -15px;
+}
+
+.bar-cross-icon {
+    display: inline-block;
+    color: white;
+    cursor: pointer;
+}
+
+.alarm-icon {
+    background: $image-headalarms;
+    height: 25px;
+    width: 25px;
+    background-size: 27px;
+    display: block;
+    float: left;
+}
+
+.userimg {
+    background: $image-userimg;
+    height: 25px;
+    width: 25px;
+    background-size: 27px;
+    display: block;
+    float: left;
+    margin-top: -3px;
+}
+
+#top-nav>li:nth-child(1) {
+    border-left: none;
+}
+
+#top-nav>li {
+    border-left: solid 1px white;
+    padding-left: 5px;
+}
+
+#top-nav>li>a {
+    color: white;
+    padding-left: 5px;
+    padding-right: 25px;
+}
+
+.editbread {
+    padding-left: 2rem;
+    padding-top: 0.55rem;
+    padding-bottom: 0rem;
+    padding-right: 0rem;
+    background: none;
+    margin-bottom: 3px;
+    margin-top: -6px;
+}
+
+.dropdown-box {
+    text-align: center;
+    background: #bbe4f4;
+    height: 24px;
+    margin: 0 auto;
+    width: 202px;
+    display: inline-block;
+}
+
+.dropdown {
+    height: 25px;
+}
+
+.info-box {
+    text-align: center;
+    height: 24px;
+    display: inline-block;
+    margin: 0 auto;
+    width: 310px;
+    margin-left: -3px;
+    background-color: #daebf4;
+    color: #156294;
+}
+
+#bottom-nav {
+    padding-top: 3px;
+    float: right;
+    color: #156294;
+    font-size: 11px;
+    // font-family: url(../css/fonts/Roboto/Roboto-Medium.ttf)
+}
+
+#bottom-nav>li {
+    border-right: solid 1px rgb(13, 64, 122);
+    padding-left: 15px;
+    padding-right: 4px;
+}
+
+#bottom-nav>li:nth-child(2),
+#bottom-nav>li:nth-child(3) {
+    border-right: none;
+}
+
+.wifi-icon {
+    background: $image-wifi-icon;
+    height: 25px;
+    width: 30px;
+    background-repeat: no-repeat;
+    background-size: 25px;
+    display: block;
+    float: left;
+    margin-top: -3px;
+    margin-right: -34px;
+    background-color: aquamarine;
+}
+
+.cbp-spmenu {
+    background: #DBE9F2;
+    position: fixed;
+}
+
+.cbp-spmenu>ul {
+    list-style: none;
+    color: white;
+    padding: 0;
+    margin: 0;
+    background-color: #DBE9F2;
+    width: 220px;
+    transition: all 1s ease;
+}
+
+.cbp-spmenu>ul>li {
+    color: white;
+    display: block;
+    box-shadow: inset 0 0 0 0 #26a4de;
+    transition: all ease 0.6s;
+    -webkit-transition: all ease 0.6s;
+    -moz-transition: all ease 0.6s;
+    -ms-transition: all ease 0.6s;
+    -o-transition: all ease 0.6s;
+    &:hover {
+        color: white;
+        /* transition: all ease 1s; */
+        box-shadow: inset 221px 0 0 0 #26a4de;
+    }
+}
+
+.cbp-spmenu>ul>li>a {
+    display: block;
+    color: black;
+    padding-left: 60px;
+    width: 220px;
+    text-decoration: none;
+    -webkit-transition: all ease 0.6s;
+    -moz-transition: all ease 0.6s;
+    -ms-transition: all ease 0.6s;
+    -o-transition: all ease 0.6s;
+    &:hover {
+        color: white;
+        /* transition: all ease 1s; */
+    }
+}
+
+
+/* Orientation-dependent styles for the content of the menu */
+
+.cbp-spmenu-vertical {
+    width: 220px;
+    height: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.cbp-spmenu-vertical>ul>li {
+    border-bottom: 1px solid #b0bec5;
+    list-style: none;
+    padding: 1em;
+}
+
+
+/* Vertical menu that slides from the left or right */
+
+.containers {
+    padding: 0px;
+    position: relative;
+    margin: 0px;
+    transition: 1.5s all cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.container-new {
+    margin-left: 220px;
+    position: relative;
+    transition: 1.5s all cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.main {
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.cbp-spmenu-left {
+    left: -220px;
+    top: 50px;
+}
+
+.cbp-spmenu-left.cbp-spmenu-open {
+    left: 0px;
+}
+
+
+/* Push classes applied to the body */
+
+.cbp-spmenu-push {
+    overflow-x: hidden;
+    position: relative;
+    left: 0;
+}
+
+.cbp-spmenu-push-toright {
+    margin-left: 240px;
+}
+
+.cbp-spmenu-push-toleft {
+    left: -220px;
+}
+
+
+/* Transitions */
+
+.cbp-spmenu,
+.cbp-spmenu-push {
+    transition: 1.5s all cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+
+/* Example media queries */
+
+@media screen and (max-width: 55.1875em) {
+    .cbp-spmenu-horizontal {
+        font-size: 75%;
+        height: 110px;
+    }
+    .cbp-spmenu-top {
+        top: -110px;
+    }
+    .cbp-spmenu-bottom {
+        bottom: -110px;
+    }
+}
+
+@media screen and (max-height: 26.375em) {
+    .cbp-spmenu-vertical {
+        font-size: 90%;
+        width: 190px;
+    }
+    .cbp-spmenu-left,
+    .cbp-spmenu-push-toleft {
+        left: -190px;
+    }
+    .cbp-spmenu-right {
+        right: -190px;
+    }
+    .cbp-spmenu-push-toright {
+        left: 190px;
+    }
+}
+
+////////////iconss csss here///////////////
+.globalicon {
+    background: url($image-global);
+    height: 25px;
+    width: 25px;
+    background-size: 30px;
+    display: block;
+    float: left;
+    margin-left: 13px;
+    margin-top: -5px;
+}

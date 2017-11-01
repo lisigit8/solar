@@ -1,0 +1,303 @@
+.roboto-bold-11px-434343{
+  font-size: 12px;
+  font-family: Roboto-Bold, sans-serif;
+  color: #434343;
+}
+
+
+.vcb {
+
+  .row:first-child {
+    //border-bottom: 1px solid #bdbdbd;
+  }
+
+  .row.row-device-control {
+    margin: 0 2%;
+  }
+
+  .theme-group-container {
+    text-align: left;
+
+    .theme-grouping-options {
+      margin-bottom: 0;
+    }
+
+    .theme-grouping-options > li {
+      padding: 1%;
+
+      .theme-grouping-text {
+        @extend .roboto-bold-11px-434343;
+      }
+
+      .theme-grouping-number {
+        font-size: 16px;
+        font-family: Roboto-Regular, sans-serif;
+      }
+
+      .theme-grouping-on-number {
+        font-size: 16px;
+        font-family: Roboto-Regular, sans-serif;
+        color: #569dd3;
+      }
+
+      .theme-grouping-nocomm-number {
+        font-size: 16px;
+        font-family: Roboto-Regular, sans-serif;
+        color: #939799;
+      }
+    }
+  }
+
+  .theme-cards-container {
+
+    text-align: left;
+
+    .col-first-filter {
+      padding: 0;
+
+      ul{
+        margin:0;
+      }
+
+      li.theme-border-bottom{
+        border-bottom: 1px solid #156294;
+      }
+
+      li{
+        padding: 1% 1% 0 1%;
+
+        .theme-filters-text,.theme-groupby-text{
+          @extend .roboto-bold-11px-434343;
+        }
+
+        .theme-filters-text , .fa-caret-square-o-right{
+          cursor: pointer;
+        }
+
+        .label-default{
+          background: #b3b7ba;
+          font-family: Roboto-Bold , sans-serif;
+          font-size: 10px;
+          color:#FFFFFF;
+        }
+      }
+
+      .theme-grouping-param{
+        cursor:pointer;
+        font-family: Roboto-Regular, sans-serif;
+        font-size:11px;
+        color: #6a6a6a;
+      }
+
+      .theme-grouping-param.active{
+        @extend .roboto-bold-11px-434343;
+        color:#156294;
+      }
+
+      .col-md-6 {
+        padding: 0;
+      }
+    }
+
+    .cards {
+     // height: 80vh;
+     // overflow-y: auto;
+    }
+  }
+}
+
+.pageHeader{
+  padding: 0px !important;
+}
+.actualCards{
+  margin-top: 2vh;
+  width: 30vh;
+  padding: 4px;
+}
+.normalHeader{
+  font-family: Roboto-Bold;
+  font-size: 12px;
+  background-color: #464646;
+  color: #ffffff;
+  padding-right: 0px;
+  height: 37px;
+  line-height: 17px;
+}
+.nonnetworkheader{
+  font-family: Roboto-Bold;
+  font-size: 12px;
+  background-color: #BBBABF;
+  color: #ffffff;
+  padding-right: 0px;
+  height: 37px;
+  line-height: 17px;
+}
+vcbPlate{
+  background-color: red;
+}
+#headerTitle{
+  margin-left: -1vh;
+  font-family: Roboto-Bold;
+}
+
+.remoteiconBackground{
+  height: 50px;
+  width: 50px;
+  background-color: #7EBB39;
+  float: right;
+  padding-right: 0px;
+}
+.remoteIcon{
+  margin-top: 6px;
+  background: url("../styles/assets/images/device_control/remote.png")no-repeat;
+  height: 15px;
+  width:27px;
+  text-align: center;
+  color: white;
+  float: right;
+}
+.remoteIconText:before{
+  font-family: Roboto-Medium;
+  font-size: 11px;
+  content: "Remote";
+}
+.localiconBackground{
+  height: 50px;
+  width: 50px;
+  background-color: #F1492F;
+  float: right;
+  padding-right: 0px;
+}
+.localIcon{
+  margin-top: 6px;
+  background: url("../styles/assets/images/device_control/local.png")no-repeat;
+  height: 15px;
+  width:27px;
+  text-align: center;
+  color: white;
+  float: right;
+}
+.localIconText:before{
+  font-family: Roboto-Medium;
+  font-size: 11px;
+  content: "Local";
+  margin-left: 6px;
+}
+.nonetworkiconBackground{
+  height: 50px;
+  width: 50px;
+  background-color: #8D8C91;
+  float: right;
+  padding-right: 0px;
+}
+.nonetworkIcon{
+  margin-top: 6px;
+  background: url("../styles/assets/images/device_control/no_network.png")no-repeat;
+  height: 15px;
+  width:27px;
+  text-align: center;
+  color: white;
+  float: right;
+}
+.nonetworkIconText:before{
+  font-family: Roboto-Medium;
+  font-size: 11px;
+  content: "NonComm.";
+  margin-left: -6px;
+}
+.vcbnormalPlate{
+  background-color: #D6E3EC;
+}
+.vcbnonetworkPlate{
+  background-color: #D3D4D8;
+}
+
+#togbutton{
+  box-shadow: none;
+  border: none;
+  height:15px;
+  width:47px;
+  margin-top: 2px;
+  margin-left: -7px;
+}
+#arrowButton{
+  float: right;
+  width: 17px;
+  height: 15px;
+  background: url("../styles/assets/images/device_control/arrowButton.png")no-repeat;
+  margin-right: -14px;
+  margin-top: 3px;
+}
+ .deviceBody{
+  padding: 0px!important;
+}
+.greenCircle{
+  background: url("../styles/assets/images/device_control/greenButton.png")no-repeat;
+  height: 15px;
+  width: 17px;
+  float: right;
+ // color: #61A733;
+}
+.redCircle{
+  background: url("../styles/assets/images/device_control/redButton.png")no-repeat;
+  height: 15px;
+  width: 17px;
+  float: right;
+  //color: #61A733;
+}
+.greyCircle{
+  background: url("../styles/assets/images/device_control/greyButton.png")no-repeat;
+  height: 15px;
+  width: 17px;
+  float: right;
+  // color: #61A733;
+}
+.keyString{
+  font-family: Roboto-Bold;
+  color: #434343;
+  font-size: 10px;
+}
+.keyStringNocomm{
+  font-family: Roboto-Bold;
+  color: #7D7D7D;
+  font-size: 10px;
+}
+.schedulerON{
+  //background-color: #ffffff;
+  height: 20px;
+  margin-top: 4px;
+  border-radius: 5px
+}
+.schedulerOFF{
+ // background-color: #EDEDED;
+  height: 20px;
+  margin-top: 4px;
+  border-radius: 5px
+}
+.deviceHR{
+  border: 1px solid #CACACA;
+  margin-bottom: 2px;
+  margin-top: 0px;
+}
+#vcbonoffBox{
+  width: 26vh;
+  box-shadow: 1px 0px 28px #888888;
+  border-radius: 3px;
+  font-family: Roboto-Medium;
+  font-size: 11px;
+  background-color: #ffffff;
+  height: 14vh;
+  margin-top: 10vh;
+  margin-left: 1vh;
+  z-index: 100;
+  position: absolute;
+}
+.vcbsInsideBtn{
+  color: #ffffff;
+  height: 26px;
+  padding-top: 4px;
+  font-size: 12px;
+}
+vcbsInsideBtn:hover{
+  color: #ffffff;
+}

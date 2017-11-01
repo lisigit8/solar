@@ -1,0 +1,322 @@
+@import "./../helpers/helpers";
+@import "./../helpers/variables";
+@import "./../helpers/mixins";
+
+#trackerfault td {
+  padding: 2px;
+}
+
+.full {
+  width: 97.5%;
+  height: 100%;
+  display: inline-block;
+  transition: 0.8s all ease-out;
+}
+
+.slide {
+  width: 56%;
+  height: 100%;
+  display: inline-block;
+  transition: 0.8s all ease-in;
+}
+
+.tableout {
+  width: 44%;
+  height: 70%;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-top: none;
+  border-right: none;
+  display: inline-block;
+  position: absolute;
+  transition: all 0.8s ease;
+  margin-left: 2%;
+  margin-top: 0%;
+}
+
+.tablein {
+  width: 3%;
+  height: 70%;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  border-top: none;
+  border-right: none;
+  display: inline-block;
+  position: absolute;
+  margin-left: 1.2%;
+  transition: all 0.8s ease;;
+  margin-top: 0%;
+}
+
+//.deg {
+//    transform: rotate(270deg);
+//    margin-top: 18vh;
+//    margin-left: -35px;
+////    border-radius: 4px;
+////    border: none;
+////    background-color: #eee;
+//        border-bottom: 1px solid white;
+//}
+.deg {
+  transform: rotate(270deg);
+  margin-top: 120px;
+  margin-left: -48px;
+  width: 78px;
+  border-radius: 7px;
+  border-bottom: 1px solid white;
+  border-left-color: #777;
+  border-right-color: #777;
+  border-top-color: #777;
+}
+
+#tablefault td,
+#tablefault tr,
+#tablefault th {
+  border: 1px solid black;
+  padding: 2px;
+  font-size: 11px;
+  text-align: center;
+}
+
+#tablefault tr {
+  height: 3vh
+}
+
+#trackerfault {
+  margin-bottom: 11px;
+  font-size: 0.7vw;
+}
+
+#trackerfault td,
+#trackerfault tr,
+#trackerfault th {
+  border: 1px solid #ccc;
+  padding-left: 6px;
+}
+
+#trackerfaultlegends td,
+#trackerfaultlegends tr,
+#trackerfaultlegends th {
+  cursor: pointer;
+  padding: 1px;
+  font-size: 11px;
+  border: none;
+}
+
+#trackerfaultlegends td {
+  // width: 1vw;
+  font-weight: 600;
+  color: #676767;
+  border: none;
+}
+
+.desiredangle {
+  margin-left: 2vh;
+  padding-left: 6px;
+  color: #ffb100;
+}
+
+.icontracklegend1 {
+  @include trackerwidget-icons($image-icon-one);
+}
+
+.icontracklegend2 {
+  @include trackerwidget-icons($image-icon-two);
+}
+
+.icontracklegend3 {
+  @include trackerwidget-icons($image-icon-three);
+}
+
+.icontracklegend4 {
+  @include trackerwidget-icons($image-icon-four);
+}
+
+.icontracklegend5 {
+  @include trackerwidget-icons($image-icon-five);
+}
+
+.icontracklegend6 {
+  @include trackerwidget-icons($image-icon-six);
+}
+
+.icontracklegend7 {
+  @include trackerwidget-icons($image-icon-eight);
+}
+
+.icontracklegend8 {
+  @include trackerwidget-icons($image-icon-seven);
+}
+
+.icontracklegend21 {
+  @include trackerwidget-icons($image-icon-one);
+}
+
+.icontracklegend22 {
+  @include trackerwidget-icons($image-icon-three);
+}
+
+.icontracklegend23 {
+  @include trackerwidget-icons($image-icon-five);
+}
+
+.color_0-5 {
+  color: #1DAA5D;
+}
+
+.color_-5-0 {
+  color: #1DAA5D;
+}
+
+.color_5-15 {
+  color: #FFB100;
+}
+
+.color_-15-5 {
+  color: #FFB100;
+}
+
+#content {
+  .c3-line {
+    stroke-width: 2px;
+  }
+  .c3-grid {
+    opacity: 0.4
+  }
+  .c3-tooltip {
+    font-size: 18px
+  }
+}
+
+.showleg {
+  opacity: 1;
+}
+
+.blurleg {
+  opacity: 0.3;
+}
+
+#trackeralarmtabs {
+  .nav-tabs.nav-justified > .active > a {
+    color: #FF0000;
+  }
+  .nav-tabs.nav-justified > .active > a {
+    border: 1px solid #ccc;
+    border-top: 1px solid;
+    border-bottom: none;
+  }
+  .nav-tabs.nav-justified > li > a {
+    color: #646464;
+    border-bottom: 1px solid #ccc;
+  }
+}
+
+.viewallbut {
+  float: right;
+  margin-right: 1vh;
+  border-radius: 12px;
+  font-size: 9px;
+  color: red;
+  border-color: red;
+}
+
+.sidedatetime {
+  float: right;
+  margin-right: 1vh;
+  font-size: 10px;
+  color: #646464;
+}
+
+.maintext {
+  font-weight: bold;
+  color: #424242;
+}
+
+#cpillpillsIrr li {
+  border-right: none !important;
+  padding-bottom: 4px;
+}
+
+#cpillpillstrackfault li:nth-child(2) {
+  border-right: none !important;
+}
+
+#cpillpillsIrr li span,
+#cpillpillstrackfault li span {
+  font-size: 11px;
+}
+
+#cpillpillstrackfault {
+  margin-left: 29px;
+}
+
+#charttrack1 {
+  .c3-axis-x path {
+    display: inline;
+  }
+}
+
+#charttrack2 {
+  .c3-axis-x path {
+    display: inline !important;
+    stroke: #B7BABF !important;
+  }
+}
+
+#charttrack3 {
+  .c3-axis-x path {
+    display: inline !important;
+    stroke: #B7BABF !important;
+  }
+}
+
+#charttrack {
+  .c3-grid .c3-xgrid-focus {
+    visibility: visible !important;
+  }
+}
+
+#trackfaulttable {
+  td[class^="<"],
+  td[class^=">"] {
+    color: #FF0000;
+  }
+  td[class^="-15"],
+  td[class^="5"] {
+    color: #FFB100;
+  }
+  td[class^="-5"],
+  td[class^="0"] {
+    color: #1DAA5D;
+  }
+}
+
+.invrow {
+  color: #595959;
+  font-size: 10px
+}
+
+.typeerror {
+  color: #424242;
+  font-size: 11px
+}
+
+.totaltrackalarm {
+  color: #424242;
+  margin-left: 1.5vh;
+  font-size: 10px;
+  font-weight: bold;
+
+}
+
+.c3-lines--15--5 > path {
+  stroke-dasharray: 2 2;
+}
+
+.c3-lines---15 > path {
+  stroke-dasharray: 2 2;
+}
+
+.c3-lines--5-0 > path {
+  stroke-dasharray: 2 2;
+}

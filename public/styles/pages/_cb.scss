@@ -1,0 +1,262 @@
+/*Line charts*/
+
+.arrows {
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+}
+
+.leftarrow {
+    @extend .arrows;
+    right: 0%;
+}
+
+.rightarrow {
+    @extend .arrows;
+    left: 0%;
+}
+
+
+/*cbstatuswidget*/
+
+#cbsprogress .progress {
+    margin-bottom: 1%;
+}
+
+#cbs {
+    @extend #cbsprogress;
+}
+
+#cbs2 {
+    @extend #cbsprogress;
+}
+
+#lastBox {
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.lastBoxElements {
+    margin-bottom: 10px;
+}
+
+#lastBoxText {
+    font-family: Roboto-Bold;
+}
+
+#lastBoxButtons {
+    float: right;
+    margin-top: 15px;
+}
+
+#submitLastelement {
+    background-color: #00a7e9;
+    color: #cbcbcb;
+}
+
+#submitMsg {
+    margin-top: 15%;
+}
+
+#lastBoxDropdown {
+    background-color: white;
+    border-radius: 5px;
+    height: 25px;
+    overflow: auto;
+}
+
+.lastBoxCheckbox {
+    margin-left: 1px;
+}
+
+#cbs .progress-bar {
+    background-image: linear-gradient(to bottom, #9fcf75 0%, #9fcf75 100%);
+}
+
+#cbs2 .progress-bar {
+    background-image: linear-gradient(to bottom, #cda732 0%, #cda732 100%);
+}
+
+#cbsfont .bartext {
+    font-size: 12px;
+    font-family: roboto-medium;
+}
+
+#cbsfont2 .bartext2 {
+    font-size: 0.8vw;
+    font-family: roboto-medium;
+}
+
+#cbs {
+    @extend #cbsfont;
+}
+
+#cbs {
+    @extend #cbsfont2;
+}
+
+#cbs2 {
+    @extend #cbsfont;
+}
+
+#cbs2 {
+    @extend #cbsfont2;
+}
+
+.lasttext {
+    color: #26a4de;
+    font-size: 13px;
+    font-family: roboto-medium;
+}
+
+#cbs3 .plantAvailabilityON {
+    background-color: #a4e664;
+    border-radius: 3px;
+    width: 7vw;
+    height: 3vh;
+    font-size: 10px;
+    color: #434343;
+    border: none;
+    margin-bottom: 1vh;
+    margin-left: 1vh;
+}
+
+#cbs3 .plantAvailabilityPartial {
+    background-color: #ffa11a;
+    border-radius: 3px;
+    width: 7vw;
+    height: 3vh;
+    font-size: 10px;
+    border: none;
+    color: #434343;
+    margin-bottom: 1vh;
+    margin-left: 1vh;
+}
+
+
+/*cbstringsoverview*/
+
+#cbstrings .table>thead>tr>th {
+    padding: 3px
+}
+
+#cbstrings .table>tbody>tr>td {
+    padding: 3px
+}
+
+#cbstrings {
+    height: 100%;
+    // overflow: auto;
+}
+
+@media screen and (min-height:655px)and(max-height:1000px) {
+    #cbstrings {
+        height: 80%;
+        // overflow: auto;
+    }
+}
+
+#cbstrings th {
+    text-align: center;
+}
+
+#cbstrings .progress {
+    margin-top: 0%;
+    margin-bottom: 0px;
+    margin-left: 40px;
+    border-radius: 0px;
+}
+
+#cbstrings td {
+    text-align: center;
+}
+
+#cbstrings .progress-bar {
+    background-image: linear-gradient(to bottom, #14b1e7 0%, #14b1e7 100%);
+}
+
+#cbstrings::-webkit-scrollbar-thumb {
+    background-color: #d7d7d7;
+    box-shadow: none;
+}
+
+#cbstrings::-webkit-scrollbar {
+    width: 5px;
+    box-shadow: none;
+}
+
+#cbstrings::-webkit-scrollbar-track {
+    box-shadow: none;
+}
+
+
+/*single-cb*/
+
+#legends .c3-legend-background {
+    stroke: none;
+}
+
+#dcAc {
+    @extend #legends;
+}
+
+#invtemperature {
+    @extend #legends;
+}
+
+#cbrmstemp {
+    @extend #legends;
+}
+
+#cbsinglecurrentpower {
+    @extend #legends;
+}
+
+#cbsinglesc {
+    @extend #legends;
+}
+
+.stringbutton {
+    height: 23px;
+    width: 75px;
+    padding: 1px;
+    background-color: #ececec;
+    font-family: roboto-bold;
+    border: 1px solid #bdbdbd;
+    text-align: center;
+    cursor: pointer;
+    left: 10vh;
+    position: relative;
+}
+
+.opendiv {
+    height: 18vh;
+    width: 82vh;
+    background-color: #ffffff;
+    position: absolute;
+    z-index: 100;
+    left: 11vh;
+    border: 1px solid #bdbdbd;
+    padding: 2.5vh;
+    font-weight: bold;
+}
+
+.closediv {
+    display: none;
+}
+
+
+/*cbstatuspage*/
+
+.tophead {
+    border-top: 1px solid #156394;
+    border-bottom-color: #156394 !important;
+    background: #e4e9ed;
+    color: #156294;
+}
+
+#cbgen .c3-axis-x path,
+#cbavail .c3-axis-x path,
+#cbmaxcurrent .c3-axis-x path {
+    display: none;
+}

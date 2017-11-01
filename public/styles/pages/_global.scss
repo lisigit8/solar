@@ -1,0 +1,527 @@
+.mycard {
+    background-color: gray;
+    text-align: center;
+    padding: 5px;
+}
+
+.mycardtextborder {
+    border-right: 1px solid #DFDFDF;
+    margin-bottom: 4px;
+    border-collapse: collapse;
+    border-right-style: inset;
+}
+
+.mycardtext {
+    font-size: 20px;
+    color: #26a4de;
+}
+
+.mybutton {
+    width: 99%;
+    height: 5vh;
+    color: white;
+    background-color: #26a4de;
+    border: none;
+}
+
+.googleMapInfoBubble {
+    height: 85px;
+    width: 200px;
+}
+
+.info_labels {
+    font-family: Roboto-Bold;
+}
+
+#prvalue {
+    color: red;
+    font-family: Roboto-Bold;
+    margin-bottom: 8px;
+}
+
+#cufvalue {
+    color: green;
+    font-family: Roboto-Bold;
+}
+
+#plantavailValue {
+    color: green;
+    font-family: Roboto-Bold;
+}
+
+.gotoplant {
+    margin-top: 0px;
+    height: 25px;
+    background-color: lightgreen;
+    text-align: center;
+}
+
+.icon-red {
+    @include global-status-icons($image-icon-red)
+}
+
+.icon-grey {
+    @include global-status-icons($image-icon-grey)
+}
+
+.icon-yellow {
+    @include global-status-icons($image-icon-yellow)
+}
+
+.icon-purple {
+    @include global-status-icons($image-icon-purple)
+}
+
+.icon-green {
+    @include global-status-icons($image-icon-green)
+}
+
+.icon-marker {
+    @include global-status-icons($image-icon-marker)
+}
+
+#totalgeneration .c3-axis-x path,
+#portfoliorevenue .c3-axis-x path,
+#portfoliocuf .c3-axis-x path,
+#plantavailability .c3-axis-x path {
+    display: none;
+}
+
+#totalgeneration .c3-event-rect,
+#portfoliorevenue .c3-event-rect,
+#portfoliocuf .c3-event-rect,
+#plantavailability .c3-event-rect {
+    cursor: pointer;
+}
+
+canvas {
+    height: 20px;
+}
+
+//Project Details Modal
+.divTable {
+    width: 100%;
+    //height: 100%;
+    display: table;
+    text-align: center;
+}
+
+.divTableRow {
+    width: 100%;
+    height: 100%;
+    display: table-row;
+    line-height: 30px;
+    text-align: center;
+}
+
+.tableHead {
+    font-weight: bolder;
+    font-size: 12px;
+    background: #DFDFDF;
+}
+
+.headCell {
+    border-right: 1px solid #FFFFFF;
+    border-top: 2px solid #fff;
+}
+
+.divTableCell {
+    width: 10%;
+    height: 100%;
+    display: table-cell;
+    padding: 5px;
+}
+
+.detail-header {
+    font-size: 14px;
+    font-weight: bolder;
+    padding: 2px 10px;
+    background: aliceblue;
+}
+
+.nopad {
+    padding: 0px;
+}
+
+.close-detail-modal {
+    color: red;
+    line-height: 20px;
+}
+
+.layout-drill-back {
+    position: absolute;
+    right: 14px;
+    top: -3px;
+    float: right;
+    cursor: pointer;
+    color: #FE366C;
+}
+
+.retable-title {
+    padding: 0 15px;
+}
+
+.accrow .divTableCell {
+    width: 10%;
+    padding: 20px 5px;
+}
+
+.accrow .tableHead {
+    background-color: #E2EFFF;
+    color: #487fbc;
+}
+
+.acctable .panel.panel-default .panel-heading {
+    padding: 1px;
+}
+
+.acctabrRow {
+    background: #F4F9FF;
+    color: #474747;
+}
+
+.plant-compare {
+    height: 50px;
+    padding: 15px 5px;
+    background: rgb(246, 246, 246);
+}
+
+.plant-compare-filter {
+    height: 50px;
+    padding: 15px 5px;
+    label {
+        vertical-align: inherit;
+    }
+    select {
+        background: #fff;
+        border-radius: 5px;
+        color: gray;
+    }
+    .btn {
+        font-size: 11px;
+    }
+}
+
+body .modal-lg {
+    width: 95%;
+}
+
+//implicitly set important property to overwrite bootstrap btn-group
+//@author-Pratik
+.filterspan {
+    margin-left: 5px !important;
+    margin-bottom: 5px !important;
+    padding: 0px 10px !important;
+    border: 2px solid gray !important;
+    background: #fff !important;
+    border-radius: 10px !important;
+    color: gray !important;
+    box-shadow: none !important;
+}
+
+.filterspan:hover {
+    margin-left: 5px !important;
+    margin-bottom: 5px !important;
+    padding: 0px 10px !important;
+    border: 2px solid gray !important;
+    border-radius: 10px !important;
+    background: #fff !important;
+    color: #4dd865 !important;
+    box-shadow: none !important;
+}
+
+.filterspan.active {
+    margin-left: 5px !important;
+    margin-bottom: 5px !important;
+    padding: 0px 10px !important;
+    border: 2px solid #4dd865 !important;
+    border-radius: 10px !important;
+    background: #fff !important;
+    color: #4dd865 !important;
+    box-shadow: none !important;
+}
+
+@media all and (min-width: 1026px) and(max-width: 1279px) {
+    body #globalside .sidetext {
+        font-size: 17px;
+        font-family: $font-roboto-medium;
+        color: #434343;
+    }
+    body #globalside .trackersidetext {
+        font-size: 18px;
+        font-family: $font-roboto-medium;
+        color: #434343;
+    }
+    body #globalside .sidetext-sub {
+        font-size: 13px;
+        font-family: $font-roboto-medium;
+        color: #434343;
+    }
+    body #globalside .sidetextbelow {
+        font-size: 8px;
+        font-family: $font-roboto-medium;
+        color: $color-purple;
+    }
+    body #globalside .rowpanel-big {
+        height: 88.5vh;
+        overflow: hidden;
+    }
+    body #globalside .row1panel {
+        height: 42vh;
+    }
+}
+
+@media all and (min-width: 1280px) and(max-width: 1366px) {
+    body #globalside .sidetext {
+        font-size: 16px;
+        font-family: $font-roboto-medium;
+        color: #434343;
+    }
+    body #globalside .trackersidetext {
+        font-size: 22px;
+        font-family: $font-roboto-medium;
+        color: #434343;
+    }
+    body #globalside .sidetext-sub {
+        font-size: 14px;
+        font-family: $font-roboto-medium;
+        color: #434343;
+    }
+    body #globalside .sidetextbelow {
+        font-size: 9px;
+        font-family: $font-roboto-medium;
+        color: $color-purple;
+    }
+    body #globalside .rowpanel-big {
+        height: 82.5vh;
+        overflow: hidden;
+    }
+    body #globalside .row1panel {
+        height: 37.75vh;
+    }
+}
+
+@media all and (min-width: 1367px) {
+    body #globalside .sidetext {
+        font-size: 26px;
+        font-family: $font-roboto-medium;
+        color: #434343;
+    }
+    body #globalside .trackersidetext {
+        font-size: 26px;
+        font-family: $font-roboto-medium;
+        color: #434343;
+    }
+    body #globalside .sidetext-sub {
+        font-size: 15px;
+        font-family: $font-roboto-medium;
+        color: #434343;
+    }
+    body #globalside .sidetextbelow {
+        font-size: 12px;
+        font-family: $font-roboto-medium;
+        color: $color-purple;
+    }
+    body #globalside .rowpanel-big {
+        height: 88.5vh;
+        overflow: hidden;
+    }
+    body #globalside .row1panel {
+        height: 42vh;
+    }
+}
+
+.path {
+    stroke: steelblue;
+    stroke-width: 1;
+    fill: none;
+}
+
+.myclass {
+    display: none;
+}
+
+.sidepopup {
+    width: 600px;
+    position: absolute;
+    right: 69px;
+    top: 15px;
+    cursor: pointer;
+}
+
+#mypopup .panel-primary {
+    border-color: #bdbdbd;
+    height: 300px;
+    overflow: hidden;
+}
+
+.mylist,
+.mylist2 {
+    border: 1px solid #bdbdbd;
+    overflow-y: auto;
+    color: Gray;
+    padding: 6px;
+    height: 184px;
+}
+
+.popupheading {
+    font-size: 14px;
+    color: #474747;
+    font-family: $font-roboto-medium;
+    padding: 9px;
+}
+
+.popupsubheading {
+    font-size: 13px;
+    color: #50505A;
+    font-family: $font-roboto-medium;
+    padding: 5px;
+}
+
+#popupbuttons {
+    padding: 9px;
+    float: right;
+}
+
+#popupbuttons {
+    .btn-danger,
+    .btn-info {
+        width: 100px;
+        border-radius: 0px;
+        box-shadow: none;
+    }
+}
+
+#mypopup ::-webkit-scrollbar {
+    width: 5px;
+}
+
+.H_ib_content {
+    bottom: 34% !important;
+}
+
+svg.H_icon {
+    fill: #000000;
+    display: none;
+}
+
+.theme-site-label {
+    font-size: 13px;
+    color: #074ad1;
+    font-family: Roboto-Bold, sans-serif;
+}
+
+.theme-popup-label {
+    font-size: 11px;
+    color: #000000;
+    font-family: Roboto-Regular, sans-serif;
+}
+
+.theme-pop-value {
+    font-size: 16px;
+    font-family: Roboto-Bold, sans-serif;
+}
+
+.theme-p-label {
+    font-size: 13px;
+    font-family: Roboto-Medium, sans-serif;
+}
+
+.theme-go-to-plant {
+    background: #95D67C;
+    text-align: center;
+    color: #494949;
+    font-size: 15px;
+    font-family: Roboto-Medium, sans-serif;
+    padding: 3%;
+}
+
+.H_ib_content {
+    padding: 0% !important;
+    margin: 0% !important;
+}
+
+.H_ib_tail {
+    display: none;
+}
+
+#globalTotalGeneration .c3-legend-item,
+#globalCuf .c3-legend-item,
+#globalAvail .c3-legend-item,
+#globalRevenue .c3-legend-item {
+    display: none;
+}
+
+#globalTotalGeneration .c3-legend-background,
+#globalCuf .c3-legend-background,
+#globalAvail .c3-legend-background,
+#globalRevenue .c3-legend-background {
+    stroke: none;
+}
+
+//#globalTotalGeneration .c3-legend-background{
+//  stroke:none;
+//}
+//////fixed headers css for global site table
+#fixed-header table,
+#fixed-header tr td {
+    /* border: 1px solid red */
+}
+
+#fixed-header tbody {
+    display: block;
+    max-height: 100%;
+    overflow-y: scroll;
+}
+
+#fixed-header thead,
+#fixed-header tbody tr {
+    display: table;
+    width: 98%;
+    table-layout: fixed;
+}
+
+#fixed-header thead {
+    width: 100%;
+}
+
+#fixed-header table {
+    width: 100%;
+    height: 100%;
+}
+
+#fixed-header.table {
+    height: 90%;
+}
+
+#fixed-header a {
+    word-wrap: break-word;
+}
+
+#fixed-header td:nth-child(3),
+#fixed-header td:nth-child(4),
+#fixed-header td:nth-child(6),
+#fixed-header td:nth-child(7),
+#fixed-header td:nth-child(8),
+#fixed-header td:nth-child(9),
+#fixed-header td:nth-child(10),
+#fixed-header td:nth-child(12),
+#fixed-header td:nth-child(11),
+#fixed-header td:nth-child(13),
+#fixed-header td:nth-child(14),
+#fixed-header td:nth-child(15),
+{
+    text-align: center;
+}
+
+#fixed-header th:nth-child(3),
+#fixed-header th:nth-child(4),
+#fixed-header th:nth-child(6),
+#fixed-header th:nth-child(7),
+#fixed-header th:nth-child(8),
+#fixed-header th:nth-child(9),
+#fixed-header th:nth-child(10),
+#fixed-header th:nth-child(7),
+#fixed-header th:nth-child(11) {
+    text-align: center;
+}

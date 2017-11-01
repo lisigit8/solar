@@ -1,0 +1,128 @@
+@import "./../helpers/imagepaths";
+@import "./../helpers/mixins";
+@import "./../helpers/variables";
+
+$base-font-family: 'Roboto Condensed',sans-serif;
+$base-font-size: 18px;
+$base-font-weight: 300;
+$text-color: #333;
+
+
+body {
+  @include Roboto-Regular;
+  color: $text-color;
+  line-height: 1.6;
+  height:100%;
+  width:100%
+}
+
+body{
+  .page-content-background{
+    background-color: #ffffff;
+  }
+}
+
+.icon-filter{
+  @include base-icon;
+  margin-top: 3px;
+  margin-right:10px ;
+  background: url($image-latest-cal) no-repeat;
+}
+.icon-setting{
+  @include base-icon;
+  margin-top: 3px;
+  margin-right: 10px;
+  background:url($image-latest-settings) no-repeat; ;
+}
+
+.icon-setting1{
+  width: 14px;
+  padding-top: 0;
+  height: 14px;
+  background-size: contain;
+  display: inline-block;
+  background:url($image-settings-01) no-repeat;
+}
+.icon-maximize{
+  @include base-icon;
+  float: right;
+  margin-top: 3px;
+  margin-right: 10px;
+  background: url($image-latest-max) no-repeat;
+}
+@media all and (max-width:1024px){
+body .icon-maximize{
+  @include base-icon;
+  height:12px;
+  margin-top: 3px;
+  margin-left:3px;
+  background: url($image-latest-max) no-repeat;
+}
+    body .icon-filter{
+  @include base-icon;
+        height:12px;
+  //margin-top: 9px;
+  background: url($image-latest-cal) no-repeat;
+}
+
+
+}
+.icon-minimize{
+  @include base-icon;
+  float: right;
+  margin-top: 3px;
+  margin-right: 10px;
+  background: url($image-latest-min) no-repeat;
+}
+
+.icon-refresh{
+  @include base-icon;
+  background: url($image-refresh) no-repeat;
+}
+
+.icon-flip-1{
+  @include base-icon;
+  background: url($image-flip-1) no-repeat;
+  height:17px;
+  margin-top: 3px;
+  margin-left:3px;
+}
+
+.icon-flip-2{
+  @include base-icon;
+  background: url($image-flip-2) no-repeat;
+  height:17px;
+  margin-top: 3px;
+  margin-left:3px;
+}
+
+.icon-download{
+  @include base-icon;
+  background: url($image-latest-download) no-repeat;
+  width:21px;
+  height:20px;
+  margin-top: 1px;
+  margin-left:3px;
+}
+
+
+.panel a{
+  top:1px
+}
+
+.ui-select-toggle{
+  background: none;
+}
+
+
+.page-container{
+  width:100%;
+  height:100%
+}
+
+#single-button-sites-dropdowm{
+  background: none;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}

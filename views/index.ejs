@@ -1,11 +1,93 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en" class="solar-login-background">
+
+<head>
+  <!-- META SECTION -->
+  <title>Erixis - Solarpulse</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <!-- END META SECTION -->
+
+  <!-- CSS INCLUDE -->
+  <link rel='stylesheet' href='/js/vendor/bootstrap/dist/css/bootstrap.css' />
+  <link rel='stylesheet' href='/js/vendor/bootstrap/dist/css/bootstrap-theme.css' />
+  <link rel='stylesheet' href='../styles/vendors/fontawesome/font-awesome.min.css' />
+  <link rel='stylesheet' href='../styles/main.css' />
+</head>
+
+<body >
+
+<div class="login-container">
+
+  <div class="login-box animated fadeInDown">
+    <div class="login-logo"></div>
+    <div class="login-body">
+      <form class="form-horizontal" method="post" action='/login'>
+        <div style="margin-bottom: 25px" class="input-group">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <input ng-model="username" id="login-username" type="text" class="form-control" name="username" value="" placeholder="Username / Email">
+        </div>
+
+        <div style="margin-bottom: 25px" class="input-group">
+          <span class="input-group-addon"><i class="fa fa-key"></i></span>
+          <input id="login-password" type="password" class="form-control" name="password" placeholder="Password">
+        </div>
+        <div class="input-group" style="color:red; margin-left:15px;">
+        </div>
+        <!--                <div style="margin-left:30%"><a href="#">Reset Password</a></div>-->
+        <div class="input-group">
+          <div class="col-md-12">
+            <span>
+                        <a href="forgot" onclick="javascript:window.location.href='/forgot'; return false;">Forgot your password ? </a>
+              <!--                        <a href="/changePassword" style="margin-left:5%">Change Password</a>-->
+                        </span>
+
+            <!--
+        <div style="margin-bottom: 25px" class="input-group" ng-show="showForgotBox||showResetBox">
+            <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+            <input ng-model="resetCode" id="resetCode" type="text" class="form-control" name="resetCode" value="" placeholder="{{placeHolder}}" required>
+            <input ng-model="newPassword" id="newPassword" type="text" class="form-control" name="newPassword" value="" placeholder="New Password" required>
+            <input ng-model="rePassword" id="reNewPassword" type="text" class="form-control" name="reNewPassword" value="" placeholder="Re-type New Password" required>
+            <button class="btn btn-warning btn-block" ng-click="action()">Reset</button>
+        </div>
+-->
+          </div>
+        </div>
+        <div class="input-group">
+
+          <div class="remember-checkbox">
+            <input type="checkbox" value="None" id="remember-checkbox" name="check" checked />
+            <label for="remember-checkbox"></label>
+          </div>
+          <label class="remember-label">Remember my Id and Password</label>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-info btn-block loginbtn">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<footer class="footer">
+  <span class="footertextleft">Copyright <%- (new Date()).getFullYear().toString() %>  Machinepulse.All rights reserved.</span>
+  <span class="footertextright"> Legal | Privacy policy | Terms Of Site | About Machinepulse| Powered By<span
+            style="color:aqua;font-size:12px"> Erixis</span></span>
+</footer>
+
+</body>
+<script src="/js/vendor/angular/angular.js"></script>
+
+<script src="/js/vendor/angular-cookie/angular-cookie.js"></script>
+<script src="/js/vendor/angular-touch/angular-touch.js"></script>
+<!--<script src="/js/vendor/angular-ui/build/angular-ui.js"></script>-->
+<script src="/js/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/js/vendor/angular/angular-sanitize.min.js"></script>
+<!--<script src="/js/app/solarpulse/sloar-login-module.js"></script>-->
+
 </html>

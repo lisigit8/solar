@@ -1,0 +1,460 @@
+@import "./../helpers/variables";
+@import "./../helpers/mixins";
+@import "./../helpers/helpers";
+$height-second-row:240px;
+$height-third-row:240px;
+$energy-trend-chart-height:200px;
+
+@media screen and (min-width:$breakpoint-small)and(max-width:$breakpoint-large){
+    body #plantDetails .panel-body {
+
+  height:$height-second-row;
+  padding: 2px;
+  overflow: auto;
+
+  .theme-details-subject{
+    @include Roboto-Bold;
+    font-size: 10px;
+    color:$color-content;
+    white-space: nowrap;
+  }
+
+  .theme-details-text{
+    @include Roboto-Medium;
+    font-size:9px;
+    color:$color-content;
+  }
+}
+
+}
+@media screen and (min-width:$breakpoint-small)and(max-width:$breakpoint-large){
+   body #generationStatus .panel-body .dt-picker{
+       padding:0px;
+    }
+}
+
+@media screen and (min-width:$breakpoint-small)and(max-width:$breakpoint-large){
+  body #revenueDetails .panel-body{
+
+  height:$height-second-row;
+  padding: 2px;
+
+  .table-responsive{
+    height:100%;
+    overflow-x: hidden;
+  }
+
+  table {
+    height:100%;
+    margin-bottom:0;
+  }
+
+  table > thead th {
+    background-color: $color-table-header-back;
+    color:$color-white;
+  }
+
+  table > thead th{
+    border-left:3px solid $color-white;
+    border-right:3px solid $color-white;
+    font-size: $font-size-8pt;
+    border-top:none;
+    vertical-align: middle;
+  }
+
+  table > thead th:first-child {
+    border-left:$none-class;
+      width:29%;
+  }
+
+  table > thead th:last-child{
+    border-right:$none-class;
+  }
+
+  table > tbody td{
+    color:$color-content;
+    background-color: $color-table-body-grey;
+    border-left:2px solid $color-white;
+    border-right:2px solid $color-white;
+    @include Roboto-Medium;
+    font-size:8px;
+    border-top:none;
+    vertical-align: middle;
+  }
+
+  table > tbody tr:nth-child(odd) td:first-child{
+    background-color: $color-table-body-dark;
+    font-size: 8px;
+    @include Roboto-Bold;
+
+  }
+
+  table > tbody tr:nth-child(even) td:first-child{
+    background-color: $color-table-body-light;
+    font-size: 8px;
+    @include Roboto-Bold;
+
+  }
+
+}
+
+}
+
+#plantDetails {
+
+//  height:$height-second-row;
+//  padding: 2px;
+//  overflow: auto;
+
+  .theme-details-subject{
+    @include Roboto-Bold;
+    font-size: $font-size-9pt;
+    color:$color-content;
+    white-space: nowrap;
+  }
+
+  .theme-details-text{
+    @include Roboto-Medium;
+    font-size: $font-size-10pt;
+    color:$color-content;
+  }
+
+  .row .theme-back-primary{
+    background-color: $color-primary-blue;
+    height:23px;
+  }
+
+  .row .theme-back-secondary{
+    background-color: $color-secondary-blue;
+    height:23px;
+  }
+
+  .row .theme-back-tertiary{
+    background-color: $color-tertiary-blue;
+    height:23px;
+  }
+
+  .row{
+    margin-bottom: 3px;
+  }
+
+  .row .layout-subject{
+    border-right:2px solid $color-white;
+  }
+
+  .row .layout-text{
+    border-left:2px solid $color-white;
+  }
+}
+
+#plantMap .panel-body{
+  height:$height-second-row;
+  padding: 5px;
+}
+
+#revenueDetails .panel-body{
+
+  height:$height-second-row;
+  padding: 2px;
+
+  .table-responsive{
+    height:100%;
+    overflow-x: hidden;
+  }
+
+  table {
+    height:100%;
+    margin-bottom:0;
+  }
+
+  table > thead th {
+    background-color: $color-table-header-back;
+    color:$color-white;
+  }
+
+  table > thead th{
+    border-left:3px solid $color-white;
+    border-right:3px solid $color-white;
+    font-size: $font-size-9pt;
+    border-top:none;
+    vertical-align: middle;
+  }
+
+  table > thead th:first-child {
+    border-left:$none-class;
+      width:29%;
+  }
+
+  table > thead th:last-child{
+    border-right:$none-class;
+  }
+
+  table > tbody td{
+    color:$color-content;
+    background-color: $color-table-body-grey;
+    border-left:2px solid $color-white;
+    border-right:2px solid $color-white;
+    @include Roboto-Medium;
+    font-size:$font-size-8pt;
+    border-top:none;
+    vertical-align: middle;
+  }
+
+  table > tbody tr:nth-child(odd) td:first-child{
+    background-color: $color-table-body-dark;
+    font-size: $font-size-8pt;
+    @include Roboto-Bold;
+
+  }
+
+  table > tbody tr:nth-child(even) td:first-child{
+    background-color: $color-table-body-light;
+    font-size: $font-size-8pt;
+    @include Roboto-Bold;
+
+  }
+
+}
+
+#generationStatus .panel-body.lossanalysis-container{
+  height:$height-third-row;
+  padding: 5px;
+}
+
+
+#generationStatus .panel-body.accordion-container{
+  height:$height-third-row;
+  padding: 5px;
+
+  .panel-collapse{
+    height: 136px;
+  }
+
+  .panel-group .panel + .panel{
+    margin-top:3px;
+  }
+
+  span.form-control{
+    height: 25px;
+    padding: 1px 12px;
+  }
+
+  .theme-filter-container{
+    padding: 0px;
+  }
+
+  a {
+    color:#333 !important;
+      text-decoration: initial;
+  }
+
+  .btn-default:hover, .btn-default:focus{
+    background: $color-white;
+  }
+
+  .dt-picker{
+    height: 25px;
+  }
+
+  .input-group-addon{
+    background-color: #ffffff;
+    border-left:none;
+    padding: 4px 6px;
+  }
+
+  .theme-details-subject{
+    @include Roboto-Bold;
+    font-size: $font-size-11pt;
+    color:$color-white;
+//    background-color: $color-table-header-back;
+    white-space: nowrap;
+    border-radius:0px;
+    border:1px solid #bdbdbd;
+  }
+
+  .theme-details-text{
+    @include Roboto-Medium;
+    font-size: $font-size-9pt;
+    color:$color-content;
+    white-space: nowrap;
+  }
+
+  .theme-details-text-secondary{
+    font-size: $font-size-9pt;
+    color:$color-content;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .theme-back-primary{
+    background-color: $color-primary-blue;
+    height: 34px;
+    padding: 5px;
+
+//    span{
+//      vertical-align: sub;
+//    }
+  }
+
+  .theme-back-secondary{
+    background-color: $color-secondary-blue;
+    height: 35px;
+    padding: 5px;
+
+//    span{
+//      vertical-align: sub;
+//    }
+  }
+
+  .theme-back-tertiary{
+    background-color: $color-tertiary-blue;
+    height: 35px;
+    padding: 5px;
+
+//    span{
+//      vertical-align: sub;
+//    }
+  }
+
+  .row{
+    margin-bottom: 3px;
+  }
+
+  .row .layout-subject{
+    border-right:2px solid $color-white;
+  }
+
+  .row .layout-text{
+    border-left:2px solid $color-white;
+  }
+
+  .progress{
+    background: $color-white;
+    margin-bottom: 0;
+    margin-top:5px;
+    height:14px;
+    box-shadow: $none-class;
+  }
+
+  .progress-bar-warning{
+    background-image: linear-gradient(to bottom, #00A8E9 0%, #00A8E9 100%);
+  }
+
+  .progress-bar-success{
+    background-image: linear-gradient(to bottom, #59AB08 0%, #59AB08 100%);
+  }
+
+  .panel-collapse .panel-body{
+    padding: 0px;
+  }
+
+
+}
+
+#exec-daily-trends .panel-body{
+  height:$height-third-row + 10px;
+  padding: 0px;
+}
+
+.sl {
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+  stroke: black;
+  stroke-width: 1;
+
+  .sl path{
+    fill: none;
+  }
+  .sl circle{
+    fill: red;
+  }
+
+}
+
+.pad{
+  padding:1px
+}
+
+
+@media screen and (min-width:$breakpoint-small)and(max-width:$breakpoint-large){
+   body #exec-daily-trends{
+  .nav-tabs{
+
+  }
+  .nav-tabs>li{
+
+    margin-left:0px;
+  }
+  .nav>li>a{
+
+  }
+  .nav-tabs>li>a{
+
+    font-size: 9px;
+    text-align: center;
+    //padding-left: 39px;
+    //padding-right: 33px;
+  }
+
+
+}
+}
+
+#mydatetech{
+  width: 340px!important;
+}
+
+#exec-daily-trends{
+  .nav-tabs{
+    border: 0;
+    padding-top: 3px;
+    padding-bottom: 1px;
+    background: #26A4DE;
+  }
+  .nav-tabs>li{
+    margin-bottom: 0;
+    //margin-left:9px;
+  }
+  .nav>li>a{
+    padding: 3px 7px;
+  }
+  .nav-tabs>li>a{
+    margin-top: -1px;
+    border-radius: 0;
+    border: 0;
+    font-weight: 600;
+    font-size: 12px;
+    background-color: #26A4DE;
+    color:white;
+    text-align: center;
+    //padding-left: 49px;
+    //padding-right: 37px;
+  }
+  .nav-tabs>li.active>a,
+  .nav-tabs>li.active>a:focus,
+  .nav-tabs>li>a:hover {
+    color: #26A4DE;
+    cursor: pointer;
+    background-color: #ffffff !important;
+    border-bottom-color: transparent;
+  }
+  .panel-body .tab-content .tab-pane{
+    height: $energy-trend-chart-height;
+  }
+}
+
+.execPlantMapTooltip{
+  width: 13vw;background-color: #b1b1b1;
+  height:3vh;text-align: center;font-family: Roboto-Medium;
+  color: #ffffff;font-size: 13px;border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.execPlantMapTooltipContent{
+  margin-left: 10px;font-family: Roboto-bold;font-size: 13px;margin-top: 4px;
+}
+
+
+#co2saved .c3-axis-x path{
+  display: none;
+}

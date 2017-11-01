@@ -1,0 +1,594 @@
+@import "./../helpers/variables";
+@import "./../helpers/mixins";
+@import "./../helpers/helpers";
+
+$height-third-row: 270px;
+
+#techPR {
+.c3-axis-x path {
+  display: none;
+}
+
+}
+
+
+#u-gridAvail {
+.c3-axis-x path {
+  display: none;
+}
+
+}
+
+
+
+
+
+
+#techPA {.c3-axis-x path {
+  display: none;
+}
+
+}
+.c3-axis-x .tick{
+fill:#676767
+}
+
+.c3 text {
+  font-family: roboto-medium;
+}
+#techPlantMap {
+  .panel-body {
+    height: $height-third-row - 70px;
+    padding: 7px;
+  }
+}
+
+#activeVsIrradiance {
+
+  .chart-xtra-legends {
+
+    .legend {
+      color: #2d6bbf;
+      background-color: rgba(211, 211, 211, 0.29);
+      margin-right: 2%;
+      font-family: Roboto-Bold;
+
+      .legend-value {
+        color: #1f1f1f;
+      }
+    }
+  }
+
+  .c3-axis-y2 {
+
+    .c3-axis-y2-label {
+      fill: #DC4B8F;
+      font-family: Roboto-Medium;
+      font-size: 12px;
+    }
+
+    .tick {
+      fill: #DC4B8F;
+      font-family: Roboto-Medium;
+      font-size: 12px;
+    }
+  }
+
+  .c3-axis-y {
+
+    .c3-axis-y-label {
+      fill: #24b1e5;
+      font-family: Roboto-Medium;
+      font-size: 12px;
+    }
+
+    .tick {
+      fill: #24b1e5;
+      font-family: Roboto-Medium;
+      font-size: 12px;
+    }
+
+  }
+
+  .c3-axis-x {
+
+    .c3-axis-x-label {
+      fill: #676767;
+      font-family: Roboto-Regular;
+      font-size: 12px;
+    }
+
+    .tick {
+      fill: #676767;
+      font-family: Roboto-Regular;
+      font-size: 12px;
+    }
+
+  }
+
+}
+
+
+#techGenStatus {
+
+  .theme-border{
+
+  }
+
+  .theme-border:before {
+    content : "";
+    position: absolute;
+    left    : 0;
+    bottom  : 0;
+    height  : 1px;
+    width   : 100%;
+    border-bottom:1px solid #bdbdbd;
+  }
+
+  .gen-text{
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:13px;
+    text-align: left;
+      margin-bottom:6px;
+   /* padding: 3%;*/
+    /*margin: 6px 0 6px 0;*/
+    border-right:1px solid #bdbdbd;
+  }
+
+  .gen-value {
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:13px;
+    text-align: left;
+      margin-bottom:6px;
+    /*padding: 5px 0px 0px 0px;
+    margin: 6px 0 6px 0;*/
+  }
+
+  .gen-label {
+    color:#434343;
+    font-family: Roboto-Regular , sans-serif;
+    font-size:13px;
+  }
+
+}
+
+
+#weather {
+
+  .weather-value {
+    font-family: Roboto-Bold, sans-serif;
+    font-size: 11px;
+    color: #434343;
+    text-align: center;
+  }
+
+  .weather-text {
+    font-family: Roboto-Bold, sans-serif;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .wind-speed {
+    color: #485EA2;
+  }
+
+  .rainfall {
+    color: #109CFD;
+  }
+}
+
+
+
+ .techalarm-right-icon{
+    background: url('/styles/assets/images/Dashboard-Menu-Icons_Alarm.png')no-repeat;
+   width: 30px;height: 30px;display: inline-block;background-size: contain;margin:0;float:left;
+    }
+
+
+
+
+
+
+
+.row3panelplantgen {
+    height: 170px;
+    overflow: auto;
+}
+
+@media all and (min-height: 656px) and(max-height: 720px) {
+    body .row3panelplantgen {
+        height: 27vh;
+        overflow: auto;
+    }
+}
+
+@media all and (min-height: 721px) and(max-height: 768px) {
+    body .row3panelplantgen {
+        height: 28vh;
+        overflow: auto;
+    }
+}
+
+@media all and (min-height: 769px) and(max-height: 800px) {
+    body .row3panelplantgen {
+        height: 28vh;
+        overflow: auto;
+    }
+}
+
+@media all and (min-height: 801px) and(max-height: 900px) {
+    body .row3panelplantgen {
+        height: 28vh;
+        overflow: auto;
+    }
+}
+
+@media all and (min-height: 900px) {
+    body .row3panelplantgen {
+        height: 30vh;
+        overflow: auto;
+    }
+}
+
+
+
+.plantAvailabilityON{
+background-color: rgb(143,238,120);
+border-radius:3px;
+    width: 5vw;
+    height: 3vh;
+    font-size: 10px;
+    color:rgb(38,126,13);
+    border: none;
+}
+.plantAvailabilityOFF{
+background-color: rgb(254,48,50);
+border-radius:3px;
+    width: 5vw;
+    height: 3vh;
+    font-size: 10px;
+    border: none;
+}
+.plantAvailabilityPartial{
+background-color: orange;
+border-radius:3px;
+    width: 5vw;
+    height: 3vh;
+    font-size: 10px;
+    border: none;
+}
+
+#performanceOverview{
+
+  .label-custom {
+    font-size: 11px;
+    font-family: Roboto-Medium , sans-serif;
+    color: #434343;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .yellow {
+    color:#F29B27;
+  }
+
+  .green {
+    color:#83DA72;
+  }
+
+  .blue {
+    color:#3CB0FB;
+  }
+
+  .purple {
+    color:#BB55F7;
+  }
+
+  #goBackToZoneView {
+    padding: 1px 6px;
+    background-image: none !important;
+    box-shadow: none;
+    text-shadow: none;
+    border: none;
+  }
+
+}
+
+
+//media query for plant gen status widget
+@media all and (min-height: 650px) and(max-height: 699px) {
+   #techGenStatus{
+  .gen-text{
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:12px;
+    text-align: left;
+      margin-bottom:4px;
+   /* padding: 3%;*/
+    /*margin: 6px 0 6px 0;*/
+    border-right:1px solid #bdbdbd;
+  }
+
+  .gen-value {
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:12px;
+    text-align: left;
+      margin-bottom:4px;
+    /*padding: 5px 0px 0px 0px;
+    margin: 6px 0 6px 0;*/
+  }
+   }
+
+}
+@media all and (min-height: 700px) and(max-height: 720px) {
+   #techGenStatus{
+  .gen-text{
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:13px;
+    text-align: left;
+      margin-bottom:5px;
+   /* padding: 3%;*/
+    /*margin: 6px 0 6px 0;*/
+    border-right:1px solid #bdbdbd;
+  }
+
+  .gen-value {
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:13px;
+    text-align: left;
+      margin-bottom:5px;
+    /*padding: 5px 0px 0px 0px;
+    margin: 6px 0 6px 0;*/
+  }
+   }
+
+}
+
+@media all and (min-height: 721px) and(max-height: 767px) {
+     #techGenStatus{
+  .gen-text{
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:11px;
+    text-align: left;
+      margin-bottom:1.2vh;
+   /* padding: 3%;*/
+    /*margin: 6px 0 6px 0;*/
+    border-right:1px solid #bdbdbd;
+  }
+
+  .gen-value {
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:11px;
+    text-align: left;
+      margin-bottom:1.2vh;
+    /*padding: 5px 0px 0px 0px;
+    margin: 6px 0 6px 0;*/
+  }
+   }
+}
+//ipad special query
+@media all and (max-height: 768px) and(max-width: 1024px) {
+     #techGenStatus{
+  .gen-text{
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:11px;
+    text-align: left;
+      margin-bottom:5px;
+   /* padding: 3%;*/
+    /*margin: 6px 0 6px 0;*/
+    border-right:1px solid #bdbdbd;
+  }
+
+  .gen-value {
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:11px;
+    text-align: left;
+      margin-bottom:5px;
+    /*padding: 5px 0px 0px 0px;
+    margin: 6px 0 6px 0;*/
+  }
+   }
+    .c3-chart-arcs-title {
+    dominant-baseline: middle;
+    font-size: 1em;
+}
+
+    #performanceOverview{
+
+  .label-custom {
+    font-size: 11px;
+    font-family: Roboto-Medium , sans-serif;
+    color: #434343;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .yellow {
+    color:#F29B27;
+  }
+
+  .green {
+    color:#83DA72;
+  }
+
+  .blue {
+    color:#3CB0FB;
+  }
+
+  .purple {
+    color:#BB55F7;
+  }
+}
+}
+
+@media all and (min-height: 769px) and(max-height: 800px) {
+      #techGenStatus{
+  .gen-text{
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:12px;
+    text-align: left;
+      margin-bottom:1.2vh;
+   /* padding: 3%;*/
+    /*margin: 6px 0 6px 0;*/
+    border-right:1px solid #bdbdbd;
+  }
+
+  .gen-value {
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:12px;
+    text-align: left;
+      margin-bottom:1.2vh;
+    /*padding: 5px 0px 0px 0px;
+    margin: 6px 0 6px 0;*/
+  }
+   }
+}
+
+@media all and (min-height: 801px) and(max-height: 900px) {
+      #techGenStatus{
+  .gen-text{
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:13px;
+    text-align: left;
+      margin-bottom:1.2vh;
+   /* padding: 3%;*/
+    /*margin: 6px 0 6px 0;*/
+    border-right:1px solid #bdbdbd;
+  }
+
+  .gen-value {
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:13px;
+    text-align: left;
+      margin-bottom:1.2vh;
+    /*padding: 5px 0px 0px 0px;
+    margin: 6px 0 6px 0;*/
+  }
+   }
+}
+
+@media all and (min-height: 900px) {
+         #techGenStatus{
+  .gen-text{
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:14px;
+    text-align: left;
+      margin-bottom:1.4vh;
+   /* padding: 3%;*/
+    /*margin: 6px 0 6px 0;*/
+    border-right:1px solid #bdbdbd;
+  }
+
+  .gen-value {
+    color:#434343;
+    font-family: Roboto-Medium , sans-serif;
+    font-size:14px;
+    text-align: left;
+      margin-bottom:1.4vh;
+    /*padding: 5px 0px 0px 0px;
+    margin: 6px 0 6px 0;*/
+  }
+   }
+}
+
+  .techalarm-right-icon{
+    background: url('/styles/assets/images/Dashboard-Menu-Icons_Alarm1.png')no-repeat;
+   width: 30px;height: 30px;display: inline-block;background-size: contain;margin:0;
+    }
+
+@media all and (min-width: 1280px) and(max-width: 1366px) {
+ #techplant{
+     body .sidetext {
+    font-size: 20px;
+    font-family: $font-roboto-medium;
+    color: #434343;
+  }
+  body .sidetext-sub {
+    font-size: 14px;
+    font-family: $font-roboto-medium;
+    color: #434343;
+  }
+  body .sidetextbelow {
+    font-size: 9px;
+    font-family: $font-roboto-medium;
+    color: #156294;
+  }
+  .plant-map-container {
+    height: 75% !important;
+  }
+   .distributed.plant-map-container {
+     height: 100% !important;
+   }
+  #devicestatus {
+    height: 25% !important;
+  }
+ }
+}
+
+@media all and (min-width:1025px) and (max-width:1279px){
+    #performanceOverview{
+
+  .label-custom {
+    font-size: 12px;
+    font-family: Roboto-Medium , sans-serif;
+    color: #434343;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+
+  .yellow {
+    color:#F29B27;
+  }
+
+  .green {
+    color:#83DA72;
+  }
+
+  .blue {
+    color:#3CB0FB;
+  }
+
+  .purple {
+    color:#BB55F7;
+  }
+}
+
+
+}
+    .deviceType {
+        border: none !important;
+        background-color: #ffffff !important;
+        font-size: 12px !important;
+        padding-top: 0px !important;
+        margin-left: 0px !important;
+        width: 105% !important;
+    }
+    .c3-target-Plant-Availability {
+   opacity: 0 !important;
+}
+    .c3-target-Expected {
+   opacity: 0 !important;
+}
+      .c3-grid .c3-xgrid-focus {
+   visibility : hidden !important;
+}
+#techPerformanceRatio .c3-event-rect {
+    cursor:pointer;
+}
+    #techPlantAvailability .c3-event-rect {
+    cursor:pointer;
+}

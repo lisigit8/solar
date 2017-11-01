@@ -1,0 +1,112 @@
+.test {
+  fill: #ffffff;
+  stroke: #434343;
+  stroke-width: 0.2;
+//  opacity: 0.6;
+  cursor: pointer;
+}
+
+.critical {
+  fill: #cf0000;
+  stroke: #434343;
+  stroke-width: 0.2;
+//  opacity: 0.6;
+  cursor: pointer;
+}
+.poor{
+  fill: #ff6c00;
+  stroke: #434343;
+  stroke-width: 0.2;
+}
+
+.remaining{
+  opacity: 0;
+}
+
+/*.selected , .clicked{
+  fill:#434343 !important;
+  stroke:#434343 !important;
+  stroke-width: 0.2;
+//  opacity: 0.3;
+}*/
+
+/*.selected {
+  stroke-width: 1 !important;
+}*/
+.comfail{
+  fill: #949494;
+  stroke: #434343;
+  stroke-width: 0.2;
+  //  opacity: 0.6;
+  cursor: pointer;
+}
+
+
+.average {
+  fill: #e2c500;
+  stroke: #434343;
+  stroke-width: 0.2;
+//  opacity: 0.6;
+  cursor: pointer;
+}
+.removed{
+  fill: black;
+  stroke: #434343;
+  stroke-width: 0.2;
+  //  opacity: 0.6;
+  cursor: pointer;
+}
+
+.good {
+  fill: #55a705;
+  stroke: #434343;
+  stroke-width: 0.2;
+//  opacity: 0.6;
+  cursor: pointer;
+}
+
+.dropped{
+  fill: black;
+  stroke: #434343;
+  stroke-width: 0.2;
+  //  opacity: 0.6;
+  cursor: pointer;
+}
+
+.stopped {
+  fill: #CACACA;
+  stroke: #434343;
+  stroke-width: 0.2;
+//  opacity: 0.6;
+  cursor: pointer;
+}
+
+.connection-failed {
+  fill: #949494;
+  stroke: #434343;
+  stroke-width: 0.2;
+//  opacity: 0.6;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.border {
+  stroke:#000;
+}
+
+div.tooltip {
+  color: #fff;
+  background-color: #434343;
+  padding: .5em;
+  text-shadow: #f5f5f5 0 1px 0;
+  border-radius: 2px;
+  opacity: 0.9;
+  position: absolute;
+}
+
+#d3map{
+  background-color: #EEEDEB
+}

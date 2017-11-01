@@ -1,0 +1,50 @@
+@import "./../helpers/helpers";
+@import "./../helpers/variables";
+@media screen and (min-width: $breakpoint-small) and(max-width: $breakpoint-large) {
+    body .panel.panel-default {
+        .panel-heading {
+            border-bottom: 1px solid $panel-border-color;
+            background: none;
+            padding: 4px 15px;
+        }
+        .panel-title {
+            font-family: $font-roboto-bold;
+            font-size: $font-size-10pt;
+            color: $color-panel-header;
+        }
+    }
+}
+
+.panel {
+    //  border-right: none;
+    //  border-left:none;
+    border-radius: 0px;
+}
+
+.panel.panel-default {
+    .panel-heading {
+        border-bottom: 1px solid $panel-border-color;
+        background: none;
+        padding: 10px 10px;
+    }
+    .panel-title {
+        font-family: $font-roboto-bold;
+        font-size: $font-panel-header;
+        color: $color-panel-header;
+    }
+    .panel-body {
+        padding: 2px;
+    }
+}
+
+.widgetMaximize {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    .panel-body {
+        height: 94% !important;
+    }
+}

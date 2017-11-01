@@ -1,0 +1,227 @@
+body .soilrow1panel {
+  height: 34vh;
+}
+
+body .row2panel {
+  height: 26vh;
+}
+
+body .row3panel {
+  height: 26vh;
+  overflow: hidden;
+}
+
+body .row3panelalarm {
+  height: 26vh;
+  overflow-y: auto;
+}
+
+body .soilrowbigpanelleft {
+  height: 38.8vh;
+  overflow: hidden;
+}
+
+@media all and (max-height: 655px) {
+  .soil-loss-analysis{
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+
+
+@media all and (min-height: 656px) and(max-height: 720px) {
+
+  body .soilrow1panel {
+    height: 34vh;
+  }
+
+  body .row2panel {
+    height: 26vh;
+  }
+
+  body .row3panel {
+    height: 26vh;
+    overflow: hidden;
+  }
+  body .row3panelalarm {
+    height: 26vh;
+    overflow-y: auto;
+  }
+
+  body .soilrowbigpanelleft {
+    height: 38.8vh;
+    overflow: hidden;
+  }
+
+  .soil-loss-analysis{
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media all and (min-height: 721px) and(max-height: 768px) {
+
+  body .soilrow1panel {
+    height: 25vh;
+  }
+
+  body .row2panel {
+    height: 27vh;
+  }
+
+  body .row3panel {
+    height: 27vh;
+    overflow: hidden;
+  }
+  body .soilrowbigpanelleft {
+    height: 51.4vh;
+    overflow: hidden;
+  }
+  body .row3panelalarm {
+    height: 27vh;
+    overflow-y: auto;
+  }
+
+  .soil-loss-analysis{
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media all and (min-height: 769px) and(max-height: 800px) {
+
+  body .soilrow1panel {
+    height: 25vh;
+  }
+
+  body .row2panel {
+    height: 27vh;
+  }
+
+  body .row3panel {
+    height: 27vh;
+    overflow: hidden;
+  }
+  body .row3panelalarm {
+    height: 26vh;
+    overflow-y: auto;
+  }
+  body .soilrowbigpanelleft {
+    height: 52.3vh;
+    overflow: hidden;
+  }
+
+  .soil-loss-analysis{
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media all and (min-height: 801px) and(max-height: 900px) {
+
+  body .soilrow1panel {
+    height: 25vh;
+  }
+
+  body .row2panel {
+    height: 28vh;
+  }
+
+  body .row3panel {
+    height: 27vh;
+  }
+  body .row3panelalarm {
+    height: 27vh;
+    overflow-y: auto;
+  }
+  body .soilrowbigpanelleft {
+    height: 52.2vh;
+  }
+}
+
+@media all and (min-height: 900px) {
+
+  body .soilrow1panel {
+    height: 25vh;
+  }
+
+  body .row2panel {
+    height: 30vh;
+  }
+
+  body .row3panel {
+    height: 30vh;
+    overflow: hidden;
+  }
+  body .soilrowbigpanelleft {
+    height: 55vh;
+    overflow: hidden;
+  }
+  body .row3panelalarm {
+    height: 29vh;
+    overflow-y: auto;
+  }
+}
+
+.mycardsoil {
+  background-color: #D9EDF7;
+  text-align: center;
+  padding: 3px;
+  margin-bottom: 5px;
+}
+
+.soilmycardtext {
+  font-size: 13px;
+  color: #26a4de;
+}
+.c3 text {
+  font-family: roboto-medium;
+}
+
+
+#dailyCum,#soilLossAnalysis,#todayIscPlot {
+  .panel-body .row {
+    height:100%;
+    width:100%;
+  }
+
+  #comboChartDailyCum,#comboChartLossAnalysis,#todayIsc{
+    height:100%;
+    width:100%;
+  }
+}
+ #comboChartLossAnalysis .c3-legend-background{
+        display:none;
+    }
+
+.modal-label {
+  font-size: 16px;
+  font-family: Roboto-Bold , sans-serif;
+  color: #434343;
+}
+
+.modal-date-text{
+  font-size: 14px;
+  font-family: Roboto-Medium , sans-serif;
+  color: #434343;
+}
+
+.modal-body {
+
+  .col-md-12{
+
+    margin-bottom: 1%;
+    margin-top: 1%;
+  }
+
+  .btn-default{
+    background-image:none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+
+}
+ #myfonts{
+     border-collapse: separate;border-spacing: 0 0.8vh;font-size:11px;
+ }

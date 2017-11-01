@@ -1,0 +1,304 @@
+@import '../helpers/helpers';
+@import '../helpers/variables';
+@import '../helpers/mixins';
+@import '../helpers/imagepaths';
+@import '../assets/fonts/font-path';
+
+
+.weathertitle{
+font-family:roboto-medium;
+color:#156294;
+}
+.weathersubtitle{
+font-family:roboto-medium;
+    font-size:15px;
+     color:#1f1f1f;
+}
+.amb-temp-icon{
+  @include top-widget-icon($image-ambient-temp);
+}
+
+.wind-speed-icon{
+  @include responsive-top-widget-icon($image-wind-speed);
+}
+
+.wind-dir-icon{
+  @include responsive-top-widget-icon($image-wind-dir);
+}
+
+.rainfall-logo{
+  @include top-widget-icon($image-rainfall);
+}
+
+@media all and (min-width:768px) and(max-width:1025px){
+.weathertitle{
+font-family:roboto-medium;
+color:#156294;
+    font-size:9px;
+}
+.weathersubtitle{
+font-family:roboto-medium;
+    font-size:11px;
+    color:#1f1f1f;
+}
+}
+
+
+
+@media screen and (min-width:$breakpoint-small)and(max-width:$breakpoint-large){
+
+
+body .top-widget-container{
+  .top-widget{
+
+    background-color: transparent;
+    padding:$no-padding 5px;
+    border:$none-class;
+    box-shadow: $none-class;
+    font-weight: 400;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+
+    .my-inner {
+    border: 1px solid $widget-border-color;
+    background-color: #f9f9f9;
+
+      .panel-heading {
+        @include Roboto-Bold;
+        font-size: 9pt;
+        padding: $no-padding 5px;
+        background: $widget-header-color;
+        border-bottom: 1px solid #dddddd;
+        color: $widget-font-color;
+      }
+      .panel-body{
+        height: 55px;
+      }
+    }
+  }
+}
+}
+
+
+@media screen and (min-width:$breakpoint-small)and(max-width:$breakpoint-large){
+  body  .top-widget-container .top-widget .my-inner .panel-body .carousel-inner .widget-content .widget-item-left{
+    float: left;
+    width: 41px;
+    padding: 0;
+    text-align: center;
+    margin-right: 0;
+    margin-left: 6px;
+    }
+ /* body .top-widget-container .top-widget .my-inner .panel-body .carousel-inner .widget-content
+    .amb-temp
+   {
+
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    display: inline-block;
+    cursor: pointer;
+    }*/
+    body .top-widget-container .top-widget .my-inner .panel-body .carousel-inner .widget-content{
+            .weather-icon{
+              @include responsive-top-widget-icon($image-weather-station);
+            }
+            .act-pwr-icon{
+              @include responsive-top-widget-icon($image-active-power);
+            }
+            .PR-icon{
+              @include responsive-top-widget-icon($image-performance-ratio);
+            }
+            .grd-avl-icon{
+              @include responsive-top-widget-icon($image-plant-availability);
+            }
+            .today-CO2-icon{
+              @include responsive-top-widget-icon($image-today-co2-reduced);
+            }
+            .total-CO2-icon{
+              @include responsive-top-widget-icon($image-total-co2-reduced);
+            }
+            .today-eGen-icon{
+              @include responsive-top-widget-icon($image-today-e-gen);
+            }
+            .total-capacity-icon{
+              @include responsive-top-widget-icon($image-total-capacity);
+            }
+            .amb-temp-icon{
+              @include responsive-top-widget-icon($image-ambient-temp);
+            }
+            .mod-temp-icon{
+              @include responsive-top-widget-icon($image-module-temp);
+            }
+            .wind-dir-icon{
+              @include responsive-top-widget-icon($image-wind-direction);
+            }
+
+            .alarm-icon{
+              @include responsive-top-widget-icon($image-alarm)
+            }
+            .zone-icon{
+              @include responsive-top-widget-icon($image-zone)
+            }
+            .peak-power{
+              @include top-widget-icon($image-peak-power)
+            }
+      .CUF-icon{
+        @include top-widget-icon($image-CUF)
+      }
+    }
+
+   body .top-widget-container .top-widget .my-inner .panel-body .carousel-inner .widget-content .widget-data .widget-num-val{
+     font-size: 14px;
+     .widget-unit{
+       font-size:12px;
+     }
+    }
+    body .top-widget-container .top-widget .my-inner .panel-body .carousel-inner .widget-content .widget-data .widget-label
+    {
+        font-size: 10px;
+    }
+    body .top-widget-container .top-widget .my-inner .panel-body .carousel-inner .widget-content .widget-data{
+      padding-left:0px;
+    }
+}
+
+
+
+
+
+
+
+.top-widget-container{
+  .top-widget{
+
+    background-color: transparent;
+    padding:$no-padding 5px;
+    border:$none-class;
+    box-shadow: $none-class;
+    font-weight: 400;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    margin-bottom:8px !important;
+
+    .my-inner {
+    border: 1px solid $widget-border-color;
+    background-color: #f9f9f9;
+
+      .panel-heading {
+        @include Roboto-Bold;
+        font-size: 11pt;
+        padding: $no-padding 5px;
+        background: $widget-header-color;
+        border-bottom: 1px solid #dddddd;
+        color: $widget-font-color;
+      }
+      .panel-body {
+        height: 64px;
+        padding: 5px;
+        background-color: #ffffff;
+        .carousel-control {
+          display: none;
+        }
+        .carousel-indicators {
+          left: 10%;
+          top: 36px;
+          li {
+            width: 6px;
+            height: 6px;
+            display: inline-block;
+            background-color: #d5d5d5;
+          }
+          li.active {
+            width: 8px;
+            height: 8px;
+            display: inline-block;
+            background-color: #01A0E7;
+          }
+        }
+//        .carousel-inner{
+          .widget-content{
+            .widget-item-left{
+              float:left;
+              width:40px;
+              padding:0px;
+              text-align: center;
+              margin-right: 0px;
+              padding-right: 10px;
+              margin-left:5px;
+              margin-top: 5px;
+            }
+            .widget-data{
+              padding-left: 40px;
+              .widget-num-val{
+                @include Roboto-Medium;
+                color:#222222;
+                font-size:20px;
+                text-align: left;
+                white-space: nowrap;
+                .widget-unit{
+                  font-size:18px;
+                }
+              }
+              .widget-label{
+                @include Roboto-Bold;
+                color:#55545A;
+                white-space: nowrap;
+                text-align: left;
+                font-size:11px;
+              }
+            }
+            .weather-icon{
+              @include top-widget-icon($image-weather-station);
+            }
+            .act-pwr-icon{
+              @include top-widget-icon($image-active-power);
+            }
+            .PR-icon{
+              @include top-widget-icon($image-performance-ratio);
+            }
+            .plant-avl-icon{
+              @include top-widget-icon($image-plant-availability);
+            }
+            .today-CO2-icon{
+              @include top-widget-icon($image-today-co2-reduced);
+            }
+            .total-CO2-icon{
+              @include top-widget-icon($image-total-co2-reduced);
+            }
+            .today-eGen-icon{
+              @include top-widget-icon($image-today-e-gen);
+            }
+            .total-capacity-icon{
+              @include top-widget-icon($image-total-capacity);
+            }
+
+            .mod-temp-icon{
+              @include top-widget-icon($image-module-temp);
+            }
+            .wind-dir-icon{
+              @include top-widget-icon($image-wind-direction);
+            }
+            .wind-speed-icon{
+              @include top-widget-icon($image-wind-speed);
+            }
+            .zone-icon{
+              @include top-widget-icon($image-zone)
+            }
+            .alarm-icon{
+              @include top-widget-icon($image-alarm)
+            }
+            .peak-power-icon{
+              @include top-widget-icon($image-peak-power)
+            }
+            .CUF-icon{
+              @include top-widget-icon($image-CUF)
+            }
+          }
+//        }
+      }
+  }
+  }
+}

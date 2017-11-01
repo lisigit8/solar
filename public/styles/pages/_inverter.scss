@@ -1,0 +1,227 @@
+.selectrow {
+    width: 100%;
+    height: 25px;
+    background-color: #e4e9ed;
+}
+
+.selectrowtext {
+    color: $color-purple;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.selectrowtextleft {
+    @extend .selectrowtext;
+    float: left;
+}
+
+.selectrowtextright {
+    @extend .selectrowtext;
+    float: right;
+}
+
+.selectrowtextmiddle {
+    @extend .selectrowtext;
+    margin-left: 35%;
+}
+
+.mybtn {
+    color: #838383;
+    background-color: white;
+    height: 20px;
+    border-color: #b3b7ba;
+    font-size: 12px;
+    padding: 0px;
+}
+
+#typeClass {
+    input[type="radio"] {
+        -webkit-appearance: checkbox;
+        -moz-appearance: checkbox;
+        -ms-appearance: checkbox;
+        -o-appearance: checkbox;
+    }
+}
+
+#topbuttons .btn-default {
+    @extend .mybtn;
+    background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 100%);
+    height: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 1px;
+    border: none;
+    box-shadow: none;
+}
+
+#topbuttons2 .btn-default {
+    @extend .mybtn;
+    background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 100%);
+    padding-left: 23px;
+    padding-right: 23px;
+    border-radius: 1px;
+}
+
+#topbuttons3 .btn-default {
+    @extend .mybtn;
+    background-image: -webkit-linear-gradient(top, #ffffff 0%, #ffffff 100%);
+    padding-left: 23px;
+    padding-right: 23px;
+    border-radius: 1px;
+}
+
+#topbuttons .btn.active {
+    color: white;
+    background-color: #848487;
+    background-image: -webkit-linear-gradient(top, #848487 0%, #848487 100%);
+}
+
+#topbuttons2 .btn.active {
+    color: white;
+    background-color: #b3b7ba;
+    background-image: -webkit-linear-gradient(top, #b3b7ba 0%, #b3b7ba 100%);
+}
+
+#topbuttons3 .btn.active {
+    color: white;
+    background-color: #b3b7ba;
+    background-image: -webkit-linear-gradient(top, #b3b7ba 0%, #b3b7ba 100%);
+}
+
+.hs {
+    font-size: 18px;
+}
+
+//inverter-status page scss
+#status {
+    .nav-tabs>li.active>a {
+        color: #00a7e9;
+        cursor: default;
+        background-color: #daf0fa;
+        border: 1px solid #33b9ed;
+        border-bottom-color: transparent;
+        border-radius: 0px;
+        font-family: roboto-medium;
+        width: 162px;
+        text-align: center;
+        margin-left: -2px;
+    }
+    .nav-tabs>li>a {
+        color: #a4a4a4;
+        border-right: 1px solid #cbcbcb;
+        width: 162px;
+        text-align: center;
+        border-top: 1px solid #cbcbcb;
+        border-radius: 0px;
+        border-left: 1px solid #cbcbcb;
+    }
+    .nav-tabs {
+        border-bottom: 1px solid #33b9ed;
+        margin: 15px;
+    }
+    .nav-tabs>li {
+        margin-left: -2px;
+    }
+}
+
+.theme-zone-filter-header {
+    font-family: Roboto-Bold, sans-serif;
+    font-size: 14px;
+    color: #434343;
+}
+
+.layout-zone-group {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: 2px solid #434343 !important;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-bottom: .5%;
+}
+
+.theme-inverter-critical {
+    color: #ff6840;
+    margin-right: 15px;
+}
+
+.theme-inverter-warning {
+    color: #ffa11a;
+    margin-right: 15px;
+}
+
+.theme-inverter-good {
+    color: #96bc43;
+    margin-right: 15px;
+}
+
+#typeClass {
+    .label-custom {
+        font-size: 11px;
+        font-family: Roboto-Medium, sans-serif;
+        color: #434343;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    .yellow {
+        color: #F29B27;
+    }
+    .green {
+        color: #83DA72;
+    }
+    .blue {
+        color: #3CB0FB;
+    }
+    .purple {
+        color: #BB55F7;
+    }
+}
+
+
+/*u-single-inverter*/
+
+#invlegendBackground .c3-legend-background {
+    stroke: none;
+}
+
+#dcAc {
+    @extend #invlegendBackground;
+}
+
+#invtemperature {
+    @extend #invlegendBackground;
+}
+
+
+/*u-invAcdcChart u-invTempChart*/
+
+.invArrow {
+    position: absolute;
+    cursor: pointer;
+    top: 50%
+}
+
+.leftarrow {
+    @extend .invArrow;
+    right: 0%;
+}
+
+.rightarrow {
+    @extend .invArrow;
+    left: 0%;
+}
+
+
+/*u-inverterstatustable*/
+
+.tophead {
+    border-top: 1px solid #156394;
+    border-bottom-color: #156394 !important;
+    background: #e4e9ed;
+    color: #156294;
+}
+
+#inverterGen .c3-axis-x path,
+#inverterAvail .c3-axis-x path,
+#inverterPr .c3-axis-x path {
+    display: none;
+}

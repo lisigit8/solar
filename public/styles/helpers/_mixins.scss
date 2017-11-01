@@ -1,0 +1,175 @@
+@import '../assets/fonts/font-path';
+@import "../helpers/imagepaths";
+//Mixin for font styles
+@mixin font-face($font-family, $file-path) {
+    @font-face {
+        font-family: $font-family;
+        src: url('#{$file-path}.ttf');
+    }
+}
+
+@include font-face(Roboto-Regular,
+$roboto-regular);
+@include font-face(Roboto-Bold,
+$roboto-bold);
+@include font-face(Roboto-Medium,
+$roboto-medium);
+@mixin Roboto-Regular {
+    font-family: Roboto-Regular;
+}
+
+@mixin Roboto-Bold {
+    font-family: Roboto-Bold;
+}
+
+@mixin Roboto-Medium {
+    font-family: Roboto-Medium;
+}
+
+@mixin base-icon {
+    width: 14px;
+    padding-top: 0;
+    height: 14px;
+    background-size: contain;
+    display: inline-block;
+    cursor: pointer;
+}
+
+// Mixin for top widget icons
+@mixin top-widget-icon($icon-url) {
+    background: url($icon-url) no-repeat;
+    width: 18px;
+    height: 18px;
+    background-size: contain;
+    display: inline-block;
+    cursor: pointer;
+}
+
+@mixin responsive-top-widget-icon($icon-url) {
+    background: url($icon-url);
+    width: 18px;
+    height: 18px;
+    background-size: contain;
+    display: inline-block;
+    cursor: pointer;
+}
+
+@mixin menu-icons($icon-url) {
+    background: url($icon-url);
+    height: 25px;
+    width: 25px;
+    background-size: 30px;
+    display: block;
+    float: left;
+    margin-left: 13px;
+    margin-top: 5px;
+}
+
+@mixin menu-icons2($icon-url) {
+    background: url($icon-url);
+    height: 25px;
+    width: 25px;
+    background-size: 22px;
+    display: block;
+    float: left;
+    margin-left: 17px;
+    margin-top: 8px;
+    background-repeat: no-repeat;
+}
+
+@mixin header-icons($icon-url) {
+    background: url($icon-url);
+    height: 25px;
+    width: 25px;
+    background-size: 27px;
+    display: block;
+    float: left;
+}
+
+@mixin trackerwidget-icons($icon-url) {
+    background: url($icon-url);
+    height: 10px;
+    width: 27px;
+    background-size: contain;
+    display: inline-block;
+    background-repeat: no-repeat;
+}
+
+@mixin header-logo($icon-url) {
+    background: url($icon-url);
+    height: 52px;
+    width: 135px;
+    background-size: 135px;
+    display: block;
+    float: left;
+    margin-top: -17px;
+    margin-left: -15px;
+}
+
+@mixin rowColor($rowType) {
+    @if $rowType=="new" {
+        color: #1978b5;
+        background-color: #ffffff;
+        @include Roboto-Bold;
+    }
+    @else if $rowType=="resolved" {
+        background-color: #ECEBF0;
+        color: #bdbdbd;
+        @include Roboto-Medium;
+    }
+    @else if $rowType=="acknowledged" {
+        color: #50505a;
+        background-color: #ffffff;
+        @include Roboto-Regular;
+    }
+    @else {
+        color: #333333;
+        background-color: #d0f5ff;
+        border-color: #96e4fc !important;
+        @include Roboto-Bold;
+    }
+}
+
+@mixin alarmIcon($alarmType) {
+    @if $alarmType=="alarm" {
+        background: url($image-alarm-icon) no-repeat;
+    }
+    @else if $alarmType=="warning" {
+        background: url($image-warning-icon) no-repeat;
+    }
+    @else if $alarmType=="notification" {
+        background: url($image-notification-icon) no-repeat;
+    }
+    @else if $alarmType=="info open" {
+        background: url($image-info-open-icon) no-repeat;
+    }
+    @else if $alarmType=="info close" {
+        background: url($image-info-close-icon) no-repeat;
+    }
+    width:20px;
+    height:20px;
+    display:inline-block;
+    background-size:contain;
+    vertical-align:bottom;
+}
+
+@mixin global-status-icons($icon-url) {
+    background: url($icon-url) no-repeat;
+    height: 20px;
+    width: 23px;
+    background-size: 20px;
+    display: inline-block;
+}
+
+@mixin sub-menu-icons($icon-url) {
+    background: url($icon-url);
+    padding: 0px;
+    height: 39px;
+    width: 27px;
+    background-size: 39px;
+    display: block;
+    float: left;
+    margin-left: 32px;
+    opacity: 0.4;
+    background-repeat: no-repeat;
+}

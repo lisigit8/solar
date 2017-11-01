@@ -1,0 +1,39 @@
+
+[type="radio"] {
+  display:none;
+
+  +span {
+    display: inline-block;
+  }
+
+  +span:before{
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 1em;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #ccc;
+    margin-right: 0.50em;
+    transition: 0.5s ease all;
+    background: #DEF2F9;
+  }
+}
+
+[type="radio"]:checked + span:before{
+  background: #5BC70F;
+  box-shadow: 0 0 0 1px #ccc;
+}
+
+/* One radio button per line */
+label {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: normal;
+  vertical-align: sub;
+}
+
+label.label-filter:not(first-child){
+  margin-left:6px;
+}

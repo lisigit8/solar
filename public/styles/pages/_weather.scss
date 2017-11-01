@@ -1,0 +1,61 @@
+
+/*Legend Background*/
+#legendBackground .c3-legend-background{
+  stroke:none;
+}
+#poaghi{
+  @extend #legendBackground;
+}
+#ambMod{
+  @extend #legendBackground;
+}
+#rainfall{
+  @extend #legendBackground;
+}
+#windspeed{
+  @extend #legendBackground;
+}
+
+
+#axisxpath .c3-axis-x path{
+  display: none;
+}
+#weatherghi{
+  @extend #axisxpath;
+}
+#weatherpoa {
+  @extend #axisxpath;
+}
+#weatherambTemp {
+  @extend #axisxpath;
+}
+#weathermodTemp {
+  @extend #axisxpath;
+}
+
+
+/*Line char arrows*/
+.arrow{
+  position: absolute;
+  cursor: pointer;
+  top:50%
+}
+.leftarrow{
+  @extend .arrow;
+  right:0%;
+}
+.rightarrow{
+  @extend .arrow;
+  left: 0%;
+}
+
+
+
+/*Status page tabs*/
+$status-tab-color:#156394;
+.tophead {
+  border-top: 1px solid $status-tab-color;
+  border-bottom-color: $status-tab-color !important;
+  background: #e4e9ed;
+  color: $status-tab-color;
+}

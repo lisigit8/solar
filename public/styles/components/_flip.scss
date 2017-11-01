@@ -1,0 +1,22 @@
+
+.flip-indicators {
+  position: absolute;
+  bottom:1%;
+  left: 85%;
+  width: 100%;
+
+  span {
+    cursor: pointer;
+    margin-right: 5px;
+
+     i.active {
+       color:#2d9dfd;
+       font-size:12px;
+     }
+
+     i {
+       color:#d5d5d5;
+       font-size:12px;
+     }
+  }
+}
