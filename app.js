@@ -117,7 +117,7 @@ router.get('/maintenance', isAuthenticated, function (req, res, next) {
 
 router.get('/getuser', isAuthenticated, function (req, res, next) {
     if (req.session.user) {
-        res.json(user);res.end();
+        res.json(req.session.user);res.end();
     } else {
         res.json({});res.end();
     }
