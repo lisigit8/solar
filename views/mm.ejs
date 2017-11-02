@@ -7,6 +7,19 @@
 
     <h3> We use angular ui router for routing between pages on the ui and access the logged in user via the user sent to the client over the json while rendering the page</h3>
 
+    <h4>
+        <ol>
+            <li> We load the user using a rest call , which will return the user in session.   </li>
+            <li> Inject it into the state using the resolve attribute</li>
+            <li> A Service is used to inject the logged in user</li>
+            <li> This User is then available into the Base Controller of every state</li>
+        </ol>
+
+        <pre>
+            <%- JSON.stringify(user,undefined,2)%>
+        </pre>
+    </h4>
+
 
 </body>
 

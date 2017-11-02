@@ -55,6 +55,9 @@ var isAuthenticated = function (req, res, next) {
 router.get('/', function (req, res) {
 
     if (req.session.user) {
+
+        console.log(JSON.stringify(req.session.user));
+
         res.render('mm', {
             title: 'Erixis',
             user: req.session.user,
@@ -112,6 +115,13 @@ router.get('/maintenance', isAuthenticated, function (req, res, next) {
     }
 });
 
+router.get('/getuser', isAuthenticated, function (req, res, next) {
+    if (req.session.user) {
+        res.json(user);res.end();
+    } else {
+        res.json({});res.end();
+    }
+});
 
 app.use('/', router);
 
