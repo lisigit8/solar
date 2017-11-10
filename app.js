@@ -9,12 +9,19 @@ var expressSession = require('express-session');
 var passport = require('passport');
 var app = express();
 var router = express.Router();
+var docsRoute = require('./documentation/docsRoute');
+var cors=require('cors');
+var moogose=require('mongoose');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
+app.use("/api", docsRoute);
+
 var initPassport = require('./passport/init');
 initPassport(passport);
 // uncomment after placing your favicon in /public
@@ -146,6 +153,15 @@ app.use(function (err, req, res, next) {
 
 app.listen('3000', function () {
     console.log('Listening to port 3000');
-})
+});
+
+
+moogose.connect('mongodb://localhost:27017/dataDocs');
+moogose.connection.on("connected",()=>{
+    console.log("Mongodb connected successfully");
+});
+moogose.connection.on("error",(err)=>{
+    console.log("Mongodb connecttion failed "+err);
+});
 
 module.exports = app;
