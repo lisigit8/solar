@@ -20,20 +20,8 @@ app.set('view engine', 'ejs');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
-app.use("/api", docsRoute);
 
-var initPassport = require('./passport/init');
-initPassport(passport);
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-//app.use(logger('dev'));
 app.use(bodyParser.json({
     extended: true,
     limit: "30mb"
@@ -41,6 +29,20 @@ app.use(bodyParser.json({
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
+app.use("/api", docsRoute);
+
+var initPassport = require('./passport/init');
+initPassport(passport);
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(__dirname + '/public/favicon.ico'));
+//app.use(logger('dev'));
 app.use(cookieParser());
 
 app.use(expressSession({
