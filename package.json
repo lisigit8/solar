@@ -18,10 +18,12 @@
     "mongojs": "^2.4.1",
     "mongoose": "^4.13.1",
     "mongoose-double": "0.0.1",
+    "mongoose-relationship": "^0.1.5",
     "morgan": "~1.7.0",
     "passport": "^0.3.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "promise": "^8.0.1",
     "serve-favicon": "~2.3.0",
     "underscore": "^1.8.3",
     "winston": "^2.4.0"

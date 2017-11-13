@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-
+var Schema = mongoose.Schema;
 const schema = mongoose.Schema({
-    WarrentyInformations : [{ type: Schema.Types.ObjectId, ref: 'WarrentyInfo' }],
+    WarrantyInformations : [{ type: Schema.Types.ObjectId, ref: 'WarrentyInfo' }],
 
 
     name:{
