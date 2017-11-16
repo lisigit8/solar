@@ -1,5 +1,4 @@
 var express = require('express');
-var Promise = require('promise');
 var router = express.Router();
 var warrantyInfo = require('./models/warrentyInformation');
 var device = require('./models/device');
@@ -7,7 +6,6 @@ var Site = require('./models/site');
 var Vendor = require('./models/vendor');
 var Contractor = require('./models/amcContractor');
 var hashSet = require('simple-hashset');
-
 
 //warranty Info
 router.get('/warrantyInfo', (req, resp, next)=>{
@@ -294,68 +292,90 @@ router.get('/warrantyDetails/site/:site_id', (req, resp, next)=>{
         if (err){
             return handleError(err);
         } else{
-            //resp.json(site.WarrantyInformations);
-            console.log("site : "+site.name);
             var warrantyDetails = new Array();
             var warrantyInfos = new Array();
             warrantyInfos = site.WarrantyInformations;
             warrantyInfos.forEach(myFunction);
 
-            function myFunction(item, index) {
-                /*assigning().then(function() {
-                    console.log(index + " : " + item);
-                });
-                function assigning(){
-                    item.vendor = "test";
-                    return;
-                }*/
+            /*function assigning(msg, callback){
+                warrantyInfos.forEach(myFunction);
 
+                console.log(msg);
+
+                if(typeof callback === "function"){
+                      callback();
+                }
+            }*/
+
+            function myFunction(item, index, array) {
                 var warrantyDetail = new Object();
 
-                warrantyInfo.findOne({_id: item._id}).populate('vendor').exec(function(err, warrantyInfo) {
+                warrantyInfo.findOne({_id: item._id}).populate('vendor').exec(function(err, warrantyInfoVendor) {
                     if (err){
                         return handleError(err);
                     } else{
-                        console.log("vendor : "+warrantyInfo.vendor.name);
-                        warrantyDetail["vendor_id"] = warrantyInfo.vendor._id;
-                        warrantyDetail["vendor"] = warrantyInfo.vendor.name;
-                    }
-                });
-                warrantyInfo.findOne({_id: item._id}).populate('device').exec(function(err, warrantyInfo) {
-                    if (err){
-                        return handleError(err);
-                    } else{
-                        console.log("device : "+warrantyInfo.device.name);
-                        warrantyDetail["device_id"] = warrantyInfo.device._id;
-                        warrantyDetail["device_name"] = warrantyInfo.device.name;
-                        warrantyDetail["device_ID"] = warrantyInfo.device.ID;
-                    }
-                });
-                warrantyInfo.findOne({_id: item._id}).populate('contractor').exec(function(err, warrantyInfo) {
-                    if (err){
-                        return handleError(err);
-                    } else{
-                        console.log("contractor : "+warrantyInfo.contractor.name);
-                        warrantyDetail["contractor_id"] = warrantyInfo.contractor._id;
-                        warrantyDetail["contractor"] = warrantyInfo.contractor.name;
-                    }
-                });
+                        warrantyInfo.findOne({_id: item._id}).populate('device').exec(function(err, warrantyInfoDevice) {
+                            if (err){
+                                return handleError(err);
+                            } else{
+                                warrantyInfo.findOne({_id: item._id}).populate('contractor').exec(function(err, warrantyInfoContractor) {
+                                    if (err){
+                                        return handleError(err);
+                                    } else{
+                                        warrantyDetail["vendor_id"] = warrantyInfoVendor.vendor._id;
+                                        warrantyDetail["vendor"] = warrantyInfoVendor.vendor.name;
 
-                warrantyDetail["_id"] = item._id;
-                warrantyDetail["start_date"] = item.start_date;
-                warrantyDetail["end_date"] = item.end_date;
-                warrantyDetail["cost"] = item.cost;
-                warrantyDetail["file_path"] = item.file_path;
-                warrantyDetail["auto_renewal"] = item.auto_renewal;
-                warrantyDetail["reminder_date"] = item.reminder_date;
-                warrantyDetail["send_to"] = item.send_to;
-                warrantyDetail["send_via"] = item.send_via;
+                                        warrantyDetail["device_id"] = warrantyInfoDevice.device._id;
+                                        warrantyDetail["device_name"] = warrantyInfoDevice.device.name;
+                                        warrantyDetail["device_ID"] = warrantyInfoDevice.device.ID;
 
-                warrantyDetails.push(warrantyDetail);
+                                        warrantyDetail["contractor_id"] = warrantyInfoContractor.contractor._id;
+                                        warrantyDetail["contractor"] = warrantyInfoContractor.contractor.name;
+
+                                        warrantyDetail["_id"] = item._id;
+                                        warrantyDetail["start_date"] = item.start_date;
+                                        warrantyDetail["end_date"] = item.end_date;
+                                        warrantyDetail["cost"] = item.cost;
+                                        warrantyDetail["file_path"] = item.file_path;
+                                        warrantyDetail["auto_renewal"] = item.auto_renewal;
+                                        warrantyDetail["reminder_date"] = item.reminder_date;
+                                        warrantyDetail["send_to"] = item.send_to;
+                                        warrantyDetail["send_via"] = item.send_via;
+
+                                        warrantyDetails.push(warrantyDetail);
+
+                                        if(warrantyDetails.length === array.length) {
+                                            resp.json(warrantyDetails);
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
             }
 
+            /*f1("abc", function(){
+                console.log("f2 called...");
+            });
+            function f1(str, callback){
+                console.log("f1 called...");
+                console.log("f1 called...");
+                console.log("f1 called...");
+                console.log("f1 called...");
+                console.log("f1 called...");
+
+                if(typeof callback === "function") {
+                    callback();
+                }
+            }*/
+
             //resp.json(warrantyInfos);
-            setTimeout(function(){ resp.json(warrantyDetails); }, 500);
+            //setTimeout(function(){ resp.json(warrantyDetails); }, 500);
+
+            /*assigning("...", function(){
+                resp.json(warrantyDetails);
+            });*/
         }
     });
 });
