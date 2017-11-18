@@ -7,6 +7,9 @@ var Vendor = require('./models/vendor');
 var Contractor = require('./models/amcContractor');
 var hashSet = require('simple-hashset');
 
+
+var Hero = require('./models/hero');
+
 //warranty Info
 router.get('/warrantyInfo', (req, resp, next)=>{
     warrantyInfo.find(function(err, warrantyInfos){
@@ -429,6 +432,40 @@ router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next)=>{
 
     setTimeout(function(){ resp.json(warrantyDetail); }, 500);
 });
+
+
+
+
+
+//Hero
+router.post('/hero', (req, resp, next)=>{
+    let newHero = new Hero({
+        id: req.body.id,
+        name: req.body.name
+    });
+    newHero.save((err, hero)=>{
+        if(err){
+            resp.json({msg: 'Error : '+err});
+        }else{
+            resp.json({msg: 'Successful!'});
+        }
+    });
+});
+router.get("/hero", (req,resp,next)=>{
+    Hero.find(function(err, heros){
+        resp.json(heros);
+    });
+});
+router.delete('/hero/:id', (req, resp, next)=>{
+    Hero.remove({_id: req.params.id}, function(err, result){
+        if(err){
+            resp.json(err);
+        }else{
+            resp.json(result);
+        }
+    });
+});
+
 
 
 
