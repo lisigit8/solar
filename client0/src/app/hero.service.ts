@@ -30,9 +30,10 @@ export class HeroService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
-  private heroesUrl = 'api/heroes';  // URL to web api
+  //private heroesUrl = 'api/heroes';  // URL to web api
+  private heroesUrl = 'http://localhost:3000/api/hero';  // URL to web api
 
-  /** GET heroes from the server */
+  // /** GET heroes from the server */
   getHeroes (): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
@@ -40,6 +41,7 @@ export class HeroService {
         catchError(this.handleError('getHeroes', []))
       );
   }
+
 
   /** GET hero by id. Return `undefined` when id not found */
   getHeroNo404<Data>(id: number): Observable<Hero> {
