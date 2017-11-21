@@ -1,23 +1,32 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-
-
-import {AppComponent} from './app.component';
-import {DocumentationModule} from "./documentation/documentation.module";
-import {RouterModule} from "@angular/router";
-
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import {FormControl, FormsModule} from '@angular/forms';
+import { AppComponent } from './app.component';
+import { SitesComponent } from './sites/sites.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import {MaintenanceModuleService} from "./services/maintenance-module.service";
+import { HttpClientModule }    from '@angular/common/http';
+import { WarrantyDetailsComponent } from './warranty-details/warranty-details.component';
+import {LayoutModule} from "./layout/layout.module";
+import {MatSelectModule} from "@angular/material";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SitesComponent,
+    WarrantyDetailsComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
-    RouterModule,
-    DocumentationModule
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    LayoutModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [MaintenanceModuleService],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

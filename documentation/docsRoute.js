@@ -97,7 +97,7 @@ router.get("/device", (req,resp,next)=>{
 router.get("/device/site/:site_id", (req,resp,next)=>{
     Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function(err, site) {
         if (err){
-            return handleError(err);
+            resp.json({msg: 'Error : '+err});
         } else{
             console.log("site : "+site.name);
             var devices = new Array();
@@ -110,7 +110,7 @@ router.get("/device/site/:site_id", (req,resp,next)=>{
 
                 warrantyInfo.findOne({_id: item._id}).populate('device').exec(function(err, warrantyInfo) {
                     if (err){
-                        return handleError(err);
+                        resp.json({msg: 'Error : '+err});
                     } else{
                         console.log("device : "+warrantyInfo.device.name);
                         device["_id"] = warrantyInfo.device._id;
@@ -189,7 +189,7 @@ router.get("/vendor", (req,resp,next)=>{
 router.get("/vendor/site/:site_id", (req,resp,next)=>{
     Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function(err, site) {
         if (err){
-            return handleError(err);
+            resp.json({msg: 'Error : '+err});
         } else{
             console.log("site : "+site.name);
             var vendors = new Array();
@@ -202,7 +202,7 @@ router.get("/vendor/site/:site_id", (req,resp,next)=>{
 
                 warrantyInfo.findOne({_id: item._id}).populate('vendor').exec(function(err, warrantyInfo) {
                     if (err){
-                        return handleError(err);
+                        resp.json({msg: 'Error : '+err});
                     } else{
                         console.log("vendor : "+warrantyInfo.vendor.name);
                         vendor["_id"] = warrantyInfo.vendor._id;
@@ -250,7 +250,7 @@ router.get("/contractor", (req,resp,next)=>{
 router.get("/contractor/site/:site_id", (req,resp,next)=>{
     Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function(err, site) {
         if (err){
-            return handleError(err);
+            resp.json({msg: 'Error : '+err});
         } else{
             console.log("site : "+site.name);
             var contractors = new Array();
@@ -263,7 +263,7 @@ router.get("/contractor/site/:site_id", (req,resp,next)=>{
 
                 warrantyInfo.findOne({_id: item._id}).populate('contractor').exec(function(err, warrantyInfo) {
                     if (err){
-                        return handleError(err);
+                        resp.json({msg: 'Error : '+err});
                     } else{
                         console.log("contractor : "+warrantyInfo.contractor.name);
                         contractor["_id"] = warrantyInfo.contractor._id;
@@ -288,17 +288,16 @@ router.delete('/contractor/:id', (req, resp, next)=>{
     });
 });
 
-
 //warranty Details By site
 router.get('/warrantyDetails/site/:site_id', (req, resp, next)=>{
     Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function(err, site) {
         if (err){
-            return handleError(err);
+            resp.json({msg: 'Error : '+err});
         } else{
             var warrantyDetails = new Array();
             var warrantyInfos = new Array();
             warrantyInfos = site.WarrantyInformations;
-            warrantyInfos.forEach(myFunction);
+            site.WarrantyInformations.forEach(myFunction);
 
             /*function assigning(msg, callback){
                 warrantyInfos.forEach(myFunction);
@@ -315,15 +314,15 @@ router.get('/warrantyDetails/site/:site_id', (req, resp, next)=>{
 
                 warrantyInfo.findOne({_id: item._id}).populate('vendor').exec(function(err, warrantyInfoVendor) {
                     if (err){
-                        return handleError(err);
+                        resp.json({msg: 'Error : '+err});
                     } else{
                         warrantyInfo.findOne({_id: item._id}).populate('device').exec(function(err, warrantyInfoDevice) {
                             if (err){
-                                return handleError(err);
+                                resp.json({msg: 'Error : '+err});
                             } else{
                                 warrantyInfo.findOne({_id: item._id}).populate('contractor').exec(function(err, warrantyInfoContractor) {
                                     if (err){
-                                        return handleError(err);
+                                        resp.json({msg: 'Error : '+err});
                                     } else{
                                         warrantyDetail["vendor_id"] = warrantyInfoVendor.vendor._id;
                                         warrantyDetail["vendor"] = warrantyInfoVendor.vendor.name;
@@ -383,12 +382,37 @@ router.get('/warrantyDetails/site/:site_id', (req, resp, next)=>{
     });
 });
 
+
+//Warranty details by site id and device id
+/*router.get('/warrantyDetails/site/:site_id/device/:device_id', (req, resp, next)=> {
+    Site.findOne({_id: req.params.site_id}).populate({
+        path: 'WarrantyInformations',
+        match: {device: req.params.device_id},
+    }).exec(function (err, site) {
+        if (err) {
+            resp.json({msg: 'Error : '+err});
+        } else {
+            resp.json(site.WarrantyInformations);
+        }
+    });
+});*/
+router.get('/warrantyDetails/site/:site_id/device/:device_id', (req, resp, next)=> {
+    warrantyInfo.find({site: req.params.site_id, device: req.params.device_id}, function(err, items){
+        if (err) {
+            resp.json({msg: 'Error : '+err});
+        } else {
+            resp.json(items);
+        }
+    });
+});
+
+
 //warranty Details By warranty info id
 router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next)=>{
     var warrantyDetail = new Object();
     warrantyInfo.findOne({_id: req.params.warranty_id}).populate('vendor').exec(function(err, warrantyInfo) {
         if (err){
-            return handleError(err);
+            resp.json({msg: 'Error : '+err});
         } else{
             console.log("vendor : "+warrantyInfo.vendor.name);
             warrantyDetail["vendor_id"] = warrantyInfo.vendor._id;
@@ -397,7 +421,7 @@ router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next)=>{
     });
     warrantyInfo.findOne({_id: req.params.warranty_id}).populate('device').exec(function(err, warrantyInfo) {
         if (err){
-            return handleError(err);
+            resp.json({msg: 'Error : '+err});
         } else{
             console.log("device : "+warrantyInfo.device.name);
             warrantyDetail["device_id"] = warrantyInfo.device._id;
@@ -407,7 +431,7 @@ router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next)=>{
     });
     warrantyInfo.findOne({_id: req.params.warranty_id}).populate('contractor').exec(function(err, warrantyInfo) {
         if (err){
-            return handleError(err);
+            resp.json({msg: 'Error : '+err});
         } else{
             console.log("contractor : "+warrantyInfo.contractor.name);
             warrantyDetail["contractor_id"] = warrantyInfo.contractor._id;
@@ -416,7 +440,7 @@ router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next)=>{
     });
     warrantyInfo.findOne({_id: req.params.warranty_id}, function(err, item) {
         if (err){
-            return handleError(err);
+            resp.json({msg: 'Error : '+err});
         } else{
             warrantyDetail["_id"] = item._id;
             warrantyDetail["start_date"] = item.start_date;
@@ -465,6 +489,7 @@ router.delete('/hero/:id', (req, resp, next)=>{
         }
     });
 });
+
 
 
 
