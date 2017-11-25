@@ -95,14 +95,42 @@ router.get("/device", (req,resp,next)=>{
     });
 });
 router.get("/device/site/:site_id", (req,resp,next)=>{
-    Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function(err, site) {
+    warrantyInfo.find({site: req.params.site_id}).distinct('device').exec(function(err, items){
+        if (err){
+            resp.json({msg: 'Error : '+err});
+        } else{
+            var devices = new Array();
+            items.forEach(myFunction);
+            function myFunction(item, index, array) {
+                var dvice = new Object();
+                device.findOne({_id: item}).exec(function(err, device){
+                    if (err){
+                        resp.json({msg: 'Error : '+err});
+                    } else{
+                        console.log("device : "+device.name);
+                        dvice["_id"] = device._id;
+                        dvice["name"] = device.name;
+                        dvice["ID"] = device.ID;
+
+                        devices.push(dvice);
+
+                        if(devices.length === array.length) {
+                            resp.json(devices);
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+    /*Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function(err, site) {
         if (err){
             resp.json({msg: 'Error : '+err});
         } else{
             console.log("site : "+site.name);
             var devices = new Array();
-            /*var warrantyInfos = new Array();
-            warrantyInfos = site.WarrantyInformations;*/
+            /!*var warrantyInfos = new Array();
+            warrantyInfos = site.WarrantyInformations;*!/
             site.WarrantyInformations.forEach(myFunction);
 
             function myFunction(item, index, array) {
@@ -119,7 +147,7 @@ router.get("/device/site/:site_id", (req,resp,next)=>{
 
                         devices.push(device);
 
-                        if(site.WarrantyInformations.length === array.length) {
+                        if(devices.length === array.length) {
                             resp.json(devices);
                         }
                     }
@@ -128,7 +156,7 @@ router.get("/device/site/:site_id", (req,resp,next)=>{
 
             //setTimeout(function(){ resp.json(devices); }, 500);
         }
-    });
+    });*/
 });
 router.delete('/device/:id', (req, resp, next)=>{
     device.remove({_id: req.params.id}, function(err, result){
@@ -191,14 +219,41 @@ router.get("/vendor", (req,resp,next)=>{
     });
 });
 router.get("/vendor/site/:site_id", (req,resp,next)=>{
-    Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function(err, site) {
+    warrantyInfo.distinct('vendor', {site: req.params.site_id} ,function(err, items){
+        if (err){
+            resp.json({msg: 'Error : '+err});
+        } else{
+            var vendors = new Array();
+            items.forEach(myFunction);
+            function myFunction(item, index, array) {
+                var vndor = new Object();
+                Vendor.findOne({_id: item}).exec(function(err, vendor){
+                    if (err){
+                        resp.json({msg: 'Error : '+err});
+                    } else{
+                        console.log("vendor : "+vendor.name);
+                        vndor["_id"] = vendor._id;
+                        vndor["name"] = vendor.name;
+
+                        vendors.push(vndor);
+
+                        if(vendors.length === array.length) {
+                            resp.json(vendors);
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+    /*Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function(err, site) {
         if (err){
             resp.json({msg: 'Error : '+err});
         } else{
             console.log("site : "+site.name);
             var vendors = new Array();
-            /*var warrantyInfos = new Array();
-            warrantyInfos = site.WarrantyInformations;*/
+            /!*var warrantyInfos = new Array();
+            warrantyInfos = site.WarrantyInformations;*!/
             site.WarrantyInformations.forEach(myFunction);
 
             function myFunction(item, index, array) {
@@ -214,7 +269,7 @@ router.get("/vendor/site/:site_id", (req,resp,next)=>{
 
                         vendors.push(vendor);
 
-                        if(site.WarrantyInformations.length === array.length){
+                        if(vendors.length === array.length){
                             resp.json(vendors);
                         }
                     }
@@ -223,7 +278,7 @@ router.get("/vendor/site/:site_id", (req,resp,next)=>{
 
             //setTimeout(function(){ resp.json(vendors); }, 500);
         }
-    });
+    });*/
 });
 router.delete('/vendor/:id', (req, resp, next)=>{
     Vendor.remove({_id: req.params.id}, function(err, result){
@@ -256,14 +311,41 @@ router.get("/contractor", (req,resp,next)=>{
     });
 });
 router.get("/contractor/site/:site_id", (req,resp,next)=>{
-    Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function(err, site) {
+    warrantyInfo.distinct('contractor', {site: req.params.site_id} ,function(err, items){
+        if (err){
+            resp.json({msg: 'Error : '+err});
+        } else{
+            var contractors = new Array();
+            items.forEach(myFunction);
+            function myFunction(item, index, array) {
+                var cntractor = new Object();
+                Contractor.findOne({_id: item}).exec(function(err, contractor){
+                    if (err){
+                        resp.json({msg: 'Error : '+err});
+                    } else{
+                        console.log("vendor : "+contractor.name);
+                        cntractor["_id"] = contractor._id;
+                        cntractor["name"] = contractor.name;
+
+                        contractors.push(cntractor);
+
+                        if(contractors.length === array.length) {
+                            resp.json(contractors);
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+   /* Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function(err, site) {
         if (err){
             resp.json({msg: 'Error : '+err});
         } else{
             console.log("site : "+site.name);
             var contractors = new Array();
-            /*var warrantyInfos = new Array();
-            warrantyInfos = site.WarrantyInformations;*/
+            /!*var warrantyInfos = new Array();
+            warrantyInfos = site.WarrantyInformations;*!/
             site.WarrantyInformations.forEach(myFunction);
 
             function myFunction(item, index, array) {
@@ -279,7 +361,7 @@ router.get("/contractor/site/:site_id", (req,resp,next)=>{
 
                         contractors.push(contractor);
 
-                        if(site.WarrantyInformations.length === array.length) {
+                        if(contractors.length === array.length) {
                             resp.json(contractors);
                         }
                     }
@@ -288,7 +370,7 @@ router.get("/contractor/site/:site_id", (req,resp,next)=>{
 
             //setTimeout(function(){ resp.json(contractors); }, 500);
         }
-    });
+    });*/
 });
 router.delete('/contractor/:id', (req, resp, next)=>{
     Contractor.remove({_id: req.params.id}, function(err, result){
