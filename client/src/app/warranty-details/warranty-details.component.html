@@ -1,0 +1,222 @@
+<div style="float: left; width: 100%">
+  <!--<ul class="sites" style="float: left; width: 34%">
+    <h2>Site</h2>
+    <li *ngFor="let site of sites"
+        [class.selected]="site === selectedSite"
+        (click)="onSiteSelect(site)">
+      <span class="badge">{{site._id}}</span> {{site.name}}
+    </li>
+  </ul>-->
+
+  <form style="float: left; width: 34%">
+    <mat-form-field>
+      <mat-select placeholder="Select Site" [(ngModel)]="selectedSite" name="site">
+        <mat-option>Select</mat-option>
+        <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect(site)">
+          {{site.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--<p> Selected site: {{selectedSite}} </p>-->
+  </form>
+
+  <!--<ul *ngIf="selectedSite" class="sites" style="float: left; width: 33%">
+    <h2>Type</h2>
+    <li *ngFor="let tp of types"
+        [class.selected]="tp === selectedType"
+        (click)="onTypeSelect(tp)">
+      <span class="badge">{{tp._id}}</span> {{tp.type}}
+    </li>
+  </ul>-->
+
+  <form *ngIf="selectedSite" style="float: left; width: 33%">
+    <mat-form-field>
+      <mat-select placeholder="Select Type" [(ngModel)]="selectedType" name="type">
+        <mat-option>Select</mat-option>
+        <mat-option *ngFor="let tp of types" [value]="tp" (click)="onTypeSelect(tp)">
+          {{tp.type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <!--<ul *ngIf="selectedType" class="sites" style="float: left; width: 33%">
+    <h2>List</h2>
+    <span *ngIf="selectedType._id === '1'">
+      <li *ngFor="let device of devices"
+          [class.selected]="device === selectedDevice"
+          (click)="onDeviceSelect(device)">
+        <span class="badge">{{device._id}}</span> {{device.name}}
+      </li>
+    </span>
+    <span *ngIf="selectedType._id === '2'">
+      <li *ngFor="let device of devices"
+          [class.selected]="device === selectedDevice"
+          (click)="onDeviceSelect(device)">
+        <span class="badge">{{device._id}}</span> {{device.ID}}
+      </li>
+    </span>
+    <span *ngIf="selectedType._id === '3'">
+      <li *ngFor="let vendor of vendors"
+          [class.selected]="vendor === selectedVendor"
+          (click)="onVendorSelect(vendor)">
+        <span class="badge">{{vendor._id}}</span> {{vendor.name}}
+      </li>
+    </span>
+    <span *ngIf="selectedType._id === '4'">
+      <li *ngFor="let contractor of contractors"
+          [class.selected]="contractor === selectedContractor"
+          (click)="onContractorSelect(contractor)">
+        <span class="badge">{{contractor._id}}</span> {{contractor.name}}
+      </li>
+    </span>
+  </ul>-->
+
+  <form *ngIf="selectedType && selectedSite" style="float: left; width: 33%">
+      <mat-form-field *ngIf="selectedType._id === '1'">
+      <mat-select placeholder="Select" [(ngModel)]="selectedDevice" name="device">
+        <mat-option>Select</mat-option>
+        <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect(device)">
+          {{device.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+      <mat-form-field *ngIf="selectedType._id === '2'">
+        <mat-select placeholder="Select" [(ngModel)]="selectedDevice" name="device">
+          <mat-option>Select</mat-option>
+          <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect(device)">
+            {{device.ID}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+      <mat-form-field *ngIf="selectedType._id === '3'">
+        <mat-select placeholder="Select" [(ngModel)]="selectedVendor" name="vendor">
+          <mat-option>Select</mat-option>
+          <mat-option *ngFor="let vendor of vendors" [value]="vendor" (click)="onVendorSelect(vendor)">
+            {{vendor.name}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+      <mat-form-field *ngIf="selectedType._id === '4'">
+        <mat-select placeholder="Select" [(ngModel)]="selectedContractor" name="contractor">
+          <mat-option>Select</mat-option>
+          <mat-option *ngFor="let contractor of contractors" [value]="contractor" (click)="onContractorSelect(contractor)">
+            {{contractor.name}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+
+<!--<div *ngIf="selectedSite" style="float: left; width: 100%; margin-top: 50px;">
+  <h1>
+    Warranty Details
+  </h1>
+  <li *ngFor="let wd of warrantyDetailsList">
+    <p>
+      <span>Vendor: {{wd.vendor}}, </span>
+      <span>Device: {{wd.device_name}}, </span>
+      <span>Device ID: {{wd.device_ID}}, </span>
+      <span>Contractor: {{wd.contractor}}, </span>
+      <span>Start Date: {{wd.start_date}}, </span>
+      <span>End Date: {{wd.end_date}}, </span>
+      <span>Cost: {{wd.cost}}, </span>
+      <span>File Path: {{wd.file_path}}, </span>
+      <span>Auto Renewal: {{wd.auto_renewal}}, </span>
+      <span>Reminder Date: {{wd.reminder_date}}, </span>
+      <span>Send to: {{wd.send_to}}, </span>
+      <span>Send via: {{wd.send_via}}</span>
+    </p>
+  </li>
+</div>-->
+
+
+<!--<mat-form-field>
+  <mat-select placeholder="Site name" [(ngModel)]="siteSelection" multiple>
+    <mat-select-trigger>
+      {{siteSelection[0] ? siteSelection[0].name : ''}}
+      <span *ngIf="siteSelection?.length > 1" class="example-additional-selection">
+         (+{{siteSelection.length - 1}} others)
+      </span>
+    </mat-select-trigger>
+    <mat-option *ngFor="let site of sites" [value]="site">{{site.name}}</mat-option>
+  </mat-select>
+</mat-form-field>-->
+
+
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="device_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Device name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.device_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="device_ID">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Device ID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.device_ID}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="vendor">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Vendor name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.vendor}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="start_date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Warranty starts </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.start_date}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="end_date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Warranty ends </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.end_date}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="contractor">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> AMC Contractor </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.contractor}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="file_path">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Uploaded doc path </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.file_path}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="reminder_date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Reminder </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.reminder_date}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<!--<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+     <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Weight </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>-->

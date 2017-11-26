@@ -1,0 +1,21 @@
+<div style="float: left; width: 50%">
+<ul class="sites">
+  <h2>Sites</h2>
+  <li *ngFor="let site of sites"
+      [class.selected]="site === selectedSite"
+      (click)="onSelect(site)">
+    <span class="badge">{{site._id}}</span> {{site.name}}
+  </li>
+</ul></div>
+<div *ngIf="selectedSite" style="float: left; width: 50%; margin-top: 50px;">
+
+  <h2>{{ selectedSite.name | uppercase }} Details</h2>
+  <div><span>id: </span>{{selectedSite._id}}</div>
+  <div><span>name: </span>{{selectedSite.name}}</div>
+  <!--<div>
+    <label>name:
+      <input [(ngModel)]="selectedSite.name" placeholder="name">
+    </label>
+  </div>-->
+
+</div>
