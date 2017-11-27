@@ -5,8 +5,8 @@ import {WarrantyDetailsComponent} from "../warranty-details/warranty-details.com
 
 const routes: Routes = [
   { path: 'sites', component: SitesComponent },
-  { path: 'documentation', component: WarrantyDetailsComponent }
-  /*{ path: '', redirectTo: '/documentation', pathMatch: 'full' },*/
+  { path: 'documentation', component: WarrantyDetailsComponent },
+  { path: '', redirectTo: '/documentation', pathMatch: 'full' },
 ];
 
 @NgModule({
