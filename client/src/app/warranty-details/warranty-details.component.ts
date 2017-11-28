@@ -43,7 +43,7 @@ export class WarrantyDetailsComponent implements OnInit {
   selectedContractor: Contractor;
   siteSelection:any[]=[];
 
-  displayedColumns = ['device_name', 'device_ID', 'vendor', 'start_date', 'end_date', 'contractor', 'file_path', 'reminder_date'];
+  displayedColumns = ['device_name', 'device_ID', 'vendor', 'start_date', 'end_date', 'contractor', 'file_path', 'reminder_date', '_id'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -138,11 +138,7 @@ export class WarrantyDetailsComponent implements OnInit {
     this.service.getContractorsBySiteId(site_id)
       .subscribe(contractors => this.contractors = contractors);
   }
-
-
-  ngOnInit() {
-    this.getSites();
-
+  getWarrantyDetails(): void {
     this.warrantyDetailsList = [];
     this.service.getWarrantyDetails()
       .subscribe(warrantyDetailsList =>{
@@ -150,6 +146,12 @@ export class WarrantyDetailsComponent implements OnInit {
         this.dataSource = new MatTableDataSource(warrantyDetailsList);
         this.dataSource.sort = this.sort;
       });
+  }
+
+
+  ngOnInit() {
+    this.getSites();
+    this.getWarrantyDetails();
   }
 
   ngAfterViewInit() {

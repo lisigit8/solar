@@ -1,7 +1,8 @@
 import * as moment from "moment";
-import _date = moment.unitOfTime._date;
+import {Site} from "./site";
 
 export class WarrentyDetails {
+  site: Site;
   vendor_id: string;
   vendor: string;
   device_id: string;
@@ -17,5 +18,5 @@ export class WarrentyDetails {
   auto_renewal: boolean;
   reminder_date: Date;
   send_to: string;
-  send_via: string
+  send_via: string;
 }

@@ -150,7 +150,9 @@
 
     <ng-container matColumnDef="device_name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Device name </mat-header-cell>
+      <a routerLink="/warranty-info/1">
       <mat-cell *matCellDef="let element"> {{element.device_name}} </mat-cell>
+      </a>
     </ng-container>
 
     <ng-container matColumnDef="device_ID">
@@ -186,6 +188,14 @@
     <ng-container matColumnDef="reminder_date">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Reminder </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.reminder_date}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="_id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Select </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <a routerLink="/warranty-info/{{element._id}}">Select</a>
+        <!--<a [routerLink]="['/', { outlets: { 'abc': 'warranty-info/'+element._id } }]" replaceUrl="true">Select</a>-->
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

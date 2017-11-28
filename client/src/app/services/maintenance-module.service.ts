@@ -28,6 +28,9 @@ export class MaintenanceModuleService {
   getWarrantyDetails (): Observable<WarrentyDetails[]> {
     return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}`);
   }
+  getWarrantyDetailsByWarrantyId (warranty_id: string): Observable<WarrentyDetails> {
+    return this.http.get<WarrentyDetails>(`${this.warrantyDetailsUrl}/warranty/${warranty_id}`);
+  }
   getWarrantyDetailsBySiteId (site_id: string): Observable<WarrentyDetails[]> {
     return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}/site/${site_id}`);
   }
@@ -49,17 +52,23 @@ export class MaintenanceModuleService {
 
   //Device
   private deviceUrl = 'http://localhost:3000/api/device';
+  getDevices (): Observable<Device[]> {
+    return this.http.get<Device[]>(this.deviceUrl);
+  }
   getDeviceBySiteId (site_id: string): Observable<Device[]> {
     return this.http.get<Device[]>(`${this.deviceUrl}/site/${site_id}`);
   }
 
-  // Site
+  // Vendor
   private vendorUrl = 'http://localhost:3000/api/vendor';
+  getVendors (): Observable<Vendor[]> {
+    return this.http.get<Vendor[]>(this.vendorUrl);
+  }
   getVendorsBySiteId (site_id: string): Observable<Vendor[]> {
     return this.http.get<Vendor[]>(`${this.vendorUrl}/site/${site_id}`);
   }
 
-  // Site
+  // Contractor
   private contractorUrl = 'http://localhost:3000/api/contractor';
   getContractorsBySiteId (site_id: string): Observable<Contractor[]> {
     return this.http.get<Contractor[]>(`${this.contractorUrl}/site/${site_id}`);
