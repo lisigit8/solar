@@ -80,6 +80,31 @@
   </mat-form-field>
   <div class="form-control">
     <div class="breadcrumb">AMC Details</div>
+    <ul>
+      <li>AMC Cost: <span style="float: right;">INR. {{wd.cost}}</span></li>
+      <li>AMC Duration: <span style="float: right;">From {{wd.start_date | date: 'MM/dd/yyyy'}} to {{wd.end_date | date: 'MM/dd/yyyy'}}</span></li>
+    </ul>
   </div>
+    <div class="form-control">
+      <div class="breadcrumb">Uploaded file</div>
+      <ul>
+        <li>{{wd.file_path}}</li>
+      </ul>
+    </div>
+    <div class="form-control">
+      Automatic warranty renewal : <br>
+      <input type="radio" name="auto_renewal" value="true" checked="{{wd.auto_renewal?checked:!checked}}"> On<br>
+      <input type="radio" name="auto_renewal" value="false" checked="{{wd.auto_renewal?!checked:checked}}"> Off<br>
+    </div>
+    <div class="form-control">
+      <mat-form-field class="example-full-width">
+        <input matInput type="date" placeholder="{{wd.reminder_date}}" name="reminder_date">
+      </mat-form-field>
+    </div>
+    <div class="form-control">
+      <mat-form-field class="example-full-width">
+        <input matInput value="{{wd.send_to}}" disabled>
+      </mat-form-field>
+    </div>
 </form></div>
 </div>

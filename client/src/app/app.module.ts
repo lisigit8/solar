@@ -8,7 +8,7 @@ import {MaintenanceModuleService} from "./services/maintenance-module.service";
 import { HttpClientModule }    from '@angular/common/http';
 import { WarrantyDetailsComponent } from './warranty-details/warranty-details.component';
 import {LayoutModule} from "./layout/layout.module";
-import {MatSelectModule, MatTableModule, MatSortModule, MatInputModule} from "@angular/material";
+import {MatSelectModule, MatTableModule, MatSortModule, MatInputModule, MatFormFieldModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { WarrantyInformationComponent } from './warranty-information/warranty-information.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
@@ -31,7 +31,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     MatTableModule,
     MatSortModule,
     MatInputModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    MatFormFieldModule
   ],
   providers: [MaintenanceModuleService],
   bootstrap: [AppComponent]
