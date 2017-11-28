@@ -79,4 +79,8 @@ export class WarrantyInformationComponent implements OnInit {
     this.getContractors();
     this.getWarrantyDetailsByWarrantyId(this.id);
   }
+
+  submitBtn() {
+    alert("hello");
+  }
 }

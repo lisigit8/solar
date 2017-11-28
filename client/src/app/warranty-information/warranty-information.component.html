@@ -93,8 +93,14 @@
     </div>
     <div class="form-control">
       Automatic warranty renewal : <br>
-      <input type="radio" name="auto_renewal" value="true" checked="{{wd.auto_renewal?checked:!checked}}"> On<br>
-      <input type="radio" name="auto_renewal" value="false" checked="{{wd.auto_renewal?!checked:checked}}"> Off<br>
+      <div *ngIf="wd.auto_renewal">
+        <input type="radio" name="auto_renewal" value="true" checked> On<br>
+        <input type="radio" name="auto_renewal" value="false"> Off<br>
+      </div>
+      <div *ngIf="!wd.auto_renewal">
+        <input type="radio" name="auto_renewal" value="true"> On<br>
+        <input type="radio" name="auto_renewal" value="false" checked> Off<br>
+      </div>
     </div>
     <div class="form-control">
       <mat-form-field class="example-full-width">
@@ -103,8 +109,20 @@
     </div>
     <div class="form-control">
       <mat-form-field class="example-full-width">
-        <input matInput value="{{wd.send_to}}" disabled>
+        <input matInput value="{{wd.send_to}}" disabled name="send_to">
       </mat-form-field>
     </div>
+    <div class="form-control">
+      Send Via : <br>
+    <!--<div *ngIf="wd.send_via==='SMS'">
+      <input type="radio" name="send_via" value="SMS" checked> SMS<br>
+      <input type="radio" name="send_via" value="email"> email<br>
+    </div>-->
+    <!--<div *ngIf="wd.send_via==='email'">-->
+      <input type="radio" [(ngModel)]="wd.send_via" name="send_via" value="SMS"> SMS<br>
+      <input type="radio" [(ngModel)]="wd.send_via" name="send_via" value="email" > email<br>
+      <!--</div>--><br>
+    </div>
+    <input type="button" class="form-control" value="Update & Save" (click)="submitBtn()">
 </form></div>
 </div>
