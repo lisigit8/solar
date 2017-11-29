@@ -15,8 +15,12 @@ import {Contractor} from "../models/contractor";
 export class WarrantyInformationComponent implements OnInit {
   /*@Input()*/
   sites: Site[];
+
   /*@Output()
   evt: EventEmitter<string> = new EventEmitter();*/
+
+  sms: string = "sms";
+  email: string = "email";
 
   selectedSite: Site;
   selectedSiteId: string;
@@ -80,7 +84,14 @@ export class WarrantyInformationComponent implements OnInit {
     this.getWarrantyDetailsByWarrantyId(this.id);
   }
 
-  submitBtn() {
-    alert("hello");
+  updateWarrantyInfo() {
+
+    this.wd.id=this.wd._id;
+    this.wd.vendor = this.wd.vendor_id;
+    this.wd.contractor = this.wd.contractor_id;
+    this.wd.device = this.wd.device_id;
+     this.service.updateWarrantyInfo(this.wd)
+       .subscribe(resp => console.log(JSON.stringify(resp)));
+    //alert(this.wd.auto_renewal);
   }
 }

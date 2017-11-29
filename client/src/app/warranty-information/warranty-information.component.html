@@ -4,125 +4,110 @@
     <h2>Warranty Details</h2>
     <!--{{sites.length}}<button (click)="clickme($event)">sdfsdfsd</button>-->
   </div>
-  <p *ngIf="wd">
-    <!--<span>Site: {{wd.site.name}}, </span>
-    <span>Vendor: {{wd.vendor}}, </span>
-    <span>Device: {{wd.device_name}}, </span>
-    <span>Device ID: {{wd.device_ID}}, </span>
-    <span>Contractor: {{wd.contractor}}, </span>
-    <span>Start Date: {{wd.start_date}}, </span>
-    <span>End Date: {{wd.end_date}}, </span>
-    <span>Cost: {{wd.cost}}, </span>
-    <span>File Path: {{wd.file_path}}, </span>
-    <span>Auto Renewal: {{wd.auto_renewal}}, </span>
-    <span>Reminder Date: {{wd.reminder_date}}, </span>
-    <span>Send to: {{wd.send_to}}, </span>
-    <span>Send via: {{wd.send_via}}</span>-->
-  </p>
 
-<div *ngIf="wd && selectedSite && sites && devices"><!--<form class="form-control">-->
-  <!--<select class="form-control" [(ngModel)]="selectedSiteId" name="site" (change)="onSiteSelect()">
-    <option *ngFor="let site of sites" [value]="site._id">{{site.name}}</option>
-  </select>
-  <br>
-  <select class="form-control" [(ngModel)]="selectedDeviceId" name="deviceName">
-    <option *ngFor="let device of devices" [value]="device._id">{{device.name}}</option>
-  </select>
-  <br>
-  <select class="form-control" [(ngModel)]="selectedDeviceId" name="deviceID">
-    <option *ngFor="let device of devices" [value]="device._id">{{device.ID}}</option>
-  </select>
-  <br>
-  <select class="form-control" [(ngModel)]="selectedVendorId" name="vendor">
-    <option *ngFor="let vendor of vendors" [value]="vendor._id">{{vendor.name}}</option>
-  </select>
-  <br>
-  <input type="text" class="form-control col-md-6" [(ngModel)]="start_date" name="start_date" />-->
-  <!--<input type="date" value="{{wd.start_date | date: 'MM/dd/yyyy'}}" class="form-control">
-  <input type="date" class="form-control" [ngModel] ="start_date | date:'MM/dd/yyyy'"
-         (ngModelChange)="start_date = $event" name="start_date">-->
-<!--</form>--></div>
+  <div *ngIf="wd"><!--<form class="form-control">-->
+    <!--<select class="form-control" [(ngModel)]="selectedSiteId" name="site" (change)="onSiteSelect()">
+      <option *ngFor="let site of sites" [value]="site._id">{{site.name}}</option>
+    </select>
+    <br>
+    <select class="form-control" [(ngModel)]="selectedDeviceId" name="deviceName">
+      <option *ngFor="let device of devices" [value]="device._id">{{device.name}}</option>
+    </select>
+    <br>
+    <select class="form-control" [(ngModel)]="selectedDeviceId" name="deviceID">
+      <option *ngFor="let device of devices" [value]="device._id">{{device.ID}}</option>
+    </select>
+    <br>
+    <select class="form-control" [(ngModel)]="selectedVendorId" name="vendor">
+      <option *ngFor="let vendor of vendors" [value]="vendor._id">{{vendor.name}}</option>
+    </select>
+    <br>
+    <input type="text" class="form-control col-md-6" [(ngModel)]="start_date" name="start_date" />-->
+    <!--<input type="date" value="{{wd.start_date | date: 'MM/dd/yyyy'}}" class="form-control">
+    <input type="date" class="form-control" [ngModel] ="start_date | date:'MM/dd/yyyy'"
+           (ngModelChange)="start_date = $event" name="start_date">-->
+    <!--</form>--></div>
 
-<div *ngIf="wd && selectedSiteId && selectedDeviceId && selectedContractorId && sites && devices && contractors">
-  <form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-select [(ngModel)]="selectedSiteId" name="site" class="form-control">
-      <mat-option *ngFor="let site of sites" [value]="site._id" (click)="onSiteSelect1(site)">{{site.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-select [(ngModel)]="selectedDeviceId" name="deviceName" class="form-control">
-      <mat-option *ngFor="let device of devices" [value]="device._id">{{device.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-select [(ngModel)]="selectedDeviceId" name="deviceID" class="form-control">
-      <mat-option *ngFor="let device of devices" [value]="device._id">{{device.ID}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-select [(ngModel)]="selectedVendorId" name="vendor" class="form-control">
-      <mat-option *ngFor="let vendor of vendors" [value]="vendor._id">{{vendor.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-    <div class="form-control">
-  <mat-form-field class="example-full-width">
-    <input matInput type="date" placeholder="{{wd.start_date}}" name="start_date">
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input matInput type="date" placeholder="{{wd.end_date}}" name="end_date">
-  </mat-form-field>
-    </div>
-  <mat-form-field class="example-full-width">
-    <mat-select [(ngModel)]="selectedContractorId" name="contractor" class="form-control">
-      <mat-option *ngFor="let contractor of contractors" [value]="contractor._id">{{contractor.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <div class="form-control">
-    <div class="breadcrumb">AMC Details</div>
-    <ul>
-      <li>AMC Cost: <span style="float: right;">INR. {{wd.cost}}</span></li>
-      <li>AMC Duration: <span style="float: right;">From {{wd.start_date | date: 'MM/dd/yyyy'}} to {{wd.end_date | date: 'MM/dd/yyyy'}}</span></li>
-    </ul>
-  </div>
-    <div class="form-control">
-      <div class="breadcrumb">Uploaded file</div>
-      <ul>
-        <li>{{wd.file_path}}</li>
-      </ul>
-    </div>
-    <div class="form-control">
-      Automatic warranty renewal : <br>
-      <div *ngIf="wd.auto_renewal">
-        <input type="radio" name="auto_renewal" value="true" checked> On<br>
-        <input type="radio" name="auto_renewal" value="false"> Off<br>
-      </div>
-      <div *ngIf="!wd.auto_renewal">
-        <input type="radio" name="auto_renewal" value="true"> On<br>
-        <input type="radio" name="auto_renewal" value="false" checked> Off<br>
-      </div>
-    </div>
-    <div class="form-control">
+  <div *ngIf="wd">
+    <form class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput type="date" placeholder="{{wd.reminder_date}}" name="reminder_date">
+        <mat-select [(ngModel)]="wd.site" name="site" class="form-control">
+          <mat-option *ngFor="let site of sites" [value]="wd.site._id===site._id?wd.site:site" (click)="onSiteSelect1(site)">{{site.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
-    </div>
-    <div class="form-control">
       <mat-form-field class="example-full-width">
-        <input matInput value="{{wd.send_to}}" disabled name="send_to">
+        <mat-select [(ngModel)]="wd.device_id" name="deviceName" class="form-control">
+          <mat-option *ngFor="let device of devices" [value]="device._id">{{device.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
-    </div>
-    <div class="form-control">
-      Send Via : <br>
-    <!--<div *ngIf="wd.send_via==='SMS'">
-      <input type="radio" name="send_via" value="SMS" checked> SMS<br>
-      <input type="radio" name="send_via" value="email"> email<br>
-    </div>-->
-    <!--<div *ngIf="wd.send_via==='email'">-->
-      <input type="radio" [(ngModel)]="wd.send_via" name="send_via" value="SMS"> SMS<br>
-      <input type="radio" [(ngModel)]="wd.send_via" name="send_via" value="email" > email<br>
-      <!--</div>--><br>
-    </div>
-    <input type="button" class="form-control" value="Update & Save" (click)="submitBtn()">
-</form></div>
+      <mat-form-field class="example-full-width">
+        <mat-select [(ngModel)]="wd.device_id" name="deviceID" class="form-control">
+          <mat-option *ngFor="let device of devices" [value]="device._id">{{device.ID}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-select [(ngModel)]="wd.vendor_id" name="vendor" class="form-control">
+          <mat-option *ngFor="let vendor of vendors" [value]="vendor._id">{{vendor.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="form-control">
+        <mat-form-field class="example-full-width">
+          <input matInput type="date" [(ngModel)]="wd.start_date" placeholder="{{wd.start_date}}" name="start_date">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput type="date" [(ngModel)]="wd.end_date" placeholder="{{wd.end_date}}" name="end_date">
+        </mat-form-field>
+      </div>
+      <mat-form-field class="example-full-width">
+        <mat-select [(ngModel)]="wd.contractor_id" name="contractor" class="form-control">
+          <mat-option *ngFor="let contractor of contractors" [value]="contractor._id">{{contractor.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="form-control">
+        <div class="breadcrumb">AMC Details</div>
+        <ul>
+          <li>AMC Cost: <span style="float: right;">INR. {{wd.cost}}</span></li>
+          <li>AMC Duration: <span style="float: right;">From {{wd.start_date | date: 'MM/dd/yyyy'}} to {{wd.end_date | date: 'MM/dd/yyyy'}}</span></li>
+        </ul>
+      </div>
+      <div class="form-control">
+        <div class="breadcrumb">Uploaded file</div>
+        <ul>
+          <li>{{wd.file_path}}</li>
+        </ul>
+      </div>
+      <div class="form-control">
+        Automatic warranty renewal : <br>
+        <!--<div *ngIf="wd.auto_renewal">
+          <input type="radio" [(ngModel)]="wd.auto_renewal" name="auto_renewal" value="{{true}}" checked> On<br>
+          <input type="radio" [(ngModel)]="wd.auto_renewal" name="auto_renewal" value="{{false}}"> Off<br>
+        </div>
+        <div *ngIf="!wd.auto_renewal">-->
+          <input type="radio" [(ngModel)]="wd.auto_renewal" name="auto_renewal" value="true"> On<br>
+          <input type="radio" [(ngModel)]="wd.auto_renewal" name="auto_renewal" value="false" > Off<br>
+        <!--</div>-->
+      </div>
+      <div class="form-control">
+        <mat-form-field class="example-full-width">
+          <input matInput type="date" [(ngModel)]="wd.reminder_date" placeholder="{{wd.reminder_date}}" name="reminder_date">
+        </mat-form-field>
+      </div>
+      <div class="form-control">
+        <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="wd.send_to" value="{{wd.send_to}}" disabled name="send_to">
+        </mat-form-field>
+      </div>
+      <div class="form-control">
+        Send Via : <br>
+        <!--<div *ngIf="wd.send_via==='SMS'">
+          <input type="radio" name="send_via" value="SMS" checked> SMS<br>
+          <input type="radio" name="send_via" value="email"> email<br>
+        </div>-->
+        <!--<div *ngIf="wd.send_via==='email'">-->
+        <input type="radio" [(ngModel)]="wd.send_via" name="send_via" value="SMS"> SMS<br>
+        <input type="radio" [(ngModel)]="wd.send_via" name="send_via" value="email" > email<br>
+        <!--</div>--><br>
+      </div>
+      <input type="button" class="form-control" value="Update & Save" (click)="updateWarrantyInfo()">
+    </form></div>
 </div>

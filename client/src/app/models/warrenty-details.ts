@@ -2,9 +2,11 @@ import * as moment from "moment";
 import {Site} from "./site";
 
 export class WarrentyDetails {
+  id: string;
   site: Site;
   vendor_id: string;
   vendor: string;
+  device: string;
   device_id: string;
   device_name: string;
   device_ID: string;

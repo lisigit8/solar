@@ -23,6 +23,12 @@ export class MaintenanceModuleService {
     return this.http.get<Site[]>(this.siteUrl);
   }
 
+  //Warranty Info
+  private warrantyInfoUrl = 'http://localhost:3000/api/warrantyInfo';
+  updateWarrantyInfo (obj: WarrentyDetails): Observable<any> {
+    return this.http.put<any>(`${this.warrantyInfoUrl}`, obj);
+  }
+
   //Warranty Details
   private warrantyDetailsUrl = 'http://localhost:3000/api/warrantyDetails';
   getWarrantyDetails (): Observable<WarrentyDetails[]> {
