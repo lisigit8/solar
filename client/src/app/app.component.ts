@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css',
     '../assets/css/bootstrap.min.css',
     '../assets/css/template.css',
-    '../assets/font-awesome/css/font-awesome.min.css']
+    '../assets/font-awesome/css/font-awesome.min.css',
+    '../assets/css/BootSideMenu.css'
+  ]
 })
 export class AppComponent {
 
