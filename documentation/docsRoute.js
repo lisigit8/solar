@@ -10,14 +10,8 @@ var hashSet = require('simple-hashset');
 
 var Hero = require('./models/hero');
 
-//warranty Info
-router.get('/warrantyInfo', (req, resp, next)=>{
-    warrantyInfo.find(function(err, warrantyInfos){
-        resp.json(warrantyInfos);
-    });
-});
-router.post('/warrantyInfo', (req, resp, next)=>{
-    let newWarrantyInfo = new warrantyInfo({
+function varWarrantyInfoObj(req) {
+    var warrantyInfoObj = {
         device: req.body.device,
         contractor: req.body.contractor,
         site: req.body.site,
@@ -30,32 +24,12 @@ router.post('/warrantyInfo', (req, resp, next)=>{
         reminder_date: req.body.reminder_date,
         send_to: req.body.send_to,
         send_via: req.body.send_via
-    });
-    newWarrantyInfo.save((err, warrantyInfos)=>{
-        if(err){
-            resp.json({msg: 'Error : '+err});
-        }else{
-            resp.json({msg: 'Successful!'});
-        }
-    });
-});
-router.put('/warrantyInfo', (req, resp, next)=>{
-    var conditions = { _id: req.body.id };
-    var update = {
-        device: req.body.device,
-        contractor: req.body.contractor,
-        site: req.body.site,
-        vendor: req.body.vendor,
-        start_date: req.body.start_date,
-        end_date: req.body.end_date,
-        cost: req.body.cost,
-        file_path: req.body.file_path,
-        auto_renewal: req.body.auto_renewal,
-        reminder_date: req.body.reminder_date,
-        send_to: req.body.send_to,
-        send_via: req.body.send_via
-    };
-    warrantyInfo.findOneAndUpdate(conditions, update, function (err)
+    }
+    return warrantyInfoObj;
+}
+function findOneAndUpdateObject(obj, req, resp) {
+    var conditions = { _id: req.body._id };
+    warrantyInfo.findOneAndUpdate(conditions, obj, function (err)
     {
         if(err){
             resp.json({msg: 'Error : '+err});
@@ -63,6 +37,33 @@ router.put('/warrantyInfo', (req, resp, next)=>{
             resp.json({msg: 'Successful!'});
         }
     });
+}
+function insertObject(newObj, resp){
+    newObj.save((err, obj)=>{
+        if(err){
+            resp.json({msg: 'Error : '+err});
+        }else{
+            resp.json({msg: 'Successful!'});
+        }
+    });
+}
+
+//warranty Info
+router.get('/warrantyInfo', (req, resp, next)=>{
+    warrantyInfo.find(function(err, warrantyInfos){
+        resp.json(warrantyInfos);
+    });
+});
+router.post('/warrantyInfo', (req, resp, next)=>{
+    if(req.body._id){
+        findOneAndUpdateObject(varWarrantyInfoObj(req), req, resp);
+    }else{
+        let newWarrantyInfo = new warrantyInfo(varWarrantyInfoObj(req));
+        insertObject(newWarrantyInfo, resp);
+    }
+});
+router.put('/warrantyInfo', (req, resp, next)=>{
+    findOneAndUpdateObject(varWarrantyInfoObj(req), req, resp);
 });
 router.delete('/warrantyInfo/:id', (req, resp, next)=>{
     warrantyInfo.remove({_id: req.params.id}, function(err, result){
@@ -502,15 +503,10 @@ function responseWarrantyDetails(warrantyInfos, resp){
                                 if (err){
                                     resp.json({msg: 'Error : '+err});
                                 } else{
-                                    warrantyDetail["vendor_id"] = warrantyInfoVendor.vendor._id;
-                                    warrantyDetail["vendor"] = warrantyInfoVendor.vendor.name;
-
-                                    warrantyDetail["device_id"] = warrantyInfoDevice.device._id;
-                                    warrantyDetail["device_name"] = warrantyInfoDevice.device.name;
-                                    warrantyDetail["device_ID"] = warrantyInfoDevice.device.ID;
-
-                                    warrantyDetail["contractor_id"] = warrantyInfoContractor.contractor._id;
-                                    warrantyDetail["contractor"] = warrantyInfoContractor.contractor.name;
+                                    warrantyDetail["site"] = warrantyInfoSite.site;
+                                    warrantyDetail["vendor"] = warrantyInfoVendor.vendor;
+                                    warrantyDetail["device"] = warrantyInfoDevice.device;
+                                    warrantyDetail["contractor"] = warrantyInfoContractor.contractor;
 
                                     warrantyDetail["_id"] = item._id;
                                     warrantyDetail["start_date"] = item.start_date;
@@ -564,16 +560,10 @@ router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next)=> {
                                             resp.json({msg: 'Error : ' + err});
                                         } else {
                                             warrantyDetail["site"] = warrantyInfoSite.site;
-                                            console.log("vendor : " + warrantyInfoVendor.vendor.name);
-                                            warrantyDetail["vendor_id"] = warrantyInfoVendor.vendor._id;
-                                            warrantyDetail["vendor"] = warrantyInfoVendor.vendor.name;
-                                            console.log("device : " + warrantyInfoDevice.device.name);
-                                            warrantyDetail["device_id"] = warrantyInfoDevice.device._id;
-                                            warrantyDetail["device_name"] = warrantyInfoDevice.device.name;
-                                            warrantyDetail["device_ID"] = warrantyInfoDevice.device.ID;
-                                            console.log("contractor : " + warrantyInfoContractor.contractor.name);
-                                            warrantyDetail["contractor_id"] = warrantyInfoContractor.contractor._id;
-                                            warrantyDetail["contractor"] = warrantyInfoContractor.contractor.name;
+                                            warrantyDetail["vendor"] = warrantyInfoVendor.vendor;
+                                            warrantyDetail["device"] = warrantyInfoDevice.device;
+                                            warrantyDetail["contractor"] = warrantyInfoContractor.contractor;
+
                                             warrantyDetail["_id"] = item._id;
                                             warrantyDetail["start_date"] = item.start_date;
                                             warrantyDetail["end_date"] = item.end_date;

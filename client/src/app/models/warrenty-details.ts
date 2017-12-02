@@ -1,17 +1,15 @@
 import * as moment from "moment";
 import {Site} from "./site";
+import {Device} from "./device";
+import {Vendor} from "./vendor";
+import {Contractor} from "./contractor";
 
 export class WarrentyDetails {
-  id: string;
   site: Site;
-  vendor_id: string;
-  vendor: string;
-  device: string;
-  device_id: string;
-  device_name: string;
-  device_ID: string;
-  contractor_id: string;
-  contractor: string;
+  device: Device;
+  vendor: Vendor;
+  contractor: Contractor;
+
   _id: string;
   start_date: Date;
   end_date: Date;

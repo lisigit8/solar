@@ -19,20 +19,12 @@ export class WarrantyInformationComponent implements OnInit {
   /*@Output()
   evt: EventEmitter<string> = new EventEmitter();*/
 
-  sms: string = "sms";
-  email: string = "email";
-
-  selectedSite: Site;
-  selectedSiteId: string;
-  selectedDeviceId: string;
   devices: Device[];
   vendors: Vendor[];
-  selectedVendorId: string;
-  start_date: Date;
+  contractors: Contractor[];
+
   wd: WarrentyDetails;
   id: string = this.route.snapshot.paramMap.get('id');
-  contractors: Contractor[];
-  selectedContractorId: string;
 
   constructor(private route: ActivatedRoute,
               private service: MaintenanceModuleService) { }
@@ -66,13 +58,8 @@ export class WarrantyInformationComponent implements OnInit {
   getWarrantyDetailsByWarrantyId(id: string): void {
     this.service.getWarrantyDetailsByWarrantyId(id)
       .subscribe(wd =>{
+        debugger;
         this.wd = wd;
-        this.selectedSite = wd.site;
-        this.selectedSiteId = wd.site._id;
-        this.selectedDeviceId = wd.device_id;
-        this.selectedVendorId = wd.vendor_id;
-        this.start_date = wd.start_date;
-        this.selectedContractorId = wd.contractor_id;
       });
   }
 
@@ -85,13 +72,8 @@ export class WarrantyInformationComponent implements OnInit {
   }
 
   updateWarrantyInfo() {
-
-    this.wd.id=this.wd._id;
-    this.wd.vendor = this.wd.vendor_id;
-    this.wd.contractor = this.wd.contractor_id;
-    this.wd.device = this.wd.device_id;
      this.service.updateWarrantyInfo(this.wd)
-       .subscribe(resp => console.log(JSON.stringify(resp)));
+       .subscribe(resp => alert(resp.msg));
     //alert(this.wd.auto_renewal);
   }
 }

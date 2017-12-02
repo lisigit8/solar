@@ -6,10 +6,10 @@ var Schema = mongoose.Schema;
 var schemaTypes = mongoose.Schema.Types;
 
 const schema = mongoose.Schema({
-    device: { type:Schema.Types.ObjectId, ref:"Device", childPath: "WarrantyInformations" },
-    contractor: { type:Schema.Types.ObjectId, ref:"Contractor", childPath: "WarrantyInformations" },
     site: { type:Schema.Types.ObjectId, ref:"Site", childPath: "WarrantyInformations" },
+    device: { type:Schema.Types.ObjectId, ref:"Device", childPath: "WarrantyInformations" },
     vendor: { type:Schema.Types.ObjectId, ref:"Vendor", childPath: "WarrantyInformations" },
+    contractor: { type:Schema.Types.ObjectId, ref:"Contractor", childPath: "WarrantyInformations" },
 
 
 
