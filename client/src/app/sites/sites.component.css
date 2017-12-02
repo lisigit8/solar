@@ -129,3 +129,10 @@ label {
 .radioButtondemoBasicUsage .ipsum {
   color: saddlebrown;
   font-size: 0.9em; }
+
+.highlight {
+  background: #6ca9a5;
+}
+.highlight mat-cell{
+  color: white;
+}

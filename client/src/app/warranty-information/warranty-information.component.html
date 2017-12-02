@@ -1,37 +1,14 @@
-<!--<h1>{{id}}</h1>-->
 <div class="form-control example-form">
   <div class="breadcrumb">
     <h3>Warranty Information</h3>
-    <!--{{sites.length}}<button (click)="clickme($event)">sdfsdfsd</button>-->
+    <!--{{sites.length}}
+    <button (click)="clickme($event)">sdfsdfsd</button>-->
     <span style="float: right; padding-left: 5%;">
       <mat-icon>edit</mat-icon>
       <mat-icon (click)="remove()">delete</mat-icon>
       <mat-icon>assignment</mat-icon>
     </span>
   </div>
-
-  <div *ngIf="wd"><!--<form class="form-control">-->
-    <!--<select class="form-control" [(ngModel)]="selectedSiteId" name="site" (change)="onSiteSelect()">
-      <option *ngFor="let site of sites" [value]="site._id">{{site.name}}</option>
-    </select>
-    <br>
-    <select class="form-control" [(ngModel)]="selectedDeviceId" name="deviceName">
-      <option *ngFor="let device of devices" [value]="device._id">{{device.name}}</option>
-    </select>
-    <br>
-    <select class="form-control" [(ngModel)]="selectedDeviceId" name="deviceID">
-      <option *ngFor="let device of devices" [value]="device._id">{{device.ID}}</option>
-    </select>
-    <br>
-    <select class="form-control" [(ngModel)]="selectedVendorId" name="vendor">
-      <option *ngFor="let vendor of vendors" [value]="vendor._id">{{vendor.name}}</option>
-    </select>
-    <br>
-    <input type="text" class="form-control col-md-6" [(ngModel)]="start_date" name="start_date" />-->
-    <!--<input type="date" value="{{wd.start_date | date: 'MM/dd/yyyy'}}" class="form-control">
-    <input type="date" class="form-control" [ngModel] ="start_date | date:'MM/dd/yyyy'"
-           (ngModelChange)="start_date = $event" name="start_date">-->
-    <!--</form>--></div>
 
   <div *ngIf="wd">
     <form class="example-form">
@@ -107,14 +84,6 @@
       </div>
       <div class="form-control">
         Send Via : <br>
-        <!--<div *ngIf="wd.send_via==='SMS'">
-          <input type="radio" name="send_via" value="SMS" checked> SMS<br>
-          <input type="radio" name="send_via" value="email"> email<br>
-        </div>-->
-        <!--<div *ngIf="wd.send_via==='email'">
-        <input type="radio" [(ngModel)]="wd.send_via" name="send_via" value="SMS"> SMS<br>
-        <input type="radio" [(ngModel)]="wd.send_via" name="send_via" value="email" > email<br>
-        <!--</div>--><br>
         <mat-radio-group class="example-radio-group" [(ngModel)]="wd.send_via" name="send_via">
           <mat-radio-button class="example-radio-button" value="SMS">
             SMS

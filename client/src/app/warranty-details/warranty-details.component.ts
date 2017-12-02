@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {WarrentyDetails} from "../models/warrenty-details";
 import {MaintenanceModuleService} from "../services/maintenance-module.service";
 import {ActivatedRoute} from "@angular/router";
@@ -9,6 +9,7 @@ import {Vendor} from "../models/vendor";
 import {Contractor} from "../models/contractor";
 import {FormControl} from "@angular/forms";
 import {MatTableDataSource, MatSort} from '@angular/material';
+import {MessageService} from "../MessageService";
 
 @Component({
   selector: 'app-warranty-details',
@@ -16,10 +17,10 @@ import {MatTableDataSource, MatSort} from '@angular/material';
   styleUrls: ['../sites/sites.component.css']
 })
 
-export class WarrantyDetailsComponent implements OnInit {
+export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
   warrantyDetailsList: WarrentyDetails[];
   sites: Site[];
-  types: Types[] = [{
+  types: Types[] = [{//todo db theke asbe
     _id: "1",
     type: "Device Name",
   },{
@@ -41,6 +42,7 @@ export class WarrantyDetailsComponent implements OnInit {
   selectedDevice: Device;
   selectedVendor: Vendor;
   selectedContractor: Contractor;
+  selectedWD: WarrentyDetails;
   siteSelection:any[]=[];
 
   displayedColumns = ['device_name', 'device_ID', 'vendor', 'start_date', 'end_date', 'contractor', 'file_path', 'reminder_date', '_id'];
@@ -51,7 +53,8 @@ export class WarrantyDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private service: MaintenanceModuleService
+    private service: MaintenanceModuleService,
+    private messageService: MessageService
   ) { }
 
 
@@ -156,6 +159,16 @@ export class WarrantyDetailsComponent implements OnInit {
 
   ngAfterViewInit() {
     //this.dataSource.sort = this.sort;
+  }
+
+  onWarrantySelect(wd: WarrentyDetails){
+    this.selectedWD = wd;
+    this.messageService.sendMessage("rowSelected",wd);
+  }
+
+
+  ngOnDestroy(): void {
+    this.messageService.clearMessage();
   }
 
 }

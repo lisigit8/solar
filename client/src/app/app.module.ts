@@ -21,6 +21,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { WarrantyInformationComponent } from './warranty-information/warranty-information.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { InsertWarrantyDetailsComponent } from './insert-warranty-details/insert-warranty-details.component';
+import {MessageService} from "./MessageService";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { InsertWarrantyDetailsComponent } from './insert-warranty-details/insert
     MatRadioModule,
     MatIconModule
   ],
-  providers: [MaintenanceModuleService],
+  providers: [MaintenanceModuleService,MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

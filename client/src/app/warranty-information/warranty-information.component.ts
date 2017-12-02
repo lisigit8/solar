@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {WarrentyDetails} from "../models/warrenty-details";
 import {MaintenanceModuleService} from "../services/maintenance-module.service";
@@ -6,15 +6,20 @@ import {Site} from "../models/site";
 import {Device} from "../models/device";
 import {Vendor} from "../models/vendor";
 import {Contractor} from "../models/contractor";
+import {Subscription} from "rxjs/Subscription";
+import {MessageService} from "../MessageService";
 
 @Component({
   selector: 'app-warranty-information',
   templateUrl: './warranty-information.component.html',
   styleUrls: ['../sites/sites.component.css']
 })
-export class WarrantyInformationComponent implements OnInit {
-  /*@Input()*/
+export class WarrantyInformationComponent implements OnInit,OnDestroy {
+  @Input()
+    id: string;
+
   sites: Site[];
+  subscription: Subscription;
 
   /*@Output()
   evt: EventEmitter<string> = new EventEmitter();*/
@@ -24,10 +29,22 @@ export class WarrantyInformationComponent implements OnInit {
   contractors: Contractor[];
 
   wd: WarrentyDetails;
-  id: string = this.route.snapshot.paramMap.get('id');
+  //id: string = this.route.snapshot.paramMap.get('id');
 
   constructor(private route: ActivatedRoute,
-              private service: MaintenanceModuleService) { }
+              private service: MaintenanceModuleService,
+              private messageService: MessageService
+  ) {
+    this.subscription = this.messageService.getMessage().subscribe(message => {
+      if(message.event=='rowSelected'){
+        this.getSites();
+        this.getDevices();
+        this.getVendors();
+        this.getContractors();
+        this.getWarrantyDetailsByWarrantyId(message.message._id);
+      }
+    });
+  }
 
   /*clickme() {
     this.evt.emit('a');
@@ -77,7 +94,9 @@ export class WarrantyInformationComponent implements OnInit {
   }
 
   remove(){
-    alert("hi");
-    this.service.removeWarrantyInfo(this.wd._id).subscribe(resp=>alert(resp.msg));
+    this.service.removeWarrantyInfo(this.wd._id).subscribe(resp=>alert(resp.msg.js));
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
