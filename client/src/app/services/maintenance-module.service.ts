@@ -28,6 +28,9 @@ export class MaintenanceModuleService {
   updateWarrantyInfo (obj: WarrentyDetails): Observable<any> {
     return this.http.put<any>(`${this.warrantyInfoUrl}`, obj);
   }
+  insertWarrantyInfo (obj: WarrentyDetails): Observable<any> {
+    return this.http.post<any>(`${this.warrantyInfoUrl}`, obj);
+  }
 
   //Warranty Details
   private warrantyDetailsUrl = 'http://localhost:3000/api/warrantyDetails';

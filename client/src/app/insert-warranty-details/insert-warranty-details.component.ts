@@ -47,9 +47,8 @@ export class InsertWarrantyDetailsComponent implements OnInit {
     this.getContractors();
   }
 
-  insertWarrantyDetails() {
-    alert("hi")
-    /*this.service.updateWarrantyInfo(this.wd)
-      .subscribe(resp => console.log(JSON.stringify(resp)));*/
+  insertWarrantyInfo() {
+    this.service.insertWarrantyInfo(this.wd)
+      .subscribe(resp => alert(resp.msg));
   }
 }

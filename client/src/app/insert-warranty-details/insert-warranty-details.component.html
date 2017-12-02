@@ -5,36 +5,36 @@
 
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <mat-select [(ngModel)]="wd.site" name="site" class="form-control">
-          <mat-option *ngFor="let site of sites" [value]="wd.site._id===site._id?wd.site:site">{{site.name}}</mat-option>
+        <mat-select [(ngModel)]="wd.site" name="site" class="form-control" placeholder="Site Name">
+          <mat-option *ngFor="let site of sites" [value]="site">{{site.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <mat-select [(ngModel)]="wd.device" name="deviceName" class="form-control">
-          <mat-option *ngFor="let device of devices" [value]="wd.device._id===device._id?wd.device:device">{{device.name}}</mat-option>
+        <mat-select [(ngModel)]="wd.device" name="deviceName" class="form-control" placeholder="Device Name">
+          <mat-option *ngFor="let device of devices" [value]="device">{{device.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <mat-select [(ngModel)]="wd.device" name="deviceID" class="form-control">
-          <mat-option *ngFor="let device of devices" [value]="wd.device._id===device._id?wd.device:device">{{device.ID}}</mat-option>
+        <mat-select [(ngModel)]="wd.device" name="deviceID" class="form-control" placeholder="Device ID">
+          <mat-option *ngFor="let device of devices" [value]="device">{{device.ID}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <mat-select [(ngModel)]="wd.vendor" name="vendor" class="form-control">
-          <mat-option *ngFor="let vendor of vendors" [value]="wd.vendor._id===vendor._id?wd.vendor:vendor">{{vendor.name}}</mat-option>
+        <mat-select [(ngModel)]="wd.vendor" name="vendor" class="form-control" placeholder="Vendor Name">
+          <mat-option *ngFor="let vendor of vendors" [value]="vendor">{{vendor.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <div class="form-control">
         <mat-form-field class="example-full-width">
-          <input matInput type="date" [(ngModel)]="wd.start_date" name="start_date">
+          <input matInput type="date" placeholder="Start Date" [(ngModel)]="wd.start_date" name="start_date">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput type="date" [(ngModel)]="wd.end_date" name="end_date">
+          <input matInput type="date" placeholder="End Date" [(ngModel)]="wd.end_date" name="end_date">
         </mat-form-field>
       </div>
       <mat-form-field class="example-full-width">
-        <mat-select [(ngModel)]="wd.contractor" name="contractor" class="form-control">
-          <mat-option *ngFor="let contractor of contractors" [value]="wd.contractor._id===contractor._id?wd.contractor:contractor">{{contractor.name}}</mat-option>
+        <mat-select [(ngModel)]="wd.contractor" name="contractor" class="form-control" placeholder="AMC Contractor">
+          <mat-option *ngFor="let contractor of contractors" [value]="contractor">{{contractor.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <div class="form-control">
@@ -65,7 +65,7 @@
       </div>
       <div class="form-control">
         <mat-form-field class="example-full-width">
-          <input matInput type="date" [(ngModel)]="wd.reminder_date" name="reminder_date">
+          <input matInput type="date" placeholder="Reminder Date" [(ngModel)]="wd.reminder_date" name="reminder_date">
         </mat-form-field>
       </div>
       <div class="form-control">
@@ -85,6 +85,7 @@
           </mat-radio-button>
         </mat-radio-group>
       </div>
-      <input type="button" class="form-control" value="Save" (click)="insertWarrantyDetails()">
+      <br>
+      <input type="button" class="form-control" value="Save" (click)="insertWarrantyInfo()">
     </form>
 </div>
