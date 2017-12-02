@@ -31,6 +31,9 @@ export class MaintenanceModuleService {
   insertWarrantyInfo (obj: WarrentyDetails): Observable<any> {
     return this.http.post<any>(`${this.warrantyInfoUrl}`, obj);
   }
+  removeWarrantyInfo (id: string): Observable<any> {
+    return this.http.delete<any>(`${this.warrantyInfoUrl}/${id}`);
+  }
 
   //Warranty Details
   private warrantyDetailsUrl = 'http://localhost:3000/api/warrantyDetails';

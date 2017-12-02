@@ -1,8 +1,13 @@
 <!--<h1>{{id}}</h1>-->
 <div class="form-control example-form">
   <div class="breadcrumb">
-    <h2>Warranty Information</h2>
+    <h3>Warranty Information</h3>
     <!--{{sites.length}}<button (click)="clickme($event)">sdfsdfsd</button>-->
+    <span style="float: right; padding-left: 5%;">
+      <mat-icon>edit</mat-icon>
+      <mat-icon (click)="remove()">delete</mat-icon>
+      <mat-icon>assignment</mat-icon>
+    </span>
   </div>
 
   <div *ngIf="wd"><!--<form class="form-control">-->

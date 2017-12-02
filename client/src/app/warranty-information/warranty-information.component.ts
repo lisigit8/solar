@@ -58,7 +58,6 @@ export class WarrantyInformationComponent implements OnInit {
   getWarrantyDetailsByWarrantyId(id: string): void {
     this.service.getWarrantyDetailsByWarrantyId(id)
       .subscribe(wd =>{
-        debugger;
         this.wd = wd;
       });
   }
@@ -75,5 +74,10 @@ export class WarrantyInformationComponent implements OnInit {
      this.service.updateWarrantyInfo(this.wd)
        .subscribe(resp => alert(resp.msg));
     //alert(this.wd.auto_renewal);
+  }
+
+  remove(){
+    alert("hi");
+    this.service.removeWarrantyInfo(this.wd._id).subscribe(resp=>alert(resp.msg));
   }
 }

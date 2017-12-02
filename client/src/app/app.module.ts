@@ -14,7 +14,8 @@ import {
   MatSortModule,
   MatInputModule,
   MatFormFieldModule,
-  MatRadioModule
+  MatRadioModule,
+  MatIconModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { WarrantyInformationComponent } from './warranty-information/warranty-information.component';
@@ -42,7 +43,8 @@ import { InsertWarrantyDetailsComponent } from './insert-warranty-details/insert
     MatInputModule,
     NgbModule.forRoot(),
     MatFormFieldModule,
-    MatRadioModule
+    MatRadioModule,
+    MatIconModule
   ],
   providers: [MaintenanceModuleService],
   bootstrap: [AppComponent]

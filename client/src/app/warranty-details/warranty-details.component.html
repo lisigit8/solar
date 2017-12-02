@@ -151,18 +151,18 @@
     <ng-container matColumnDef="device_name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Device name </mat-header-cell>
       <a routerLink="/warranty-info/1">
-      <mat-cell *matCellDef="let element"> {{element.device_name}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.device.name}} </mat-cell>
       </a>
     </ng-container>
 
     <ng-container matColumnDef="device_ID">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Device ID </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.device_ID}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.device.ID}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="vendor">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Vendor name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.vendor}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.vendor.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="start_date">
@@ -177,7 +177,7 @@
 
     <ng-container matColumnDef="contractor">
       <mat-header-cell *matHeaderCellDef mat-sort-header> AMC Contractor </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.contractor}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.contractor.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="file_path">
