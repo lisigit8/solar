@@ -105,10 +105,16 @@
       <mat-cell *matCellDef="let element"> {{element.contractor.name}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="file_path">
+    <!--<ng-container matColumnDef="file_path">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Uploaded doc path </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.file_path}} </mat-cell>
-    </ng-container>
+      <mat-cell *matCellDef="let element"> {{element.file_path}}<br>
+        &lt;!&ndash;<span *ngFor="let doc of element.documents">
+          <a href="{{doc.path}}" target="_blank">
+            {{doc.original_name}}
+          </a><br>
+        </span>&ndash;&gt;
+      </mat-cell>
+    </ng-container>-->
 
     <ng-container matColumnDef="reminder_date">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Reminder </mat-header-cell>

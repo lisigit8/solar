@@ -6,10 +6,14 @@ import {WarrentyDetails} from "../models/warrenty-details";
 import {Device} from "../models/device";
 import {Vendor} from "../models/vendor";
 import {Contractor} from "../models/contractor";
+import {Users} from "../models/users";
+import {Documents} from "../models/documents";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
+const apiUrl = 'http://localhost:3000/api/';
 
 @Injectable()
 export class MaintenanceModuleService {
@@ -18,13 +22,34 @@ export class MaintenanceModuleService {
 
 
   // Site
-  private siteUrl = 'http://localhost:3000/api/site';
+  private siteUrl = apiUrl + 'site';
   getSites (): Observable<Site[]> {
     return this.http.get<Site[]>(this.siteUrl);
   }
 
+  // User
+  private userUrl = apiUrl + 'user';
+  getUsers (): Observable<Users[]> {
+    return this.http.get<Users[]>(this.userUrl);
+  }
+
+  //Documents
+  private docUrl = apiUrl + 'documents';
+  getDocumentsByWarrantyId (warranty_id: string): Observable<Documents[]> {
+    return this.http.get<Documents[]>(`${this.docUrl}/warranty/${warranty_id}`);
+  }
+  insertDocs (data: any): Observable<Array<any>> {
+    return this.http.post<Array<any>>(`${this.docUrl}`, data);
+  }
+  updateDocument (obj: Documents): Observable<any> {
+    return this.http.put<any>(`${this.docUrl}`, obj);
+  }
+  getDocumentsById (id: string): Observable<Documents> {
+    return this.http.get<Documents>(`${this.docUrl}/${id}`);
+  }
+
   //Warranty Info
-  private warrantyInfoUrl = 'http://localhost:3000/api/warrantyInfo';
+  private warrantyInfoUrl = apiUrl + 'warrantyInfo';
   updateWarrantyInfo (obj: WarrentyDetails): Observable<any> {
     return this.http.put<any>(`${this.warrantyInfoUrl}`, obj);
   }
@@ -36,7 +61,7 @@ export class MaintenanceModuleService {
   }
 
   //Warranty Details
-  private warrantyDetailsUrl = 'http://localhost:3000/api/warrantyDetails';
+  private warrantyDetailsUrl = apiUrl + 'warrantyDetails';
   getWarrantyDetails (): Observable<WarrentyDetails[]> {
     return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}`);
   }
@@ -63,7 +88,7 @@ export class MaintenanceModuleService {
   }
 
   //Device
-  private deviceUrl = 'http://localhost:3000/api/device';
+  private deviceUrl = apiUrl + 'device';
   getDevices (): Observable<Device[]> {
     return this.http.get<Device[]>(this.deviceUrl);
   }
@@ -72,7 +97,7 @@ export class MaintenanceModuleService {
   }
 
   // Vendor
-  private vendorUrl = 'http://localhost:3000/api/vendor';
+  private vendorUrl = apiUrl + 'vendor';
   getVendors (): Observable<Vendor[]> {
     return this.http.get<Vendor[]>(this.vendorUrl);
   }
@@ -81,7 +106,7 @@ export class MaintenanceModuleService {
   }
 
   // Contractor
-  private contractorUrl = 'http://localhost:3000/api/contractor';
+  private contractorUrl = apiUrl + 'contractor';
   getContractors (): Observable<Contractor[]> {
     return this.http.get<Contractor[]>(this.contractorUrl);
   }

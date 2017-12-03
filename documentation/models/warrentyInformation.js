@@ -28,8 +28,7 @@ const schema = mongoose.Schema({
         required: true
     },
     file_path:{
-        type: String,
-        required: true
+        type: String
     },
     auto_renewal:{
         type: Boolean, 
@@ -41,8 +40,7 @@ const schema = mongoose.Schema({
         required: true
     },
     send_to:{
-        type: String,
-        required: true
+        type: String
     },
     send_via:{
         type: String,
@@ -50,8 +48,11 @@ const schema = mongoose.Schema({
         required: true
     }
 });
+
 schema.plugin(relationship, { relationshipPathName:'device' });
 schema.plugin(relationship, { relationshipPathName:'contractor' });
 schema.plugin(relationship, { relationshipPathName:'site' });
 schema.plugin(relationship, { relationshipPathName:'vendor' });
+schema.plugin(relationship, { relationshipPathName:'user' });
+
 const WarrantyInfo = module.exports = mongoose.model('WarrantyInfo', schema);

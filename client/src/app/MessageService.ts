@@ -6,8 +6,8 @@ import {Subject} from 'rxjs/Subject';
 export class MessageService {
   private subject = new Subject<any>();
 
-  sendMessage(eventName: string, message: any) {
-    this.subject.next({event: eventName, message: message});
+  sendMessage(eventName: string, data: any) {
+    this.subject.next({event: eventName, data: data});
   }
 
   clearMessage() {

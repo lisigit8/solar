@@ -671,6 +671,12 @@ router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next) => {
         }
     });
 });
+/*router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next) => {
+    warrantyInfo.findOne({_id: req.params.warranty_id}, function (err, item) {
+       resp.json(item);
+    });
+});*/
+
 
 
 //Hero
@@ -711,11 +717,10 @@ router.get('/warrantyDetails/site', (req, resp, next) => {
 
 
 //documents
-router.post('/documents', upload.array('files'), function (req, res, next) {
-    var arr = req.files;
-    arr.map(item => {
+router.post('/documents', upload.array('files'), function (req, resp, next) {
+    var docIdList = new Array();
+    req.files.map(item => {
         let newObj = new Documents({
-            warrantyInfo: "5a23cd57ced7bc0c94d9677d",
             original_name: item.originalname,
             file_name: item.filename,
             mime_type: item.mimetype,
@@ -723,24 +728,80 @@ router.post('/documents', upload.array('files'), function (req, res, next) {
             size: item.size
         });
         newObj.save((err, obj) => {
-            /*if (err) {
+            docIdList.push(obj._id);
+            console.log("//////////"+JSON.stringify(docIdList));
+            if (err) {
                 resp.json({msg: 'Error : ' + err});
             } else {
-                resp.json({msg: 'Successful!'});
-            }*/
+                //resp.json({msg: 'Successful!'});
+                if (req.files.length === docIdList.length) {
+                    resp.json(docIdList);
+                }
+            }
         });
     });
 
-
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(req.files));
+    //resp.setHeader('Content-Type', 'application/json');
+    //resp.send(JSON.stringify(req.files));
+});
+router.put('/documents', (req, resp, next) => {
+    var conditions = {_id: req.body._id};
+    Documents.findOneAndUpdate(conditions, {
+        warrantyInfo: req.body.warrantyInfo,
+        original_name: req.body.original_name,
+        file_name: req.body.file_name,
+        mime_type: req.body.mime_type,
+        path: req.body.path,
+        size: req.body.size
+    }, function (err) {
+        if (err) {
+            resp.json({msg: 'Error : ' + err});
+        } else {
+            resp.json({msg: 'Successful!'});
+        }
+    });
 });
 router.get("/documents", (req, resp, next) => {
     Documents.find(function (err, docs) {
         resp.json(docs);
     });
 });
-
+router.get('/documents/warranty/:warranty_id', (req, resp, next) => {
+    Documents.find({warrantyInfo: req.params.warranty_id}, function (err, items) {
+        if (err) {
+            resp.json({msg: 'Error : ' + err});
+        } else {
+            resp.json(items);
+        }
+    });
+});
+router.delete('/documents/:id', (req, resp, next) => {
+    Documents.remove({_id: req.params.id}, function (err, result) {
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(result);
+        }
+    });
+});
+router.get('/documents/:id', (req, resp,next)=>{
+    Documents.findOne({_id: req.params.id}, function(err, item){
+        if(err){
+            resp.json(err);
+        }else{
+            resp.json(item);
+        }
+    });
+});
+router.get('/downloadDocs/:id', (req, resp,next)=>{
+    Documents.findOne({_id: req.params.id}, function(err, item){
+        if(err){
+            resp.json(err);
+        }else{
+            resp.download(item.path, item.original_name);
+        }
+    });
+});
 
 
 

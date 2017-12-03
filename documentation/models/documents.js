@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+relationship = require("mongoose-relationship");
 
 const schema = mongoose.Schema({
     warrantyInfo: { type:Schema.Types.ObjectId, ref:"WarrantyInfo", childPath: "documents" },
@@ -25,5 +26,7 @@ const schema = mongoose.Schema({
         required: true
     }
 });
+
+schema.plugin(relationship, { relationshipPathName:'warrantyInfo' });
 
 const Documents = module.exports = mongoose.model('Documents', schema);

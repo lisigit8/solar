@@ -10,6 +10,7 @@ import {Contractor} from "../models/contractor";
 import {FormControl} from "@angular/forms";
 import {MatTableDataSource, MatSort} from '@angular/material';
 import {MessageService} from "../MessageService";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-warranty-details',
@@ -44,8 +45,9 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
   selectedContractor: Contractor;
   selectedWD: WarrentyDetails;
   siteSelection:any[]=[];
+  subscription: Subscription;
 
-  displayedColumns = ['device_name', 'device_ID', 'vendor', 'start_date', 'end_date', 'contractor', 'file_path', 'reminder_date', '_id'];
+  displayedColumns = ['device_name', 'device_ID', 'vendor', 'start_date', 'end_date', 'contractor', 'reminder_date', '_id'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -55,7 +57,15 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
     private route: ActivatedRoute,
     private service: MaintenanceModuleService,
     private messageService: MessageService
-  ) { }
+  ) {
+    this.subscription = this.messageService.getMessage().subscribe(message => {
+      if(message){
+        if(message.event=='dataUpdated'){
+          this.ngOnInit();
+        }
+      }
+    });
+  }
 
 
 
