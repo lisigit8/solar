@@ -6,7 +6,11 @@ var Site = require('./models/site');
 var Vendor = require('./models/vendor');
 var Contractor = require('./models/amcContractor');
 var hashSet = require('simple-hashset');
-var User = require('./models/users')
+var User = require('./models/users');
+var Documents = require('./models/documents')
+
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
 
 
 var Hero = require('./models/hero');
@@ -54,10 +58,24 @@ function varSiteObj(req){
     }
     return siteObj;
 }
+function varVendorObj(req){
+    return {
+        WarrantyInformations: req.body.WarrantyInformations,
+        name: req.body.name
+    };
+}
+function varContractorObj(req){
+    return {
+        WarrantyInformations: req.body.WarrantyInformations,
+        name: req.body.name
+    };
+}
 
-function findOneAndUpdateObject(obj, req, resp) {
+
+function findOneAndUpdateObject(obj, req, resp, objName) {
     var conditions = {_id: req.body._id};
-    warrantyInfo.findOneAndUpdate(conditions, obj, function (err) {
+    console.log(req.body._id);
+    objName.findOneAndUpdate(conditions, obj, function (err) {
         if (err) {
             resp.json({msg: 'Error : ' + err});
         } else {
@@ -65,7 +83,6 @@ function findOneAndUpdateObject(obj, req, resp) {
         }
     });
 }
-
 function insertObject(newObj, resp) {
     newObj.save((err, obj) => {
         if (err) {
@@ -84,14 +101,14 @@ router.get('/warrantyInfo', (req, resp, next) => {
 });
 router.post('/warrantyInfo', (req, resp, next) => {
     if (req.body._id) {
-        findOneAndUpdateObject(varWarrantyInfoObj(req), req, resp);
+        findOneAndUpdateObject(varWarrantyInfoObj(req), req, resp, warrantyInfo);
     } else {
-        let newWarrantyInfo = new warrantyInfo(varWarrantyInfoObj(req));
-        insertObject(newWarrantyInfo, resp);
+        let newObj = new warrantyInfo(varWarrantyInfoObj(req));
+        insertObject(newObj, resp);
     }
 });
 router.put('/warrantyInfo', (req, resp, next) => {
-    findOneAndUpdateObject(varWarrantyInfoObj(req), req, resp);
+    findOneAndUpdateObject(varWarrantyInfoObj(req), req, resp, warrantyInfo);
 });
 router.delete('/warrantyInfo/:id', (req, resp, next) => {
     warrantyInfo.remove({_id: req.params.id}, function (err, result) {
@@ -111,14 +128,14 @@ router.get('/user', (req, resp, next) => {
 });
 router.post('/user', (req, resp, next) => {
     if (req.body._id) {
-        findOneAndUpdateObject(varUserObj(req), req, resp);
+        findOneAndUpdateObject(varUserObj(req), req, resp, User);
     } else {
-        let newUser = new User(varUserObj(req));
-        insertObject(newUser, resp);
+        let newObj = new User(varUserObj(req));
+        insertObject(newObj, resp);
     }
 });
 router.put('/user', (req, resp, next) => {
-    findOneAndUpdateObject(varUserObj(req), req, resp);
+    findOneAndUpdateObject(varUserObj(req), req, resp, User);
 });
 router.delete('/user/:id', (req, resp, next) => {
     User.remove({_id: req.params.id}, function (err, result) {
@@ -133,14 +150,14 @@ router.delete('/user/:id', (req, resp, next) => {
 //Device
 router.post('/device', (req, resp, next) => {
     if (req.body._id) {
-        findOneAndUpdateObject(varDeviceObj(req), req, resp);
+        findOneAndUpdateObject(varDeviceObj(req), req, resp, device);
     } else {
-        let newDevice = new device(varDeviceObj(req));
-        insertObject(newDevice, resp);
+        let newObj = new device(varDeviceObj(req));
+        insertObject(newObj, resp);
     }
 });
 router.put('/device', (req, resp, next) => {
-    findOneAndUpdateObject(varDeviceObj(req), req, resp);
+    findOneAndUpdateObject(varDeviceObj(req), req, resp, device);
 });
 router.get("/device", (req, resp, next) => {
     device.find(function (err, devices) {
@@ -224,14 +241,14 @@ router.delete('/device/:id', (req, resp, next) => {
 //Site
 router.post('/site', (req, resp, next) => {
     if (req.body._id) {
-        findOneAndUpdateObject(varSiteObj(req), req, resp);
+        findOneAndUpdateObject(varSiteObj(req), req, resp, Site);
     } else {
-        let newSite = new Site(varSiteObj(req));
-        insertObject(newSite, resp);
+        let newObj = new Site(varSiteObj(req));
+        insertObject(newObj, resp);
     }
 });
 router.put('/site', (req, resp, next) => {
-    findOneAndUpdateObject(varSiteObj(req), req, resp);
+    findOneAndUpdateObject(varSiteObj(req), req, resp, Site);
 });
 router.get("/site", (req, resp, next) => {
     Site.find(function (err, sites) {
@@ -251,17 +268,15 @@ router.delete('/site/:id', (req, resp, next) => {
 
 //Vendor
 router.post('/vendor', (req, resp, next) => {
-    let newVendor = new Vendor({
-        WarrantyInformations: req.body.WarrantyInformations,
-        name: req.body.name
-    });
-    newVendor.save((err, vendor) => {
-        if (err) {
-            resp.json({msg: 'Error : ' + err});
-        } else {
-            resp.json({msg: 'Successful!'});
-        }
-    });
+    if (req.body._id) {
+        findOneAndUpdateObject(varVendorObj(req), req, resp, Vendor);
+    } else {
+        let newObj = new User(varVendorObj(req));
+        insertObject(newObj, resp);
+    }
+});
+router.put('/vendor', (req, resp, next) => {
+    findOneAndUpdateObject(varVendorObj(req), req, resp, Vendor);
 });
 router.get("/vendor", (req, resp, next) => {
     Vendor.find(function (err, vendors) {
@@ -342,17 +357,15 @@ router.delete('/vendor/:id', (req, resp, next) => {
 
 //Contractor
 router.post('/contractor', (req, resp, next) => {
-    let newContractor = new Contractor({
-        WarrantyInformations: req.body.WarrantyInformations,
-        name: req.body.name
-    });
-    newContractor.save((err, contractor) => {
-        if (err) {
-            resp.json({msg: 'Error : ' + err});
-        } else {
-            resp.json({msg: 'Successful!'});
-        }
-    });
+    if (req.body._id) {
+        findOneAndUpdateObject(varContractorObj(req), req, resp, Contractor);
+    } else {
+        let newObj = new User(varContractorObj(req));
+        insertObject(newObj, resp);
+    }
+});
+router.put('/contractor', (req, resp, next) => {
+    findOneAndUpdateObject(varContractorObj(req), req, resp, Contractor);
 });
 router.get("/contractor", (req, resp, next) => {
     Contractor.find(function (err, contractors) {
@@ -694,6 +707,41 @@ router.delete('/hero/:id', (req, resp, next) => {
 router.get('/warrantyDetails/site', (req, resp, next) => {
     resp.json(req.query.site_ids);
 });
+
+
+
+//documents
+router.post('/documents', upload.array('files'), function (req, res, next) {
+    var arr = req.files;
+    arr.map(item => {
+        let newObj = new Documents({
+            warrantyInfo: "5a23cd57ced7bc0c94d9677d",
+            original_name: item.originalname,
+            file_name: item.filename,
+            mime_type: item.mimetype,
+            path: item.path,
+            size: item.size
+        });
+        newObj.save((err, obj) => {
+            /*if (err) {
+                resp.json({msg: 'Error : ' + err});
+            } else {
+                resp.json({msg: 'Successful!'});
+            }*/
+        });
+    });
+
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(req.files));
+});
+router.get("/documents", (req, resp, next) => {
+    Documents.find(function (err, docs) {
+        resp.json(docs);
+    });
+});
+
+
 
 
 module.exports = router;
