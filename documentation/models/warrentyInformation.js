@@ -10,8 +10,10 @@ const schema = mongoose.Schema({
     device: { type:Schema.Types.ObjectId, ref:"Device", childPath: "WarrantyInformations" },
     vendor: { type:Schema.Types.ObjectId, ref:"Vendor", childPath: "WarrantyInformations" },
     contractor: { type:Schema.Types.ObjectId, ref:"Contractor", childPath: "WarrantyInformations" },
+    user: { type:Schema.Types.ObjectId, ref:"Users", childPath: "WarrantyInformations" },
 
-
+    documents : [{ type: Schema.Types.ObjectId, ref: 'Documents' }],
+    warrantyInfo_sendVia : [{ type: Schema.Types.ObjectId, ref: 'WarrantyInfo_SendVia' }],
 
     start_date:{
         type : Date,

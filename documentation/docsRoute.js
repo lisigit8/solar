@@ -6,6 +6,7 @@ var Site = require('./models/site');
 var Vendor = require('./models/vendor');
 var Contractor = require('./models/amcContractor');
 var hashSet = require('simple-hashset');
+var User = require('./models/users')
 
 
 var Hero = require('./models/hero');
@@ -16,6 +17,7 @@ function varWarrantyInfoObj(req) {
         contractor: req.body.contractor,
         site: req.body.site,
         vendor: req.body.vendor,
+        user: req.body.user,
         start_date: req.body.start_date,
         end_date: req.body.end_date,
         cost: req.body.cost,
@@ -26,6 +28,31 @@ function varWarrantyInfoObj(req) {
         send_via: req.body.send_via
     }
     return warrantyInfoObj;
+}
+function varUserObj(req){
+    var userObj = {
+        WarrantyInformations: req.body.WarrantyInformations,
+        name: req.body.name,
+        email: req.body.email,
+        mobile: req.body.mobile,
+        address: req.body.address
+    }
+    return userObj;
+}
+function varDeviceObj(req){
+    var deviceObj = {
+        WarrantyInformations: req.body.WarrantyInformations,
+        name: req.body.name,
+        ID: req.body.ID
+    }
+    return deviceObj;
+}
+function varSiteObj(req){
+    var siteObj = {
+        WarrantyInformations: req.body.WarrantyInformations,
+        name: req.body.name
+    }
+    return siteObj;
 }
 
 function findOneAndUpdateObject(obj, req, resp) {
@@ -76,20 +103,44 @@ router.delete('/warrantyInfo/:id', (req, resp, next) => {
     });
 });
 
-//Device
-router.post('/device', (req, resp, next) => {
-    let newDevice = new device({
-        WarrantyInformations: req.body.WarrantyInformations,
-        name: req.body.name,
-        ID: req.body.ID
+//user
+router.get('/user', (req, resp, next) => {
+    User.find(function (err, users) {
+        resp.json(users);
     });
-    newDevice.save((err, device) => {
+});
+router.post('/user', (req, resp, next) => {
+    if (req.body._id) {
+        findOneAndUpdateObject(varUserObj(req), req, resp);
+    } else {
+        let newUser = new User(varUserObj(req));
+        insertObject(newUser, resp);
+    }
+});
+router.put('/user', (req, resp, next) => {
+    findOneAndUpdateObject(varUserObj(req), req, resp);
+});
+router.delete('/user/:id', (req, resp, next) => {
+    User.remove({_id: req.params.id}, function (err, result) {
         if (err) {
-            resp.json({msg: 'Error : ' + err});
+            resp.json(err);
         } else {
-            resp.json({msg: 'Successful!'});
+            resp.json(result);
         }
     });
+});
+
+//Device
+router.post('/device', (req, resp, next) => {
+    if (req.body._id) {
+        findOneAndUpdateObject(varDeviceObj(req), req, resp);
+    } else {
+        let newDevice = new device(varDeviceObj(req));
+        insertObject(newDevice, resp);
+    }
+});
+router.put('/device', (req, resp, next) => {
+    findOneAndUpdateObject(varDeviceObj(req), req, resp);
 });
 router.get("/device", (req, resp, next) => {
     device.find(function (err, devices) {
@@ -172,17 +223,15 @@ router.delete('/device/:id', (req, resp, next) => {
 
 //Site
 router.post('/site', (req, resp, next) => {
-    let newSite = new Site({
-        WarrantyInformations: req.body.WarrantyInformations,
-        name: req.body.name
-    });
-    newSite.save((err, site) => {
-        if (err) {
-            resp.json({msg: 'Error : ' + err});
-        } else {
-            resp.json({msg: 'Successful!'});
-        }
-    });
+    if (req.body._id) {
+        findOneAndUpdateObject(varSiteObj(req), req, resp);
+    } else {
+        let newSite = new Site(varSiteObj(req));
+        insertObject(newSite, resp);
+    }
+});
+router.put('/site', (req, resp, next) => {
+    findOneAndUpdateObject(varSiteObj(req), req, resp);
 });
 router.get("/site", (req, resp, next) => {
     Site.find(function (err, sites) {
@@ -508,26 +557,33 @@ function responseWarrantyDetails(warrantyInfos, resp) {
                                         if (err) {
                                             resp.json({msg: 'Error : ' + err});
                                         } else {
-                                            warrantyDetail["site"] = warrantyInfoSite.site;
-                                            warrantyDetail["vendor"] = warrantyInfoVendor.vendor;
-                                            warrantyDetail["device"] = warrantyInfoDevice.device;
-                                            warrantyDetail["contractor"] = warrantyInfoContractor.contractor;
+                                            warrantyInfo.findOne({_id: item._id}).populate('user').exec(function (err, warrantyInfoUser) {
+                                                if (err) {
+                                                    resp.json({msg: 'Error : ' + err});
+                                                } else {
+                                                    warrantyDetail["site"] = warrantyInfoSite.site;
+                                                    warrantyDetail["vendor"] = warrantyInfoVendor.vendor;
+                                                    warrantyDetail["device"] = warrantyInfoDevice.device;
+                                                    warrantyDetail["contractor"] = warrantyInfoContractor.contractor;
+                                                    warrantyDetail["user"] = warrantyInfoUser.user;
 
-                                            warrantyDetail["_id"] = item._id;
-                                            warrantyDetail["start_date"] = item.start_date;
-                                            warrantyDetail["end_date"] = item.end_date;
-                                            warrantyDetail["cost"] = item.cost;
-                                            warrantyDetail["file_path"] = item.file_path;
-                                            warrantyDetail["auto_renewal"] = item.auto_renewal;
-                                            warrantyDetail["reminder_date"] = item.reminder_date;
-                                            warrantyDetail["send_to"] = item.send_to;
-                                            warrantyDetail["send_via"] = item.send_via;
+                                                    warrantyDetail["_id"] = item._id;
+                                                    warrantyDetail["start_date"] = item.start_date;
+                                                    warrantyDetail["end_date"] = item.end_date;
+                                                    warrantyDetail["cost"] = item.cost;
+                                                    warrantyDetail["file_path"] = item.file_path;
+                                                    warrantyDetail["auto_renewal"] = item.auto_renewal;
+                                                    warrantyDetail["reminder_date"] = item.reminder_date;
+                                                    warrantyDetail["send_to"] = item.send_to;
+                                                    warrantyDetail["send_via"] = item.send_via;
 
-                                            warrantyDetails.push(warrantyDetail);
+                                                    warrantyDetails.push(warrantyDetail);
 
-                                            if (warrantyDetails.length === array.length) {
-                                                resp.json(warrantyDetails);
-                                            }
+                                                    if (warrantyDetails.length === array.length) {
+                                                        resp.json(warrantyDetails);
+                                                    }
+                                                }
+                                            });
                                         }
                                     });
                                 }
@@ -562,28 +618,35 @@ router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next) => {
                                 if (err) {
                                     resp.json({msg: 'Error : ' + err});
                                 } else {
-                                    warrantyInfo.findOne({_id: req.params.warranty_id}, function (err, item) {
+                                    warrantyInfo.findOne({_id: req.params.warranty_id}).populate('user').exec(function (err, warrantyInfoUser) {
                                         if (err) {
                                             resp.json({msg: 'Error : ' + err});
                                         } else {
-                                            warrantyDetail["site"] = warrantyInfoSite.site;
-                                            warrantyDetail["vendor"] = warrantyInfoVendor.vendor;
-                                            warrantyDetail["device"] = warrantyInfoDevice.device;
-                                            warrantyDetail["contractor"] = warrantyInfoContractor.contractor;
+                                            warrantyInfo.findOne({_id: req.params.warranty_id}, function (err, item) {
+                                                if (err) {
+                                                    resp.json({msg: 'Error : ' + err});
+                                                } else {
+                                                    warrantyDetail["site"] = warrantyInfoSite.site;
+                                                    warrantyDetail["vendor"] = warrantyInfoVendor.vendor;
+                                                    warrantyDetail["device"] = warrantyInfoDevice.device;
+                                                    warrantyDetail["contractor"] = warrantyInfoContractor.contractor;
+                                                    warrantyDetail["user"] = warrantyInfoUser.user;
 
-                                            warrantyDetail["_id"] = item._id;
-                                            warrantyDetail["start_date"] = item.start_date;
-                                            warrantyDetail["end_date"] = item.end_date;
-                                            warrantyDetail["cost"] = item.cost;
-                                            warrantyDetail["file_path"] = item.file_path;
-                                            warrantyDetail["auto_renewal"] = item.auto_renewal;
-                                            warrantyDetail["reminder_date"] = item.reminder_date;
-                                            warrantyDetail["send_to"] = item.send_to;
-                                            warrantyDetail["send_via"] = item.send_via;
+                                                    warrantyDetail["_id"] = item._id;
+                                                    warrantyDetail["start_date"] = item.start_date;
+                                                    warrantyDetail["end_date"] = item.end_date;
+                                                    warrantyDetail["cost"] = item.cost;
+                                                    warrantyDetail["file_path"] = item.file_path;
+                                                    warrantyDetail["auto_renewal"] = item.auto_renewal;
+                                                    warrantyDetail["reminder_date"] = item.reminder_date;
+                                                    warrantyDetail["send_to"] = item.send_to;
+                                                    warrantyDetail["send_via"] = item.send_via;
 
-                                            if (warrantyDetail.length === item.length) {
-                                                resp.json(warrantyDetail);
-                                            }
+                                                    if (warrantyDetail.length === item.length) {
+                                                        resp.json(warrantyDetail);
+                                                    }
+                                                }
+                                            });
                                         }
                                     });
                                 }

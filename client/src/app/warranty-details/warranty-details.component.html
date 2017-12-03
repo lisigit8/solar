@@ -12,52 +12,48 @@
       </mat-form-field>
     </form>
 
-    <form *ngIf="selectedSite" style="float: left; width: 33%">
+    <form style="float: left; width: 33%">
       <mat-form-field>
         <mat-select placeholder="Select Type" [(ngModel)]="selectedType" name="type">
           <mat-option>Select</mat-option>
+          <span *ngIf="selectedSite">
           <mat-option *ngFor="let tp of types" [value]="tp" (click)="onTypeSelect(tp)">
             {{tp.type}}
           </mat-option>
+          </span>
         </mat-select>
       </mat-form-field>
     </form>
 
-    <form *ngIf="selectedType && selectedSite" style="float: left; width: 33%">
-        <mat-form-field *ngIf="selectedType._id === '1'">
+    <form style="float: left; width: 33%">
+        <mat-form-field>
         <mat-select placeholder="Select" [(ngModel)]="selectedDevice" name="device">
           <mat-option>Select</mat-option>
-          <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect(device)">
-            {{device.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-        <mat-form-field *ngIf="selectedType._id === '2'">
-          <mat-select placeholder="Select" [(ngModel)]="selectedDevice" name="device">
-            <mat-option>Select</mat-option>
-            <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect(device)">
+          <span *ngIf="selectedType && selectedSite">
+            <span *ngIf="selectedType._id === '1'">
+              <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect(device)">
+                {{device.name}}
+              </mat-option>
+            </span>
+            <span *ngIf="selectedType._id === '2'">
+              <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect(device)">
               {{device.ID}}
             </mat-option>
-          </mat-select>
-      </mat-form-field>
-        <mat-form-field *ngIf="selectedType._id === '3'">
-          <mat-select placeholder="Select" [(ngModel)]="selectedVendor" name="vendor">
-            <mat-option>Select</mat-option>
-            <mat-option *ngFor="let vendor of vendors" [value]="vendor" (click)="onVendorSelect(vendor)">
+            </span>
+            <span *ngIf="selectedType._id === '3'">
+              <mat-option *ngFor="let vendor of vendors" [value]="vendor" (click)="onVendorSelect(vendor)">
               {{vendor.name}}
             </mat-option>
-          </mat-select>
-      </mat-form-field>
-        <mat-form-field *ngIf="selectedType._id === '4'">
-          <mat-select placeholder="Select" [(ngModel)]="selectedContractor" name="contractor">
-            <mat-option>Select</mat-option>
-            <mat-option *ngFor="let contractor of contractors" [value]="contractor" (click)="onContractorSelect(contractor)">
+            </span>
+            <span *ngIf="selectedType._id === '4'">
+              <mat-option *ngFor="let contractor of contractors" [value]="contractor" (click)="onContractorSelect(contractor)">
               {{contractor.name}}
             </mat-option>
-          </mat-select>
+            </span>
+          </span>
+        </mat-select>
       </mat-form-field>
     </form>
-
 
   </div>
 
