@@ -30,8 +30,8 @@ export class HeroService {
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
-  //private heroesUrl = 'api/heroes';  // URL to web api
-  private heroesUrl = 'http://localhost:3000/api/hero';  // URL to web api
+  private heroesUrl = 'api/heroes';  // URL to web api
+  //private heroesUrl = 'http://localhost:3000/api/hero';  // URL to web api
 
   // /** GET heroes from the server */
   getHeroes (): Observable<Hero[]> {

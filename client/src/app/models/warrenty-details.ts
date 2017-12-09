@@ -3,7 +3,7 @@ import {Site} from "./site";
 import {Device} from "./device";
 import {Vendor} from "./vendor";
 import {Contractor} from "./contractor";
-import {Users} from "./users";
+import {Customer} from "./customer";
 import {Documents} from "./documents";
 
 export class WarrentyDetails {
@@ -11,7 +11,7 @@ export class WarrentyDetails {
   device: Device;
   vendor: Vendor;
   contractor: Contractor;
-  user: Users;
+  customer: Customer;
 
   documents: Documents[];
 

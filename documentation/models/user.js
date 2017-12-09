@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const schema = mongoose.Schema({
-    WarrantyInformations : [{ type: Schema.Types.ObjectId, ref: 'WarrantyInfo' }],
+    user_userRoll : [{ type: Schema.Types.ObjectId, ref: 'User_UserRoll' }],
 
     name:{
+        type: String,
+        required: true
+    },
+    userId:{
+        type: String,
+        required: true
+    },
+    password:{
         type: String,
         required: true
     },
@@ -21,4 +29,4 @@ const schema = mongoose.Schema({
     }
 });
 
-const Users = module.exports = mongoose.model('Users', schema);
+const User = module.exports = mongoose.model('User', schema);

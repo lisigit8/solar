@@ -9,9 +9,17 @@ var expressSession = require('express-session');
 var passport = require('passport');
 var app = express();
 var router = express.Router();
-var docsRoute = require('./documentation/docsRoute');
 var cors=require('cors');
 var moogose=require('mongoose');
+
+var documentRoute = require('./documentation/routes/documentRoute');
+var siteRoute = require('./documentation/routes/siteRoute');
+var vendorRoute = require('./documentation/routes/vendorRoute');
+var contractorRoute = require('./documentation/routes/contractorRoute');
+var customerRoute = require('./documentation/routes/customerRoute');
+var deviceRoute = require('./documentation/routes/deviceRoute');
+var warrantyRoute = require('./documentation/routes/warrantyRoute');
+var heroRoute = require('./documentation/routes/heroRoute');
 
 
 // view engine setup
@@ -30,7 +38,14 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use("/api", docsRoute);
+app.use("/api", documentRoute);
+app.use("/api", siteRoute);
+app.use("/api", vendorRoute);
+app.use("/api", contractorRoute);
+app.use("/api", customerRoute);
+app.use("/api", deviceRoute);
+app.use("/api", warrantyRoute);
+app.use("/api", heroRoute);
 
 var initPassport = require('./passport/init');
 initPassport(passport);

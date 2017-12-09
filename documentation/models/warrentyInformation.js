@@ -10,7 +10,7 @@ const schema = mongoose.Schema({
     device: { type:Schema.Types.ObjectId, ref:"Device", childPath: "WarrantyInformations" },
     vendor: { type:Schema.Types.ObjectId, ref:"Vendor", childPath: "WarrantyInformations" },
     contractor: { type:Schema.Types.ObjectId, ref:"Contractor", childPath: "WarrantyInformations" },
-    user: { type:Schema.Types.ObjectId, ref:"Users", childPath: "WarrantyInformations" },
+    customer: { type:Schema.Types.ObjectId, ref:"Customer", childPath: "WarrantyInformations" },
 
     documents : [{ type: Schema.Types.ObjectId, ref: 'Documents' }],
     warrantyInfo_sendVia : [{ type: Schema.Types.ObjectId, ref: 'WarrantyInfo_SendVia' }],
@@ -53,6 +53,6 @@ schema.plugin(relationship, { relationshipPathName:'device' });
 schema.plugin(relationship, { relationshipPathName:'contractor' });
 schema.plugin(relationship, { relationshipPathName:'site' });
 schema.plugin(relationship, { relationshipPathName:'vendor' });
-schema.plugin(relationship, { relationshipPathName:'user' });
+schema.plugin(relationship, { relationshipPathName:'customer' });
 
 const WarrantyInfo = module.exports = mongoose.model('WarrantyInfo', schema);

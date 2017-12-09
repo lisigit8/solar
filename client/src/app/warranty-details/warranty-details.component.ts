@@ -1,39 +1,33 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource, MatSort} from '@angular/material';
+import {Subscription} from "rxjs/Subscription";
+
 import {WarrentyDetails} from "../models/warrenty-details";
-import {MaintenanceModuleService} from "../services/maintenance-module.service";
-import {ActivatedRoute} from "@angular/router";
 import {Site} from "../models/site";
 import {Types} from "../models/types";
+import {TYPES} from "../models/types-data";
 import {Device} from "../models/device";
 import {Vendor} from "../models/vendor";
 import {Contractor} from "../models/contractor";
-import {FormControl} from "@angular/forms";
-import {MatTableDataSource, MatSort} from '@angular/material';
-import {MessageService} from "../MessageService";
-import {Subscription} from "rxjs/Subscription";
+
+import {MessageService} from "../services/MessageService";
+import {MaintenanceModuleService} from "../services/maintenance-module.service";
+import {SiteService} from "../services/site.service";
+import {VendorService} from "../services/vendor.service";
+import {ContractorService} from "../services/contractor.service";
+import {DeviceService} from "../services/device.service";
+import {WarrantyService} from "../services/warranty.service";
 
 @Component({
   selector: 'app-warranty-details',
   templateUrl: './warranty-details.component.html',
-  styleUrls: ['../sites/sites.component.css']
+  styleUrls: ['../app.component.css']
 })
 
 export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
   warrantyDetailsList: WarrentyDetails[];
   sites: Site[];
-  types: Types[] = [{//todo db theke asbe
-    _id: "1",
-    type: "Device Name",
-  },{
-    _id: "2",
-    type: "Device ID",
-  },{
-    _id: "3",
-    type: "Vendor Name",
-  },{
-    _id: "4",
-    type: "AMC Contractor",
-  }];
+  types: Types[] = TYPES;
   devices: Device[];
   vendors: Vendor[];
   contractors: Contractor[];
@@ -44,19 +38,26 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
   selectedVendor: Vendor;
   selectedContractor: Contractor;
   selectedWD: WarrentyDetails;
-  siteSelection:any[]=[];
+  selectedSites: Site[] = [];
+  selectedDevices: Device[] = [];
+  selectedVendors: Vendor[] = [];
+  selectedContractors: Contractor[] = [];
   subscription: Subscription;
 
-  displayedColumns = ['device_name', 'device_ID', 'vendor', 'start_date', 'end_date', 'contractor', 'reminder_date', '_id'];
+  displayedColumns = ['device_name', 'device_ID', 'vendor', 'start_date', 'end_date', 'contractor', 'reminder_date'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
 
 
 
   constructor(
-    private route: ActivatedRoute,
+    private messageService: MessageService,
     private service: MaintenanceModuleService,
-    private messageService: MessageService
+    private siteService: SiteService,
+    private vendorService: VendorService,
+    private contractorService: ContractorService,
+    private deviceService: DeviceService,
+    private warrantyService: WarrantyService
   ) {
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if(message){
@@ -65,100 +66,6 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
         }
       }
     });
-  }
-
-
-
-  onSiteSelect(site: Site): void {
-    this.warrantyDetailsList = [];
-    this.selectedSite = site;
-    this.service.getWarrantyDetailsBySiteId(site._id)
-      .subscribe(warrantyDetailsList =>{
-        this.warrantyDetailsList = warrantyDetailsList;
-        this.dataSource = new MatTableDataSource(warrantyDetailsList);
-        this.dataSource.sort = this.sort;
-      });
-
-    if(this.selectedType){
-      this.callFunctionByType(this.selectedType);
-    }
-  }
-  onTypeSelect(type: Types): void {
-    this.selectedType = type;
-    this.callFunctionByType(type);
-  }
-  callFunctionByType(type){
-    if(type._id === '1' || type._id === '2'){
-      this.getDeviceBySiteId();
-    }else if (type._id === '3'){
-      this.getVendorsBySiteId();
-    }else if(type._id === '4'){
-      this.getContractorsBySiteId();
-    }
-  }
-  onDeviceSelect(device: Device): void {
-    this.selectedDevice = device;
-    this.warrantyDetailsList = [];
-    this.service.getWarrantyDetailsBySiteAndDeviceId(this.selectedSite._id, device._id)
-      .subscribe(warrantyDetailsList =>{
-        this.warrantyDetailsList = warrantyDetailsList;
-        this.dataSource = new MatTableDataSource(warrantyDetailsList);
-        this.dataSource.sort = this.sort;
-      });
-  }
-  onVendorSelect(vendor: Vendor): void {
-    this.selectedVendor = vendor;
-    this.warrantyDetailsList = [];
-    this.service.getWarrantyDetailsBySiteAndVendorId(this.selectedSite._id, vendor._id)
-      .subscribe(warrantyDetailsList =>{
-        this.warrantyDetailsList = warrantyDetailsList;
-        this.dataSource = new MatTableDataSource(warrantyDetailsList);
-        this.dataSource.sort = this.sort;
-      });
-  }
-  onContractorSelect(contractor: Contractor): void {
-    this.selectedContractor = contractor;
-    this.warrantyDetailsList = [];
-    this.service.getWarrantyDetailsBySiteAndContractorId(this.selectedSite._id, contractor._id)
-      .subscribe(warrantyDetailsList =>{
-        this.warrantyDetailsList = warrantyDetailsList;
-        this.dataSource = new MatTableDataSource(warrantyDetailsList);
-        this.dataSource.sort = this.sort;
-      });
-  }
-
-
-
-  getSites(): void {
-    this.service.getSites()
-      .subscribe(sites => this.sites = sites);
-  }
-  getDeviceBySiteId(): void {
-    this.devices = [];
-    const site_id = this.selectedSite._id;
-    this.service.getDeviceBySiteId(site_id)
-      .subscribe(devices => this.devices = devices);
-  }
-  getVendorsBySiteId(): void {
-    this.vendors = [];
-    const site_id = this.selectedSite._id;
-    this.service.getVendorsBySiteId(site_id)
-      .subscribe(vendors => this.vendors = vendors);
-  }
-  getContractorsBySiteId(): void {
-    this.contractors = [];
-    const site_id = this.selectedSite._id;
-    this.service.getContractorsBySiteId(site_id)
-      .subscribe(contractors => this.contractors = contractors);
-  }
-  getWarrantyDetails(): void {
-    this.warrantyDetailsList = [];
-    this.service.getWarrantyDetails()
-      .subscribe(warrantyDetailsList =>{
-        this.warrantyDetailsList = warrantyDetailsList;
-        this.dataSource = new MatTableDataSource(warrantyDetailsList);
-        this.dataSource.sort = this.sort;
-      });
   }
 
 
@@ -171,9 +78,218 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
     //this.dataSource.sort = this.sort;
   }
 
+
+
+  onSiteSelect(): void {
+    this.warrantyDetailsList = [];
+    if(this.selectedSite){
+      this.warrantyService.getWarrantyDetailsBySiteId(this.selectedSite._id)
+        .subscribe(warrantyDetailsList =>{
+          //alert(JSON.stringify(warrantyDetailsList));
+          this.warrantyDetailsList = warrantyDetailsList;
+          this.assignDataSource(warrantyDetailsList);
+        });
+    }else{
+      this.onMultiSiteSelect();
+    }
+
+    if(this.selectedType){
+      this.callFunctionByType(this.selectedType);
+    }
+  }
+
+  onMultiSiteSelect(){
+    this.warrantyDetailsList = [];
+    this.selectedSites.forEach(site => {
+      this.warrantyService.getWarrantyDetailsBySiteId(site._id)
+        .subscribe(warrantyDetailsList => warrantyDetailsList.forEach(warrantyDetails => {
+          //alert(JSON.stringify(warrantyDetailsList));
+          this.warrantyDetailsList.push(warrantyDetails);
+          this.assignDataSource(this.warrantyDetailsList);
+        }));
+    });
+  }
+
+  onTypeSelect(type: Types): void {
+    this.selectedType = type;
+    this.callFunctionByType(type);
+  }
+  callFunctionByType(type){
+    if(type._id === '1' || type._id === '2'){
+      //this.getDeviceBySiteId();
+      this.getDevices();
+    }else if (type._id === '3'){
+      //this.getVendorsBySiteId();
+      this.getVendors();
+    }else if(type._id === '4'){
+      //this.getContractorsBySiteId();
+      this.getContractors();
+    }
+  }
+  getDevices(): void {
+    this.deviceService.getDevices()
+      .subscribe(devices => this.devices = devices);
+  }
+  getVendors(): void {
+    this.vendorService.getVendors()
+      .subscribe(vendors => this.vendors = vendors);
+  }
+  getContractors(): void {
+    this.contractorService.getContractors()
+      .subscribe(contractors => this.contractors = contractors);
+  }
+
+  onDeviceSelect(): void {
+    this.warrantyDetailsList = [];
+    if(this.selectedDevice){
+      this.warrantyService.getWarrantyDetailsBySiteAndDeviceId(this.selectedSite._id, this.selectedDevice._id)
+        .subscribe(warrantyDetailsList =>{
+          //(JSON.stringify(warrantyDetailsList));
+          this.warrantyDetailsList = warrantyDetailsList;
+          this.assignDataSource(warrantyDetailsList);
+        });
+    }else{
+      this.selectedSites.forEach(site => {
+        this.selectedDevices.forEach(device => {
+          this.warrantyService.getWarrantyDetailsBySiteAndDeviceId(site._id, device._id)
+            .subscribe(warrantyDetailsList => warrantyDetailsList.forEach(warrantyDetails => {
+              //alert(JSON.stringify(warrantyDetailsList));
+              this.warrantyDetailsList.push(warrantyDetails);
+              this.assignDataSource(warrantyDetailsList);
+            }));
+        });
+      });
+    }
+  }
+  onVendorSelect(): void {
+    this.warrantyDetailsList = [];
+    if(this.selectedVendor) {
+      this.warrantyService.getWarrantyDetailsBySiteAndVendorId(this.selectedSite._id, this.selectedVendor._id)
+        .subscribe(warrantyDetailsList => {
+          //alert(JSON.stringify(warrantyDetailsList));
+          this.warrantyDetailsList = warrantyDetailsList;
+          this.dataSource = new MatTableDataSource(warrantyDetailsList);
+          this.dataSource.sort = this.sort;
+        });
+    }else{
+      this.selectedSites.forEach(site => {
+        this.selectedVendors.forEach(vendor => {
+          this.warrantyService.getWarrantyDetailsBySiteAndVendorId(site._id, vendor._id)
+            .subscribe(warrantyDetailsList => warrantyDetailsList.forEach(warrantyDetails => {
+              //alert(JSON.stringify(warrantyDetailsList));
+              this.warrantyDetailsList.push(warrantyDetails);
+              this.dataSource = new MatTableDataSource(this.warrantyDetailsList);
+              this.dataSource.sort = this.sort;
+            }));
+        });
+      });
+    }
+  }
+  onContractorSelect(): void {
+    this.warrantyDetailsList = [];
+    if(this.selectedContractor) {
+      this.warrantyService.getWarrantyDetailsBySiteAndContractorId(this.selectedSite._id, this.selectedContractor._id)
+        .subscribe(warrantyDetailsList => {
+          //alert(JSON.stringify(warrantyDetailsList));
+          this.warrantyDetailsList = warrantyDetailsList;
+          this.dataSource = new MatTableDataSource(warrantyDetailsList);
+          this.dataSource.sort = this.sort;
+        });
+    }else{
+      this.selectedSites.forEach(site => {
+        this.selectedContractors.forEach(contractor => {
+          this.warrantyService.getWarrantyDetailsBySiteAndContractorId(site._id, contractor._id)
+            .subscribe(warrantyDetailsList => warrantyDetailsList.forEach(warrantyDetails => {
+              //alert(JSON.stringify(warrantyDetailsList));
+              this.warrantyDetailsList.push(warrantyDetails);
+              this.dataSource = new MatTableDataSource(this.warrantyDetailsList);
+              this.dataSource.sort = this.sort;
+            }));
+        });
+      });
+    }
+  }
+
+
+
+  getSites(): void {
+    this.siteService.getSites()
+      .subscribe(sites => this.sites = sites);
+  }
+  getDeviceBySiteId(): void {
+    this.devices = [];
+    if(this.selectedSite){
+      this.deviceService.getDeviceBySiteId(this.selectedSite._id)
+        .subscribe(devices => {
+          this.devices = devices;
+        });
+    }else{
+      this.selectedSites.forEach(site => {
+        this.deviceService.getDeviceBySiteId(site._id)
+          .subscribe(devices => devices.forEach(device => {
+            this.devices.push(device);
+          }));
+      });
+    }
+  }
+  getVendorsBySiteId(): void {
+    this.vendors = [];
+    if(this.selectedSite){
+      this.vendorService.getVendorsBySiteId(this.selectedSite._id)
+        .subscribe(vendors => {
+          this.vendors = vendors;
+        });
+    }else{
+      this.selectedSites.forEach(site => {
+        this.vendorService.getVendorsBySiteId(site._id)
+          .subscribe(vendors => vendors.forEach(vendor => {
+            this.vendors.push(vendor);
+          }));
+      });
+    }
+  }
+  getContractorsBySiteId(): void {
+    this.contractors = [];
+    if(this.selectedSite){
+      this.contractorService.getContractorsBySiteId(this.selectedSite._id)
+        .subscribe(contractors => {
+          this.contractors = contractors;
+        });
+    }else{
+      this.selectedSites.forEach(site => {
+        this.contractorService.getContractorsBySiteId(site._id)
+          .subscribe(contractors => contractors.forEach(contractor => {
+            if (this.contractors.indexOf(contractor) == -1) {
+              this.contractors.push(contractor);
+            }
+          }));
+      });
+    }
+  }
+
+  getWarrantyDetails(): void {
+    this.warrantyDetailsList = [];
+    this.warrantyService.getWarrantyDetails()
+      .subscribe(warrantyDetailsList =>{
+        this.warrantyDetailsList = warrantyDetailsList;
+        this.assignDataSource(warrantyDetailsList);
+      });
+  }
+
   onWarrantySelect(wd: WarrentyDetails){
     this.selectedWD = wd;
     this.messageService.sendMessage("rowSelected",wd);
+  }
+
+  assignDataSource(data){
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
 

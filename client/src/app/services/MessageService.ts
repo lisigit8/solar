@@ -5,6 +5,11 @@ import {Subject} from 'rxjs/Subject';
 @Injectable()
 export class MessageService {
   private subject = new Subject<any>();
+  message: string;
+
+  add(message: string) {
+    this.message=message;
+  }
 
   sendMessage(eventName: string, data: any) {
     this.subject.next({event: eventName, data: data});
@@ -12,6 +17,7 @@ export class MessageService {
 
   clearMessage() {
     this.subject.next();
+    this.message = '';
   }
 
   getMessage(): Observable<any> {

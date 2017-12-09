@@ -12,88 +12,190 @@
 
   <div *ngIf="wd">
     <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <mat-select placeholder="Select" [(ngModel)]="wd.site" name="site" class="form-control">
+      <div class="form-control">
+        Site : <br>
+        <mat-form-field class="example-full-width">
+          <mat-select [(ngModel)]="wd.site" name="site">
           <span *ngIf="wd.site">
-            <mat-option *ngFor="let site of sites" [value]="wd.site._id===site._id?wd.site:site" (click)="onSiteSelect1(site)">{{site.name}}</mat-option>
+            <mat-option *ngFor="let site of sites"
+                        [value]="wd.site._id===site._id?wd.site:site">{{site.name}}</mat-option>
+          </span>
+            <span *ngIf="!wd.site">
+            <!--<mat-option>Select</mat-option>-->
+            <mat-option *ngFor="let site of sites" [value]="site">{{site.name}}</mat-option>
+          </span>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--<mat-form-field class="example-full-width">
+        Site : <br>
+        <mat-select [(ngModel)]="wd.site" name="site" class="form-control">
+          <span *ngIf="wd.site">
+            <mat-option *ngFor="let site of sites" [value]="wd.site._id===site._id?wd.site:site">{{site.name}}</mat-option>
           </span>
           <span *ngIf="!wd.site">
-            <mat-option>Select</mat-option>
-            <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect1(site)">{{site.name}}</mat-option>
+            &lt;!&ndash;<mat-option>Select</mat-option>&ndash;&gt;
+            <mat-option *ngFor="let site of sites" [value]="site">{{site.name}}</mat-option>
           </span>
         </mat-select>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-select placeholder="Select" [(ngModel)]="wd.device" name="deviceName" class="form-control">
+      </mat-form-field>-->
+
+      <div class="form-control">
+        Device name : <br>
+        <mat-form-field class="example-full-width">
+          <mat-select [(ngModel)]="wd.device" name="deviceName">
+          <span *ngIf="wd.device">
+            <mat-option *ngFor="let device of devices" [value]="wd.device._id===device._id?wd.device:device">{{device.name}}</mat-option>
+          </span>
+            <span *ngIf="!wd.device">
+            <!--<mat-option>Select</mat-option>-->
+            <mat-option *ngFor="let device of devices" [value]="device">{{device.name}}</mat-option>
+          </span>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--<mat-form-field class="example-full-width">
+        Device  name : <br>
+        <mat-select [(ngModel)]="wd.device" name="deviceName" class="form-control">
           <span *ngIf="wd.device">
             <mat-option *ngFor="let device of devices" [value]="wd.device._id===device._id?wd.device:device">{{device.name}}</mat-option>
           </span>
           <span *ngIf="!wd.device">
-            <mat-option>Select</mat-option>
+            &lt;!&ndash;<mat-option>Select</mat-option>&ndash;&gt;
             <mat-option *ngFor="let device of devices" [value]="device">{{device.name}}</mat-option>
           </span>
         </mat-select>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-select placeholder="Select" [(ngModel)]="wd.device" name="deviceID" class="form-control">
+      </mat-form-field>-->
+
+      <div class="form-control">
+        Device ID : <br>
+        <mat-form-field class="example-full-width">
+          <mat-select [(ngModel)]="wd.device" name="deviceID">
+          <span *ngIf="wd.device">
+            <mat-option *ngFor="let device of devices" [value]="wd.device._id===device._id?wd.device:device">{{device.ID}}</mat-option>
+          </span>
+            <span *ngIf="!wd.device">
+            <!--<mat-option>Select</mat-option>-->
+            <mat-option *ngFor="let device of devices" [value]="device">{{device.ID}}</mat-option>
+          </span>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--<mat-form-field class="example-full-width">
+        Device ID : <br>
+        <mat-select [(ngModel)]="wd.device" name="deviceID" class="form-control">
           <span *ngIf="wd.device">
             <mat-option *ngFor="let device of devices" [value]="wd.device._id===device._id?wd.device:device">{{device.ID}}</mat-option>
           </span>
           <span *ngIf="!wd.device">
-            <mat-option>Select</mat-option>
+            &lt;!&ndash;<mat-option>Select</mat-option>&ndash;&gt;
             <mat-option *ngFor="let device of devices" [value]="device">{{device.ID}}</mat-option>
           </span>
         </mat-select>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-select placeholder="Select" [(ngModel)]="wd.vendor" name="vendor" class="form-control">
+      </mat-form-field>-->
+
+      <div class="form-control">
+        Vendor : <br>
+        <mat-form-field class="example-full-width">
+          <mat-select [(ngModel)]="wd.vendor" name="vendor">
+          <span *ngIf="wd.vendor">
+            <mat-option *ngFor="let vendor of vendors" [value]="wd.vendor._id===vendor._id?wd.vendor:vendor">{{vendor.name}}</mat-option>
+          </span>
+            <span *ngIf="!wd.vendor">
+            <!--<mat-option>Select</mat-option>-->
+            <mat-option *ngFor="let vendor of vendors" [value]="vendor">{{vendor.name}}</mat-option>
+          </span>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--<mat-form-field class="example-full-width">
+        Vendor : <br>
+        <mat-select [(ngModel)]="wd.vendor" name="vendor" class="form-control">
           <span *ngIf="wd.vendor">
             <mat-option *ngFor="let vendor of vendors" [value]="wd.vendor._id===vendor._id?wd.vendor:vendor">{{vendor.name}}</mat-option>
           </span>
           <span *ngIf="!wd.vendor">
-            <mat-option>Select</mat-option>
+            &lt;!&ndash;<mat-option>Select</mat-option>&ndash;&gt;
             <mat-option *ngFor="let vendor of vendors" [value]="vendor">{{vendor.name}}</mat-option>
           </span>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field>-->
+
       <div class="form-control">
-        <mat-form-field class="example-full-width">
-          <input matInput type="date" [(ngModel)]="wd.start_date" placeholder="Start Date: {{wd.start_date}}" name="start_date">
+        Warranty start date : <br>
+        <!--<mat-form-field class="example-full-width">
+          <input matInput type="date" [(ngModel)]="wd.start_date"
+                 placeholder="Start Date: {{wd.start_date | date: 'MM/dd/yyyy'}}" name="start_date">
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput type="date" [(ngModel)]="wd.end_date" placeholder="End Date: {{wd.end_date}}" name="end_date">
+          <input matInput type="date" [(ngModel)]="wd.end_date"
+                 placeholder="End Date: {{wd.end_date | date: 'MM/dd/yyyy'}}" name="end_date">
+        </mat-form-field>-->
+
+        <mat-form-field class="example-full-width">
+          <input matInput [matDatepicker]="picker1" [(ngModel)]="wd.start_date" name="start_date">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
       </div>
-      <mat-form-field class="example-full-width">
-        <mat-select placeholder="Select" [(ngModel)]="wd.contractor" name="contractor" class="form-control">
+      <div class="form-control">
+        Warranty end date : <br>
+        <mat-form-field class="example-full-width">
+          <input matInput [matDatepicker]="picker2" [(ngModel)]="wd.end_date" name="end_date">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="form-control">
+        AMC Contractor : <br>
+        <mat-form-field class="example-full-width">
+          <mat-select [(ngModel)]="wd.contractor" name="contractor">
           <span *ngIf="wd.contractor">
-            <mat-option *ngFor="let contractor of contractors" [value]="wd.contractor._id===contractor._id?wd.contractor:contractor">{{contractor.name}}</mat-option>
+            <mat-option *ngFor="let contractor of contractors"
+                        [value]="wd.contractor._id===contractor._id?wd.contractor:contractor">{{contractor.name}}</mat-option>
           </span>
-          <span *ngIf="!wd.contractor">
-            <mat-option>Select</mat-option>
+            <span *ngIf="!wd.contractor">
+            <!--<mat-option>Select</mat-option>-->
             <mat-option *ngFor="let contractor of contractors" [value]="contractor">{{contractor.name}}</mat-option>
           </span>
-        </mat-select>
-      </mat-form-field>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!-- <mat-form-field class="example-full-width">
+         AMC Contractor : <br>
+         <mat-select [(ngModel)]="wd.contractor" name="contractor" class="form-control">
+           <span *ngIf="wd.contractor">
+             <mat-option *ngFor="let contractor of contractors"
+                         [value]="wd.contractor._id===contractor._id?wd.contractor:contractor">{{contractor.name}}</mat-option>
+           </span>
+           <span *ngIf="!wd.contractor">
+             &lt;!&ndash;<mat-option>Select</mat-option>&ndash;&gt;
+             <mat-option *ngFor="let contractor of contractors" [value]="contractor">{{contractor.name}}</mat-option>
+           </span>
+         </mat-select>
+       </mat-form-field>-->
+
       <div class="form-control">
         <div class="breadcrumb">AMC Details</div>
         <ul>
-          <li>AMC Cost: INR. <mat-form-field class="example-full-width">
-            <input matInput type="text" [(ngModel)]="wd.cost" name="cost">
-          </mat-form-field></li>
-          <li>AMC Duration: <span style="float: right;">From {{wd.start_date | date: 'MM/dd/yyyy'}} to {{wd.end_date | date: 'MM/dd/yyyy'}}</span></li>
+          <li>AMC Cost: INR.
+            <mat-form-field class="example-full-width">
+              <input matInput type="text" [(ngModel)]="wd.cost" name="cost">
+            </mat-form-field>
+          </li>
+          <li>AMC Duration: <span style="float: right;">From {{wd.start_date | date: 'MM/dd/yyyy'}} to {{wd.end_date | date: 'MM/dd/yyyy'}}</span>
+          </li>
         </ul>
       </div>
       <div class="form-control">
-        <!--<div class="breadcrumb">Uploaded file path</div>
-        <mat-form-field class="example-full-width">
-          <input matInput type="text" [(ngModel)]="wd.file_path" name="file_path">
-        </mat-form-field>-->
-
         <div class="breadcrumb">Uploaded files</div>
-        <span *ngFor="let doc of wd.documents"><a href="http://localhost:3000/api/downloadDocs/{{doc._id}}" target="_blank">{{doc.original_name}}</a><br></span>
+        <span *ngFor="let doc of wd.documents">
+          <a href="{{apiUrl}}downloadDocs/{{doc._id}}" target="_blank">{{doc.original_name}}</a>
+          <a href="#"><mat-icon (click)="removeDocument(doc._id)">delete</mat-icon></a>
+          <br></span>
 
-        <div class="breadcrumb">Uploaded files</div>
+        <div class="breadcrumb">Upload files</div>
         <input type="file" name="files" (change)="onDocChange($event)">
         <!--<input type="file" name="files" (change)="onDocChange($event)">-->
       </div>
@@ -109,27 +211,44 @@
         </mat-radio-group>
       </div>
       <div class="form-control">
+        <!--<mat-form-field class="example-full-width">
+          <input matInput type="date" [(ngModel)]="wd.reminder_date"
+                 placeholder="Reminder Date: {{wd.reminder_date | date: 'MM/dd/yyyy'}}" name="reminder_date">
+        </mat-form-field>-->
+
         <mat-form-field class="example-full-width">
-          <input matInput type="date" [(ngModel)]="wd.reminder_date" placeholder="Reminder Date: {{wd.reminder_date}}" name="reminder_date">
+          <input matInput [matDatepicker]="picker" [(ngModel)]="wd.reminder_date" name="reminder_date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
-      <!--<div class="form-control">
-        Send To : <br>
-        <mat-form-field class="example-full-width">
-          <input matInput [(ngModel)]="wd.send_to" name="send_to">
-        </mat-form-field>
-      </div>-->
-      <mat-form-field class="example-full-width">
-        <mat-select placeholder="Select" [(ngModel)]="wd.user" name="userName" class="form-control" placeholder="Send to:">
-          <span *ngIf="wd.user">
-            <mat-option *ngFor="let user of users" [value]="wd.user._id===user._id?wd.user:user">{{user.name}}</mat-option>
+      <!--<mat-form-field class="example-full-width">
+        Send to : <br>
+        <mat-select [(ngModel)]="wd.customer" name="customerName" class="form-control">
+          <span *ngIf="wd.customer">
+            <mat-option *ngFor="let customer of customers" [value]="wd.customer._id===customer._id?wd.customer:customer">{{customer.name}}</mat-option>
           </span>
-          <span *ngIf="!wd.user">
+          <span *ngIf="!wd.customer">
             <mat-option>Select</mat-option>
-            <mat-option *ngFor="let user of users" [value]="user">{{user.name}}</mat-option>
+            <mat-option *ngFor="let customer of customers" [value]="customer">{{customer.name}}</mat-option>
           </span>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field>-->
+      <div class="form-control">
+        Send to : <br>
+        <mat-form-field class="example-full-width">
+          <mat-select [(ngModel)]="wd.customer" name="customerName">
+          <span *ngIf="wd.customer">
+            <mat-option *ngFor="let customer of customers"
+                        [value]="wd.customer._id===customer._id?wd.customer:customer">{{customer.name}}</mat-option>
+          </span>
+            <span *ngIf="!wd.customer">
+            <!--<mat-option>Select</mat-option>-->
+            <mat-option *ngFor="let customer of customers" [value]="customer">{{customer.name}}</mat-option>
+          </span>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <div class="form-control">
         Send Via : <br>
         <mat-radio-group class="example-radio-group" [(ngModel)]="wd.send_via" name="send_via">
@@ -142,6 +261,8 @@
         </mat-radio-group>
       </div>
       <br>
-      <input type="button" class="form-control" [value]="toInsert?'Save':'Update & Save'" (click)="updateOrInsertWarrantyInfo()">
-    </form></div>
+      <input type="button" class="form-control" [value]="toInsert?'Save':'Update & Save'"
+             (click)="updateOrInsertWarrantyInfo()">
+    </form>
+  </div>
 </div>
