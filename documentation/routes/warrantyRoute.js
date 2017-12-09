@@ -3,6 +3,7 @@ var router = express.Router();
 
 var warrantyInfo = require('../models/warrentyInformation');
 var Site = require('../models/site');
+var WarrantyInfo_SendVia = require('../models/warrantyInfo-sendVia');
 
 var common = require('./common');
 
@@ -25,6 +26,13 @@ function varWarrantyInfoObj(req) {
         send_via: req.body.send_via
     }
     return warrantyInfoObj;
+}
+
+function varWarrantySendViaObj(req) {
+    return {
+        warrantyInfo: req.body.warrantyInfo,
+        sendVia: req.body.sendVia
+    };
 }
 
 
@@ -285,6 +293,54 @@ router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next) => {
        resp.json(item);
     });
 });*/
+
+
+
+//warranty Info - Send Via
+router.get('/warrantyInfo_sendVia', (req, resp, next) => {
+    WarrantyInfo_SendVia.find(function (err, items) {
+        resp.json(items);
+    });
+});
+router.get('/warrantyInfo_sendVia/warranty/:warranty_id', (req, resp, next) => {
+    WarrantyInfo_SendVia.find({warrantyInfo: req.params.warranty_id}, function (err, items) {
+        if (err) {
+            resp.json({msg: 'Error : ' + err});
+        } else {
+            resp.json(items);
+        }
+    });
+});
+router.post('/warrantyInfo_sendVia', (req, resp, next) => {
+    if (req.body._id) {
+        var conditions = {warrantyInfo: req.body.warrantyInfo, sendVia: req.body.sendVia};
+        common.findOneAndUpdateObject(varWarrantySendViaObj(req), req, resp, WarrantyInfo_SendVia, conditions);
+    } else {
+        let newObj = new WarrantyInfo_SendVia(varWarrantySendViaObj(req));
+        common.insertObject(newObj, resp);
+    }
+});
+router.put('/warrantyInfo_sendVia', (req, resp, next) => {
+    common.findOneAndUpdateObject(varWarrantySendViaObj(req), req, resp, WarrantyInfo_SendVia);
+});
+router.delete('/warrantyInfo_sendVia/:id', (req, resp, next) => {
+    WarrantyInfo_SendVia.remove({_id: req.params.id}, function (err, result) {
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(result);
+        }
+    });
+});
+router.delete('/warrantyInfo_sendVia', (req, resp, next) => {
+    WarrantyInfo_SendVia.remove(function (err, result) {
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(result);
+        }
+    });
+});
 
 
 

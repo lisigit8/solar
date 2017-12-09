@@ -19,6 +19,9 @@ import {CustomerService} from "../services/customer.service";
 import {DeviceService} from "../services/device.service";
 import {DocumentsService} from "../services/documents.service";
 import {WarrantyService} from "../services/warranty.service";
+import {SendViaService} from "../services/send-via.service";
+import {SendVia} from "../models/send-via";
+import {Warranty_SendVia} from "../models/warranty-sendvia";
 
 @Component({
   selector: 'app-warranty-information',
@@ -34,6 +37,9 @@ export class WarrantyInformationComponent implements OnInit,OnDestroy {
   data = new FormData();
   toInsert: boolean;
   apiUrl: string = apiUrl;
+  sendViaAll: SendVia[];
+  warranty_sendVia: Warranty_SendVia = new Warranty_SendVia;
+  warranty_sendVia_all: Warranty_SendVia[];
 
   /*@Output()
   evt: EventEmitter<string> = new EventEmitter();*/
@@ -56,7 +62,8 @@ export class WarrantyInformationComponent implements OnInit,OnDestroy {
               private customerService: CustomerService,
               private deviceService: DeviceService,
               private documentsService: DocumentsService,
-              private warrantyService: WarrantyService
+              private warrantyService: WarrantyService,
+              private sendViaService: SendViaService
   ) {
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if(message.event=='rowSelected'){
@@ -67,6 +74,7 @@ export class WarrantyInformationComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit() {
+    this.getSendVia();
     this.getSites();
     this.getDevices();
     this.getVendors();
@@ -78,6 +86,17 @@ export class WarrantyInformationComponent implements OnInit,OnDestroy {
   /*clickme() {
     this.evt.emit('a');
   }*/
+
+  getSendVia(){
+    this.sendViaService.getSendVia()
+      .subscribe(sendViaAll => {
+        this.sendViaAll = sendViaAll;
+      });
+  }
+
+  onSelectSendVia(){
+
+  }
 
   getSites(): void {
     this.siteService.getSites()
@@ -105,6 +124,17 @@ export class WarrantyInformationComponent implements OnInit,OnDestroy {
         this.wd = wd;
         this.toInsert = false;
         this.getDocumentsByWarrantyId(this.wd._id);
+
+        this.sendViaAll.forEach(sendVia => {
+          this.warrantyService.getWarrantyInfoSendViaByWarrantyId(this.wd._id)
+            .subscribe(warranty_sendVia_all => {
+              warranty_sendVia_all.forEach(warranty_sendVia => {
+                if(warranty_sendVia.sendVia+"" === sendVia._id+""){
+                  sendVia.isSelected = true;
+                }
+              })
+            });
+        });
       });
   }
   getDocumentsByWarrantyId(warranty_id: string): void {
@@ -119,7 +149,8 @@ export class WarrantyInformationComponent implements OnInit,OnDestroy {
        .subscribe(resp => {
          alert(resp.msg);
          this.insertDocs(this.data);
-         this.messageService.sendMessage("dataUpdated","");
+         this.insertWarrantyInfoSendVia();
+         this.messageService.sendMessage("dataUpdated",this.wd);
        });
   }
   updateOrInsertWarrantyInfo(){
@@ -157,16 +188,28 @@ export class WarrantyInformationComponent implements OnInit,OnDestroy {
             }else{
               this.onClickOnNew();
             }
-            this.messageService.sendMessage("dataUpdated","");
+            this.messageService.sendMessage("dataUpdated",this.wd);
           });
       });
     });
   }
+  insertWarrantyInfoSendVia(): void{
+    this.sendViaAll.forEach(sendVia => {
+      if(sendVia.isSelected){
+        this.warranty_sendVia.warrantyInfo = this.wd;
+        this.warranty_sendVia.sendVia = sendVia;
+        this.warrantyService.insertWarrantyInfoSendVia(this.warranty_sendVia).subscribe(resp=>{
+          console.log(resp.msg);
+        });
+      }
+    });
+  }
+
   onClickOnNew(){
     this.wd = new WarrentyDetails;
     this.toInsert = true;
 
-    this.messageService.sendMessage("dataUpdated","");
+    this.messageService.sendMessage("dataUpdated",this.wd);
   }
   insertWarrantyInfo() {
     this.warrantyService.insertWarrantyInfo(this.wd)
@@ -174,16 +217,17 @@ export class WarrantyInformationComponent implements OnInit,OnDestroy {
         alert(resp.msg);
         this.wd = resp.obj;
         this.insertDocs(this.data);
-        this.messageService.sendMessage("dataUpdated","");
+        this.insertWarrantyInfoSendVia();
+        this.messageService.sendMessage("dataUpdated",this.wd);
       });
   }
   removeDocument(id: string){
     this.documentsService.removeDocument(id).subscribe(resp=>{
-      this.messageService.sendMessage("dataUpdated","");
+      this.messageService.sendMessage("dataUpdated",this.wd);
       if(!this.toInsert) {
         this.ngOnInit();
+        alert("Deleted successfully!");
       }
-      alert("Deleted successfully!");
     });
   }
 

@@ -73,7 +73,7 @@
          (+{{selectedSites.length - 1}} others)
       </span>
             </mat-select-trigger>
-            <mat-option (click)="onSiteSelectAll()">Select All</mat-option>
+            <mat-option (click)="onSiteSelectAll()" >Select All</mat-option>
             <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()">{{site.name}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -229,7 +229,7 @@
         <!--<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
         <mat-row *matRowDef="let element; columns: displayedColumns;"
                  [ngClass]="{'highlight':element === selectedWD}"
-                 (click)="onWarrantySelect(element)">
+                 (click)="onWarrantySelect(element)" id="row_{{element._id}}">
         </mat-row>
       </mat-table>
     </div>

@@ -27,9 +27,6 @@ const schema = mongoose.Schema({
         type: schemaTypes.Double,
         required: true
     },
-    file_path:{
-        type: String
-    },
     auto_renewal:{
         type: Boolean, 
         default: true,
@@ -39,13 +36,15 @@ const schema = mongoose.Schema({
         type : Date,
         required: true
     },
+    file_path:{
+        type: String
+    },
     send_to:{
         type: String
     },
     send_via:{
         type: String,
-        enum : ['SMS', 'email'],
-        required: true
+        enum : ['SMS', 'email']
     }
 });
 

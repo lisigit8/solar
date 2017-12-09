@@ -4,14 +4,7 @@ relationship = require("mongoose-relationship");
 
 const schema = mongoose.Schema({
     warrantyInfo: { type:Schema.Types.ObjectId, ref:"WarrantyInfo", childPath: "warrantyInfo_sendVia" },
-    sendVia: { type:Schema.Types.ObjectId, ref:"SendVia", childPath: "warrantyInfo_sendVia" },
-
-
-    send_via:{
-        type: String,
-        enum : ['SMS', 'email'],
-        required: true
-    }
+    sendVia: { type:Schema.Types.ObjectId, ref:"SendVia", childPath: "warrantyInfo_sendVia" }
 });
 
 schema.plugin(relationship, { relationshipPathName:'warrantyInfo' });

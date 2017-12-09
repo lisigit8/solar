@@ -15,7 +15,8 @@ import {
   MatRadioModule,
   MatIconModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatCheckboxModule,
 } from "@angular/material";
 
 import {LayoutModule} from "./layout/layout.module";
@@ -35,6 +36,7 @@ import { VendorService } from './services/vendor.service';
 import {ContractorService} from "./services/contractor.service";
 import { DocumentsService } from './services/documents.service';
 import { WarrantyService } from './services/warranty.service';
+import { SendViaService } from './services/send-via.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { WarrantyService } from './services/warranty.service';
     MatRadioModule,
     MatIconModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule
   ],
   providers: [
     MaintenanceModuleService,
@@ -72,7 +75,8 @@ import { WarrantyService } from './services/warranty.service';
     VendorService,
     ContractorService,
     DocumentsService,
-    WarrantyService
+    WarrantyService,
+    SendViaService
   ],
   bootstrap: [AppComponent]
 })

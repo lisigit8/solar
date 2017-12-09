@@ -5,22 +5,27 @@ label {
   color: #607D8B;
   font-weight: bold;
 }
+
 .example-container {
   display: flex;
   flex-direction: column;
   min-width: 300px;
 }
+
 .example-header {
   min-height: 64px;
   padding: 8px 24px 0;
 }
+
 .mat-table {
   overflow: auto;
   max-height: 500px;
 }
+
 .mat-header-cell.mat-sort-header-sorted {
   color: black;
 }
+
 .example-form {
   min-width: 150px;
   max-width: 500px;
@@ -50,43 +55,65 @@ label {
 .example-container .mat-radio-button {
   margin: 0 5px;
 }
+
 .mat-radio-button {
   padding-right: 16px;
 }
+
 .radioButtondemoBasicUsage body {
-  padding: 20px; }
+  padding: 20px;
+}
 
 .radioButtondemoBasicUsage hr {
   margin-left: -20px;
-  opacity: 0.3; }
+  opacity: 0.3;
+}
 
 .radioButtondemoBasicUsage md-radio-group {
-  width: 150px; }
+  width: 150px;
+}
 
 .radioButtondemoBasicUsage p:last-child {
-  padding-bottom: 50px; }
+  padding-bottom: 50px;
+}
 
 .radioButtondemoBasicUsage [ng-controller] {
-  padding: 0 20px; }
+  padding: 0 20px;
+}
 
 .radioButtondemoBasicUsage .radioValue {
   margin-left: 5px;
   color: #0f9d58;
   font-weight: bold;
-  padding: 5px; }
+  padding: 5px;
+}
 
 .radioButtondemoBasicUsage md-icon {
   margin: 0 20px 20px;
   width: 128px;
-  height: 128px; }
+  height: 128px;
+}
 
 .radioButtondemoBasicUsage .ipsum {
   color: saddlebrown;
-  font-size: 0.9em; }
+  font-size: 0.9em;
+}
 
 .highlight {
   background: #6ca9a5;
 }
+
 .highlight mat-cell{
   color: white;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
 }

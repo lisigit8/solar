@@ -7,6 +7,7 @@ import {catchError, tap} from "rxjs/operators";
 import {of} from "rxjs/observable/of";
 
 import {WarrentyDetails} from "../models/warrenty-details";
+import {Warranty_SendVia} from "../models/warranty-sendvia";
 
 import {apiUrl} from "./common";
 
@@ -62,6 +63,24 @@ export class WarrantyService {
         "site-ids":site_ids
       }};
     return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}/site`,options);
+  }
+
+
+
+
+  //Warranty Info - Send Via
+  private warrantyInfoSendViaUrl = apiUrl + 'warrantyInfo_sendVia';
+  updateWarrantyInfoSendVia (obj: Warranty_SendVia): Observable<any> {
+    return this.http.put<any>(`${this.warrantyInfoSendViaUrl}`, obj);
+  }
+  insertWarrantyInfoSendVia (obj: Warranty_SendVia): Observable<any> {
+    return this.http.post<any>(`${this.warrantyInfoSendViaUrl}`, obj);
+  }
+  removeWarrantyInfoSendVia (id: string): Observable<any> {
+    return this.http.delete<any>(`${this.warrantyInfoSendViaUrl}/${id}`, httpOptions);
+  }
+  getWarrantyInfoSendViaByWarrantyId (warranty_id: string): Observable<Warranty_SendVia[]> {
+    return this.http.get<Warranty_SendVia[]>(`${this.warrantyInfoSendViaUrl}/warranty/${warranty_id}`);
   }
 
 

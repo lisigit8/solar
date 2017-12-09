@@ -5,6 +5,7 @@ import {Vendor} from "./vendor";
 import {Contractor} from "./contractor";
 import {Customer} from "./customer";
 import {Documents} from "./documents";
+import {Warranty_SendVia} from "./warranty-sendvia";
 
 export class WarrentyDetails {
   site: Site;
@@ -14,6 +15,7 @@ export class WarrentyDetails {
   customer: Customer;
 
   documents: Documents[];
+  warrantyInfo_sendVia: Warranty_SendVia[];
 
   _id: string;
   start_date: Date;
