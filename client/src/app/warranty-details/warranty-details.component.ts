@@ -78,10 +78,29 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
     //this.dataSource.sort = this.sort;
   }
 
+  onSiteSelectAll(){
+    this.getWarrantyDetails();
+    this.selectedSites = this.sites;
+  }
 
+  onDeviceSelectAll(){
+    this.selectedDevices = this.devices;
+    this.onDeviceSelect();
+  }
+
+  onVendorSelectAll(){
+    this.selectedVendors = this.vendors;
+    this.onVendorSelect();
+  }
+
+  onContractorSelectAll(){
+    this.selectedContractors = this.contractors;
+    this.onContractorSelect();
+  }
 
   onSiteSelect(): void {
     this.warrantyDetailsList = [];
+    this.assignDataSource(this.warrantyDetailsList);
     if(this.selectedSite){
       this.warrantyService.getWarrantyDetailsBySiteId(this.selectedSite._id)
         .subscribe(warrantyDetailsList =>{
@@ -100,6 +119,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
 
   onMultiSiteSelect(){
     this.warrantyDetailsList = [];
+    this.assignDataSource(this.warrantyDetailsList);
     this.selectedSites.forEach(site => {
       this.warrantyService.getWarrantyDetailsBySiteId(site._id)
         .subscribe(warrantyDetailsList => warrantyDetailsList.forEach(warrantyDetails => {
@@ -141,6 +161,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
 
   onDeviceSelect(): void {
     this.warrantyDetailsList = [];
+    this.assignDataSource(this.warrantyDetailsList);
     if(this.selectedDevice){
       this.warrantyService.getWarrantyDetailsBySiteAndDeviceId(this.selectedSite._id, this.selectedDevice._id)
         .subscribe(warrantyDetailsList =>{
@@ -155,7 +176,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
             .subscribe(warrantyDetailsList => warrantyDetailsList.forEach(warrantyDetails => {
               //alert(JSON.stringify(warrantyDetailsList));
               this.warrantyDetailsList.push(warrantyDetails);
-              this.assignDataSource(warrantyDetailsList);
+              this.assignDataSource(this.warrantyDetailsList);
             }));
         });
       });
@@ -163,13 +184,13 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
   }
   onVendorSelect(): void {
     this.warrantyDetailsList = [];
+    this.assignDataSource(this.warrantyDetailsList);
     if(this.selectedVendor) {
       this.warrantyService.getWarrantyDetailsBySiteAndVendorId(this.selectedSite._id, this.selectedVendor._id)
         .subscribe(warrantyDetailsList => {
           //alert(JSON.stringify(warrantyDetailsList));
           this.warrantyDetailsList = warrantyDetailsList;
-          this.dataSource = new MatTableDataSource(warrantyDetailsList);
-          this.dataSource.sort = this.sort;
+          this.assignDataSource(warrantyDetailsList);
         });
     }else{
       this.selectedSites.forEach(site => {
@@ -178,8 +199,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
             .subscribe(warrantyDetailsList => warrantyDetailsList.forEach(warrantyDetails => {
               //alert(JSON.stringify(warrantyDetailsList));
               this.warrantyDetailsList.push(warrantyDetails);
-              this.dataSource = new MatTableDataSource(this.warrantyDetailsList);
-              this.dataSource.sort = this.sort;
+              this.assignDataSource(this.warrantyDetailsList);
             }));
         });
       });
@@ -187,13 +207,13 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
   }
   onContractorSelect(): void {
     this.warrantyDetailsList = [];
+    this.assignDataSource(this.warrantyDetailsList);
     if(this.selectedContractor) {
       this.warrantyService.getWarrantyDetailsBySiteAndContractorId(this.selectedSite._id, this.selectedContractor._id)
         .subscribe(warrantyDetailsList => {
           //alert(JSON.stringify(warrantyDetailsList));
           this.warrantyDetailsList = warrantyDetailsList;
-          this.dataSource = new MatTableDataSource(warrantyDetailsList);
-          this.dataSource.sort = this.sort;
+          this.assignDataSource(warrantyDetailsList);
         });
     }else{
       this.selectedSites.forEach(site => {
@@ -202,8 +222,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy  {
             .subscribe(warrantyDetailsList => warrantyDetailsList.forEach(warrantyDetails => {
               //alert(JSON.stringify(warrantyDetailsList));
               this.warrantyDetailsList.push(warrantyDetails);
-              this.dataSource = new MatTableDataSource(this.warrantyDetailsList);
-              this.dataSource.sort = this.sort;
+              this.assignDataSource(this.warrantyDetailsList);
             }));
         });
       });

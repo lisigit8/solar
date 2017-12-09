@@ -73,6 +73,7 @@
          (+{{selectedSites.length - 1}} others)
       </span>
             </mat-select-trigger>
+            <mat-option (click)="onSiteSelectAll()">Select All</mat-option>
             <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()">{{site.name}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -104,32 +105,53 @@
                       [(ngModel)]="selectedDevices" name="deviceNames" multiple>
             <mat-select-trigger>
               {{selectedDevices[0] ? selectedDevices[0].name : ''}}
-              <span *ngIf="selectedSites.length > 1" class="example-additional-selection">
-         (+{{selectedSites.length - 1}} others)
-      </span>
+              <span *ngIf="selectedDevices.length > 1" class="example-additional-selection">
+                 (+{{selectedDevices.length - 1}} others)
+              </span>
             </mat-select-trigger>
-            <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()">{{site.name}}</mat-option>
+            <mat-option (click)="onDeviceSelectAll()">Select All</mat-option>
+            <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect()">{{device.name}}
+            </mat-option>
           </mat-select>
 
-
-          <mat-select *ngIf="selectedType._id === '2'" [(ngModel)]="selectedDevice"
-                      name="deviceID">
-            <mat-option>Select</mat-option>
+          <mat-select *ngIf="selectedType._id === '2'" [(ngModel)]="selectedDevices"
+                      name="deviceIDs" multiple>
+            <mat-select-trigger>
+              {{selectedDevices[0] ? selectedDevices[0].ID : ''}}
+              <span *ngIf="selectedDevices.length > 1" class="example-additional-selection">
+                 (+{{selectedDevices.length - 1}} others)
+              </span>
+            </mat-select-trigger>
+            <mat-option (click)="onDeviceSelectAll()">Select All</mat-option>
             <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect()">
               {{device.ID}}
             </mat-option>
           </mat-select>
-          <mat-select *ngIf="selectedType._id === '3'" [(ngModel)]="selectedVendor" name="vendor">
-            <mat-option>Select</mat-option>
-            <mat-option *ngFor="let vendor of vendors" [value]="vendor" (click)="onVendorSelect(vendor)">
+
+          <mat-select *ngIf="selectedType._id === '3'" [(ngModel)]="selectedVendors" name="vendors" multiple>
+            <mat-select-trigger>
+              {{selectedVendors[0] ? selectedVendors[0].name : ''}}
+              <span *ngIf="selectedVendors.length > 1" class="example-additional-selection">
+                 (+{{selectedVendors.length - 1}} others)
+              </span>
+            </mat-select-trigger>
+            <mat-option (click)="onVendorSelectAll()">Select All</mat-option>
+            <mat-option *ngFor="let vendor of vendors" [value]="vendor" (click)="onVendorSelect()">
               {{vendor.name}}
             </mat-option>
           </mat-select>
-          <mat-select *ngIf="selectedType._id === '4'" [(ngModel)]="selectedContractor"
-                      name="contractor">
-            <mat-option>Select</mat-option>
+
+          <mat-select *ngIf="selectedType._id === '4'" [(ngModel)]="selectedContractors"
+                      name="contractors" multiple>
+            <mat-select-trigger>
+              {{selectedContractors[0] ? selectedContractors[0].name : ''}}
+              <span *ngIf="selectedContractors.length > 1" class="example-additional-selection">
+                 (+{{selectedContractors.length - 1}} others)
+              </span>
+            </mat-select-trigger>
+            <mat-option (click)="onContractorSelectAll()">Select All</mat-option>
             <mat-option *ngFor="let contractor of contractors" [value]="contractor"
-                        (click)="onContractorSelect(contractor)">
+                        (click)="onContractorSelect()">
               {{contractor.name}}
             </mat-option>
           </mat-select>
