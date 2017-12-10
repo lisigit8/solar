@@ -20,6 +20,7 @@ var customerRoute = require('./documentation/routes/customerRoute');
 var deviceRoute = require('./documentation/routes/deviceRoute');
 var warrantyRoute = require('./documentation/routes/warrantyRoute');
 var sendViaRoute = require('./documentation/routes/sendViaRoute');
+var userRoute = require('./documentation/routes/userRoute');
 var heroRoute = require('./documentation/routes/heroRoute');
 
 
@@ -47,6 +48,7 @@ app.use("/api", customerRoute);
 app.use("/api", deviceRoute);
 app.use("/api", warrantyRoute);
 app.use("/api", sendViaRoute);
+app.use("/api", userRoute);
 app.use("/api", heroRoute);
 
 var initPassport = require('./passport/init');

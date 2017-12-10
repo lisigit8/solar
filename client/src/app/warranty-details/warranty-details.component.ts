@@ -39,7 +39,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
   contractors: Contractor[];
   sendViaAll: SendVia[] = SEND_VIA_DATA;
 
-  selectedSite: Site;
+  selectedSite: any = new Site;
   selectedType: Types;
   selectedDevice: Device;
   selectedVendor: Vendor;
@@ -71,6 +71,14 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
           setTimeout(()=>{
               $("#row_"+message.data._id).attr("class", "mat-row highlight");
             }, 1000);
+        } else if(message.event == 'siteSelected'){
+          this.selectedSite = message.data;
+          this.onSiteSelect();
+          /*$("#site_"+message.data._id).trigger();
+          $("#site_"+message.data._id).click();*/
+        } else if(message.event == 'renewClicked'){
+          this.ngOnInit();
+          this.selectedSite = "";
         }
       }
     });

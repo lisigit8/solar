@@ -1,4 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Site} from "../../models/site";
+import {SiteService} from "../../services/site.service";
+import {MessageService} from "../../services/MessageService";
 
 @Component({
   selector: 'app-layout',
@@ -9,10 +12,27 @@ import {Component, Input, OnInit} from '@angular/core';
     '../../../assets/font-awesome/css/font-awesome.min.css']
 })
 export class LayoutComponent implements OnInit {
-  constructor() {
-  }
+  selectedSite: any;
+  sites: Site[];
+
+  constructor(private messageService: MessageService,
+    private siteService: SiteService,) {}
 
   ngOnInit() {
+    this.getSites();
+  }
+
+  getSites(): void {
+    this.siteService.getSites()
+      .subscribe(sites => this.sites = sites);
+  }
+
+  renew(): void {
+    this.messageService.sendMessage("renewClicked", "");
+  }
+
+  onSiteSelect(): void {
+    this.messageService.sendMessage("siteSelected", this.selectedSite);
   }
 
 }

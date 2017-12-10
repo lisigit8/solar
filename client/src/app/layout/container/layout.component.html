@@ -2,6 +2,13 @@
   <div class="container">
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
+      <mat-form-field class="example-full-width">
+        <mat-select [(ngModel)]="selectedSite">
+          <mat-option (click)="renew()" value="renew">Renew Power Global</mat-option>
+          <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()">{{site.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <!--<ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>

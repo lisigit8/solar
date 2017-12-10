@@ -66,15 +66,19 @@
       <div style="float: left; width: 34%" class="form-control">
         Site : <br>
         <mat-form-field class="example-full-width">
-          <mat-select [(ngModel)]="selectedSites" multiple>
+          <input matInput *ngIf="selectedSite!=''" [(ngModel)]="selectedSite.name" disabled>
+
+          <mat-select *ngIf="selectedSite==''" [(ngModel)]="selectedSites" multiple>
             <mat-select-trigger>
               {{selectedSites[0] ? selectedSites[0].name : ''}}
               <span *ngIf="selectedSites.length > 1" class="example-additional-selection">
          (+{{selectedSites.length - 1}} others)
       </span>
             </mat-select-trigger>
-            <mat-option (click)="onSiteSelectAll()" >Select All</mat-option>
-            <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()">{{site.name}}</mat-option>
+            <mat-option (click)="onSiteSelectAll()" value="allSite">Select All</mat-option>
+            <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()" id="site_{{site._id}}">
+              {{site.name}}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -95,7 +99,7 @@
         Select : <br>
 
         <mat-form-field class="example-full-width" *ngIf="!selectedType || !selectedSites[0]">
-          <mat-select>
+          <mat-select name="selectDev">
             <mat-option>Select</mat-option>
           </mat-select>
         </mat-form-field>
