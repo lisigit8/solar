@@ -35,16 +35,6 @@ const schema = mongoose.Schema({
     reminder_date:{
         type : Date,
         required: true
-    },
-    file_path:{
-        type: String
-    },
-    send_to:{
-        type: String
-    },
-    send_via:{
-        type: String,
-        enum : ['SMS', 'email']
     }
 });
 

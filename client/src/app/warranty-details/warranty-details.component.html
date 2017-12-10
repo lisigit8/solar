@@ -1,67 +1,5 @@
 <div style="float: left; width: 70%;">
   <div class="form-control">
-    <!--<div style="width: 100%">
-      <form style="float: left; width: 34%">
-        <mat-form-field class="example-full-width">
-          <mat-select placeholder="Select Site" [(ngModel)]="selectedSite" name="site">
-            <mat-option (click)="getWarrantyDetails();">Select</mat-option>
-            <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()">
-              {{site.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </form>
-
-      <form style="float: left; width: 33%">
-        <mat-form-field class="example-full-width">
-          <mat-select placeholder="Select Type" [(ngModel)]="selectedType" name="type">
-            <mat-option>Select</mat-option>
-            <span *ngIf="selectedSite">
-            <mat-option *ngFor="let tp of types" [value]="tp" (click)="onTypeSelect(tp)">
-              {{tp.type}}
-            </mat-option>
-            </span>
-          </mat-select>
-        </mat-form-field>
-      </form>
-
-      <form style="float: left; width: 33%">
-        <mat-form-field class="example-full-width">
-          <mat-select *ngIf="!selectedType || !selectedSite" placeholder="Select">
-            <mat-option>Select</mat-option>
-          </mat-select>
-
-          <span *ngIf="selectedType && selectedSite">
-            <mat-select *ngIf="selectedType._id === '1'" placeholder="Select" [(ngModel)]="selectedDevice" name="deviceName">
-              <mat-option>Select</mat-option>
-              <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect()">
-                {{device.name}}
-              </mat-option>
-            </mat-select>
-            <mat-select *ngIf="selectedType._id === '2'" placeholder="Select" [(ngModel)]="selectedDevice" name="deviceID">
-              <mat-option>Select</mat-option>
-              <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect()">
-                {{device.ID}}
-              </mat-option>
-            </mat-select>
-            <mat-select *ngIf="selectedType._id === '3'" placeholder="Select" [(ngModel)]="selectedVendor" name="vendor">
-              <mat-option>Select</mat-option>
-              <mat-option *ngFor="let vendor of vendors" [value]="vendor" (click)="onVendorSelect(vendor)">
-              {{vendor.name}}
-            </mat-option>
-            </mat-select>
-            <mat-select *ngIf="selectedType._id === '4'" placeholder="Select" [(ngModel)]="selectedContractor" name="contractor">
-              <mat-option>Select</mat-option>
-              <mat-option *ngFor="let contractor of contractors" [value]="contractor" (click)="onContractorSelect(contractor)">
-                {{contractor.name}}
-              </mat-option>
-            </mat-select>
-          </span>
-        </mat-form-field>
-      </form>
-
-    </div>-->
-
     <div style="width: 100%">
       <div style="float: left; width: 34%" class="form-control">
         Site : <br>
@@ -204,17 +142,6 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header> AMC Contractor</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.contractor.name}}</mat-cell>
         </ng-container>
-
-        <!--<ng-container matColumnDef="file_path">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Uploaded doc path </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.file_path}}<br>
-            &lt;!&ndash;<span *ngFor="let doc of element.documents">
-              <a href="{{doc.path}}" target="_blank">
-                {{doc.original_name}}
-              </a><br>
-            </span>&ndash;&gt;
-          </mat-cell>
-        </ng-container>-->
 
         <ng-container matColumnDef="reminder_date">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Reminder</mat-header-cell>

@@ -16,14 +16,12 @@ function varWarrantyInfoObj(req) {
         site: req.body.site,
         vendor: req.body.vendor,
         customer: req.body.customer,
+
         start_date: req.body.start_date,
         end_date: req.body.end_date,
         cost: req.body.cost,
-        file_path: req.body.file_path,
         auto_renewal: req.body.auto_renewal,
-        reminder_date: req.body.reminder_date,
-        send_to: req.body.send_to,
-        send_via: req.body.send_via
+        reminder_date: req.body.reminder_date
     }
     return warrantyInfoObj;
 }
@@ -202,11 +200,8 @@ function responseWarrantyDetails(warrantyInfos, resp) {
                                                     warrantyDetail["start_date"] = item.start_date;
                                                     warrantyDetail["end_date"] = item.end_date;
                                                     warrantyDetail["cost"] = item.cost;
-                                                    warrantyDetail["file_path"] = item.file_path;
                                                     warrantyDetail["auto_renewal"] = item.auto_renewal;
                                                     warrantyDetail["reminder_date"] = item.reminder_date;
-                                                    warrantyDetail["send_to"] = item.send_to;
-                                                    warrantyDetail["send_via"] = item.send_via;
 
                                                     warrantyDetails.push(warrantyDetail);
 
@@ -266,11 +261,8 @@ router.get('/warrantyDetails/warranty/:warranty_id', (req, resp, next) => {
                                                     warrantyDetail["start_date"] = item.start_date;
                                                     warrantyDetail["end_date"] = item.end_date;
                                                     warrantyDetail["cost"] = item.cost;
-                                                    warrantyDetail["file_path"] = item.file_path;
                                                     warrantyDetail["auto_renewal"] = item.auto_renewal;
                                                     warrantyDetail["reminder_date"] = item.reminder_date;
-                                                    warrantyDetail["send_to"] = item.send_to;
-                                                    warrantyDetail["send_via"] = item.send_via;
 
                                                     if (warrantyDetail.length === item.length) {
                                                         resp.json(warrantyDetail);
