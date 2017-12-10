@@ -85,6 +85,7 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
     this.getContractors();
     this.getCustomers();
     this.getWarrantyDetailsByWarrantyId(this.id);
+    this.clearFileField();
   }
 
 
@@ -168,11 +169,19 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
     this.wd = new WarrentyDetails;
     this.toInsert = true;
     this.data = new FormData();
+    this.clearSendViaFields();
+
+    this.messageService.sendMessage("dataUpdated", this.wd);
+  }
+
+  clearFileField(){
+    $("#file_names").html('');
+    $("#files").val('');
+  }
+  clearSendViaFields(){
     this.sendViaAll.forEach(sendVia => {
       sendVia.isSelected = false;
     });
-
-    this.messageService.sendMessage("dataUpdated", this.wd);
   }
 
 
@@ -192,8 +201,7 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
       });
 
 
-      $("#file_names").html('');
-      $("#files").val('');
+      this.clearFileField();
     });
   }
 
