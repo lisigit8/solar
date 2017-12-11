@@ -34,6 +34,7 @@ declare var $ :any;
   styleUrls: ['../app.component.css']
 })
 export class WarrantyInformationComponent implements OnInit, OnDestroy {
+  private selectUndefinedOptionValue: any;
   @Input()
   id: string;
   //id1: string = this.route.snapshot.paramMap.get('id');

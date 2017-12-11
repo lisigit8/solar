@@ -11,12 +11,12 @@ declare var $: any;
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css',
-    '../../../assets/css/bootstrap.min.css',
+    /*'../../../assets/css/bootstrap.min.css',*/
     '../../../assets/css/template.css',
     '../../../assets/font-awesome/css/font-awesome.min.css']
 })
 export class LayoutComponent implements OnInit {
-  private selectUndefinedOptionValue:any;
+  private selectUndefinedOptionValue: any;
   selectedSite: any;
   sites: Site[];
 

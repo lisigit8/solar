@@ -2,14 +2,14 @@
   <!--<div class="container">-->
 
   <div class="collapse navbar-collapse" id="navbarResponsive">
-    <!--<mat-form-field *ngIf="toShowSites" class="example-full-width" placeholder="Select">
+    <!--<mat-form-field *ngIf="toShowSites" class="example-full-width">
       <mat-select [(ngModel)]="selectedSite">
         <mat-option (click)="renew()" value="renew">Renew Power Global</mat-option>
         <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()">{{site.name}}</mat-option>
       </mat-select>
     </mat-form-field>-->
 
-    <select [(ngModel)]="selectedSite" (ngModelChange)="onSiteChange()" placeholder="Select" class="form-control col-sm-2">
+    <select [(ngModel)]="selectedSite" (ngModelChange)="onSiteChange()" class="form-control col-sm-2">
       <option disabled hidden [value]="selectUndefinedOptionValue">Select</option>
       <option value="renew">Renew Power Global</option>
       <option *ngFor="let site of sites" [ngValue]="site">{{site.name}}</option>
