@@ -8,6 +8,9 @@
         <div style="width: 80%; float: left;">
           <mat-form-field class="example-full-width">
             <input matInput *ngIf="selectedSite!=''" [(ngModel)]="selectedSite.name" disabled>
+            <div *ngIf="selectedSite!=''" class="mat-select-arrow-wrapper" style="float: right">
+              <div class="mat-select-arrow"></div>
+            </div>
 
             <mat-select *ngIf="selectedSite==''" [(ngModel)]="selectedSites" multiple>
               <mat-select-trigger>
