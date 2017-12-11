@@ -181,7 +181,9 @@
             <span class="field-heading">
               AMC Duration: &nbsp; &nbsp; &nbsp;
             </span>
-            From {{wd.start_date | date: 'MM/dd/yyyy'}} to {{wd.end_date | date: 'MM/dd/yyyy'}}
+            <span *ngIf="wd.start_date && wd.end_date">
+              From {{wd.start_date | date: 'MM/dd/yyyy'}} to {{wd.end_date | date: 'MM/dd/yyyy'}}
+            </span>
           </li>
         </ul>
       </div>
