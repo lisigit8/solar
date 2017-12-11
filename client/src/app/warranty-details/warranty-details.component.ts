@@ -21,8 +21,8 @@ import {SendViaService} from "../services/send-via.service";
 import {SendVia} from "../models/send-via";
 import {SEND_VIA_DATA} from "../models/send-via-data";
 
-declare var jquery:any;
-declare var $ :any;
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-warranty-details',
@@ -69,22 +69,21 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       if (message) {
         if (message.event == 'dataUpdated') {
           this.ngOnInit();
-          setTimeout(()=>{
-              $("#row_"+message.data._id).attr("class", "mat-row highlight");
-            }, 1000);
-        } else if(message.event == 'siteSelected'){
+          setTimeout(() => {
+            $("#row_" + message.data._id).attr("class", "mat-row highlight");
+          }, 1000);
+        } else if (message.event == 'siteSelected') {
           this.selectedSite = message.data;
           this.onSiteSelect();
           /*$("#site_"+message.data._id).trigger();
           $("#site_"+message.data._id).click();*/
-        } else if(message.event == 'renewClicked'){
+        } else if (message.event == 'renewClicked') {
           this.ngOnInit();
           this.selectedSite = "";
         }
       }
     });
   }
-
 
 
   ngOnInit() {
@@ -94,28 +93,32 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
     this.selectedType = null;
     this.getWarrantyDetails();
   }
+
   ngAfterViewInit() {
     //this.dataSource.sort = this.sort;
   }
-
 
 
   getDevices(): void {
     this.deviceService.getDevices()
       .subscribe(devices => this.devices = devices);
   }
+
   getVendors(): void {
     this.vendorService.getVendors()
       .subscribe(vendors => this.vendors = vendors);
   }
+
   getContractors(): void {
     this.contractorService.getContractors()
       .subscribe(contractors => this.contractors = contractors);
   }
+
   getSites(): void {
     this.siteService.getSites()
       .subscribe(sites => this.sites = sites);
   }
+
   getDeviceBySiteId(): void {
     this.devices = [];
     if (this.selectedSite) {
@@ -132,6 +135,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   getVendorsBySiteId(): void {
     this.vendors = [];
     if (this.selectedSite) {
@@ -148,6 +152,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   getContractorsBySiteId(): void {
     this.contractors = [];
     if (this.selectedSite) {
@@ -166,6 +171,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   getWarrantyDetails(): void {
     this.warrantyDetailsList = [];
     this.warrantyService.getWarrantyDetails()
@@ -174,6 +180,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
         this.assignDataSource(warrantyDetailsList);
       });
   }
+
   callFunctionByType(type) {
     if (type._id === '1' || type._id === '2') {
       //this.getDeviceBySiteId();
@@ -188,7 +195,6 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
   }
 
 
-
   onSiteSelectAll() {
     if (this.sites.length === this.selectedSites.length) {
       this.selectedSites = [];
@@ -197,6 +203,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
     }
     this.onSiteSelect();
   }
+
   onDeviceSelectAll() {
     if (this.devices.length === this.selectedDevices.length) {
       this.selectedDevices = [];
@@ -205,6 +212,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
     }
     this.onDeviceSelect();
   }
+
   onVendorSelectAll() {
     if (this.vendors.length === this.selectedVendors.length) {
       this.selectedVendors = [];
@@ -213,6 +221,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
     }
     this.onVendorSelect();
   }
+
   onContractorSelectAll() {
     if (this.contractors.length === this.selectedContractors.length) {
       this.selectedContractors = [];
@@ -221,6 +230,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
     }
     this.onContractorSelect();
   }
+
   onSiteSelect(): void {
     this.warrantyDetailsList = [];
     this.assignDataSource(this.warrantyDetailsList);
@@ -239,6 +249,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       this.callFunctionByType(this.selectedType);
     }
   }
+
   onMultiSiteSelect() {
     this.selectedSites.forEach(site => {
       this.warrantyService.getWarrantyDetailsBySiteId(site._id)
@@ -249,10 +260,12 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
         }));
     });
   }
+
   onTypeSelect(type: Types): void {
     this.selectedType = type;
     this.callFunctionByType(type);
   }
+
   onDeviceSelect(): void {
     this.warrantyDetailsList = [];
     this.assignDataSource(this.warrantyDetailsList);
@@ -276,6 +289,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   onVendorSelect(): void {
     this.warrantyDetailsList = [];
     this.assignDataSource(this.warrantyDetailsList);
@@ -299,6 +313,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   onContractorSelect(): void {
     this.warrantyDetailsList = [];
     this.assignDataSource(this.warrantyDetailsList);
@@ -322,14 +337,14 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   onWarrantySelect(wd: WarrentyDetails) {
     this.selectedWD = wd;
     this.messageService.sendMessage("rowSelected", wd);
   }
 
 
-
-  insertSendVia(){
+  insertSendVia() {
     this.sendViaAll.forEach(sendVia => {
       this.sendViaService.insertSendVia(sendVia)
         .subscribe(resp => console.log(JSON.stringify(resp)));
@@ -337,17 +352,16 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
   }
 
 
-
   assignDataSource(data) {
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.sort = this.sort;
   }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
-
 
 
   ngOnDestroy(): void {

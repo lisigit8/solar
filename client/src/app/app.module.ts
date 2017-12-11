@@ -37,6 +37,10 @@ import {ContractorService} from "./services/contractor.service";
 import { DocumentsService } from './services/documents.service';
 import { WarrantyService } from './services/warranty.service';
 import { SendViaService } from './services/send-via.service';
+import { ContractorComponent } from './contractor/contractor.component';
+import { CustomerComponent } from './customer/customer.component';
+import { DeviceComponent } from './device/device.component';
+import { VendorComponent } from './vendor/vendor.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,10 @@ import { SendViaService } from './services/send-via.service';
     SitesComponent,
     WarrantyDetailsComponent,
     WarrantyInformationComponent,
+    ContractorComponent,
+    CustomerComponent,
+    DeviceComponent,
+    VendorComponent,
   ],
   imports: [
     LayoutModule,

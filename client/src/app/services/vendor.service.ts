@@ -12,12 +12,21 @@ export class VendorService {
 
   constructor(private http: HttpClient) { }
 
-  private vendorUrl = apiUrl + 'vendor';
+  private url = apiUrl + 'vendor';
   getVendors (): Observable<Vendor[]> {
-    return this.http.get<Vendor[]>(this.vendorUrl);
+    return this.http.get<Vendor[]>(this.url);
   }
   getVendorsBySiteId (site_id: string): Observable<Vendor[]> {
-    return this.http.get<Vendor[]>(`${this.vendorUrl}/site/${site_id}`);
+    return this.http.get<Vendor[]>(`${this.url}/site/${site_id}`);
+  }
+  insert (obj: Vendor): Observable<any> {
+    return this.http.post<any>(`${this.url}`, obj);
+  }
+  update (obj: Vendor): Observable<any> {
+    return this.http.put<any>(`${this.url}`, obj);
+  }
+  remove (id: string): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${id}`);
   }
 
 }

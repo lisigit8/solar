@@ -1,10 +1,7 @@
-<!--<app-warranty-information [sites]="obj_all" (evt)="hello($event)"></app-warranty-information>-->
-<!--<h1 *ngIf="test">{{test}}</h1>-->
-
 <div style="float: left; width: 50%; margin-top: 10px;" class="form-control">
   <ul>
-    <h2>Sites</h2>
-    <a href="#/site">
+    <h2>Contractors</h2>
+    <a href="#/contractor">
       <li *ngFor="let obj of obj_all"
           [class.selected]="obj === selectedObj">
         <span class="badge" (click)="onSelect(obj)"> {{obj.name}} </span>

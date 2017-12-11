@@ -2,6 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Site} from "../../models/site";
 import {SiteService} from "../../services/site.service";
 import {MessageService} from "../../services/MessageService";
+import {Subscription} from "rxjs/Subscription";
+
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-layout',
@@ -15,8 +19,20 @@ export class LayoutComponent implements OnInit {
   selectedSite: any;
   sites: Site[];
 
+  toShowSites: boolean = true;
+
+  subscription: Subscription;
+
   constructor(private messageService: MessageService,
-    private siteService: SiteService,) {}
+    private siteService: SiteService,) {
+    this.subscription = this.messageService.getMessage().subscribe(message => {
+      if (message) {
+        if (message.event == 'hideSites') {
+          this.toShowSites = false;
+        }
+      }
+    });
+  }
 
   ngOnInit() {
     this.getSites();

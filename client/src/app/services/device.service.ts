@@ -12,12 +12,21 @@ export class DeviceService {
 
   constructor(private http: HttpClient) { }
 
-  private deviceUrl = apiUrl + 'device';
+  private url = apiUrl + 'device';
   getDevices (): Observable<Device[]> {
-    return this.http.get<Device[]>(this.deviceUrl);
+    return this.http.get<Device[]>(this.url);
   }
   getDeviceBySiteId (site_id: string): Observable<Device[]> {
-    return this.http.get<Device[]>(`${this.deviceUrl}/site/${site_id}`);
+    return this.http.get<Device[]>(`${this.url}/site/${site_id}`);
+  }
+  insert (obj: Device): Observable<any> {
+    return this.http.post<any>(`${this.url}`, obj);
+  }
+  update (obj: Device): Observable<any> {
+    return this.http.put<any>(`${this.url}`, obj);
+  }
+  remove (id: string): Observable<any> {
+    return this.http.delete<any>(`${this.url}/${id}`);
   }
 
 }

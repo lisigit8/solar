@@ -20,7 +20,7 @@ router.post('/vendor', (req, resp, next) => {
     if (req.body._id) {
         common.findOneAndUpdateObject(varVendorObj(req), req, resp, Vendor);
     } else {
-        let newObj = new Customer(varVendorObj(req));
+        let newObj = new Vendor(varVendorObj(req));
         common.insertObject(newObj, resp);
     }
 });

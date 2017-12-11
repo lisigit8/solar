@@ -1,25 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import {Site} from "../models/site";
-
-import {SiteService} from "../services/site.service";
 import {MessageService} from "../services/MessageService";
+import {DeviceService} from "../services/device.service";
+
+import {Device} from "../models/device";
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 
 @Component({
-  selector: 'app-sites',
-  templateUrl: './sites.component.html',
-  styleUrls: ['./sites.component.css']
+  selector: 'app-device',
+  templateUrl: './device.component.html',
+  styleUrls: ['./device.component.css']
 })
-export class SitesComponent implements OnInit {
-  obj_all: Site[];
-  selectedObj: Site;
-  obj: Site = new Site;
+export class DeviceComponent implements OnInit {
 
-  /*test: any;*/
+  obj_all: Device[];
+  selectedObj: Device;
+  obj: Device = new Device;
 
-  constructor(private messageService: MessageService, private service: SiteService) {
+  constructor(private messageService: MessageService, private service: DeviceService) {
   }
 
   ngOnInit() {
@@ -28,7 +27,7 @@ export class SitesComponent implements OnInit {
   }
 
   getAll(): void {
-    this.service.getSites()
+    this.service.getDevices()
       .subscribe(items => this.obj_all = items);
   }
 
@@ -72,15 +71,10 @@ export class SitesComponent implements OnInit {
     });
   }
 
-  clearAll(){
+  clearAll() {
     this.getAll();
-    this.obj = new Site;
-    this.selectedObj = new Site;
+    this.obj = new Device;
+    this.selectedObj = new Device;
   }
-
-  /*hello(fg:any){
-    this.test = fg;
-    alert(fg);
-  }*/
 
 }

@@ -1,25 +1,24 @@
-import {Component, OnInit} from '@angular/core';
-
-import {Site} from "../models/site";
-
-import {SiteService} from "../services/site.service";
-import {MessageService} from "../services/MessageService";
+import { Component, OnInit } from '@angular/core';
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 
+import {CustomerService} from "../services/customer.service";
+import {MessageService} from "../services/MessageService";
+
+import {Customer} from "../models/customer";
+
 @Component({
-  selector: 'app-sites',
-  templateUrl: './sites.component.html',
-  styleUrls: ['./sites.component.css']
+  selector: 'app-customer',
+  templateUrl: './customer.component.html',
+  styleUrls: ['./customer.component.css']
 })
-export class SitesComponent implements OnInit {
-  obj_all: Site[];
-  selectedObj: Site;
-  obj: Site = new Site;
+export class CustomerComponent implements OnInit {
 
-  /*test: any;*/
+  obj_all: Customer[];
+  selectedObj: Customer;
+  obj: Customer = new Customer;
 
-  constructor(private messageService: MessageService, private service: SiteService) {
+  constructor(private messageService: MessageService, private service: CustomerService) {
   }
 
   ngOnInit() {
@@ -28,7 +27,7 @@ export class SitesComponent implements OnInit {
   }
 
   getAll(): void {
-    this.service.getSites()
+    this.service.getCustomers()
       .subscribe(items => this.obj_all = items);
   }
 
@@ -72,15 +71,10 @@ export class SitesComponent implements OnInit {
     });
   }
 
-  clearAll(){
+  clearAll() {
     this.getAll();
-    this.obj = new Site;
-    this.selectedObj = new Site;
+    this.obj = new Customer;
+    this.selectedObj = new Customer;
   }
-
-  /*hello(fg:any){
-    this.test = fg;
-    alert(fg);
-  }*/
 
 }
