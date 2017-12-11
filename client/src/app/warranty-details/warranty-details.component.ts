@@ -92,6 +92,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
     this.selectedSites = [];
     this.selectedType = null;
     this.getWarrantyDetails();
+    this.messageService.sendMessage("showSites", "");
   }
 
   ngAfterViewInit() {
@@ -178,6 +179,10 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       .subscribe(warrantyDetailsList => {
         this.warrantyDetailsList = warrantyDetailsList;
         this.assignDataSource(warrantyDetailsList);
+        if(warrantyDetailsList.length < 1){
+          this.selectedWD = new WarrentyDetails;
+          this.selectedWD._id = "";
+        }
       });
   }
 

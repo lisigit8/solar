@@ -16,10 +16,11 @@ declare var $: any;
     '../../../assets/font-awesome/css/font-awesome.min.css']
 })
 export class LayoutComponent implements OnInit {
+  private selectUndefinedOptionValue:any;
   selectedSite: any;
   sites: Site[];
 
-  toShowSites: boolean = true;
+  toShowSites: boolean;
 
   subscription: Subscription;
 
@@ -29,6 +30,8 @@ export class LayoutComponent implements OnInit {
       if (message) {
         if (message.event == 'hideSites') {
           this.toShowSites = false;
+        }else if(message.event == 'showSites'){
+          this.toShowSites = true;
         }
       }
     });
@@ -49,6 +52,14 @@ export class LayoutComponent implements OnInit {
 
   onSiteSelect(): void {
     this.messageService.sendMessage("siteSelected", this.selectedSite);
+  }
+
+  onSiteChange(){
+    if(this.selectedSite == "renew"){
+      this.renew();
+    }else{
+      this.onSiteSelect();
+    }
   }
 
 }

@@ -41,6 +41,7 @@ import { ContractorComponent } from './contractor/contractor.component';
 import { CustomerComponent } from './customer/customer.component';
 import { DeviceComponent } from './device/device.component';
 import { VendorComponent } from './vendor/vendor.component';
+import { DocumentationComponent } from './documentation/documentation.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { VendorComponent } from './vendor/vendor.component';
     CustomerComponent,
     DeviceComponent,
     VendorComponent,
+    DocumentationComponent,
   ],
   imports: [
     LayoutModule,

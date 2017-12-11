@@ -7,6 +7,7 @@ import {ContractorComponent} from "../contractor/contractor.component";
 import {CustomerComponent} from "../customer/customer.component";
 import {DeviceComponent} from "../device/device.component";
 import {VendorComponent} from "../vendor/vendor.component";
+import {DocumentationComponent} from "../documentation/documentation.component";
 
 const routes: Routes = [
   { path: 'site', component: SitesComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'vendor', component: VendorComponent },
   { path: 'contractor', component: ContractorComponent },
   { path: 'documentation', component: WarrantyDetailsComponent },
+  { path: 'documentation1', component: DocumentationComponent },
   //{ path: 'warranty-info/:id', component: WarrantyInformationComponent },
   { path: '', redirectTo: '/documentation', pathMatch: 'full' },
 ];

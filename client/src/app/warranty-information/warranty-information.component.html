@@ -247,11 +247,11 @@
       <div class="form-control">
         Send Via : <br>
         <section class="example-section">
-          <mat-checkbox class="example-margin" [(ngModel)]="sendViaAll[0].isSelected" name="sendVia0"
+          <mat-checkbox *ngIf="sendViaAll" class="example-margin" [(ngModel)]="sendViaAll[0].isSelected" name="sendVia0"
                         (click)="onSelectSendVia()">
             {{sendViaAll[0].send_via}}
           </mat-checkbox>
-          <mat-checkbox class="example-margin" [(ngModel)]="sendViaAll[1].isSelected" name="sendVia1"
+          <mat-checkbox *ngIf="sendViaAll" class="example-margin" [(ngModel)]="sendViaAll[1].isSelected" name="sendVia1"
                         (click)="onSelectSendVia()">
             {{sendViaAll[1].send_via}}
           </mat-checkbox>

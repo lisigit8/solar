@@ -1,4 +1,4 @@
-<div style="float: left; width: 70%;">
+<div [ngClass]="{'table-width': selectedWD}">
   <div class="form-control">
     <div style="width: 100%">
       <div style="float: left; width: 34%" class="form-control">
@@ -102,7 +102,7 @@
     </div>
 
 
-    <div class="example-container mat-elevation-z8" [ngClass]="{'table-width': selectedWD}">
+    <div class="example-container mat-elevation-z8" style="width: 100%;">
       <div class="example-header form-control">
         Search : <br>
         <mat-form-field class="example-full-width">

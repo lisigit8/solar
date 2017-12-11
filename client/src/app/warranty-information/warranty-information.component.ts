@@ -78,13 +78,26 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.getSendVia();
     this.getSites();
     this.getDevices();
     this.getVendors();
     this.getContractors();
     this.getCustomers();
-    this.getWarrantyDetailsByWarrantyId(this.id);
+    if (this.id != ""){
+      this.getSendVia();
+      this.toInsert = false;
+      this.getWarrantyDetailsByWarrantyId(this.id);
+    }else{
+      this.wd = new WarrentyDetails;
+      this.toInsert = true;
+      this.sendViaService.getSendVia()
+        .subscribe(sendViaAll => {
+          this.sendViaAll = sendViaAll;
+          this.sendViaAll.forEach(sendVia => {
+            sendVia.isSelected = false;
+          });
+        });
+    }
     this.clearFileField();
   }
 

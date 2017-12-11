@@ -1,25 +1,25 @@
 <nav class="navbar navbar-expand-lg navbar-light navbar-fixed-top" id="mainNav">
-  <div class="container">
+  <!--<div class="container">-->
 
-    <div *ngIf="toShowSites" class="collapse navbar-collapse" id="navbarResponsive">
-      <mat-form-field class="example-full-width">
-        <mat-select [(ngModel)]="selectedSite">
-          <mat-option (click)="renew()" value="renew">Renew Power Global</mat-option>
-          <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()">{{site.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <!--<mat-form-field *ngIf="toShowSites" class="example-full-width" placeholder="Select">
+      <mat-select [(ngModel)]="selectedSite">
+        <mat-option (click)="renew()" value="renew">Renew Power Global</mat-option>
+        <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()">{{site.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>-->
 
-      <!--<ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-        </li>
-      </ul>-->
-    </div>
+    <select [(ngModel)]="selectedSite" (ngModelChange)="onSiteChange()" placeholder="Select" class="form-control col-sm-2">
+      <option disabled hidden [value]="selectUndefinedOptionValue">Select</option>
+      <option value="renew">Renew Power Global</option>
+      <option *ngFor="let site of sites" [ngValue]="site">{{site.name}}</option>
+    </select>
+
+    <!--<ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
+      </li>
+    </ul>-->
   </div>
+  <!--</div>-->
 </nav>
