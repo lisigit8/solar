@@ -21,9 +21,11 @@ export class WarrentyDetails {
   start_date: Date;
   end_date: Date;
   cost: number;
-  file_path: string;
   auto_renewal: boolean;
   reminder_date: Date;
-  send_to: string;
-  send_via: string;
+
+  device_name: string;
+  device_ID: string;
+  vendor_name: string;
+  contractor_name: string;
 }

@@ -52,7 +52,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
-  displayedColumns = ['device_name', 'device_ID', 'vendor', 'start_date', 'end_date', 'contractor', 'reminder_date'];
+  displayedColumns = ['device_name', 'device_ID', 'vendor_name', 'start_date', 'end_date', 'contractor_name', 'reminder_date'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort: MatSort;
 

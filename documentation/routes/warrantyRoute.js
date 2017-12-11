@@ -203,6 +203,11 @@ function responseWarrantyDetails(warrantyInfos, resp) {
                                                     warrantyDetail["auto_renewal"] = item.auto_renewal;
                                                     warrantyDetail["reminder_date"] = item.reminder_date;
 
+                                                    warrantyDetail["device_name"] = warrantyInfoDevice.device.name;
+                                                    warrantyDetail["device_ID"] = warrantyInfoDevice.device.ID;
+                                                    warrantyDetail["vendor_name"] = warrantyInfoVendor.vendor.name;
+                                                    warrantyDetail["contractor_name"] = warrantyInfoContractor.constructor.name;
+
                                                     warrantyDetails.push(warrantyDetail);
 
                                                     if (warrantyDetails.length === array.length) {
