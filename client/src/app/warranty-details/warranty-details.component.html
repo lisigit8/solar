@@ -1,18 +1,19 @@
 <div [ngClass]="{'table-width': selectedWD}">
-  <div class="form-control">
-    <div style="width: 100%">
-      <div style="float: left; width: 34%" class="form-control">
-        <div style="width: 20%; float: left;">
-          <label>Site:</label>
-        </div>
-        <div style="width: 80%; float: left;">
-          <mat-form-field class="example-full-width">
-            <input matInput *ngIf="selectedSite!=''" [(ngModel)]="selectedSite.name" disabled>
-            <div *ngIf="selectedSite!=''" class="mat-select-arrow-wrapper" style="float: right">
-              <div class="mat-select-arrow"></div>
-            </div>
+    <div class="example-container mat-elevation-z8 form-control" style="width: 100%;">
+      <div class="example-header">
+        <!--<mat-form-field class="example-full-width">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="search">
+        </mat-form-field>-->
 
-            <mat-select *ngIf="selectedSite==''" [(ngModel)]="selectedSites" multiple>
+        <div style="float: left; padding-right: 10px;" class="">
+          <mat-form-field class="">
+            <mat-select *ngIf="selectedSite!=''" [(ngModel)]="selectedSite" disabled placeholder="Site : ">
+              <mat-option *ngFor="let site of sites" [value]="selectedSite._id===site._id?selectedSite:site">
+                {{site.name}}
+              </mat-option>
+            </mat-select>
+            <mat-select *ngIf="selectedSite==''" [(ngModel)]="selectedSites" multiple placeholder="Site : "
+                        id="selectedSites" name="selectedSites">
               <mat-select-trigger>
                 {{selectedSites[0] ? selectedSites[0].name : ''}}
                 <span *ngIf="selectedSites.length > 1" class="example-additional-selection">
@@ -26,14 +27,10 @@
             </mat-select>
           </mat-form-field>
         </div>
-      </div>
-      <div style="float: left; width: 33%" class="form-control">
-        <div style="width: 20%; float: left;">
-          <label>Type:</label>
-        </div>
-        <div style="width: 80%; float: left;">
-          <mat-form-field class="example-full-width">
-            <mat-select [(ngModel)]="selectedType" name="type">
+
+        <div style="float: left; padding-right: 10px;" class="">
+          <mat-form-field class="">
+            <mat-select [(ngModel)]="selectedType" name="type" placeholder="Type : ">
               <mat-option>Select</mat-option>
               <span *ngIf="selectedSites.length > 0">
         <mat-option *ngFor="let tp of types" [value]="tp" (click)="onTypeSelect(tp)">
@@ -43,21 +40,17 @@
             </mat-select>
           </mat-form-field>
         </div>
-      </div>
-      <div style="float: left; width: 33%" class="form-control">
-        <div style="width: 20%; float: left;">
-          <label>Type:</label>
-        </div>
-        <div style="width: 80%; float: left;">
-          <mat-form-field class="example-full-width" *ngIf="!selectedType || !selectedSites[0]">
-            <mat-select name="selectDev">
+
+        <div style="float: left; padding-right: 10px;" class="">
+          <mat-form-field class="" *ngIf="!selectedType || !selectedSites[0]">
+            <mat-select name="selectDev" placeholder="Select : ">
               <mat-option>Select</mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field class="example-full-width" *ngIf="selectedType && selectedSites[0]">
             <mat-select *ngIf="selectedType._id === '1'"
-                        [(ngModel)]="selectedDevices" name="deviceNames" multiple>
+                        [(ngModel)]="selectedDevices" name="deviceNames" multiple placeholder="Select : ">
               <mat-select-trigger>
                 {{selectedDevices[0] ? selectedDevices[0].name : ''}}
                 <span *ngIf="selectedDevices.length > 1" class="example-additional-selection">
@@ -112,22 +105,12 @@
             </mat-select>
           </mat-form-field>
         </div>
-      </div>
-    </div>
-
-
-    <div class="example-container mat-elevation-z8" style="width: 100%;">
-      <div class="example-header form-control">
-        <!--Search : <br>
-        <mat-form-field class="example-full-width">
-          <input matInput (keyup)="applyFilter($event.target.value)">
-        </mat-form-field>-->
 
         <input type="text" class="form-control col-sm-3" (keyup)="applyFilter($event.target.value)"
-               style="float: right;" placeholder="Search">
+               style="float: right; margin-top: 10px;" placeholder="Search">
       </div>
 
-      <mat-table #table [dataSource]="dataSource" matSort>
+      <mat-table #table [dataSource]="dataSource" matSort class="form-control">
         <ng-container matColumnDef="device_name">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Device name</mat-header-cell>
           <a routerLink="/warranty-info/1">
@@ -181,7 +164,6 @@
         </mat-row>
       </mat-table>
     </div>
-  </div>
 </div>
 
 

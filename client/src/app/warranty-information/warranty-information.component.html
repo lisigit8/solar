@@ -122,19 +122,18 @@
         </mat-form-field>
       </div>-->
       <div class="">
-        <span class="field-heading">
-          Warranty start date and end date :
-        </span>
         <div class="" style="width: 50%; float: left; padding-right: 10px;">
           <mat-form-field class="example-full-width">
-            <input matInput [matDatepicker]="picker1" [(ngModel)]="wd.start_date" name="start_date">
+            <input matInput [matDatepicker]="picker1" [(ngModel)]="wd.start_date"
+                   name="start_date" placeholder="Warranty start date">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
         </div>
         <div class="" style="width: 50%; float: left;">
           <mat-form-field class="example-full-width">
-            <input matInput [matDatepicker]="picker2" [(ngModel)]="wd.end_date" name="end_date">
+            <input matInput [matDatepicker]="picker2" [(ngModel)]="wd.end_date"
+                   name="end_date" placeholder="Warranty end date">
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
@@ -226,9 +225,9 @@
         </mat-form-field>
       </div>-->
       <div class="">
-        <span class="field-heading">Reminder date :</span>
-        <mat-form-field class="">
-          <input matInput [matDatepicker]="picker" [(ngModel)]="wd.reminder_date" name="reminder_date">
+        <mat-form-field class="example-full-width">
+          <input matInput [matDatepicker]="picker" [(ngModel)]="wd.reminder_date" name="reminder_date"
+                 placeholder="Reminder date :">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

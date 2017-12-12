@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const schema = mongoose.Schema({
-    user: { type:Schema.Types.ObjectId, ref:"User", childPath: "user_userRoll" },
-    userRoll: { type:Schema.Types.ObjectId, ref:"UserRoll", childPath: "user_userRoll" },
+    user: { type:Schema.Types.ObjectId, ref:"User", childPath: "user_userRoll", required: true },
+    userRoll: { type:Schema.Types.ObjectId, ref:"UserRoll", childPath: "user_userRoll", required: true },
 });
 
 schema.plugin(relationship, { relationshipPathName:'user' });

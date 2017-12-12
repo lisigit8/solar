@@ -94,11 +94,9 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
       this.sendViaService.getSendVia()
         .subscribe(sendViaAll => {
           this.sendViaAll = sendViaAll;
-          this.sendViaAll.forEach(sendVia => {
-            sendVia.isSelected = false;
-          });
+          this.clearSendViaFields();
         });
-    }
+      }
     this.clearFileField();
   }
 

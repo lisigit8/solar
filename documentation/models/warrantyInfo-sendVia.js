@@ -3,8 +3,8 @@ var Schema = mongoose.Schema;
 relationship = require("mongoose-relationship");
 
 const schema = mongoose.Schema({
-    warrantyInfo: { type:Schema.Types.ObjectId, ref:"WarrantyInfo", childPath: "warrantyInfo_sendVia" },
-    sendVia: { type:Schema.Types.ObjectId, ref:"SendVia", childPath: "warrantyInfo_sendVia" }
+    warrantyInfo: { type:Schema.Types.ObjectId, ref:"WarrantyInfo", childPath: "warrantyInfo_sendVia", required: true },
+    sendVia: { type:Schema.Types.ObjectId, ref:"SendVia", childPath: "warrantyInfo_sendVia", required: true }
 });
 
 schema.plugin(relationship, { relationshipPathName:'warrantyInfo' });

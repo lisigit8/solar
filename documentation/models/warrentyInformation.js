@@ -6,11 +6,11 @@ var Schema = mongoose.Schema;
 var schemaTypes = mongoose.Schema.Types;
 
 const schema = mongoose.Schema({
-    site: { type:Schema.Types.ObjectId, ref:"Site", childPath: "WarrantyInformations" },
-    device: { type:Schema.Types.ObjectId, ref:"Device", childPath: "WarrantyInformations" },
-    vendor: { type:Schema.Types.ObjectId, ref:"Vendor", childPath: "WarrantyInformations" },
-    contractor: { type:Schema.Types.ObjectId, ref:"Contractor", childPath: "WarrantyInformations" },
-    customer: { type:Schema.Types.ObjectId, ref:"Customer", childPath: "WarrantyInformations" },
+    site: { type:Schema.Types.ObjectId, ref:"Site", childPath: "WarrantyInformations", required: true },
+    device: { type:Schema.Types.ObjectId, ref:"Device", childPath: "WarrantyInformations", required: true },
+    vendor: { type:Schema.Types.ObjectId, ref:"Vendor", childPath: "WarrantyInformations", required: true },
+    contractor: { type:Schema.Types.ObjectId, ref:"Contractor", childPath: "WarrantyInformations", required: true },
+    customer: { type:Schema.Types.ObjectId, ref:"Customer", childPath: "WarrantyInformations", required: true },
 
     documents : [{ type: Schema.Types.ObjectId, ref: 'Documents' }],
     warrantyInfo_sendVia : [{ type: Schema.Types.ObjectId, ref: 'WarrantyInfo_SendVia' }],
