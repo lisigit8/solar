@@ -30,7 +30,29 @@ router.put('/site', (req, resp, next) => {
 });
 router.get("/site", (req, resp, next) => {
     Site.find(function (err, sites) {
-        resp.json(sites);
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(sites);
+        }
+    });
+});
+router.get("/site/name/:name", (req, resp, next) => {
+    Site.findOne({name: req.params.name}, function (err, site) {
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(site);
+        }
+    });
+});
+router.get("/site/:id", (req, resp, next) => {
+    Site.findOne({_id: req.params._id}, function (err, site) {
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(site);
+        }
     });
 });
 router.delete('/site/:id', (req, resp, next) => {
@@ -42,9 +64,9 @@ router.delete('/site/:id', (req, resp, next) => {
         }
     });
 });
-router.get('/sites', (req, resp, next) => {
+/*router.get('/sites', (req, resp, next) => {
     resp.json(req.query.site_ids);
-});
+});*/
 
 
 

@@ -1,172 +1,187 @@
-<div [ngClass]="{'table-width': selectedWD}">
-    <div class="example-container mat-elevation-z8 form-control" style="width: 100%;">
-      <div class="example-header">
-        <!--<mat-form-field class="example-full-width">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="search">
-        </mat-form-field>-->
+<app-layout></app-layout>
 
-        <div style="float: left; padding-right: 10px;" class="">
-          <mat-form-field class="">
-            <mat-select *ngIf="selectedSite!=''" [(ngModel)]="selectedSite" disabled placeholder="Site : ">
-              <mat-option *ngFor="let site of sites" [value]="selectedSite._id===site._id?selectedSite:site">
-                {{site.name}}
-              </mat-option>
-            </mat-select>
-            <mat-select *ngIf="selectedSite==''" [(ngModel)]="selectedSites" multiple placeholder="Site : "
-                        id="selectedSites" name="selectedSites">
-              <mat-select-trigger>
-                {{selectedSites[0] ? selectedSites[0].name : ''}}
-                <span *ngIf="selectedSites.length > 1" class="example-additional-selection">
+<div [ngClass]="{'table-width': selectedWD}">
+  <div class="example-container mat-elevation-z8 form-control" style="width: 100%;">
+    <div class="example-header">
+      <!--<mat-form-field class="example-full-width">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="search">
+      </mat-form-field>-->
+
+      <div style="float: left; padding-right: 10px;" class="">
+        <mat-form-field class="">
+          <mat-select *ngIf="selectedSite._id" [(ngModel)]="selectedSite" disabled placeholder="Site : ">
+            <mat-option *ngFor="let site of sites" [value]="selectedSite._id===site._id?selectedSite:site">
+              {{site.name}}
+            </mat-option>
+          </mat-select>
+          <mat-select *ngIf="!selectedSite._id" [(ngModel)]="selectedSites" multiple placeholder="Site : "
+                      id="selectedSites" name="selectedSites">
+            <mat-select-trigger>
+              {{selectedSites[0] ? selectedSites[0].name : ''}}
+              <span *ngIf="selectedSites.length > 1" class="example-additional-selection">
          (+{{selectedSites.length - 1}} others)
       </span>
-              </mat-select-trigger>
-              <mat-option (click)="onSiteSelectAll()" value="allSite">Select All</mat-option>
-              <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()" id="site_{{site._id}}">
-                {{site.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
+            </mat-select-trigger>
+            <mat-option (click)="onSiteSelectAll()" value="allSite">Select All</mat-option>
+            <mat-option *ngFor="let site of sites" [value]="site" (click)="onSiteSelect()" id="site_{{site._id}}">
+              {{site.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-        <div style="float: left; padding-right: 10px;" class="">
-          <mat-form-field class="">
-            <mat-select [(ngModel)]="selectedType" name="type" placeholder="Type : ">
-              <mat-option>Select</mat-option>
-              <span *ngIf="selectedSites.length > 0">
+      <div style="float: left; padding-right: 10px;" class="">
+        <mat-form-field class="">
+          <mat-select [(ngModel)]="selectedType" name="type" placeholder="Type : ">
+            <mat-option>Select</mat-option>
+            <span *ngIf="selectedSites.length > 0">
         <mat-option *ngFor="let tp of types" [value]="tp" (click)="onTypeSelect(tp)">
           {{tp.type}}
         </mat-option>
         </span>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        <div style="float: left; padding-right: 10px;" class="">
-          <mat-form-field class="" *ngIf="!selectedType || !selectedSites[0]">
-            <mat-select name="selectDev" placeholder="Select : ">
-              <mat-option>Select</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field class="example-full-width" *ngIf="selectedType && selectedSites[0]">
-            <mat-select *ngIf="selectedType._id === '1'"
-                        [(ngModel)]="selectedDevices" name="deviceNames" multiple placeholder="Select : ">
-              <mat-select-trigger>
-                {{selectedDevices[0] ? selectedDevices[0].name : ''}}
-                <span *ngIf="selectedDevices.length > 1" class="example-additional-selection">
-                 (+{{selectedDevices.length - 1}} others)
-              </span>
-              </mat-select-trigger>
-              <mat-option (click)="onDeviceSelectAll()">Select All</mat-option>
-              <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect()">{{device.name}}
-              </mat-option>
-            </mat-select>
-
-            <mat-select *ngIf="selectedType._id === '2'" [(ngModel)]="selectedDevices"
-                        name="deviceIDs" multiple>
-              <mat-select-trigger>
-                {{selectedDevices[0] ? selectedDevices[0].ID : ''}}
-                <span *ngIf="selectedDevices.length > 1" class="example-additional-selection">
-                 (+{{selectedDevices.length - 1}} others)
-              </span>
-              </mat-select-trigger>
-              <mat-option (click)="onDeviceSelectAll()">Select All</mat-option>
-              <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect()">
-                {{device.ID}}
-              </mat-option>
-            </mat-select>
-
-            <mat-select *ngIf="selectedType._id === '3'" [(ngModel)]="selectedVendors" name="vendors" multiple>
-              <mat-select-trigger>
-                {{selectedVendors[0] ? selectedVendors[0].name : ''}}
-                <span *ngIf="selectedVendors.length > 1" class="example-additional-selection">
-                 (+{{selectedVendors.length - 1}} others)
-              </span>
-              </mat-select-trigger>
-              <mat-option (click)="onVendorSelectAll()">Select All</mat-option>
-              <mat-option *ngFor="let vendor of vendors" [value]="vendor" (click)="onVendorSelect()">
-                {{vendor.name}}
-              </mat-option>
-            </mat-select>
-
-            <mat-select *ngIf="selectedType._id === '4'" [(ngModel)]="selectedContractors"
-                        name="contractors" multiple>
-              <mat-select-trigger>
-                {{selectedContractors[0] ? selectedContractors[0].name : ''}}
-                <span *ngIf="selectedContractors.length > 1" class="example-additional-selection">
-                 (+{{selectedContractors.length - 1}} others)
-              </span>
-              </mat-select-trigger>
-              <mat-option (click)="onContractorSelectAll()">Select All</mat-option>
-              <mat-option *ngFor="let contractor of contractors" [value]="contractor"
-                          (click)="onContractorSelect()">
-                {{contractor.name}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-
-        <input type="text" class="form-control col-sm-3" (keyup)="applyFilter($event.target.value)"
-               style="float: right; margin-top: 10px;" placeholder="Search">
+          </mat-select>
+        </mat-form-field>
       </div>
 
-      <mat-table #table [dataSource]="dataSource" matSort class="form-control">
-        <ng-container matColumnDef="device_name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Device name</mat-header-cell>
-          <a routerLink="/warranty-info/1">
-            <mat-cell *matCellDef="let element"> {{element.device_name}}</mat-cell>
-          </a>
-        </ng-container>
+      <div style="float: left; padding-right: 10px;" class="">
+        <mat-form-field class="" *ngIf="!selectedType || !selectedSites[0]">
+          <mat-select name="selectDev" placeholder="Select : ">
+            <mat-option>Select</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-        <ng-container matColumnDef="device_ID">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Device ID</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.device_ID}}</mat-cell>
-        </ng-container>
+        <mat-form-field class="example-full-width" *ngIf="selectedType && selectedSites[0]">
+          <!--<mat-select *ngIf="selectedType._id === '1'"
+                      [(ngModel)]="selectedDevices" name="deviceNames" multiple placeholder="Select : ">
+            <mat-select-trigger>
+              {{selectedDevices[0] ? selectedDevices[0].name : ''}}
+              <span *ngIf="selectedDevices.length > 1" class="example-additional-selection">
+               (+{{selectedDevices.length - 1}} others)
+            </span>
+            </mat-select-trigger>
+            <mat-option (click)="onDeviceSelectAll()">Select All</mat-option>
+            <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect()">{{device.name}}
+            </mat-option>
+          </mat-select>-->
+          <mat-select *ngIf="selectedType._id === '1'"
+                      [(ngModel)]="selectedDeviceNames" name="deviceNames" multiple placeholder="Select Device Name: ">
+            <mat-select-trigger>
+              {{selectedDeviceNames[0] ? selectedDeviceNames[0].name : ''}}
+              <span *ngIf="selectedDeviceNames.length > 1" class="example-additional-selection">
+                 (+{{selectedDeviceNames.length - 1}} others)
+              </span>
+            </mat-select-trigger>
+            <mat-option (click)="onDeviceNameSelectAll()">Select All</mat-option>
+            <mat-option *ngFor="let deviceName of deviceNames" [value]="deviceName" (click)="onDeviceNameSelect()">
+              {{deviceName.name}}
+            </mat-option>
+          </mat-select>
 
-        <ng-container matColumnDef="vendor_name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Vendor name</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.vendor_name}}</mat-cell>
-        </ng-container>
+          <mat-select *ngIf="selectedType._id === '2'" [(ngModel)]="selectedDevices"
+                      name="deviceIDs" multiple placeholder="Select Device ID: ">
+            <mat-select-trigger>
+              {{selectedDevices[0] ? selectedDevices[0].ID : ''}}
+              <span *ngIf="selectedDevices.length > 1" class="example-additional-selection">
+                 (+{{selectedDevices.length - 1}} others)
+              </span>
+            </mat-select-trigger>
+            <mat-option (click)="onDeviceSelectAll()">Select All</mat-option>
+            <mat-option *ngFor="let device of devices" [value]="device" (click)="onDeviceSelect()">
+              {{device.ID}}
+            </mat-option>
+          </mat-select>
 
-        <ng-container matColumnDef="start_date">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Warranty starts</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.start_date | date: 'MM/dd/yyyy'}}</mat-cell>
-        </ng-container>
+          <mat-select *ngIf="selectedType._id === '3'" [(ngModel)]="selectedVendors"
+                      name="vendors" multiple placeholder="Select Vendor: ">
+            <mat-select-trigger>
+              {{selectedVendors[0] ? selectedVendors[0].name : ''}}
+              <span *ngIf="selectedVendors.length > 1" class="example-additional-selection">
+                 (+{{selectedVendors.length - 1}} others)
+              </span>
+            </mat-select-trigger>
+            <mat-option (click)="onVendorSelectAll()">Select All</mat-option>
+            <mat-option *ngFor="let vendor of vendors" [value]="vendor" (click)="onVendorSelect()">
+              {{vendor.name}}
+            </mat-option>
+          </mat-select>
 
-        <ng-container matColumnDef="end_date">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Warranty ends</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.end_date | date: 'MM/dd/yyyy'}}</mat-cell>
-        </ng-container>
+          <mat-select *ngIf="selectedType._id === '4'" [(ngModel)]="selectedContractors"
+                      name="contractors" multiple placeholder="Select Contractor: ">
+            <mat-select-trigger>
+              {{selectedContractors[0] ? selectedContractors[0].name : ''}}
+              <span *ngIf="selectedContractors.length > 1" class="example-additional-selection">
+                 (+{{selectedContractors.length - 1}} others)
+              </span>
+            </mat-select-trigger>
+            <mat-option (click)="onContractorSelectAll()">Select All</mat-option>
+            <mat-option *ngFor="let contractor of contractors" [value]="contractor"
+                        (click)="onContractorSelect()">
+              {{contractor.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-        <ng-container matColumnDef="contractor_name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> AMC Contractor</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.contractor_name}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="reminder_date">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Reminder</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.reminder_date | date: 'MM/dd/yyyy'}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="_id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Select</mat-header-cell>
-          <mat-cell *matCellDef="let element" (click)="onWarrantySelect(element)">
-            <!--<a routerLink="/warranty-info/{{element._id}}">Select</a>-->
-            <!--<a [routerLink]="['/', { outlets: { 'abc': 'warranty-info/'+element._id } }]" replaceUrl="true">Select</a>-->
-          </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <!--<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
-        <mat-row *matRowDef="let element; columns: displayedColumns;"
-                 [ngClass]="{'highlight':element === selectedWD}"
-                 (click)="onWarrantySelect(element)" id="row_{{element._id}}">
-        </mat-row>
-      </mat-table>
+      <input type="text" class="form-control col-sm-3" (keyup)="applyFilter($event.target.value)"
+             style="float: right; margin-top: 10px;" placeholder="Search">
     </div>
+
+    <mat-table #table [dataSource]="dataSource" matSort class="form-control">
+      <ng-container matColumnDef="device_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Device name</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.device_name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="device_ID">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Device ID</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.device_ID}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="vendor_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Vendor name</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.vendor_name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="start_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Warranty starts</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.start_date | date: 'MM/dd/yyyy'}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="end_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Warranty ends</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.end_date | date: 'MM/dd/yyyy'}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="contractor_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> AMC Contractor</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.contractor_name}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="reminder_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Reminder</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.reminder_date | date: 'MM/dd/yyyy'}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Select</mat-header-cell>
+        <mat-cell *matCellDef="let element" (click)="onWarrantySelect(element)">
+          <!--<a routerLink="/warranty-info/{{element._id}}">Select</a>-->
+          <!--<a [routerLink]="['/', { outlets: { 'abc': 'warranty-info/'+element._id } }]" replaceUrl="true">Select</a>-->
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <!--<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
+      <mat-row *matRowDef="let element; columns: displayedColumns;"
+               [ngClass]="{'highlight':element === selectedWD}"
+               (click)="onWarrantySelect(element)" id="row_{{element._id}}">
+      </mat-row>
+    </mat-table>
+  </div>
 </div>
 
 
 <div style="float: right; width: 30%;">
-  <app-warranty-information *ngIf="selectedWD" [id]="selectedWD._id"></app-warranty-information>
+  <app-warranty-information *ngIf="selectedWD && selectedWD._id" [id]="selectedWD._id"></app-warranty-information>
+  <app-insert-warranty-info *ngIf="selectedWD && !selectedWD._id" [id]="selectedWD._id"></app-insert-warranty-info>
 </div>

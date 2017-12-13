@@ -2,17 +2,19 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 
-import {WarrentyDetails} from "../models/warrenty-details";
+import {WarrentyDetails} from "../models/warrentyDetails";
 import {Site} from "../models/site";
 import {Device} from "../models/device";
 import {Vendor} from "../models/vendor";
 import {Contractor} from "../models/contractor";
 import {Customer} from "../models/customer";
+import {DeviceName} from "../models/deviceName";
+import {SendVia} from "../models/sendVia";
+import {Warranty_SendVia} from "../models/warranty-sendvia";
 
 import {MessageService} from "../services/MessageService";
-import {MaintenanceModuleService} from "../services/maintenance-module.service";
 import {SiteService} from "../services/site.service";
-import {apiUrl} from "../services/common";
+import {apiUrl, deleteSwalOpts} from "../services/common";
 import {VendorService} from "../services/vendor.service";
 import {ContractorService} from "../services/contractor.service";
 import {CustomerService} from "../services/customer.service";
@@ -20,13 +22,12 @@ import {DeviceService} from "../services/device.service";
 import {DocumentsService} from "../services/documents.service";
 import {WarrantyService} from "../services/warranty.service";
 import {SendViaService} from "../services/send-via.service";
-import {SendVia} from "../models/send-via";
-import {Warranty_SendVia} from "../models/warranty-sendvia";
+import {DeviceNameService} from "../services/device-name.service";
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 
-declare var jquery:any;
-declare var $ :any;
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'app-warranty-information',
@@ -44,13 +45,14 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   data = new FormData();
-  toInsert: boolean;
   apiUrl: string = apiUrl;
 
   warranty_sendVia: Warranty_SendVia = new Warranty_SendVia;
   sendViaAll: SendVia[];
   sites: Site[];
   devices: Device[];
+  devicesByDeviceName: Device[];
+  deviceNames: DeviceName[];
   vendors: Vendor[];
   contractors: Contractor[];
   customers: Customer[];
@@ -58,13 +60,13 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
 
 
   constructor(private route: ActivatedRoute,
-              private service: MaintenanceModuleService,
               private messageService: MessageService,
               private siteService: SiteService,
               private vendorService: VendorService,
               private contractorService: ContractorService,
               private customerService: CustomerService,
               private deviceService: DeviceService,
+              private deviceNameService: DeviceNameService,
               private documentsService: DocumentsService,
               private warrantyService: WarrantyService,
               private sendViaService: SendViaService) {
@@ -81,22 +83,12 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getSites();
     this.getDevices();
+    this.getDeviceNames();
     this.getVendors();
     this.getContractors();
     this.getCustomers();
-    if (this.id != ""){
-      this.getSendVia();
-      this.toInsert = false;
-      this.getWarrantyDetailsByWarrantyId(this.id);
-    }else{
-      this.wd = new WarrentyDetails;
-      this.toInsert = true;
-      this.sendViaService.getSendVia()
-        .subscribe(sendViaAll => {
-          this.sendViaAll = sendViaAll;
-          this.clearSendViaFields();
-        });
-      }
+    this.getSendVia();
+    this.getWarrantyDetailsByWarrantyId(this.id);
     this.clearFileField();
   }
 
@@ -123,6 +115,16 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
       .subscribe(devices => this.devices = devices);
   }
 
+  getDevicesByDeviceNameId(deviceName_id: string): void {
+    this.deviceService.getDevicesByDeviceNameId(deviceName_id)
+      .subscribe(devices => this.devicesByDeviceName = devices);
+  }
+
+  getDeviceNames(): void {
+    this.deviceNameService.getAll()
+      .subscribe(deviceNames => this.deviceNames = deviceNames);
+  }
+
   getVendors(): void {
     this.vendorService.getVendors()
       .subscribe(vendors => this.vendors = vendors);
@@ -142,7 +144,6 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
     this.warrantyService.getWarrantyDetailsByWarrantyId(id)
       .subscribe(wd => {
         this.wd = wd;
-        this.toInsert = false;
         this.getDocumentsByWarrantyId(this.wd._id);
 
         this.sendViaAll.forEach(sendVia => {
@@ -155,6 +156,8 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
               })
             });
         });
+
+        this.getDevicesByDeviceNameId(wd.deviceName._id);
       });
   }
 
@@ -166,55 +169,48 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
   }
 
 
-  onSelectSendVia() {
-
+  onSelectDeviceName() {
+    this.getDevicesByDeviceNameId(this.wd.deviceName._id);
   }
 
   onDocChange(event) {
-    for (var i=0; i<event.target.files.length; i++){
+    for (var i = 0; i < event.target.files.length; i++) {
       this.data.append('files', event.target.files[i]);
-      $("#file_names").append('<li>'+event.target.files[i].name+'</li>');
+      $("#file_names").append('<li>' + event.target.files[i].name + '</li>');
     }
   }
 
   onClickOnNew() {
-    this.wd = new WarrentyDetails;
-    this.toInsert = true;
-    this.data = new FormData();
-    this.clearSendViaFields();
-
-    this.messageService.sendMessage("dataUpdated", this.wd);
+    this.messageService.sendMessage("dataUpdated", new WarrentyDetails);
   }
 
-  clearFileField(){
+  clearFileField() {
     $("#file_names").html('');
     $("#files").val('');
   }
-  clearSendViaFields(){
-    this.sendViaAll.forEach(sendVia => {
-      sendVia.isSelected = false;
-    });
-  }
-
 
   insertDocs(data: any): void {
-    this.documentsService.insertDocs(data).subscribe(resp => {
-      resp.map(document => {
-        document.warrantyInfo = this.wd;
-        this.documentsService.updateDocument(document).subscribe(resp => {
-          //alert(resp.msg);
-          if (!this.toInsert) {
-            this.ngOnInit();
-          } else {
-            this.onClickOnNew();
-          }
-          this.messageService.sendMessage("dataUpdated", this.wd);
+    if(data.getAll('files').length > 0){
+      this.documentsService.insertDocs(data).subscribe(resp => {
+        resp.forEach((document, index, array) => {
+          document.warrantyInfo = this.wd;
+          setTimeout(() => {
+            this.documentsService.updateDocument(document).subscribe(updateResp => {
+              //alert(updateResp.msg);
+              if (resp.length == array.length) {
+                this.ngOnInit();
+                this.messageService.sendMessage("dataUpdated", this.wd);
+              }else{
+                alert("not same")
+              }
+            });
+          }, 100);
         });
       });
-
-
-      this.clearFileField();
-    });
+    }else{
+      this.ngOnInit();
+      this.messageService.sendMessage("dataUpdated", this.wd);
+    }
   }
 
   insertWarrantyInfoSendVia(): void {
@@ -223,23 +219,11 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
         this.warranty_sendVia.warrantyInfo = this.wd;
         this.warranty_sendVia.sendVia = sendVia;
         this.warrantyService.insertWarrantyInfoSendVia(this.warranty_sendVia).subscribe(resp => {
-          console.log(resp.msg);
           sendVia.isSelected = false;
+          this.insertDocs(this.data);
         });
       }
     });
-  }
-
-  insertWarrantyInfo() {
-    this.warrantyService.insertWarrantyInfo(this.wd)
-      .subscribe(resp => {
-        //alert(resp.msg);
-        swal(resp.msg, "", "success");
-        this.wd = resp.obj;
-        this.insertDocs(this.data);
-        this.insertWarrantyInfoSendVia();
-        this.messageService.sendMessage("dataUpdated", this.wd);
-      });
   }
 
 
@@ -248,36 +232,17 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
       .subscribe(resp => {
         //alert(resp.msg);
         swal(resp.msg, "", "success");
-        this.insertDocs(this.data);
         this.insertWarrantyInfoSendVia();
-        this.messageService.sendMessage("dataUpdated", this.wd);
       });
-  }
-
-  updateOrInsertWarrantyInfo() {
-    if (this.toInsert) {
-      this.insertWarrantyInfo();
-    } else {
-      this.updateWarrantyInfo();
-    }
   }
 
 
   remove() {
-    swal({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
+    swal(deleteSwalOpts).then((result) => {
       if (result.value) {
         this.warrantyService.removeWarrantyInfo(this.wd._id).subscribe(resp => {
           this.onClickOnNew();
           //alert(resp.msg);
-          //alert(this.messageService.message);
           swal(this.messageService.message, "", "success");
         });
       }
@@ -285,23 +250,12 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
   }
 
   removeDocument(id: string) {
-    swal({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
+    swal(deleteSwalOpts).then((result) => {
       if (result.value) {
         this.documentsService.removeDocument(id).subscribe(resp => {
           this.messageService.sendMessage("dataUpdated", this.wd);
-          if (!this.toInsert) {
-            this.ngOnInit();
-            //alert("Deleted successfully!");
-            swal("Deleted successfully!", "", "success");
-          }
+          this.ngOnInit();
+          swal("Deleted successfully!", "", "success");
         });
       }
     });

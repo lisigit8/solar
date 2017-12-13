@@ -1,46 +1,34 @@
-<div *ngIf="wd && wd._id" class="form-control example-form" style="word-wrap: break-word">
+<div *ngIf="wd" class="form-control example-form" style="word-wrap: break-word">
   <div class="breadcrumb">
     <h4>Warranty Information</h4>
-    <!--{{sites.length}}
-    <button (click)="clickme($event)">sdfsdfsd</button>-->
     <span style="float: right; padding-left: 5%;">
-      <a href="#"><mat-icon>edit</mat-icon></a>
-      <a href="#"><mat-icon (click)="remove()">delete</mat-icon></a>
-      <a href="#"><mat-icon (click)="onClickOnNew()">assignment</mat-icon></a>
+      <mat-icon>edit</mat-icon>
+      <mat-icon>delete</mat-icon>
+      <mat-icon>assignment</mat-icon>
     </span>
   </div>
 
   <form class="example-form">
-    <select *ngIf="wd.site" [(ngModel)]="wd.site" class="form-control" name="site" required>
-      <option *ngFor="let site of sites" [ngValue]="wd.site._id===site._id?wd.site:site">{{site.name}}</option>
+    <select [(ngModel)]="wd.site" class="form-control" name="site" required>
+      <option disabled hidden [value]="selectUndefinedOptionValue">Site</option>
+      <option *ngFor="let site of sites" [ngValue]="site">{{site.name}}</option>
     </select>
 
-
-    <!--<select *ngIf="wd.device" [(ngModel)]="wd.device" class="form-control" name="deviceName" required>
-      <option *ngFor="let device of devices" [ngValue]="wd.device._id===device._id?wd.device:device">{{device.name}}
-      </option>
-    </select>-->
-    <select *ngIf="wd.deviceName" [(ngModel)]="wd.deviceName" class="form-control"
-            (ngModelChange)="onSelectDeviceName()"  name="deviceName" required>
-      <option *ngFor="let deviceName of deviceNames"
-              [ngValue]="wd.deviceName._id===deviceName._id?wd.deviceName:deviceName">
-        {{deviceName.name}}
-      </option>
+    <select [(ngModel)]="wd.deviceName" class="form-control"
+            (ngModelChange)="onSelectDeviceName()" name="deviceName" required>
+      <option disabled hidden [value]="selectUndefinedOptionValue">Device Name</option>
+      <option *ngFor="let deviceName of deviceNames" [ngValue]="deviceName">
+        {{deviceName.name}}</option>
     </select>
 
-    <!--<select *ngIf="wd.device" [(ngModel)]="wd.device" class="form-control" name="deviceID" required>
-      <option *ngFor="let device of devices" [ngValue]="wd.device._id===device._id?wd.device:device">{{device.ID}}
-      </option>
-    </select>-->
-    <select *ngIf="wd.device" [(ngModel)]="wd.device" class="form-control" name="deviceID" required>
-      <option *ngFor="let device of devicesByDeviceName" [ngValue]="wd.device._id===device._id?wd.device:device">
-        {{device.ID}}
-      </option>
+    <select [(ngModel)]="wd.device" class="form-control" name="deviceID" required>
+      <option disabled hidden [value]="selectUndefinedOptionValue">Device ID</option>
+      <option *ngFor="let device of devicesByDeviceName" [ngValue]="device">{{device.ID}}</option>
     </select>
 
-    <select *ngIf="wd.vendor" [(ngModel)]="wd.vendor" class="form-control" name="vendor" required>
-      <option *ngFor="let vendor of vendors" [ngValue]="wd.vendor._id===vendor._id?wd.vendor:vendor">{{vendor.name}}
-      </option>
+    <select [(ngModel)]="wd.vendor" class="form-control" name="vendor" required>
+      <option disabled hidden [value]="selectUndefinedOptionValue">Vendor</option>
+      <option *ngFor="let vendor of vendors" [ngValue]="vendor">{{vendor.name}}</option>
     </select>
 
     <div class="">
@@ -62,10 +50,9 @@
       </div>
     </div>
 
-    <select *ngIf="wd.contractor" [(ngModel)]="wd.contractor" class="form-control" name="contractor" required>
-      <option *ngFor="let contractor of contractors"
-              [ngValue]="wd.contractor._id===contractor._id?wd.contractor:contractor">{{contractor.name}}
-      </option>
+    <select [(ngModel)]="wd.contractor" class="form-control" name="contractor" required>
+      <option disabled hidden [value]="selectUndefinedOptionValue">AMC Contractor</option>
+      <option *ngFor="let contractor of contractors" [ngValue]="contractor">{{contractor.name}}</option>
     </select>
 
     <div class="form-control">
@@ -90,13 +77,6 @@
       </ul>
     </div>
     <div class="form-control">
-      <div class="breadcrumb">Uploaded files</div>
-      <span *ngFor="let doc of wd.documents">
-          {{doc.original_name}}
-          <a href="{{apiUrl}}downloadDocs/{{doc._id}}" target="_blank"><mat-icon>get_apps</mat-icon></a>
-          <a href="#"><mat-icon (click)="removeDocument(doc._id)">delete</mat-icon></a>
-          <br></span>
-
       <div class="breadcrumb">Upload files</div>
       <div>
         <ul id="file_names">
@@ -105,7 +85,6 @@
       </div>
 
       <input type="file" id="files" class="form-control" name="files" (change)="onDocChange($event)" multiple>
-      <!--<input type="file" name="files" (change)="onDocChange($event)">-->
     </div>
     <div class="form-control">
       Automatic warranty renewal : <br>
@@ -128,10 +107,9 @@
       </mat-form-field>
     </div>
 
-    <select *ngIf="wd.customer" [(ngModel)]="wd.customer" class="form-control" name="customerName" required>
-      <option *ngFor="let customer of customers" [ngValue]="wd.customer._id===customer._id?wd.customer:customer">
-        {{customer.name}}
-      </option>
+    <select [(ngModel)]="wd.customer" class="form-control" name="customerName" required>
+      <option disabled hidden [value]="selectUndefinedOptionValue">Send to</option>
+      <option *ngFor="let customer of customers" [ngValue]="customer">{{customer.name}}</option>
     </select>
 
     <div class="">
@@ -151,7 +129,7 @@
         </section>
       </div>
     </div>
-    <input type="button" class="form-control btn-dark" value="Update"
-           (click)="updateWarrantyInfo()">
+    <input type="button" class="form-control btn-dark" value="Save"
+           (click)="insertWarrantyInfo()">
   </form>
 </div>

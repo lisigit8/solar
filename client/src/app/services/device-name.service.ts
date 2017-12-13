@@ -3,26 +3,26 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 
-import {Customer} from "../models/customer";
+import {DeviceName} from "../models/deviceName";
 
 import {apiUrl} from "./common";
 
 @Injectable()
-export class CustomerService {
+export class DeviceNameService {
 
   constructor(private http: HttpClient) { }
 
-  private url = apiUrl + 'customer';
-  getCustomers (): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.url);
+  private url = apiUrl + 'deviceName';
+  getAll (): Observable<DeviceName[]> {
+    return this.http.get<DeviceName[]>(this.url);
   }
-  getByNameAndMobile (name: string, mobile: string): Observable<any> {
-    return this.http.get<any>(`${this.url}/name/${name}/mobile/${mobile}`);
+  getById (id: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/${id}`);
   }
-  insert (obj: Customer): Observable<any> {
+  insert (obj: DeviceName): Observable<any> {
     return this.http.post<any>(`${this.url}`, obj);
   }
-  update (obj: Customer): Observable<any> {
+  update (obj: DeviceName): Observable<any> {
     return this.http.put<any>(`${this.url}`, obj);
   }
   remove (id: string): Observable<any> {

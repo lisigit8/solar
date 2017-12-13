@@ -1,4 +1,4 @@
-import {WarrentyDetails} from "./warrenty-details";
+import {WarrentyDetails} from "./warrentyDetails";
 
 export class Documents {
   warrantyInfo: WarrentyDetails;

@@ -7,16 +7,20 @@ import {ContractorComponent} from "../contractor/contractor.component";
 import {CustomerComponent} from "../customer/customer.component";
 import {DeviceComponent} from "../device/device.component";
 import {VendorComponent} from "../vendor/vendor.component";
-import {DocumentationComponent} from "../documentation/documentation.component";
+import {DeviceNameComponent} from "../device-name/device-name.component";
+import {BatchUploadComponent} from "../batch-upload/batch-upload.component";
+import {InsertWarrantyInfoComponent} from "../insert-warranty-info/insert-warranty-info.component";
 
 const routes: Routes = [
   { path: 'site', component: SitesComponent },
   { path: 'customer', component: CustomerComponent },
   { path: 'device', component: DeviceComponent },
+  { path: 'device-name', component: DeviceNameComponent },
   { path: 'vendor', component: VendorComponent },
   { path: 'contractor', component: ContractorComponent },
   { path: 'documentation', component: WarrantyDetailsComponent },
-  { path: 'documentation1', component: DocumentationComponent },
+  { path: 'batch-upload', component: BatchUploadComponent },
+  { path: 'insert-warranty-info', component: InsertWarrantyInfoComponent },
   //{ path: 'warranty-info/:id', component: WarrantyInformationComponent },
   { path: '', redirectTo: '/documentation', pathMatch: 'full' },
 ];

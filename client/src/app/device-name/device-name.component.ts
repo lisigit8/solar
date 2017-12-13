@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 
 import {MessageService} from "../services/MessageService";
-import {VendorService} from "../services/vendor.service";
+import {DeviceNameService} from "../services/device-name.service";
 
-import {Vendor} from "../models/vendor";
+import {DeviceName} from "../models/deviceName";
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 import {deleteSwalOpts} from "../services/common";
 
 @Component({
-  selector: 'app-vendor',
-  templateUrl: './vendor.component.html',
+  selector: 'app-device-name',
+  templateUrl: './device-name.component.html',
   styleUrls: ['../app.component.css']
 })
-export class VendorComponent implements OnInit {
+export class DeviceNameComponent implements OnInit {
 
-  obj_all: Vendor[];
-  selectedObj: Vendor;
-  obj: Vendor = new Vendor;
+  obj_all: DeviceName[];
+  selectedObj: DeviceName;
+  obj: DeviceName = new DeviceName;
 
-  constructor(private messageService: MessageService, private service: VendorService) {
+  constructor(private messageService: MessageService, private service: DeviceNameService) {
   }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class VendorComponent implements OnInit {
   }
 
   getAll(): void {
-    this.service.getVendors()
+    this.service.getAll()
       .subscribe(items => this.obj_all = items);
   }
 
@@ -45,6 +45,7 @@ export class VendorComponent implements OnInit {
   }
 
   update() {
+    alert(this.selectedObj);
     this.service.update(this.selectedObj)
       .subscribe(resp => {
         swal(resp.msg);
@@ -66,8 +67,8 @@ export class VendorComponent implements OnInit {
 
   clearAll() {
     this.getAll();
-    this.obj = new Vendor;
-    this.selectedObj = new Vendor;
+    this.obj = new DeviceName;
+    this.selectedObj = new DeviceName;
   }
 
 }

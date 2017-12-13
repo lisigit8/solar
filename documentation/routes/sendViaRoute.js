@@ -25,13 +25,21 @@ router.post('/sendVia', (req, resp, next) => {
                 common.insertObject(newObj, resp);
             }
         }else{
-            resp.json("Already exists!");
+            if (err) {
+                resp.json(err);
+            } else {
+                resp.json("Already exists!");
+            }
         }
     });
 });
 router.get("/sendVia", (req, resp, next) => {
     SendVia.find(function (err, sites) {
-        resp.json(sites);
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(sites);
+        }
     });
 });
 router.delete('/sendVia/:id', (req, resp, next) => {

@@ -1,5 +1,5 @@
-import {WarrentyDetails} from "./warrenty-details";
-import {SendVia} from "./send-via";
+import {WarrentyDetails} from "./warrentyDetails";
+import {SendVia} from "./sendVia";
 
 export class Warranty_SendVia {
   warrantyInfo: WarrentyDetails;

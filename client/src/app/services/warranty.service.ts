@@ -6,7 +6,7 @@ import {Observable} from "rxjs/Observable";
 import {catchError, tap} from "rxjs/operators";
 import {of} from "rxjs/observable/of";
 
-import {WarrentyDetails} from "../models/warrenty-details";
+import {WarrentyDetails} from "../models/warrentyDetails";
 import {Warranty_SendVia} from "../models/warranty-sendvia";
 
 import {apiUrl} from "./common";
@@ -51,6 +51,9 @@ export class WarrantyService {
   }
   getWarrantyDetailsBySiteAndDeviceId (site_id: string, device_id: string): Observable<WarrentyDetails[]> {
     return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}/site/${site_id}/device/${device_id}`);
+  }
+  getWarrantyDetailsBySiteAndDeviceNameId (site_id: string, deviceName_id: string): Observable<WarrentyDetails[]> {
+    return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}/site/${site_id}/deviceName/${deviceName_id}`);
   }
   getWarrantyDetailsBySiteAndVendorId (site_id: string, vendor_id: string): Observable<WarrentyDetails[]> {
     return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}/site/${site_id}/vendor/${vendor_id}`);

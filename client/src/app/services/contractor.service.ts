@@ -19,6 +19,9 @@ export class ContractorService {
   getContractorsBySiteId (site_id: string): Observable<Contractor[]> {
     return this.http.get<Contractor[]>(`${this.url}/site/${site_id}`);
   }
+  getByName (name: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/name/${name}`);
+  }
   insert (obj: Contractor): Observable<any> {
     return this.http.post<any>(`${this.url}`, obj);
   }

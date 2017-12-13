@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource, MatSort} from '@angular/material';
 import {Subscription} from "rxjs/Subscription";
 
-import {WarrentyDetails} from "../models/warrenty-details";
+import {WarrentyDetails} from "../models/warrentyDetails";
 import {Site} from "../models/site";
 import {Types} from "../models/types";
 import {TYPES} from "../models/types-data";
@@ -11,15 +11,16 @@ import {Vendor} from "../models/vendor";
 import {Contractor} from "../models/contractor";
 
 import {MessageService} from "../services/MessageService";
-import {MaintenanceModuleService} from "../services/maintenance-module.service";
 import {SiteService} from "../services/site.service";
 import {VendorService} from "../services/vendor.service";
 import {ContractorService} from "../services/contractor.service";
 import {DeviceService} from "../services/device.service";
 import {WarrantyService} from "../services/warranty.service";
 import {SendViaService} from "../services/send-via.service";
-import {SendVia} from "../models/send-via";
-import {SEND_VIA_DATA} from "../models/send-via-data";
+import {SendVia} from "../models/sendVia";
+import {SEND_VIA_DATA} from "../models/sendVia-data";
+import {DeviceName} from "../models/deviceName";
+import {DeviceNameService} from "../services/device-name.service";
 
 declare var jquery: any;
 declare var $: any;
@@ -35,18 +36,21 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
   sites: Site[];
   types: Types[] = TYPES;
   devices: Device[];
+  deviceNames: DeviceName[];
   vendors: Vendor[];
   contractors: Contractor[];
-  sendViaAll: SendVia[] = SEND_VIA_DATA;
 
   selectedSite: any = new Site;
   selectedType: Types;
   selectedDevice: Device;
+  selectedDeviceName: DeviceName;
   selectedVendor: Vendor;
   selectedContractor: Contractor;
   selectedWD: WarrentyDetails;
+  selectedWDtemp: WarrentyDetails;
   selectedSites: Site[] = [];
   selectedDevices: Device[] = [];
+  selectedDeviceNames: DeviceName[] = [];
   selectedVendors: Vendor[] = [];
   selectedContractors: Contractor[] = [];
 
@@ -58,28 +62,30 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
 
 
   constructor(private messageService: MessageService,
-              private service: MaintenanceModuleService,
               private siteService: SiteService,
               private vendorService: VendorService,
               private contractorService: ContractorService,
               private deviceService: DeviceService,
+              private deviceNameService: DeviceNameService,
               private warrantyService: WarrantyService,
               private sendViaService: SendViaService) {
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
         if (message.event == 'dataUpdated') {
           this.ngOnInit();
-          setTimeout(() => {
-            $("#row_" + message.data._id).attr("class", "mat-row highlight");
-          }, 1000);
+          this.selectedWD = new WarrentyDetails;
+          if (message.data._id) {
+            this.selectedWDtemp = message.data;
+            setTimeout(() => {
+              $("#row_" + message.data._id).attr("class", "mat-row highlight");
+            }, 500);
+          }
         } else if (message.event == 'siteSelected') {
           this.selectedSite = message.data;
           this.onSiteSelect();
-          /*$("#site_"+message.data._id).trigger();
-          $("#site_"+message.data._id).click();*/
         } else if (message.event == 'renewClicked') {
           this.ngOnInit();
-          this.selectedSite = "";
+          this.selectedSite = new Site;
         }
       }
     });
@@ -87,12 +93,10 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.insertSendVia();
     this.getSites();
     this.selectedSites = [];
     this.selectedType = null;
     this.getWarrantyDetails();
-    this.messageService.sendMessage("showSites", "");
   }
 
   ngAfterViewInit() {
@@ -103,6 +107,11 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
   getDevices(): void {
     this.deviceService.getDevices()
       .subscribe(devices => this.devices = devices);
+  }
+
+  getDeviceNames(): void {
+    this.deviceNameService.getAll()
+      .subscribe(deviceNames => this.deviceNames = deviceNames);
   }
 
   getVendors(): void {
@@ -120,7 +129,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       .subscribe(sites => this.sites = sites);
   }
 
-  getDeviceBySiteId(): void {
+  /*getDeviceBySiteId(): void {
     this.devices = [];
     if (this.selectedSite) {
       this.deviceService.getDeviceBySiteId(this.selectedSite._id)
@@ -171,7 +180,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
           }));
       });
     }
-  }
+  }*/
 
   getWarrantyDetails(): void {
     this.warrantyDetailsList = [];
@@ -179,17 +188,19 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       .subscribe(warrantyDetailsList => {
         this.warrantyDetailsList = warrantyDetailsList;
         this.assignDataSource(warrantyDetailsList);
-        if(warrantyDetailsList.length < 1){
+        if (warrantyDetailsList.length < 1) {
           this.selectedWD = new WarrentyDetails;
-          this.selectedWD._id = "";
         }
       });
   }
 
   callFunctionByType(type) {
-    if (type._id === '1' || type._id === '2') {
+    if (type._id === '1') {
+      this.getDeviceNames();
+    } else if (type._id === '2') {
       //this.getDeviceBySiteId();
       this.getDevices();
+      this.getVendors();
     } else if (type._id === '3') {
       //this.getVendorsBySiteId();
       this.getVendors();
@@ -216,6 +227,15 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       this.selectedDevices = this.devices;
     }
     this.onDeviceSelect();
+  }
+
+  onDeviceNameSelectAll() {
+    if (this.deviceNames.length === this.selectedDeviceNames.length) {
+      this.selectedDeviceNames = [];
+    } else {
+      this.selectedDeviceNames = this.deviceNames;
+    }
+    this.onDeviceNameSelect();
   }
 
   onVendorSelectAll() {
@@ -295,6 +315,30 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  onDeviceNameSelect(): void {
+    this.warrantyDetailsList = [];
+    this.assignDataSource(this.warrantyDetailsList);
+    if (this.selectedDeviceName) {
+      this.warrantyService.getWarrantyDetailsBySiteAndDeviceNameId(this.selectedSite._id, this.selectedDeviceName._id)
+        .subscribe(warrantyDetailsList => {
+          //(JSON.stringify(warrantyDetailsList));
+          this.warrantyDetailsList = warrantyDetailsList;
+          this.assignDataSource(warrantyDetailsList);
+        });
+    } else {
+      this.selectedSites.forEach(site => {
+        this.selectedDeviceNames.forEach(deviceName => {
+          this.warrantyService.getWarrantyDetailsBySiteAndDeviceNameId(site._id, deviceName._id)
+            .subscribe(warrantyDetailsList => warrantyDetailsList.forEach(warrantyDetails => {
+              //alert(JSON.stringify(warrantyDetailsList));
+              this.warrantyDetailsList.push(warrantyDetails);
+              this.assignDataSource(this.warrantyDetailsList);
+            }));
+        });
+      });
+    }
+  }
+
   onVendorSelect(): void {
     this.warrantyDetailsList = [];
     this.assignDataSource(this.warrantyDetailsList);
@@ -346,15 +390,13 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
   onWarrantySelect(wd: WarrentyDetails) {
     this.selectedWD = wd;
     this.messageService.sendMessage("rowSelected", wd);
+    if (this.selectedWDtemp) {
+      $("#row_" + this.selectedWDtemp._id).attr("class", "mat-row");
+    }
   }
 
 
-  insertSendVia() {
-    this.sendViaAll.forEach(sendVia => {
-      this.sendViaService.insertSendVia(sendVia)
-        .subscribe(resp => console.log(JSON.stringify(resp)));
-    });
-  }
+
 
 
   assignDataSource(data) {

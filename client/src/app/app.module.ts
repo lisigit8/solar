@@ -19,15 +19,20 @@ import {
   MatCheckboxModule,
 } from "@angular/material";
 
-import {LayoutModule} from "./layout/layout.module";
+//import {LayoutModule} from "./layout/layout.module";
 import {AppRoutingModule} from "./app-routing/app-routing.module";
 
 import { AppComponent } from './app.component';
 import { SitesComponent } from './sites/sites.component';
 import { WarrantyDetailsComponent } from './warranty-details/warranty-details.component';
 import { WarrantyInformationComponent } from './warranty-information/warranty-information.component';
+import { DeviceNameComponent } from './device-name/device-name.component';
+import {LayoutComponent} from "./layout/container/layout.component";
+import { ContractorComponent } from './contractor/contractor.component';
+import { CustomerComponent } from './customer/customer.component';
+import { DeviceComponent } from './device/device.component';
+import { VendorComponent } from './vendor/vendor.component';
 
-import {MaintenanceModuleService} from "./services/maintenance-module.service";
 import {MessageService} from "./services/MessageService";
 import { SiteService } from './services/site.service';
 import { CustomerService } from './services/customer.service';
@@ -37,11 +42,9 @@ import {ContractorService} from "./services/contractor.service";
 import { DocumentsService } from './services/documents.service';
 import { WarrantyService } from './services/warranty.service';
 import { SendViaService } from './services/send-via.service';
-import { ContractorComponent } from './contractor/contractor.component';
-import { CustomerComponent } from './customer/customer.component';
-import { DeviceComponent } from './device/device.component';
-import { VendorComponent } from './vendor/vendor.component';
-import { DocumentationComponent } from './documentation/documentation.component';
+import { DeviceNameService } from './services/device-name.service';
+import { BatchUploadComponent } from './batch-upload/batch-upload.component';
+import { InsertWarrantyInfoComponent } from './insert-warranty-info/insert-warranty-info.component';
 
 @NgModule({
   declarations: [
@@ -53,10 +56,13 @@ import { DocumentationComponent } from './documentation/documentation.component'
     CustomerComponent,
     DeviceComponent,
     VendorComponent,
-    DocumentationComponent,
+    DeviceNameComponent,
+    LayoutComponent,
+    BatchUploadComponent,
+    InsertWarrantyInfoComponent
   ],
   imports: [
-    LayoutModule,
+    //LayoutModule,
 
     BrowserAnimationsModule,
     BrowserModule,
@@ -77,7 +83,6 @@ import { DocumentationComponent } from './documentation/documentation.component'
     MatCheckboxModule
   ],
   providers: [
-    MaintenanceModuleService,
     MessageService,
     SiteService,
     CustomerService,
@@ -86,7 +91,8 @@ import { DocumentationComponent } from './documentation/documentation.component'
     ContractorService,
     DocumentsService,
     WarrantyService,
-    SendViaService
+    SendViaService,
+    DeviceNameService
   ],
   bootstrap: [AppComponent]
 })

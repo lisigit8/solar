@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DocumentationComponent } from './documentation.component';
+import { BatchUploadComponent } from './batch-upload.component';
 
-describe('DocumentationComponent', () => {
-  let component: DocumentationComponent;
-  let fixture: ComponentFixture<DocumentationComponent>;
+describe('BatchUploadComponent', () => {
+  let component: BatchUploadComponent;
+  let fixture: ComponentFixture<BatchUploadComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DocumentationComponent ]
+      declarations: [ BatchUploadComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DocumentationComponent);
+    fixture = TestBed.createComponent(BatchUploadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

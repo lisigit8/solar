@@ -6,6 +6,7 @@ import {Contractor} from "./contractor";
 import {Customer} from "./customer";
 import {Documents} from "./documents";
 import {Warranty_SendVia} from "./warranty-sendvia";
+import {DeviceName} from "./deviceName";
 
 export class WarrentyDetails {
   site: Site;
@@ -28,4 +29,5 @@ export class WarrentyDetails {
   device_ID: string;
   vendor_name: string;
   contractor_name: string;
+  deviceName: DeviceName;
 }

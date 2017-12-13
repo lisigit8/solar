@@ -21,7 +21,6 @@ var deviceRoute = require('./documentation/routes/deviceRoute');
 var warrantyRoute = require('./documentation/routes/warrantyRoute');
 var sendViaRoute = require('./documentation/routes/sendViaRoute');
 var userRoute = require('./documentation/routes/userRoute');
-var heroRoute = require('./documentation/routes/heroRoute');
 
 
 // view engine setup
@@ -49,7 +48,6 @@ app.use("/api", deviceRoute);
 app.use("/api", warrantyRoute);
 app.use("/api", sendViaRoute);
 app.use("/api", userRoute);
-app.use("/api", heroRoute);
 
 var initPassport = require('./passport/init');
 initPassport(passport);

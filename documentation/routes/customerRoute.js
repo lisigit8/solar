@@ -22,7 +22,20 @@ function varCustomerObj(req){
 
 router.get('/customer', (req, resp, next) => {
     Customer.find(function (err, customers) {
-        resp.json(customers);
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(customers);
+        }
+    });
+});
+router.get('/customer/name/:name/mobile/:mobile', (req, resp, next) => {
+    Customer.findOne({name: req.params.name, mobile: req.params.mobile}, function (err, customer) {
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(customer);
+        }
     });
 });
 router.post('/customer', (req, resp, next) => {

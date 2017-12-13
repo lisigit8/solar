@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 
-import {SendVia} from "../models/send-via";
+import {SendVia} from "../models/sendVia";
 
 import {apiUrl} from "./common";
 import {Site} from "../models/site";
-import {WarrentyDetails} from "../models/warrenty-details";
+import {WarrentyDetails} from "../models/warrentyDetails";
 
 @Injectable()
 export class SendViaService {

@@ -6,11 +6,12 @@ import {SiteService} from "../services/site.service";
 import {MessageService} from "../services/MessageService";
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
+import {deleteSwalOpts} from "../services/common";
 
 @Component({
   selector: 'app-sites',
   templateUrl: './sites.component.html',
-  styleUrls: ['./sites.component.css']
+  styleUrls: ['../app.component.css']
 })
 export class SitesComponent implements OnInit {
   obj_all: Site[];
@@ -53,15 +54,7 @@ export class SitesComponent implements OnInit {
   }
 
   remove(id) {
-    swal({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
+    swal(deleteSwalOpts).then((result) => {
       if (result.value) {
         this.service.remove(id)
           .subscribe(resp => {

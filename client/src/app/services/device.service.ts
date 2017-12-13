@@ -16,6 +16,12 @@ export class DeviceService {
   getDevices (): Observable<Device[]> {
     return this.http.get<Device[]>(this.url);
   }
+  getDevicesByDeviceNameId (deviceName_id: string): Observable<Device[]> {
+    return this.http.get<Device[]>(`${this.url}/deviceName/${deviceName_id}`);
+  }
+  getByID (ID: string): Observable<any> {
+    return this.http.get<any>(`${this.url}/ID/${ID}`);
+  }
   getDeviceBySiteId (site_id: string): Observable<Device[]> {
     return this.http.get<Device[]>(`${this.url}/site/${site_id}`);
   }

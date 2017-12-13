@@ -1,4 +1,4 @@
-import { SendVia } from './send-via';
+import { SendVia } from './sendVia';
 
 export const SEND_VIA_DATA: SendVia[] = [
   {

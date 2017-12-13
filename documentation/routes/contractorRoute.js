@@ -29,13 +29,26 @@ router.put('/contractor', (req, resp, next) => {
 });
 router.get("/contractor", (req, resp, next) => {
     Contractor.find(function (err, contractors) {
-        resp.json(contractors);
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(contractors);
+        }
+    });
+});
+router.get("/contractor/name/:name", (req, resp, next) => {
+    Contractor.findOne({name: req.params.name}, function (err, contractor) {
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(contractor);
+        }
     });
 });
 router.get("/contractor/site/:site_id", (req, resp, next) => {
     warrantyInfo.distinct('contractor', {site: req.params.site_id}, function (err, items) {
         if (err) {
-            resp.json({msg: 'Error : ' + err});
+            resp.json(err);
         } else {
             var contractors = new Array();
             items.forEach(myFunction);
@@ -44,7 +57,7 @@ router.get("/contractor/site/:site_id", (req, resp, next) => {
                 var cntractor = new Object();
                 Contractor.findOne({_id: item}).exec(function (err, contractor) {
                     if (err) {
-                        resp.json({msg: 'Error : ' + err});
+                        resp.json(err);
                     } else {
                         console.log("vendor : " + contractor.name);
                         cntractor["_id"] = contractor._id;

@@ -23,7 +23,7 @@ router.post('/documents', upload.array('files'), function (req, resp, next) {
         newObj.save((err, obj) => {
             docList.push(obj);
             if (err) {
-                resp.json({msg: 'Error : ' + err});
+                resp.json(err);
             } else {
                 //resp.json({msg: 'Successful!'});
                 if (req.files.length === docList.length) {
@@ -47,7 +47,7 @@ router.put('/documents', (req, resp, next) => {
         size: req.body.size
     }, function (err) {
         if (err) {
-            resp.json({msg: 'Error : ' + err});
+            resp.json(err);
         } else {
             resp.json({msg: 'Successful!'});
         }
@@ -55,13 +55,17 @@ router.put('/documents', (req, resp, next) => {
 });
 router.get("/documents", (req, resp, next) => {
     Documents.find(function (err, docs) {
-        resp.json(docs);
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(docs);
+        }
     });
 });
 router.get('/documents/warranty/:warranty_id', (req, resp, next) => {
     Documents.find({warrantyInfo: req.params.warranty_id}, function (err, items) {
         if (err) {
-            resp.json({msg: 'Error : ' + err});
+            resp.json(err);
         } else {
             resp.json(items);
         }

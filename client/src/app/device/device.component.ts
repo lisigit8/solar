@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {MessageService} from "../services/MessageService";
 import {DeviceService} from "../services/device.service";
@@ -6,33 +6,53 @@ import {DeviceService} from "../services/device.service";
 import {Device} from "../models/device";
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
+import {DeviceName} from "../models/deviceName";
+import {DeviceNameService} from "../services/device-name.service";
+import {deleteSwalOpts} from "../services/common";
 
 @Component({
   selector: 'app-device',
   templateUrl: './device.component.html',
-  styleUrls: ['./device.component.css']
+  styleUrls: ['../app.component.css']
 })
 export class DeviceComponent implements OnInit {
+  private selectUndefinedOptionValue: any;
 
   obj_all: Device[];
   selectedObj: Device;
   obj: Device = new Device;
 
-  constructor(private messageService: MessageService, private service: DeviceService) {
+  deviceNames: DeviceName[];
+
+  constructor(private messageService: MessageService, private service: DeviceService, private serviceDN: DeviceNameService) {
   }
 
   ngOnInit() {
     this.getAll();
+    this.getAllDeviceNames();
     this.messageService.sendMessage("hideSites", "");
   }
 
   getAll(): void {
     this.service.getDevices()
-      .subscribe(items => this.obj_all = items);
+      .subscribe(items => {
+        this.obj_all = items;
+      });
+  }
+  getAllDeviceNames(): void {
+    this.serviceDN.getAll()
+      .subscribe(items => this.deviceNames = items);
   }
 
   onSelect(obj: any): void {
     this.selectedObj = obj;
+    if(obj.deviceName._id){
+      this.serviceDN.getById(obj.deviceName._id)
+        .subscribe(item => this.selectedObj.deviceName = item);
+    }else{
+      this.serviceDN.getById(obj.deviceName)
+        .subscribe(item => this.selectedObj.deviceName = item);
+    }
   }
 
   insert() {
@@ -52,15 +72,7 @@ export class DeviceComponent implements OnInit {
   }
 
   remove(id) {
-    swal({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
+    swal(deleteSwalOpts).then((result) => {
       if (result.value) {
         this.service.remove(id)
           .subscribe(resp => {

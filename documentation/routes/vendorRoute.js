@@ -29,13 +29,26 @@ router.put('/vendor', (req, resp, next) => {
 });
 router.get("/vendor", (req, resp, next) => {
     Vendor.find(function (err, vendors) {
-        resp.json(vendors);
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(vendors);
+        }
+    });
+});
+router.get("/vendor/name/:name", (req, resp, next) => {
+    Vendor.findOne({name: req.params.name}, function (err, vendor) {
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(vendor);
+        }
     });
 });
 router.get("/vendor/site/:site_id", (req, resp, next) => {
     warrantyInfo.distinct('vendor', {site: req.params.site_id}, function (err, items) {
         if (err) {
-            resp.json({msg: 'Error : ' + err});
+            resp.json(err);
         } else {
             var vendors = new Array();
             items.forEach(myFunction);
@@ -44,7 +57,7 @@ router.get("/vendor/site/:site_id", (req, resp, next) => {
                 var vndor = new Object();
                 Vendor.findOne({_id: item}).exec(function (err, vendor) {
                     if (err) {
-                        resp.json({msg: 'Error : ' + err});
+                        resp.json(err);
                     } else {
                         console.log("vendor : " + vendor.name);
                         vndor["_id"] = vendor._id;

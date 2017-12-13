@@ -6,11 +6,12 @@ import {CustomerService} from "../services/customer.service";
 import {MessageService} from "../services/MessageService";
 
 import {Customer} from "../models/customer";
+import {deleteSwalOpts} from "../services/common";
 
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.css']
+  styleUrls: ['../app.component.css']
 })
 export class CustomerComponent implements OnInit {
 
@@ -52,15 +53,7 @@ export class CustomerComponent implements OnInit {
   }
 
   remove(id) {
-    swal({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      type: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
+    swal(deleteSwalOpts).then((result) => {
       if (result.value) {
         this.service.remove(id)
           .subscribe(resp => {

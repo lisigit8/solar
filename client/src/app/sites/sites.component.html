@@ -8,7 +8,7 @@
       <li *ngFor="let obj of obj_all"
           [class.selected]="obj === selectedObj">
         <span class="badge" (click)="onSelect(obj)"> {{obj.name}} </span>
-        <mat-icon (click)="remove(obj._id)">delete</mat-icon>
+        <!--<mat-icon (click)="remove(obj._id)">delete</mat-icon>-->
       </li>
     </a>
   </ul>

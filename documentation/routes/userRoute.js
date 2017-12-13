@@ -22,7 +22,11 @@ function varUserObj(req){
 
 router.get('/user', (req, resp, next) => {
     User.find(function (err, users) {
-        resp.json(users);
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(users);
+        }
     });
 });
 router.post('/user', (req, resp, next) => {
