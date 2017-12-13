@@ -98,6 +98,9 @@ router.get('/downloadDocs/:id', (req, resp,next)=>{
         }
     });
 });
+router.get('/downloadTemplate', (req, resp,next)=>{
+    resp.download('batch-template\\warranty-info.xlsx', 'warranty-info.xlsx');
+});
 
 
 

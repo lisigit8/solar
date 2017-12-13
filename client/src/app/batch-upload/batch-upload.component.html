@@ -1,4 +1,4 @@
-<input type="file" (change)="onFileChange($event)" multiple="false" />
+<!--<input type="file" (change)="onFileChange($event)" multiple="false" />
 <table class="sjs-table">
   <tr *ngFor="let row of data">
     <td *ngFor="let val of row">
@@ -6,4 +6,21 @@
     </td>
   </tr>
 </table>
-<button (click)="export()">Export!</button>
+<button (click)="export()">Export!</button>-->
+<span style="font-weight: bolder;">Click <a
+  href="{{apiUrl}}downloadTemplate" target="_blank">here</a> to download our template</span>
+<div class="form-control">
+  <div class="breadcrumb">Upload document</div>
+  <div>
+    <ul id="file_names" *ngIf="fileNames[0] && fileNames[0].name">
+      <li *ngFor="let fileName of fileNames">{{fileName.name}}
+        <mat-icon (click)="deleteFile(fileName.index)">delete</mat-icon>
+      </li>
+    </ul>
+  </div>
+
+  <input type="file" id="files" class="form-control" name="files" (change)="onFileChange($event)">
+</div>
+
+<input type="button" class="form-control btn-dark" value="Upload and create entry"
+       style="margin-top: 10%; margin-bottom: 68%;" (click)="uploadAndCreateEntry()">

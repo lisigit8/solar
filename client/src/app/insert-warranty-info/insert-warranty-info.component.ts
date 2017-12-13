@@ -19,6 +19,7 @@ import {SiteService} from "../services/site.service";
 import {SendViaService} from "../services/send-via.service";
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 import {MessageService} from "../services/MessageService";
+import {pathName} from "../services/common";
 
 declare var jquery: any;
 declare var $: any;
@@ -35,6 +36,8 @@ export class InsertWarrantyInfoComponent implements OnInit {
   data = new FormData();
   tempData = new FormData();
   fileNames: any[] = [];
+
+  pathName: string = pathName;
 
   warranty_sendVia: Warranty_SendVia = new Warranty_SendVia;
   sendViaAll: SendVia[];
@@ -227,6 +230,24 @@ export class InsertWarrantyInfoComponent implements OnInit {
         this.addFileNames();
       }
     }
+  }
+
+  onClickManual() {
+    $('#batchORmanual').hide();
+    $('#batchUpload').hide();
+    $('#manual').show();
+  }
+
+  onClickBatch() {
+    $('#batchORmanual').hide();
+    $('#manual').hide();
+    $('#batchUpload').show();
+  }
+
+  onClickOnNew(){
+    $('#batchORmanual').show();
+    $('#batchUpload').hide();
+    $('#manual').hide();
   }
 
 }
