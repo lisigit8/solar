@@ -18,7 +18,8 @@
             (ngModelChange)="onSelectDeviceName()" name="deviceName" required>
       <option disabled hidden [value]="selectUndefinedOptionValue">Device Name</option>
       <option *ngFor="let deviceName of deviceNames" [ngValue]="deviceName">
-        {{deviceName.name}}</option>
+        {{deviceName.name}}
+      </option>
     </select>
 
     <select [(ngModel)]="wd.device" class="form-control" name="deviceID" required>
@@ -79,12 +80,15 @@
     <div class="form-control">
       <div class="breadcrumb">Upload files</div>
       <div>
-        <ul id="file_names">
-
+        <ul id="file_names" *ngIf="fileNames[0] && fileNames[0].name">
+          <li *ngFor="let fileName of fileNames">{{fileName.name}}
+            <mat-icon (click)="deleteFile(fileName.index)">delete</mat-icon>
+          </li>
         </ul>
       </div>
 
       <input type="file" id="files" class="form-control" name="files" (change)="onDocChange($event)" multiple>
+      <!--<input type="button" value="Test Delete" (click)="testDelete()">-->
     </div>
     <div class="form-control">
       Automatic warranty renewal : <br>

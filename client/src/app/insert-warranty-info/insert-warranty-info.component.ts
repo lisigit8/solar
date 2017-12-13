@@ -33,6 +33,8 @@ export class InsertWarrantyInfoComponent implements OnInit {
 
   wd: WarrentyDetails;
   data = new FormData();
+  tempData = new FormData();
+  fileNames: any[] = [];
 
   warranty_sendVia: Warranty_SendVia = new Warranty_SendVia;
   sendViaAll: SendVia[];
@@ -65,6 +67,7 @@ export class InsertWarrantyInfoComponent implements OnInit {
     this.getCustomers();
     this.getSendVia();
     this.clearFileField();
+    this.data = new FormData();
   }
 
   clearSendViaFields() {
@@ -121,40 +124,43 @@ export class InsertWarrantyInfoComponent implements OnInit {
       .subscribe(customers => this.customers = customers);
   }
 
+
   insertDocs(data: FormData): void {
-    //alert(data.getAll('files').length);
-    if(data.getAll('files').length > 0){
+    if (data.getAll('files').length > 0) {
       this.documentsService.insertDocs(data).subscribe(resp => {
         resp.forEach((document, index, array) => {
           document.warrantyInfo = this.wd;
           setTimeout(() => {
             this.documentsService.updateDocument(document).subscribe(updateResp => {
               //alert(updateResp.msg);
-              if (resp.length == array.length) {
+              if (index + 1 === array.length) {
                 this.ngOnInit();
                 this.messageService.sendMessage("dataUpdated", new WarrentyDetails);
-              }else{
+              } else {
                 alert("not same")
               }
             });
           }, 100);
         });
       });
-    }else{
+    } else {
       this.ngOnInit();
       this.messageService.sendMessage("dataUpdated", new WarrentyDetails);
     }
   }
 
   insertWarrantyInfoSendVia(): void {
-    this.sendViaAll.forEach(sendVia => {
+    this.sendViaAll.forEach((sendVia, index, array) => {
       if (sendVia.isSelected) {
         this.warranty_sendVia.warrantyInfo = this.wd;
         this.warranty_sendVia.sendVia = sendVia;
         this.warrantyService.insertWarrantyInfoSendVia(this.warranty_sendVia).subscribe(resp => {
           sendVia.isSelected = false;
-          this.insertDocs(this.data);
         });
+      }
+      if (index + 1 === array.length) {
+        alert(this.data.getAll('files').length);
+        this.insertDocs(this.data);
       }
     });
   }
@@ -176,10 +182,50 @@ export class InsertWarrantyInfoComponent implements OnInit {
     this.getDevicesByDeviceNameId(this.wd.deviceName._id);
   }
 
+  /*testDelete() {
+    console.log(this.data.getAll('files').length);
+    console.log(this.data.getAll('files'));
+
+    this.data.getAll('files').forEach(file => {
+      console.log(file['name']);
+      console.log(file.valueOf());
+    });
+
+    console.log(this.data.get('files'));
+    console.log(this.data.getAll('files')[0]);
+  }*/
+
+  addFileNames() {
+    this.fileNames = [];
+    this.data.getAll('files').forEach((file, index, array) => {
+      var fileName = new Object();
+      fileName['name'] = file['name'];
+      fileName['index'] = index;
+      this.fileNames.push(fileName);
+    });
+  }
+
+  deleteFile(ind: any) {
+    this.tempData = new FormData();
+    this.data.getAll('files').forEach((file, index, array) => {
+      if (Number(ind) !== Number(index)) {
+        this.tempData.append('files', file);
+      }
+      if (index + 1 === array.length) {
+        this.data = this.tempData;
+        this.addFileNames();
+      }
+    });
+  }
+
   onDocChange(event) {
     for (var i = 0; i < event.target.files.length; i++) {
+      //console.log(event.target.files[i]);
       this.data.append('files', event.target.files[i]);
-      $("#file_names").append('<li>' + event.target.files[i].name + '</li>');
+
+      if (i + 1 === event.target.files.length) {
+        this.addFileNames();
+      }
     }
   }
 

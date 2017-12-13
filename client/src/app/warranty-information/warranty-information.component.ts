@@ -45,6 +45,8 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
   data = new FormData();
+  tempData = new FormData();
+  fileNames: any[] = [];
   apiUrl: string = apiUrl;
 
   warranty_sendVia: Warranty_SendVia = new Warranty_SendVia;
@@ -88,8 +90,8 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
     this.getContractors();
     this.getCustomers();
     this.getSendVia();
-    this.getWarrantyDetailsByWarrantyId(this.id);
     this.clearFileField();
+    this.getWarrantyDetailsByWarrantyId(this.id);
   }
 
 
@@ -173,10 +175,37 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
     this.getDevicesByDeviceNameId(this.wd.deviceName._id);
   }
 
+  addFileNames() {
+    this.fileNames = [];
+    this.data.getAll('files').forEach((file, index, array) => {
+      var fileName = new Object();
+      fileName['name'] = file['name'];
+      fileName['index'] = index;
+      this.fileNames.push(fileName);
+    });
+  }
+
+  deleteFile(ind: any) {
+    this.tempData = new FormData();
+    this.data.getAll('files').forEach((file, index, array) => {
+      if (Number(ind) !== Number(index)) {
+        this.tempData.append('files', file);
+      }
+      if (index + 1 === array.length) {
+        this.data = this.tempData;
+        this.addFileNames();
+      }
+    });
+  }
+
   onDocChange(event) {
     for (var i = 0; i < event.target.files.length; i++) {
       this.data.append('files', event.target.files[i]);
-      $("#file_names").append('<li>' + event.target.files[i].name + '</li>');
+      //$("#file_names").append('<li>' + event.target.files[i].name + '</li>');
+
+      if (i + 1 === event.target.files.length) {
+        this.addFileNames();
+      }
     }
   }
 
@@ -190,38 +219,40 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
   }
 
   insertDocs(data: any): void {
-    if(data.getAll('files').length > 0){
+    if (data.getAll('files').length > 0) {
       this.documentsService.insertDocs(data).subscribe(resp => {
         resp.forEach((document, index, array) => {
           document.warrantyInfo = this.wd;
           setTimeout(() => {
             this.documentsService.updateDocument(document).subscribe(updateResp => {
               //alert(updateResp.msg);
-              if (resp.length == array.length) {
+              if (index + 1 == array.length) {
+                this.id = this.wd._id;
                 this.ngOnInit();
                 this.messageService.sendMessage("dataUpdated", this.wd);
-              }else{
-                alert("not same")
               }
             });
           }, 100);
         });
       });
-    }else{
+    } else {
+      this.id = this.wd._id;
       this.ngOnInit();
       this.messageService.sendMessage("dataUpdated", this.wd);
     }
   }
 
   insertWarrantyInfoSendVia(): void {
-    this.sendViaAll.forEach(sendVia => {
+    this.sendViaAll.forEach((sendVia, index, array) => {
       if (sendVia.isSelected) {
         this.warranty_sendVia.warrantyInfo = this.wd;
         this.warranty_sendVia.sendVia = sendVia;
         this.warrantyService.insertWarrantyInfoSendVia(this.warranty_sendVia).subscribe(resp => {
           sendVia.isSelected = false;
-          this.insertDocs(this.data);
         });
+      }
+      if (index + 1 === array.length) {
+        this.insertDocs(this.data);
       }
     });
   }
@@ -254,6 +285,7 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
       if (result.value) {
         this.documentsService.removeDocument(id).subscribe(resp => {
           this.messageService.sendMessage("dataUpdated", this.wd);
+          this.id = this.wd._id;
           this.ngOnInit();
           swal("Deleted successfully!", "", "success");
         });

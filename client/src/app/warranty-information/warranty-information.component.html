@@ -99,8 +99,10 @@
 
       <div class="breadcrumb">Upload files</div>
       <div>
-        <ul id="file_names">
-
+        <ul id="file_names" *ngIf="fileNames[0] && fileNames[0].name">
+          <li *ngFor="let fileName of fileNames">{{fileName.name}}
+            <mat-icon (click)="deleteFile(fileName.index)">delete</mat-icon>
+          </li>
         </ul>
       </div>
 

@@ -73,12 +73,13 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       if (message) {
         if (message.event == 'dataUpdated') {
           this.ngOnInit();
-          this.selectedWD = new WarrentyDetails;
           if (message.data._id) {
             this.selectedWDtemp = message.data;
             setTimeout(() => {
               $("#row_" + message.data._id).attr("class", "mat-row highlight");
             }, 500);
+          }else{
+            this.selectedWD = new WarrentyDetails;
           }
         } else if (message.event == 'siteSelected') {
           this.selectedSite = message.data;
