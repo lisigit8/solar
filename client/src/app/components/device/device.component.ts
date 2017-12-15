@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 
-import {MessageService} from "../services/MessageService";
-import {DeviceService} from "../services/device.service";
+import {MessageService} from "../../services/MessageService";
+import {DeviceService} from "../../services/device.service";
 
-import {Device} from "../models/device";
+import {Device} from "../../models/device";
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
-import {DeviceName} from "../models/deviceName";
-import {DeviceNameService} from "../services/device-name.service";
-import {deleteSwalOpts} from "../services/common";
+import {DeviceName} from "../../models/deviceName";
+import {DeviceNameService} from "../../services/device-name.service";
+import {deleteSwalOpts} from "../../services/common";
 
 @Component({
   selector: 'app-device',
   templateUrl: './device.component.html',
-  styleUrls: ['../app.component.css']
+  styleUrls: ['../../app.component.css']
 })
 export class DeviceComponent implements OnInit {
   private selectUndefinedOptionValue: any;

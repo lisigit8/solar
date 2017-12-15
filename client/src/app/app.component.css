@@ -126,3 +126,6 @@ label {
 .example-margin {
   margin: 0 10px;
 }
+.help-block {
+  font-size: 12px;
+}

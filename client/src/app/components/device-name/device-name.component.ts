@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
-import {MessageService} from "../services/MessageService";
-import {DeviceNameService} from "../services/device-name.service";
+import {MessageService} from "../../services/MessageService";
+import {DeviceNameService} from "../../services/device-name.service";
 
-import {DeviceName} from "../models/deviceName";
+import {DeviceName} from "../../models/deviceName";
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
-import {deleteSwalOpts} from "../services/common";
+import {deleteSwalOpts} from "../../services/common";
 
 @Component({
   selector: 'app-device-name',
   templateUrl: './device-name.component.html',
-  styleUrls: ['../app.component.css']
+  styleUrls: ['../../app.component.css']
 })
 export class DeviceNameComponent implements OnInit {
 

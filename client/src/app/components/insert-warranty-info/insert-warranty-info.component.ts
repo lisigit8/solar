@@ -1,25 +1,25 @@
 import {Component, OnInit} from '@angular/core';
-import {WarrentyDetails} from "../models/warrentyDetails";
-import {WarrantyService} from "../services/warranty.service";
-import {DeviceService} from "../services/device.service";
-import {Contractor} from "../models/contractor";
-import {Customer} from "../models/customer";
-import {Device} from "../models/device";
-import {DocumentsService} from "../services/documents.service";
-import {ContractorService} from "../services/contractor.service";
-import {VendorService} from "../services/vendor.service";
-import {SendVia} from "../models/sendVia";
-import {DeviceName} from "../models/deviceName";
-import {Site} from "../models/site";
-import {DeviceNameService} from "../services/device-name.service";
-import {Warranty_SendVia} from "../models/warranty-sendvia";
-import {Vendor} from "../models/vendor";
-import {CustomerService} from "../services/customer.service";
-import {SiteService} from "../services/site.service";
-import {SendViaService} from "../services/send-via.service";
+import {WarrentyDetails} from "../../models/warrentyDetails";
+import {WarrantyService} from "../../services/warranty.service";
+import {DeviceService} from "../../services/device.service";
+import {Contractor} from "../../models/contractor";
+import {Customer} from "../../models/customer";
+import {Device} from "../../models/device";
+import {DocumentsService} from "../../services/documents.service";
+import {ContractorService} from "../../services/contractor.service";
+import {VendorService} from "../../services/vendor.service";
+import {SendVia} from "../../models/sendVia";
+import {DeviceName} from "../../models/deviceName";
+import {Site} from "../../models/site";
+import {DeviceNameService} from "../../services/device-name.service";
+import {Warranty_SendVia} from "../../models/warranty-sendvia";
+import {Vendor} from "../../models/vendor";
+import {CustomerService} from "../../services/customer.service";
+import {SiteService} from "../../services/site.service";
+import {SendViaService} from "../../services/send-via.service";
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
-import {MessageService} from "../services/MessageService";
-import {pathName} from "../services/common";
+import {MessageService} from "../../services/MessageService";
+import {pathName} from "../../services/common";
 
 declare var jquery: any;
 declare var $: any;
@@ -27,7 +27,7 @@ declare var $: any;
 @Component({
   selector: 'app-insert-warranty-info',
   templateUrl: './insert-warranty-info.component.html',
-  styleUrls: ['../app.component.css']
+  styleUrls: ['../../app.component.css']
 })
 export class InsertWarrantyInfoComponent implements OnInit {
   private selectUndefinedOptionValue: any;

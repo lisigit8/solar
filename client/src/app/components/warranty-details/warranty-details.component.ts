@@ -2,25 +2,25 @@ import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource, MatSort} from '@angular/material';
 import {Subscription} from "rxjs/Subscription";
 
-import {WarrentyDetails} from "../models/warrentyDetails";
-import {Site} from "../models/site";
-import {Types} from "../models/types";
-import {TYPES} from "../models/types-data";
-import {Device} from "../models/device";
-import {Vendor} from "../models/vendor";
-import {Contractor} from "../models/contractor";
+import {WarrentyDetails} from "../../models/warrentyDetails";
+import {Site} from "../../models/site";
+import {Types} from "../../models/types";
+import {TYPES} from "../../models/types-data";
+import {Device} from "../../models/device";
+import {Vendor} from "../../models/vendor";
+import {Contractor} from "../../models/contractor";
 
-import {MessageService} from "../services/MessageService";
-import {SiteService} from "../services/site.service";
-import {VendorService} from "../services/vendor.service";
-import {ContractorService} from "../services/contractor.service";
-import {DeviceService} from "../services/device.service";
-import {WarrantyService} from "../services/warranty.service";
-import {SendViaService} from "../services/send-via.service";
-import {SendVia} from "../models/sendVia";
-import {SEND_VIA_DATA} from "../models/sendVia-data";
-import {DeviceName} from "../models/deviceName";
-import {DeviceNameService} from "../services/device-name.service";
+import {MessageService} from "../../services/MessageService";
+import {SiteService} from "../../services/site.service";
+import {VendorService} from "../../services/vendor.service";
+import {ContractorService} from "../../services/contractor.service";
+import {DeviceService} from "../../services/device.service";
+import {WarrantyService} from "../../services/warranty.service";
+import {SendViaService} from "../../services/send-via.service";
+import {SendVia} from "../../models/sendVia";
+import {SEND_VIA_DATA} from "../../models/sendVia-data";
+import {DeviceName} from "../../models/deviceName";
+import {DeviceNameService} from "../../services/device-name.service";
 
 declare var jquery: any;
 declare var $: any;
@@ -28,7 +28,7 @@ declare var $: any;
 @Component({
   selector: 'app-warranty-details',
   templateUrl: './warranty-details.component.html',
-  styleUrls: ['../app.component.css']
+  styleUrls: ['../../app.component.css']
 })
 
 export class WarrantyDetailsComponent implements OnInit, OnDestroy {

@@ -2,27 +2,27 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 
-import {WarrentyDetails} from "../models/warrentyDetails";
-import {Site} from "../models/site";
-import {Device} from "../models/device";
-import {Vendor} from "../models/vendor";
-import {Contractor} from "../models/contractor";
-import {Customer} from "../models/customer";
-import {DeviceName} from "../models/deviceName";
-import {SendVia} from "../models/sendVia";
-import {Warranty_SendVia} from "../models/warranty-sendvia";
+import {WarrentyDetails} from "../../models/warrentyDetails";
+import {Site} from "../../models/site";
+import {Device} from "../../models/device";
+import {Vendor} from "../../models/vendor";
+import {Contractor} from "../../models/contractor";
+import {Customer} from "../../models/customer";
+import {DeviceName} from "../../models/deviceName";
+import {SendVia} from "../../models/sendVia";
+import {Warranty_SendVia} from "../../models/warranty-sendvia";
 
-import {MessageService} from "../services/MessageService";
-import {SiteService} from "../services/site.service";
-import {apiUrl, deleteSwalOpts} from "../services/common";
-import {VendorService} from "../services/vendor.service";
-import {ContractorService} from "../services/contractor.service";
-import {CustomerService} from "../services/customer.service";
-import {DeviceService} from "../services/device.service";
-import {DocumentsService} from "../services/documents.service";
-import {WarrantyService} from "../services/warranty.service";
-import {SendViaService} from "../services/send-via.service";
-import {DeviceNameService} from "../services/device-name.service";
+import {MessageService} from "../../services/MessageService";
+import {SiteService} from "../../services/site.service";
+import {apiUrl, deleteSwalOpts} from "../../services/common";
+import {VendorService} from "../../services/vendor.service";
+import {ContractorService} from "../../services/contractor.service";
+import {CustomerService} from "../../services/customer.service";
+import {DeviceService} from "../../services/device.service";
+import {DocumentsService} from "../../services/documents.service";
+import {WarrantyService} from "../../services/warranty.service";
+import {SendViaService} from "../../services/send-via.service";
+import {DeviceNameService} from "../../services/device-name.service";
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 
@@ -32,7 +32,7 @@ declare var $: any;
 @Component({
   selector: 'app-warranty-information',
   templateUrl: './warranty-information.component.html',
-  styleUrls: ['../app.component.css']
+  styleUrls: ['../../app.component.css']
 })
 export class WarrantyInformationComponent implements OnInit, OnDestroy {
   private selectUndefinedOptionValue: any;

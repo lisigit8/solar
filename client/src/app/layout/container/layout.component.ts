@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Site} from "../../models/site";
 import {SiteService} from "../../services/site.service";
 import {MessageService} from "../../services/MessageService";
+import {pathName} from "../../services/common";
 
 @Component({
   selector: 'app-layout',
@@ -15,9 +16,12 @@ export class LayoutComponent implements OnInit {
   private selectUndefinedOptionValue: any;
   selectedSite: any;
   sites: Site[];
+  pathName: string = pathName;
+  user: string = localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).name : '';
 
   constructor(private messageService: MessageService,
-    private siteService: SiteService,) {}
+              private siteService: SiteService,) {
+  }
 
   ngOnInit() {
     this.getSites();
@@ -36,10 +40,10 @@ export class LayoutComponent implements OnInit {
     this.messageService.sendMessage("siteSelected", this.selectedSite);
   }
 
-  onSiteChange(){
-    if(this.selectedSite == "renew"){
+  onSiteChange() {
+    if (this.selectedSite == "renew") {
       this.renew();
-    }else{
+    } else {
       this.onSiteSelect();
     }
   }

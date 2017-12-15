@@ -1,28 +1,34 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {SitesComponent} from "../sites/sites.component";
-import {WarrantyDetailsComponent} from "../warranty-details/warranty-details.component";
-import {WarrantyInformationComponent} from "../warranty-information/warranty-information.component";
-import {ContractorComponent} from "../contractor/contractor.component";
-import {CustomerComponent} from "../customer/customer.component";
-import {DeviceComponent} from "../device/device.component";
-import {VendorComponent} from "../vendor/vendor.component";
-import {DeviceNameComponent} from "../device-name/device-name.component";
-import {BatchUploadComponent} from "../batch-upload/batch-upload.component";
-import {InsertWarrantyInfoComponent} from "../insert-warranty-info/insert-warranty-info.component";
+import {SitesComponent} from "../components/sites/sites.component";
+import {WarrantyDetailsComponent} from "../components/warranty-details/warranty-details.component";
+import {WarrantyInformationComponent} from "../components/warranty-information/warranty-information.component";
+import {ContractorComponent} from "../components/contractor/contractor.component";
+import {CustomerComponent} from "../components/customer/customer.component";
+import {DeviceComponent} from "../components/device/device.component";
+import {VendorComponent} from "../components/vendor/vendor.component";
+import {DeviceNameComponent} from "../components/device-name/device-name.component";
+import {BatchUploadComponent} from "../components/batch-upload/batch-upload.component";
+import {InsertWarrantyInfoComponent} from "../components/insert-warranty-info/insert-warranty-info.component";
+import {LoginComponent} from "../components/login/login.component";
+
+import {AuthGuard} from "../_guards/auth.guard";
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: 'site', component: SitesComponent },
   { path: 'customer', component: CustomerComponent },
   { path: 'device', component: DeviceComponent },
   { path: 'device-name', component: DeviceNameComponent },
   { path: 'vendor', component: VendorComponent },
-  { path: 'contractor', component: ContractorComponent },
-  { path: 'documentation', component: WarrantyDetailsComponent },
   { path: 'batch-upload', component: BatchUploadComponent },
   { path: 'insert-warranty-info', component: InsertWarrantyInfoComponent },
   //{ path: 'warranty-info/:id', component: WarrantyInformationComponent },
   { path: '', redirectTo: '/documentation', pathMatch: 'full' },
+  { path: 'documentation', component: WarrantyDetailsComponent, canActivate: [AuthGuard] },
+
+  // otherwise redirect to home
+  { path: '**', redirectTo: '/documentation' }
 ];
 
 @NgModule({

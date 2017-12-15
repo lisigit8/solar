@@ -4,18 +4,18 @@ import * as XLSX from 'xlsx';
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 
 import {saveAs} from 'file-saver';
-import {WarrentyDetails} from "../models/warrentyDetails";
-import {SiteService} from "../services/site.service";
-import {DeviceService} from "../services/device.service";
-import {VendorService} from "../services/vendor.service";
-import {ContractorService} from "../services/contractor.service";
-import {CustomerService} from "../services/customer.service";
-import {DeviceNameService} from "../services/device-name.service";
-import {WarrantyService} from "../services/warranty.service";
-import {SendViaService} from "../services/send-via.service";
-import {Warranty_SendVia} from "../models/warranty-sendvia";
-import {apiUrl, pathName} from "../services/common";
-import {MessageService} from "../services/MessageService";
+import {WarrentyDetails} from "../../models/warrentyDetails";
+import {SiteService} from "../../services/site.service";
+import {DeviceService} from "../../services/device.service";
+import {VendorService} from "../../services/vendor.service";
+import {ContractorService} from "../../services/contractor.service";
+import {CustomerService} from "../../services/customer.service";
+import {DeviceNameService} from "../../services/device-name.service";
+import {WarrantyService} from "../../services/warranty.service";
+import {SendViaService} from "../../services/send-via.service";
+import {Warranty_SendVia} from "../../models/warranty-sendvia";
+import {apiUrl, pathName} from "../../services/common";
+import {MessageService} from "../../services/MessageService";
 
 declare var jquery: any;
 declare var $: any;
@@ -32,7 +32,7 @@ function s2ab(s: string): ArrayBuffer {
 @Component({
   selector: 'app-batch-upload',
   templateUrl: './batch-upload.component.html',
-  styleUrls: ['../app.component.css']
+  styleUrls: ['../../app.component.css']
 })
 export class BatchUploadComponent implements OnInit {
   data: AOA/* = [ [1, 2], [3, 4] ]*/;

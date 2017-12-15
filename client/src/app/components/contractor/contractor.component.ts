@@ -1,26 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Site} from "../models/site";
-
-import {SiteService} from "../services/site.service";
-import {MessageService} from "../services/MessageService";
+import {MessageService} from "../../services/MessageService";
+import {ContractorService} from "../../services/contractor.service";
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
-import {deleteSwalOpts} from "../services/common";
+
+import {Contractor} from "../../models/contractor";
+import {deleteSwalOpts} from "../../services/common";
 
 @Component({
-  selector: 'app-sites',
-  templateUrl: './sites.component.html',
-  styleUrls: ['../app.component.css']
+  selector: 'app-contractor',
+  templateUrl: './contractor.component.html',
+  styleUrls: ['../../app.component.css']
 })
-export class SitesComponent implements OnInit {
-  obj_all: Site[];
-  selectedObj: Site;
-  obj: Site = new Site;
+export class ContractorComponent implements OnInit {
 
-  /*test: any;*/
+  obj_all: Contractor[];
+  selectedObj: Contractor;
+  obj: Contractor = new Contractor;
 
-  constructor(private messageService: MessageService, private service: SiteService) {
+  constructor(private messageService: MessageService, private service: ContractorService) {
   }
 
   ngOnInit() {
@@ -29,7 +28,7 @@ export class SitesComponent implements OnInit {
   }
 
   getAll(): void {
-    this.service.getSites()
+    this.service.getContractors()
       .subscribe(items => this.obj_all = items);
   }
 
@@ -65,15 +64,10 @@ export class SitesComponent implements OnInit {
     });
   }
 
-  clearAll(){
+  clearAll() {
     this.getAll();
-    this.obj = new Site;
-    this.selectedObj = new Site;
+    this.obj = new Contractor;
+    this.selectedObj = new Contractor;
   }
-
-  /*hello(fg:any){
-    this.test = fg;
-    alert(fg);
-  }*/
 
 }

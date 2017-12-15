@@ -1,25 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-
-import {MessageService} from "../services/MessageService";
-import {ContractorService} from "../services/contractor.service";
+import { Component, OnInit } from '@angular/core';
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 
-import {Contractor} from "../models/contractor";
-import {deleteSwalOpts} from "../services/common";
+import {CustomerService} from "../../services/customer.service";
+import {MessageService} from "../../services/MessageService";
+
+import {Customer} from "../../models/customer";
+import {deleteSwalOpts} from "../../services/common";
 
 @Component({
-  selector: 'app-contractor',
-  templateUrl: './contractor.component.html',
-  styleUrls: ['../app.component.css']
+  selector: 'app-customer',
+  templateUrl: './customer.component.html',
+  styleUrls: ['../../app.component.css']
 })
-export class ContractorComponent implements OnInit {
+export class CustomerComponent implements OnInit {
 
-  obj_all: Contractor[];
-  selectedObj: Contractor;
-  obj: Contractor = new Contractor;
+  obj_all: Customer[];
+  selectedObj: Customer;
+  obj: Customer = new Customer;
 
-  constructor(private messageService: MessageService, private service: ContractorService) {
+  constructor(private messageService: MessageService, private service: CustomerService) {
   }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class ContractorComponent implements OnInit {
   }
 
   getAll(): void {
-    this.service.getContractors()
+    this.service.getCustomers()
       .subscribe(items => this.obj_all = items);
   }
 
@@ -66,8 +66,8 @@ export class ContractorComponent implements OnInit {
 
   clearAll() {
     this.getAll();
-    this.obj = new Contractor;
-    this.selectedObj = new Contractor;
+    this.obj = new Customer;
+    this.selectedObj = new Customer;
   }
 
 }
