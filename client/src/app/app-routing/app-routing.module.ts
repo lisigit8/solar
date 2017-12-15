@@ -18,6 +18,8 @@ import {UnauthorizedComponent} from "../components/unauthorized/unauthorized.com
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'unauthorized', component: UnauthorizedComponent},
+  {path: 'contractor', component: ContractorComponent},
+  {path: 'documentation', component: WarrantyDetailsComponent},
   {path: 'site', component: SitesComponent},
   {path: 'customer', component: CustomerComponent},
   {path: 'device', component: DeviceComponent},
