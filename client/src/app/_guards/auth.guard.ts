@@ -8,15 +8,10 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log(route.data.pageName);
+    console.log(route.data);
 
     if (localStorage.getItem('currentUser')) {
-      if((JSON.parse(localStorage.getItem('currentUser')).userRolls.indexOf("Admin") > -1)){
-        return true;
-      }else{
-        this.router.navigate(['/unauthorized']);
-        return false;
-      }
+      return true;
     } else {
       // not logged in so redirect to login page
       this.router.navigate(['/login']);

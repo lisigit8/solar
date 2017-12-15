@@ -1,6 +1,7 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource, MatSort} from '@angular/material';
 import {Subscription} from "rxjs/Subscription";
+import {Router} from '@angular/router';
 
 import {WarrentyDetails} from "../../models/warrentyDetails";
 import {Site} from "../../models/site";
@@ -17,10 +18,9 @@ import {ContractorService} from "../../services/contractor.service";
 import {DeviceService} from "../../services/device.service";
 import {WarrantyService} from "../../services/warranty.service";
 import {SendViaService} from "../../services/send-via.service";
-import {SendVia} from "../../models/sendVia";
-import {SEND_VIA_DATA} from "../../models/sendVia-data";
 import {DeviceName} from "../../models/deviceName";
 import {DeviceNameService} from "../../services/device-name.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 declare var jquery: any;
 declare var $: any;
@@ -68,7 +68,9 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
               private deviceService: DeviceService,
               private deviceNameService: DeviceNameService,
               private warrantyService: WarrantyService,
-              private sendViaService: SendViaService) {
+              private sendViaService: SendViaService,
+              private authService: AuthenticationService,
+              private router: Router) {
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
         if (message.event == 'dataUpdated') {
@@ -78,7 +80,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
             setTimeout(() => {
               $("#row_" + message.data._id).attr("class", "mat-row highlight");
             }, 500);
-          }else{
+          } else {
             this.selectedWD = new WarrentyDetails;
           }
         } else if (message.event == 'siteSelected') {
@@ -98,12 +100,26 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
     this.selectedSites = [];
     this.selectedType = null;
     this.getWarrantyDetails();
+
+    this.checkLogin();
   }
 
   ngAfterViewInit() {
     //this.dataSource.sort = this.sort;
   }
 
+  checkLogin() {
+    this.authService.checkLogin()
+      .subscribe(resp => {
+        if (resp == null) {
+          alert('Logging out!!!');
+          this.router.navigate(['/login']);
+          return false;
+        } else {
+          return true;
+        }
+      });
+  }
 
   getDevices(): void {
     this.deviceService.getDevices()
@@ -260,7 +276,7 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
   onSiteSelect(): void {
     this.warrantyDetailsList = [];
     this.assignDataSource(this.warrantyDetailsList);
-    if (this.selectedSite) {
+    if (this.selectedSite._id) {
       this.warrantyService.getWarrantyDetailsBySiteId(this.selectedSite._id)
         .subscribe(warrantyDetailsList => {
           //alert(JSON.stringify(warrantyDetailsList));
@@ -395,9 +411,6 @@ export class WarrantyDetailsComponent implements OnInit, OnDestroy {
       $("#row_" + this.selectedWDtemp._id).attr("class", "mat-row");
     }
   }
-
-
-
 
 
   assignDataSource(data) {

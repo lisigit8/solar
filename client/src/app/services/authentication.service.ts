@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/map'
 import {Users} from "../models/users";
+import {apiUrl} from "./common";
+import {WarrentyDetails} from "../models/warrentyDetails";
 
 @Injectable()
 export class AuthenticationService {
@@ -11,7 +13,7 @@ export class AuthenticationService {
   }
 
   login(obj: Users) {
-    return this.http.post('http://localhost:3000/api/login', obj)
+    return this.http.post(`${apiUrl}login`, obj)
       .map((response: any) => {
         // login successful if there's a jwt token in the response
         let token = response.token;
@@ -23,7 +25,7 @@ export class AuthenticationService {
           localStorage.setItem('currentUser',
             JSON.stringify({
               userId: obj.userId,
-              userRolls: response.user.userRolls,
+              roles: response.user.roles,
               name: response.user.name,
               token: token
             }));
@@ -35,6 +37,15 @@ export class AuthenticationService {
           return false;
         }
       });
+  }
+
+  checkLogin() {
+    return this.http.get(`${apiUrl}check-login/${JSON.parse(localStorage.getItem('currentUser')).userId}`, {
+      headers: new HttpHeaders({
+        'token':
+          localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).token : ''
+      })
+    });
   }
 
   logout(): void {

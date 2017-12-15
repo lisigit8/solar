@@ -1,7 +1,8 @@
 var jwt = require('jsonwebtoken');
+var User = require('../models/user');
 
 module.exports = {
-    findOneAndUpdateObject: function (obj, req, resp, objName, conditions) {
+    findOneAndUpdateObjectWithConditions: function (obj, req, resp, objName, conditions) {
         objName.findOneAndUpdate(conditions, obj, function (err) {
             if (err) {
                 resp.json(err);
@@ -33,20 +34,41 @@ module.exports = {
     },
 
     ensureToken: function (req, resp, next) {
-        console.log(req.headers['token']);
+        console.log(req.params.userId);
         if (typeof req.headers["token"] != 'undefined') {
-            jwt.verify(req.headers["token"], 'my_secret_key', function (err, data) {
+            console.log('////////////1');
+            User.findOne({userId: req.params.userId}, function (err, obj) {
+                console.log('////////////2');
                 if (err) {
+                    console.log('////////////3');
                     //resp.sendStatus(403);
-                    resp.json([]);
+                    resp.json(null);
                 } else {
-                    req.data = data;
-                    next();
+                    console.log('////////////4');
+                    if (obj == null) {
+                        console.log('////////////5');
+                        //resp.sendStatus(403);
+                        resp.json(null);
+                    } else {
+                        console.log('////////////6');
+                        jwt.verify(req.headers["token"], 'my_secret_key', function (err, data) {
+                            if (err) {
+                                console.log('////////////7');
+                                //resp.sendStatus(403);
+                                resp.json(null);
+                            } else {
+                                console.log('////////////8');
+                                req.data = data;
+                                next();
+                            }
+                        });
+                    }
                 }
             });
         } else {
+            console.log('////////////9');
             //resp.sendStatus(403);
-            resp.json([]);
+            resp.json(null);
         }
     }
 }

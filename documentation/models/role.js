@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 const schema = mongoose.Schema({
-    user_Roll : [{ type: Schema.Types.ObjectId, ref: 'User_Roll' }],
+    user_role : [{ type: Schema.Types.ObjectId, ref: 'User_Role' }],
 
-    userRoll:{
+    role:{
         type: String,
         required: true
     }
 });
 
-const UserRoll = module.exports = mongoose.model('UserRoll', schema);
+const Role = module.exports = mongoose.model('Role', schema);

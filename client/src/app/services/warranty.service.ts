@@ -50,12 +50,7 @@ export class WarrantyService {
   private warrantyDetailsUrl = apiUrl + 'warrantyDetails';
 
   getWarrantyDetails(): Observable<WarrentyDetails[]> {
-    return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}`, {
-      headers: new HttpHeaders({
-        'token':
-          localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).token : ''
-      })
-    });
+    return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}`);
   }
 
   getWarrantyDetailsByWarrantyId(warranty_id: string): Observable<WarrentyDetails> {

@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 
-import {MessageService} from "../../services/MessageService";
-import {DeviceNameService} from "../../services/device-name.service";
-
-import {DeviceName} from "../../models/deviceName";
-
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
+
+import {UserService} from "../../services/user.service";
+import {MessageService} from "../../services/MessageService";
+
+import {Users} from "../../models/users";
 import {deleteSwalOpts} from "../../services/common";
 
 @Component({
-  selector: 'app-device-name',
-  templateUrl: './device-name.component.html',
+  selector: 'app-user',
+  templateUrl: './user.component.html',
   styleUrls: ['../../app.component.css']
 })
-export class DeviceNameComponent implements OnInit {
+export class UserComponent implements OnInit {
 
-  obj_all: DeviceName[];
-  selectedObj: DeviceName;
-  obj: DeviceName = new DeviceName;
+  obj_all: Users[];
+  selectedObj: Users;
+  obj: Users = new Users;
 
-  constructor(private messageService: MessageService, private service: DeviceNameService) {
+  constructor(private messageService: MessageService, private service: UserService) {
   }
 
   ngOnInit() {
@@ -44,13 +44,13 @@ export class DeviceNameComponent implements OnInit {
       });
   }
 
-  update() {
+  /*update() {
     this.service.update(this.selectedObj)
       .subscribe(resp => {
         swal(resp.msg);
         this.clearAll();
       });
-  }
+  }*/
 
   remove(id) {
     swal(deleteSwalOpts).then((result) => {
@@ -66,8 +66,8 @@ export class DeviceNameComponent implements OnInit {
 
   clearAll() {
     this.getAll();
-    this.obj = new DeviceName;
-    this.selectedObj = new DeviceName;
+    this.obj = new Users;
+    this.selectedObj = new Users;
   }
 
 }

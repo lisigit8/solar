@@ -50,6 +50,9 @@ import { DeviceNameService } from './services/device-name.service';
 import {AuthGuard} from "./_guards/auth.guard";
 import {AuthenticationService} from "./services/authentication.service";
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { RoleService } from './services/role.service';
+import { UserService } from './services/user.service';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +69,8 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
     BatchUploadComponent,
     InsertWarrantyInfoComponent,
     LoginComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    UserComponent
   ],
   imports: [
     //LayoutModule,
@@ -105,7 +109,9 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
 
 
     AuthGuard,
-    AuthenticationService
+    AuthenticationService,
+    RoleService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

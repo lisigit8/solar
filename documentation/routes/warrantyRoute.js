@@ -67,7 +67,7 @@ router.delete('/warrantyInfo/:id', (req, resp, next) => {
 
 
 //Warranty details
-router.get('/warrantyDetails', common.ensureToken, (req, resp, next) => {
+router.get('/warrantyDetails', (req, resp, next) => {
     warrantyInfo.find(function (err, items) {
         if (err) {
             resp.json(err);
@@ -78,7 +78,7 @@ router.get('/warrantyDetails', common.ensureToken, (req, resp, next) => {
 });
 
 //warranty Details By site
-router.get('/warrantyDetails/site/:site_id', common.ensureToken, (req, resp, next) => {
+router.get('/warrantyDetails/site/:site_id', (req, resp, next) => {
     Site.findOne({_id: req.params.site_id}).populate('WarrantyInformations').exec(function (err, site) {
         if (err) {
             resp.json(err);
@@ -132,7 +132,7 @@ router.get('/warrantyDetails/site/:site_id', common.ensureToken, (req, resp, nex
         }
     });
 });*/
-router.get('/warrantyDetails/site/:site_id/device/:device_id', common.ensureToken, (req, resp, next) => {
+router.get('/warrantyDetails/site/:site_id/device/:device_id', (req, resp, next) => {
     warrantyInfo.find({site: req.params.site_id, device: req.params.device_id}, function (err, items) {
         if (err) {
             resp.json(err);
@@ -141,7 +141,7 @@ router.get('/warrantyDetails/site/:site_id/device/:device_id', common.ensureToke
         }
     });
 });
-router.get('/warrantyDetails/site/:site_id/deviceName/:deviceName_id', common.ensureToken, (req, resp, next) => {
+router.get('/warrantyDetails/site/:site_id/deviceName/:deviceName_id', (req, resp, next) => {
     Device.find({deviceName: req.params.deviceName_id}).exec(function (err, itemsDevice) {
         if (err) {
             resp.json(err);
@@ -160,7 +160,7 @@ router.get('/warrantyDetails/site/:site_id/deviceName/:deviceName_id', common.en
 });
 
 //Warranty details by site id and vendor id
-router.get('/warrantyDetails/site/:site_id/vendor/:vendor_id', common.ensureToken, (req, resp, next) => {
+router.get('/warrantyDetails/site/:site_id/vendor/:vendor_id', (req, resp, next) => {
     warrantyInfo.find({site: req.params.site_id, vendor: req.params.vendor_id}, function (err, items) {
         if (err) {
             resp.json(err);
@@ -171,7 +171,7 @@ router.get('/warrantyDetails/site/:site_id/vendor/:vendor_id', common.ensureToke
 });
 
 //Warranty details by site id and contractor id
-router.get('/warrantyDetails/site/:site_id/contractor/:contractor_id', common.ensureToken, (req, resp, next) => {
+router.get('/warrantyDetails/site/:site_id/contractor/:contractor_id', (req, resp, next) => {
     warrantyInfo.find({site: req.params.site_id, contractor: req.params.contractor_id}, function (err, items) {
         if (err) {
             resp.json(err);
@@ -346,7 +346,7 @@ router.get('/warrantyInfo_sendVia/warranty/:warranty_id', (req, resp, next) => {
 router.post('/warrantyInfo_sendVia', (req, resp, next) => {
     if (req.body._id) {
         var conditions = {warrantyInfo: req.body.warrantyInfo, sendVia: req.body.sendVia};
-        common.findOneAndUpdateObject(varWarrantySendViaObj(req), req, resp, WarrantyInfo_SendVia, conditions);
+        common.findOneAndUpdateObjectWithConditions(varWarrantySendViaObj(req), req, resp, WarrantyInfo_SendVia, conditions);
     } else {
         let newObj = new WarrantyInfo_SendVia(varWarrantySendViaObj(req));
         common.insertObject(newObj, resp);

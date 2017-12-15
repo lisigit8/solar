@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
+import {Router} from '@angular/router';
 
 import {WarrentyDetails} from "../../models/warrentyDetails";
 import {Site} from "../../models/site";
@@ -25,6 +26,7 @@ import {SendViaService} from "../../services/send-via.service";
 import {DeviceNameService} from "../../services/device-name.service";
 
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
+import {AuthenticationService} from "../../services/authentication.service";
 
 declare var jquery: any;
 declare var $: any;
@@ -71,7 +73,9 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
               private deviceNameService: DeviceNameService,
               private documentsService: DocumentsService,
               private warrantyService: WarrantyService,
-              private sendViaService: SendViaService) {
+              private sendViaService: SendViaService,
+              private authService: AuthenticationService,
+              private router: Router) {
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message.event == 'rowSelected') {
         this.id = message.data._id;
@@ -92,6 +96,21 @@ export class WarrantyInformationComponent implements OnInit, OnDestroy {
     this.getSendVia();
     this.clearFileField();
     this.getWarrantyDetailsByWarrantyId(this.id);
+
+    this.checkLogin();
+  }
+
+  checkLogin() {
+    this.authService.checkLogin()
+      .subscribe(resp => {
+        if (resp == null) {
+          alert('Logging out!!!');
+          this.router.navigate(['/login']);
+          return false;
+        } else {
+          return true;
+        }
+      });
   }
 
 

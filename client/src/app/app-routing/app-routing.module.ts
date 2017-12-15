@@ -14,25 +14,26 @@ import {LoginComponent} from "../components/login/login.component";
 
 import {AuthGuard} from "../_guards/auth.guard";
 import {UnauthorizedComponent} from "../components/unauthorized/unauthorized.component";
+import {UserComponent} from "../components/user/user.component";
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'unauthorized', component: UnauthorizedComponent},
   {path: 'contractor', component: ContractorComponent},
-  {path: 'documentation', component: WarrantyDetailsComponent},
   {path: 'site', component: SitesComponent},
   {path: 'customer', component: CustomerComponent},
+  {path: 'user', component: UserComponent},
   {path: 'device', component: DeviceComponent},
   {path: 'device-name', component: DeviceNameComponent},
   {path: 'vendor', component: VendorComponent},
   {path: 'batch-upload', component: BatchUploadComponent},
   {path: 'insert-warranty-info', component: InsertWarrantyInfoComponent},
   //{ path: 'warranty-info/:id', component: WarrantyInformationComponent },
-  {path: '', redirectTo: '/documentation', pathMatch: 'full'},
+  //{path: '', redirectTo: '/documentation', pathMatch: 'full'},
   {
     path: 'documentation',
     component: WarrantyDetailsComponent,
-    data: {pageName: 'documentation'},
+    data: {access: ['ROLE_ADMIN', 'ROLE_TEST']},
     canActivate: [AuthGuard]
   },
 

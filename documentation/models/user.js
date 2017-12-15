@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs'); // A native JS bcrypt library for NodeJS
 
 const schema = mongoose.Schema({
-    user_Roll : [{ type: Schema.Types.ObjectId, ref: 'User_Roll' }],
+    user_role : [{ type: Schema.Types.ObjectId, ref: 'User_Role' }],
 
     name:{
         type: String,

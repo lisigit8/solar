@@ -20,6 +20,8 @@ import {SendViaService} from "../../services/send-via.service";
 import * as swal from 'sweetalert2/dist/sweetalert2.all.min.js';
 import {MessageService} from "../../services/MessageService";
 import {pathName} from "../../services/common";
+import {AuthenticationService} from "../../services/authentication.service";
+import {Router} from '@angular/router';
 
 declare var jquery: any;
 declare var $: any;
@@ -58,7 +60,9 @@ export class InsertWarrantyInfoComponent implements OnInit {
               private deviceNameService: DeviceNameService,
               private documentsService: DocumentsService,
               private warrantyService: WarrantyService,
-              private sendViaService: SendViaService) {
+              private sendViaService: SendViaService,
+              private authService: AuthenticationService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -71,6 +75,21 @@ export class InsertWarrantyInfoComponent implements OnInit {
     this.getSendVia();
     this.clearFileField();
     this.data = new FormData();
+
+    this.checkLogin();
+  }
+
+  checkLogin() {
+    this.authService.checkLogin()
+      .subscribe(resp => {
+        if (resp == null) {
+          alert('Logging out!!!');
+          this.router.navigate(['/login']);
+          return false;
+        } else {
+          return true;
+        }
+      });
   }
 
   clearSendViaFields() {
@@ -139,8 +158,6 @@ export class InsertWarrantyInfoComponent implements OnInit {
               if (index + 1 === array.length) {
                 this.ngOnInit();
                 this.messageService.sendMessage("dataUpdated", new WarrentyDetails);
-              } else {
-                alert("not same")
               }
             });
           }, 100);
@@ -162,7 +179,7 @@ export class InsertWarrantyInfoComponent implements OnInit {
         });
       }
       if (index + 1 === array.length) {
-        alert(this.data.getAll('files').length);
+        /*alert(this.data.getAll('files').length);*/
         this.insertDocs(this.data);
       }
     });
@@ -172,7 +189,7 @@ export class InsertWarrantyInfoComponent implements OnInit {
     this.warrantyService.insertWarrantyInfo(this.wd)
       .subscribe(resp => {
         if (resp.errors) {
-          swal("Please try again!", "", "error");
+          swal("All fields are mandatory!", "", "error");
         } else {
           swal(resp.msg, "", "success");
           this.wd = resp.obj;
@@ -244,7 +261,7 @@ export class InsertWarrantyInfoComponent implements OnInit {
     $('#batchUpload').show();
   }
 
-  onClickOnNew(){
+  onClickOnNew() {
     $('#batchORmanual').show();
     $('#batchUpload').hide();
     $('#manual').hide();

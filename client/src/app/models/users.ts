@@ -1,4 +1,4 @@
-import {UserRoll} from "./userRoll";
+import {Role} from "./role";
 
 export class Users {
   _id: string;
@@ -9,5 +9,5 @@ export class Users {
   userId: string;
   password: string;
 
-  userRoll: UserRoll
+  roles: Role[]
 }

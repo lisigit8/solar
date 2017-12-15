@@ -3,7 +3,7 @@ var router = express.Router();
 var jwt = require('jsonwebtoken');
 
 var User = require('../models/user');
-var User_Roll = require('../models/user-roll');
+var User_Role = require('../models/user-role');
 
 var common = require('./common');
 
@@ -17,11 +17,20 @@ function varUserObj(req) {
         mobile: req.body.mobile,
         address: req.body.address,
 
-        userRoll: req.body.userRoll
+        //role: req.body.role
     };
 }
 
 
+router.get("/user/:id", (req, resp, next) => {
+    User.findOne({_id: req.params.id}, function(err,item) {
+        if (err) {
+            resp.json(err);
+        } else {
+            resp.json(item);
+        }
+    });
+});
 router.get('/user', (req, resp, next) => {
     User.find(function (err, users) {
         if (err) {
@@ -49,16 +58,23 @@ router.post('/login', (req, resp, next) => {
                     let usr = new Object();
                     usr['userId'] = user.userId;
                     usr['name'] = user.name;
-                    User_Roll.find({user: user._id}).populate('userRoll').exec(function (err, user_rolls) {
+
+                    usr['roles'] = '';
+                    resp.json({
+                        token: token,
+                        user: usr,
+                        msg: 'You are logged in!'
+                    });
+                    /*User_Role.find({user: user._id}).populate('role').exec(function (err, user_roles) {
                         if (err) {
                             resp.json(err);
                         } else {
-                            let usrRolls = new Array();
-                            user_rolls.forEach((user_roll, index, array) => {
-                                usrRolls.push(user_roll.userRoll.userRoll);
+                            let roles = new Array();
+                            user_roles.forEach((user_role, index, array) => {
+                                roles.push(user_role.role.role);
 
-                                if (usrRolls.length === array.length) {
-                                    usr['userRolls'] = usrRolls;
+                                if (roles.length === array.length) {
+                                    usr['roles'] = roles;
                                     resp.json({
                                         token: token,
                                         user: usr,
@@ -67,7 +83,7 @@ router.post('/login', (req, resp, next) => {
                                 }
                             });
                         }
-                    });
+                    });*/
                 }
             }
         }
@@ -81,13 +97,14 @@ router.post('/user', (req, resp, next) => {
             if (err) {
                 resp.json(err);
             } else {
-                User_Roll.findOneAndUpdate({user: obj}, {user: obj, userRoll: req.body.userRoll}, function (err) {
+                /*User_Role.findOneAndUpdate({user: obj}, {user: obj, role: req.body.role}, function (err) {
                     if (err) {
                         resp.json(err);
                     } else {
                         resp.json({msg: 'Successful!'});
                     }
-                });
+                });*/
+                resp.json({msg: 'Successful!'});
             }
         });
     } else {
@@ -100,28 +117,25 @@ router.post('/user', (req, resp, next) => {
                     if (err) {
                         resp.json(err);
                     } else {
-                        let user_roll = new User_Roll({
+                        /*let user_role = new User_Role({
                             user: obj,
-                            userRoll: req.body.userRoll
+                            role: req.body.role
                         });
-                        user_roll.save((err, user_roll) => {
-                            User_Roll.findOneAndUpdate({user: obj}, user_roll, function (err) {
-                                if (err) {
-                                    resp.json(err);
-                                } else {
-                                    resp.json({msg: 'Successful!'});
-                                }
-                            });
-                        });
+                        user_role.save((err, user_role) => {
+                            if (err) {
+                                resp.json(err);
+                            } else {
+                                resp.json({msg: 'Successful!'});
+                            }
+                        });*/
+                        resp.json({msg: 'Successful!'});
                     }
                 });
             }
         });
     }
 });
-router.put('/user', (req, resp, next) => {
-    common.findOneAndUpdateObject(varUserObj(req), req, resp, User);
-});
+
 router.delete('/user/:id', (req, resp, next) => {
     User.remove({_id: req.params.id}, function (err, result) {
         if (err) {
@@ -132,15 +146,20 @@ router.delete('/user/:id', (req, resp, next) => {
     });
 });
 
-// user_roll
-router.get('/user_roll', (req, resp, next) => {
-    User_Roll.find(function (err, items) {
+// user_role
+router.get('/user_role', (req, resp, next) => {
+    User_Role.find(function (err, items) {
         if (err) {
             resp.json(err);
         } else {
             resp.json(items);
         }
     });
+});
+
+//check login
+router.get('/check-login/:userId', common.ensureToken, (req, resp, next) => {
+    resp.json(req.data);
 });
 
 
