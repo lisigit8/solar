@@ -29,11 +29,10 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenticationService.login(this.model)
       .subscribe(result => {
-        console.log(result + "/////");
         if (result === true) {
           setTimeout(() => {
             this.router.navigate(['/']);
-          }, 1500);
+          }, 3000);
         } else {
           this.error = 'UserId or password is incorrect';
           this.loading = false;

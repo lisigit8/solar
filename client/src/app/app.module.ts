@@ -22,7 +22,7 @@ import {
 //import {LayoutModule} from "./layout/layout.module";
 import {AppRoutingModule} from "./app-routing/app-routing.module";
 
-import {LayoutComponent} from "./layout/container/layout.component";
+import {LayoutComponent} from "./components/layout/container/layout.component";
 import { VendorComponent } from './components/vendor/vendor.component';
 import { AppComponent } from './app.component';
 import { SitesComponent } from './components/sites/sites.component';
@@ -49,6 +49,7 @@ import { DeviceNameService } from './services/device-name.service';
 
 import {AuthGuard} from "./_guards/auth.guard";
 import {AuthenticationService} from "./services/authentication.service";
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import {AuthenticationService} from "./services/authentication.service";
     LayoutComponent,
     BatchUploadComponent,
     InsertWarrantyInfoComponent,
-    LoginComponent
+    LoginComponent,
+    UnauthorizedComponent
   ],
   imports: [
     //LayoutModule,

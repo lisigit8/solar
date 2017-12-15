@@ -1,3 +1,5 @@
+import {HttpHeaders} from "@angular/common/http";
+
 export const apiUrl: string = 'http://localhost:3000/api/';
 
 var initial_url = window.location + "";

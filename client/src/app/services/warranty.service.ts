@@ -12,14 +12,13 @@ import {Warranty_SendVia} from "../models/warranty-sendvia";
 import {apiUrl} from "./common";
 
 import {MessageService} from "./MessageService";
-import {AuthenticationService} from "./authentication.service";
 
-const httpOptions = {
+/*const httpOptions = {
   headers: new HttpHeaders({
     'token':
       localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).token : ''
   })
-};
+};*/
 
 @Injectable()
 export class WarrantyService {
@@ -51,7 +50,12 @@ export class WarrantyService {
   private warrantyDetailsUrl = apiUrl + 'warrantyDetails';
 
   getWarrantyDetails(): Observable<WarrentyDetails[]> {
-    return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}`, httpOptions);
+    return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}`, {
+      headers: new HttpHeaders({
+        'token':
+          localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).token : ''
+      })
+    });
   }
 
   getWarrantyDetailsByWarrantyId(warranty_id: string): Observable<WarrentyDetails> {
@@ -78,14 +82,14 @@ export class WarrantyService {
     return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}/site/${site_id}/contractor/${contractor_id}`);
   }
 
-  getWarrantyDetailsByMultiSiteId(site_ids: string[]): Observable<WarrentyDetails[]> {
+  /*getWarrantyDetailsByMultiSiteId(site_ids: string[]): Observable<WarrentyDetails[]> {
     var options = {
       "params": {
         "site-ids": site_ids
       }
     };
     return this.http.get<WarrentyDetails[]>(`${this.warrantyDetailsUrl}/site`, options);
-  }
+  }*/
 
 
   //Warranty Info - Send Via
@@ -100,7 +104,7 @@ export class WarrantyService {
   }
 
   removeWarrantyInfoSendVia(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.warrantyInfoSendViaUrl}/${id}`, httpOptions);
+    return this.http.delete<any>(`${this.warrantyInfoSendViaUrl}/${id}`);
   }
 
   getWarrantyInfoSendViaByWarrantyId(warranty_id: string): Observable<Warranty_SendVia[]> {

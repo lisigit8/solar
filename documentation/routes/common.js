@@ -33,6 +33,7 @@ module.exports = {
     },
 
     ensureToken: function (req, resp, next) {
+        console.log(req.headers['token']);
         if (typeof req.headers["token"] != 'undefined') {
             jwt.verify(req.headers["token"], 'my_secret_key', function (err, data) {
                 if (err) {

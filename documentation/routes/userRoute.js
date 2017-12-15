@@ -31,34 +31,40 @@ router.get('/user', (req, resp, next) => {
         }
     });
 });
-router.post('/login', (req, resp, next)=>{
-    User.findOne({ userId: req.body.userId }, (err, user) => {
+router.post('/login', (req, resp, next) => {
+    User.findOne({userId: req.body.userId}, (err, user) => {
         if (err) {
             resp.json(err);
         } else {
             if (!user) {
-                resp.json({msg: 'UserId not found!' });
+                resp.json({msg: 'UserId not found!'});
             } else {
                 const validPassword = user.comparePassword(req.body.password); // Compare password provided to password in database
                 // Check if password is a match
                 if (!validPassword) {
-                    resp.json({ msg: 'Password invalid!' });
+                    resp.json({msg: 'Password invalid!'});
                 } else {
                     const token = jwt.sign({user}, 'my_secret_key', {expiresIn: '1h'});
 
                     let usr = new Object();
                     usr['userId'] = user.userId;
                     usr['name'] = user.name;
-                    User_Roll.findOne({user: user._id}).populate('userRoll').exec(function (err, user_roll) {
+                    User_Roll.find({user: user._id}).populate('userRoll').exec(function (err, user_rolls) {
                         if (err) {
                             resp.json(err);
                         } else {
-                            usr['userRoll'] = user_roll.userRoll.userRoll;
+                            let usrRolls = new Array();
+                            user_rolls.forEach((user_roll, index, array) => {
+                                usrRolls.push(user_roll.userRoll.userRoll);
 
-                            resp.json({
-                                token: token,
-                                user: usr,
-                                msg: 'You are logged in!'
+                                if (usrRolls.length === array.length) {
+                                    usr['userRolls'] = usrRolls;
+                                    resp.json({
+                                        token: token,
+                                        user: usr,
+                                        msg: 'You are logged in!'
+                                    });
+                                }
                             });
                         }
                     });
@@ -85,23 +91,29 @@ router.post('/user', (req, resp, next) => {
             }
         });
     } else {
-        let newObj = new User(varUserObj(req));
-        newObj.save((err, obj) => {
-            if (err) {
-                resp.json(err);
+        User.findOne({userId: req.body.userId}, function (err, obj) {
+            if (obj != null) {
+                resp.json({msg: 'User already exists!'});
             } else {
-                let user_roll = new User_Roll({
-                    user: obj,
-                    userRoll: req.body.userRoll
-                });
-                user_roll.save((err, user_roll) => {
-                    User_Roll.findOneAndUpdate({user: obj}, user_roll, function (err) {
-                        if (err) {
-                            resp.json(err);
-                        } else {
-                            resp.json({msg: 'Successful!'});
-                        }
-                    });
+                let newObj = new User(varUserObj(req));
+                newObj.save((err, obj) => {
+                    if (err) {
+                        resp.json(err);
+                    } else {
+                        let user_roll = new User_Roll({
+                            user: obj,
+                            userRoll: req.body.userRoll
+                        });
+                        user_roll.save((err, user_roll) => {
+                            User_Roll.findOneAndUpdate({user: obj}, user_roll, function (err) {
+                                if (err) {
+                                    resp.json(err);
+                                } else {
+                                    resp.json({msg: 'Successful!'});
+                                }
+                            });
+                        });
+                    }
                 });
             }
         });

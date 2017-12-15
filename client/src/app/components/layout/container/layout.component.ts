@@ -1,16 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Site} from "../../models/site";
-import {SiteService} from "../../services/site.service";
-import {MessageService} from "../../services/MessageService";
-import {pathName} from "../../services/common";
+import {Site} from "../../../models/site";
+import {SiteService} from "../../../services/site.service";
+import {MessageService} from "../../../services/MessageService";
+import {pathName} from "../../../services/common";
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css',
-    /*'../../../assets/css/bootstrap.min.css',*/
-    '../../../assets/css/template.css',
-    '../../../assets/font-awesome/css/font-awesome.min.css']
+    /*'../../../../assets/css/bootstrap.min.css',*/
+    '../../../../assets/css/template.css',
+    '../../../../assets/font-awesome/css/font-awesome.min.css']
 })
 export class LayoutComponent implements OnInit {
   private selectUndefinedOptionValue: any;

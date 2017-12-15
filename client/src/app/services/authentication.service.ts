@@ -23,7 +23,7 @@ export class AuthenticationService {
           localStorage.setItem('currentUser',
             JSON.stringify({
               userId: obj.userId,
-              userRoll: response.user.userRoll,
+              userRolls: response.user.userRolls,
               name: response.user.name,
               token: token
             }));
